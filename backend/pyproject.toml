@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "crosspaths"
+version = "0.1.0"
+description = ""
+authors = ["Andrew Maach <andrew@worldbibleschool.net>"]
+readme = "README.md"
+packages = [{ include = "cross_paths" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.112.2"
+uvicorn = "^0.30.6"
+pydantic = "^2.8.2"
+minio = "^7.2.8"
+
+[tool.poetry.group.lint]
+optional = true
+
+[tool.poetry.group.lint.dependencies]
+ruff = "^0.3.2"
+
+
+[tool.poetry.group.types.dependencies]
+pyright = "^1.1.353"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+lint.ignore = ["B008", "E501", "C901"]
+lint.select = ["B", "B9", "C", "E", "F", "I", "S", "T", "TID25", "W"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
