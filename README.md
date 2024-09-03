@@ -2,10 +2,10 @@
 
 
 ## Commands needed
-- just
-- kind
+- [just](https://github.com/casey/just)
+- [kind](https://kind.sigs.k8s.io/)
 - kubectl
-- skaffold
+- [skaffold](https://skaffold.dev/)
 
 ## How to run
 
@@ -14,3 +14,7 @@
 
 The server is on port 5500: [http://localhost:5500](http://localhost:5500)
 The webapp is on port 5173: [http://localhost:5173](http://localhost:5173)
+
+## Resetting
+
+1. Run `just kind-reset`.
