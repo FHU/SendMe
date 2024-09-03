@@ -1,0 +1,65 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: cross-paths
+
+build:
+  artifacts:
+    - image: webapp
+      context: frontend/
+      docker:
+        dockerfile: Containerfile
+      sync:
+        manual:
+          - src: app/**/*
+            dest: /app/app/
+            strip: app/
+
+    - image: api
+      context: backend/
+      docker:
+        dockerfile: Containerfile
+      sync:
+        manual:
+          - src: cross_paths/**/*
+            dest: /app/cross_paths
+            strip: cross_paths/
+
+  tagPolicy:
+    gitCommit:
+      prefix: dev-
+      ignoreChanges: false
+  local:
+    concurrency: 3
+deploy:
+  helm:
+    releases:
+      - name: cp-dev-release
+        chartPath: helm/
+        version: 0.1.0
+        setValues:
+          imagePullPolicy: Never
+          environment: development
+          registry: ""
+          docker_tag: latest
+        setValueTemplates:
+          tags.api: "{{.IMAGE_TAG_api}}"
+          tags.webapp: "{{.IMAGE_TAG_webapp}}"
+    flags:
+      upgrade:
+        ["--timeout=1800s"]
+      install:
+        ["--timeout=1800s"]
+
+
+profiles:
+- name: dev
+- name: unittests
+  patches:
+    - op: add
+      path: /deploy/helm/releases/0/setValues/unittests
+      value: "true"
+    - op: remove
+      path: /build/artifacts/1
+    - op: remove
+      path: /build/artifacts/0

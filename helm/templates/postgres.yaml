@@ -1,0 +1,93 @@
+{{ if or ( eq .Values.environment "staging" )  ( eq .Values.environment "development" ) }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgresdb
+  labels:
+    app: postgresdb
+spec:
+  replicas: 1
+  serviceName: postgresdbs
+  selector:
+    matchLabels:
+      app: postgresdb
+  template:
+    metadata:
+      labels:
+        app: postgresdb
+    spec:
+      containers:
+        - name: database
+          image: mirror.gcr.io/library/postgres:15.5
+          env:
+            - name: POSTGRES_PASSWORD
+              value: development
+            - name: POSTGRES_USER
+              value: admin
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+          resources:
+{{ if ( eq .Values.unittests true ) }}
+            requests:
+              memory: 100Mi
+              cpu: 100m
+            limits:
+              memory: 200Mi
+              cpu: 500m
+{{ else }}
+            requests:
+              memory: 200Mi
+              cpu: 500m
+            limits:
+              memory: 500Mi
+              cpu: 2000m
+{{ end }}
+      securityContext:
+        fsGroup: 472
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-storage
+      spec:
+        accessModes: [ReadWriteOnce]
+        resources:
+          requests:
+            storage: 2Gi
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-config
+type: Opaque
+data:
+  PGPASSWORD: ekY1ZGtnc0RwcTZ4ekFMcXA2dk0=
+  PGRST_DB_URI: cG9zdGdyZXNxbDovL3dic19zdnBAcG9zdGdyZXM6NTQzMi93YnNfc3Zw
+  SVP_BACKEND_URI: cG9zdGdyZXNxbDovL3dic2FkbWluOmRldmVsb3BtZW50QHBvc3RncmVzOjU0MzIvd2JzX3N2cA==
+  SVP_BACKEND_URI_ROOT: cG9zdGdyZXNxbDovL3dic2FkbWluOmRldmVsb3BtZW50QHBvc3RncmVzOjU0MzIvd2JzYWRtaW4=
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  selector:
+    app: postgresdb
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+      name: psql
+{{ if ( eq .Values.environment "development" ) }}
+      nodePort: 30432
+  type: NodePort
+{{ else }}
+  type: ClusterIP
+{{ end }}
+
+
+{{ end }}

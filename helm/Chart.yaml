@@ -1,0 +1,4 @@
+apiVersion: v2
+name: SeekPaths
+version: 0.1.0
+description: SeekPaths connects Christians to missions.

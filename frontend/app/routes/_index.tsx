@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import Button from "@mui/material/Button";
+import { Button } from "@mui/material";
 export const meta: MetaFunction = () => {
   return [
     { title: "CrossPaths" },

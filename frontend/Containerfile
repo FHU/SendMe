@@ -1,0 +1,17 @@
+# Development image
+FROM node:20.17-alpine AS dev
+
+WORKDIR /app
+
+COPY app/ /app/app/
+COPY public/ /app/public/
+COPY package.json /app/package.json
+COPY package-lock.json /app/package-lock.json
+COPY vite.config.ts /app/vite.config.ts
+COPY tsconfig.json /app/tsconfig.json
+
+RUN npm install --include=dev
+
+RUN npm run build
+
+CMD ["npm", "run", "dev"]
