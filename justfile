@@ -1,3 +1,6 @@
+
+import 'backend/lint.just'
+
 kind-reset:
     #!/usr/bin/env sh
     kind delete cluster
