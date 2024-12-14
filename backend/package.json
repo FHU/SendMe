@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@openapi-qraft/cli": "^1.14.2",
+    "@openapi-qraft/react": "^1.14.2"
+  }
+}

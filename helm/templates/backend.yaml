@@ -2,6 +2,16 @@
 {{ if ( ne .Values.unittests true ) }}
 
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-secret
+type: Opaque
+data:
+  CROSS_DB_URL: |-
+        {{ .Values.db_url | b64enc }}
+
+---
 
 apiVersion: apps/v1
 kind: Deployment
@@ -26,7 +36,9 @@ spec:
         - name: api
           image: {{ .Values.registry }}api:{{ .Values.tags.api  }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
-
+          envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-secret
           resources:
             requests:
               memory: 2000Mi
@@ -45,8 +57,8 @@ spec:
     app: api
   ports:
     - protocol: TCP
-      port: 5500
-      targetPort: 5500
+      port: 8000
+      targetPort: 8000
       name: http
       nodePort: 30600
   type: NodePort

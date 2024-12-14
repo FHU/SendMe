@@ -1,15 +1,16 @@
-# fly.toml app configuration file generated for backend-bold-bird-9025 on 2024-10-17T14:07:45-05:00
-#
+
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
 
 app = 'crosspaths'
 primary_region = 'iad'
 
+[processes]
+app = "poetry run fastapi run cross_paths/api.py"
+
 [build]
 
 [http_service]
-internal_port = 5500
+internal_port = 8000
 force_https = true
 auto_stop_machines = 'stop'
 auto_start_machines = true

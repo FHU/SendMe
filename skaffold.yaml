@@ -18,7 +18,7 @@ build:
     - image: api
       context: backend/
       docker:
-        dockerfile: Containerfile
+        dockerfile: Dockerfile
       sync:
         manual:
           - src: cross_paths/**/*

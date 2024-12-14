@@ -2,3 +2,5 @@ environment: development
 unittests: false
 
 pgpassword: development
+
+db_url: postgresql://admin:development@postgres:5432/admin

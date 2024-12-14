@@ -1,7 +1,8 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, Mapped, mapped_column
+from sqlalchemy import DateTime
+from sqlalchemy.orm import Mapped, mapped_column
 
 from cross_paths.database.models import Base
 
@@ -10,8 +11,6 @@ This class represents an Opportunity in the database.
 SQLAlchemy uses this to write the appropiate SQL
 for various operations.
 """
-
-
 class Opportunity(Base):
     __tablename__ = "opportunities"
 
