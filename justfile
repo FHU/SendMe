@@ -14,6 +14,11 @@ dev: kind-start
     #!/usr/bin/env sh
     skaffold dev
 
+frontend:
+    #!/usr/bin/env sh
+    cd frontend/
+    npm run dev
+
 
 # Run while api server is running.
 openapi:

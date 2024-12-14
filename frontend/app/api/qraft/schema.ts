@@ -55,6 +55,11 @@ export interface components {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
         };
+        /** HelloWorldResponse */
+        HelloWorldResponse: {
+            /** Message */
+            message: string;
+        };
         /** Opportunity */
         Opportunity: {
             /**
@@ -172,7 +177,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": unknown;
+                    "application/json": components["schemas"]["HelloWorldResponse"];
                 };
             };
         };

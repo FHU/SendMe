@@ -1,16 +1,15 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Button } from "@mui/material";
+import api from "@sendme/api";
+
 export const meta: MetaFunction = () => {
   return [
-    { title: "CrossPaths" },
-    { name: "description", content: "Welcome to Remix (SPA Mode)!" },
+    { title: "SendMe" },
+    { name: "description", content: "SendMe Mission" },
   ];
 };
 
 export default function Index() {
-  return (
-    <div>
-      <Button variant="contained">Hello world</Button>
-    </div>
-  );
+  const { data } = api.hello.helloWorldHelloGet.useQuery();
+
+  return <div>Here's a message from our server: {data?.message}</div>;
 }
