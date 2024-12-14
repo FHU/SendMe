@@ -18,8 +18,7 @@ dev: kind-start
 # Run while api server is running.
 openapi:
     #!/usr/bin/env sh
-    cd ../frontend
+    cd ./frontend
 
-    npx @openapi-qraft/cli --plugin tanstack-query-react --plugin openapi-typescript http://localhost:5500/openapi.json --output-dir ./app/api
+    npx @openapi-qraft/cli --plugin tanstack-query-react --plugin openapi-typescript http://localhost:5500/openapi.json --output-dir ./app/api/qraft
 
-    rm openapi.yaml
