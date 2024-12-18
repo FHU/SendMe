@@ -1,17 +1,17 @@
-import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { reactRouter } from "@react-router/dev/vite";
 
 export default defineConfig({
-  plugins: [
-    remix({
-      ssr: false,
-      future: {
-        v3_fetcherPersist: true,
-        v3_relativeSplatPath: true,
-        v3_throwAbortReason: true,
+  plugins: [reactRouter(), tsconfigPaths()],
+
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:5500",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, "/"),
       },
-    }),
-    tsconfigPaths(),
-  ],
+    },
+  },
 });

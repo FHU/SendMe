@@ -13,9 +13,6 @@ nodes:
   - containerPort: 30432 # Postgres
     hostPort: 5432
     protocol: TCP
-  - containerPort: 30500 # Webapp
-    hostPort: 5173
-    protocol: TCP
   - containerPort: 30600 # API
     hostPort: 5500
     protocol: TCP

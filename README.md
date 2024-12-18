@@ -9,7 +9,8 @@
 
 ## How to run
 
-1. Run `just dev`.
+1. Run `just dev` in one terminal. This runs the backend.
+2. Run `just frontend` in another terminal.
 2. It's running.
 
 The server is on port 5500: [http://localhost:5500](http://localhost:5500)

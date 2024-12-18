@@ -1,4 +1,4 @@
-FROM python:3.12-bullseye AS requirements
+FROM python:3.13-bullseye AS requirements
 
 WORKDIR /app
 COPY pyproject.toml poetry.lock /app/
@@ -6,7 +6,7 @@ RUN pip install poetry
 RUN poetry export > requirements.txt
 
 
-FROM python:3.12-bullseye
+FROM python:3.13-bullseye
 
 WORKDIR /app
 COPY --from=requirements  /app/requirements.txt /app/requirements.txt
@@ -14,4 +14,6 @@ RUN pip install -r requirements.txt
 
 COPY cross_paths/ /app/cross_paths/
 
-CMD ["uvicorn", "cross_paths.api:app", "--host", "0.0.0.0", "--port", "5500", "--workers", "2", "--reload"]
+
+CMD ["fastapi", "dev", "--host", "0.0.0.0", "/app/cross_paths/api.py"]
+

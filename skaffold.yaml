@@ -5,20 +5,10 @@ metadata:
 
 build:
   artifacts:
-    - image: webapp
-      context: frontend/
-      docker:
-        dockerfile: Containerfile
-      sync:
-        manual:
-          - src: app/**/*
-            dest: /app/app/
-            strip: app/
-
     - image: api
       context: backend/
       docker:
-        dockerfile: Containerfile
+        dockerfile: Dockerfile
       sync:
         manual:
           - src: cross_paths/**/*
