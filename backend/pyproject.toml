@@ -1,14 +1,14 @@
 [tool.poetry]
-name = "crosspaths"
+name = "sendme"
 version = "0.1.0"
 description = ""
 authors = ["Andrew Maach <andrew@worldbibleschool.net>"]
 readme = "README.md"
-packages = [{ include = "cross_paths" }]
+packages = [{ include = "send_me" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-fastapi = {extras = ["standard"], version = "^0.115.6"}
+fastapi = { extras = ["standard"], version = "^0.115.6" }
 uvicorn = "^0.30.6"
 pydantic = "^2.8.2"
 minio = "^7.2.8"

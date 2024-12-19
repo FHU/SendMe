@@ -4,7 +4,7 @@ from datetime import datetime
 from sqlalchemy import DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 
-from cross_paths.database.models import Base
+from send_me.database.models import Base
 
 """
 This class represents an Opportunity in the database.

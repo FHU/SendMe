@@ -1,7 +1,7 @@
 from datetime import datetime
 from uuid import UUID
 
-from cross_paths.schemas import CrossPathsModel
+from send_me.schemas import SendMeModel
 
 """
 Unlike models, these are not used for database access.
@@ -13,13 +13,13 @@ OpenAPI spec.
 
 
 # Specifies the client's request to create an opportunity.
-class CreateOpportunityRequest(CrossPathsModel):
+class CreateOpportunityRequest(SendMeModel):
     name: str
     description: str
 
 
 # This is the general definition of what an Opportunity looks like.
-class Opportunity(CrossPathsModel):
+class Opportunity(SendMeModel):
     id: UUID
     name: str
     description: str

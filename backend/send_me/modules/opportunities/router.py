@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from cross_paths.database.engine import get_db
+from send_me.database.engine import get_db
 
 from . import models, schemas
 

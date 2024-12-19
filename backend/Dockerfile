@@ -12,8 +12,8 @@ WORKDIR /app
 COPY --from=requirements  /app/requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
-COPY cross_paths/ /app/cross_paths/
+COPY send_me/ /app/send_me/
 
 
-CMD ["fastapi", "dev", "--host", "0.0.0.0", "/app/cross_paths/api.py"]
+CMD ["fastapi", "dev", "--host", "0.0.0.0", "/app/send_me/api.py"]
 

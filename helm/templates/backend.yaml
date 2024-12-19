@@ -8,7 +8,7 @@ metadata:
   name: {{ .Release.Name }}-secret
 type: Opaque
 data:
-  CROSS_DB_URL: |-
+  SENDME_DB_URL: |-
         {{ .Values.db_url | b64enc }}
 
 ---
@@ -60,7 +60,7 @@ spec:
       port: 8000
       targetPort: 8000
       name: http
-      nodePort: 30600
+      nodePort: 30500
   type: NodePort
 
 {{ end }}

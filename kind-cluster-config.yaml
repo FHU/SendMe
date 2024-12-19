@@ -11,10 +11,10 @@ nodes:
         streaming-connection-idle-timeout: "0"
   extraPortMappings:
   - containerPort: 30432 # Postgres
-    hostPort: 5432
+    hostPort: 30432
     protocol: TCP
-  - containerPort: 30600 # API
-    hostPort: 5500
+  - containerPort: 30500 # API
+    hostPort: 30500
     protocol: TCP
   - containerPort: 30010 # Minio
     hostPort: 2100
