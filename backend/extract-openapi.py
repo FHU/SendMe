@@ -13,7 +13,7 @@ parser.add_argument(
 if __name__ == "__main__":
     args = parser.parse_args()
 
-    from cross_paths.api import app
+    from send_me.api import app
 
     openapi = app.openapi()
     version = openapi.get("openapi", "unknown version")

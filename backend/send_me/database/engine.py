@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 engine = create_engine(
-    os.environ["CROSS_DB_URL"],
+    os.environ["SENDME_DB_URL"],
     echo=False,
     pool_size=20,
     max_overflow=30,

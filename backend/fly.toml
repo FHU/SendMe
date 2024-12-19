@@ -1,11 +1,11 @@
 
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 
-app = 'crosspaths'
+app = 'sendme'
 primary_region = 'iad'
 
 [processes]
-app = "poetry run fastapi run cross_paths/api.py"
+app = "poetry run fastapi run sendme/api.py"
 
 [build]
 

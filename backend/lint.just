@@ -3,8 +3,8 @@
 ruff:
   #!/usr/bin/env sh
   cd backend
-  poetry run ruff check cross_paths/ --fix
-  poetry run ruff format cross_paths/
+  poetry run ruff check sendme/ --fix
+  poetry run ruff format sendme/
 
 pyright:
   #!/usr/bin/env sh

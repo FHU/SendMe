@@ -1,2 +1,2 @@
-# CrossPaths server
+# SendMe server
 

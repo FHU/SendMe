@@ -57,17 +57,6 @@ spec:
           requests:
             storage: 2Gi
 
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-config
-type: Opaque
-data:
-  PGPASSWORD: ekY1ZGtnc0RwcTZ4ekFMcXA2dk0=
-  PGRST_DB_URI: cG9zdGdyZXNxbDovL3dic19zdnBAcG9zdGdyZXM6NTQzMi93YnNfc3Zw
-  SVP_BACKEND_URI: cG9zdGdyZXNxbDovL3dic2FkbWluOmRldmVsb3BtZW50QHBvc3RncmVzOjU0MzIvd2JzX3N2cA==
-  SVP_BACKEND_URI_ROOT: cG9zdGdyZXNxbDovL3dic2FkbWluOmRldmVsb3BtZW50QHBvc3RncmVzOjU0MzIvd2JzYWRtaW4=
 
 ---
 apiVersion: v1

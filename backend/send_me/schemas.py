@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ConfigDict
 
 
-class CrossPathsModel(BaseModel):
+class SendMeModel(BaseModel):
     model_config = ConfigDict(from_attributes=True)

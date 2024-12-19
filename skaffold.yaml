@@ -1,7 +1,7 @@
 apiVersion: skaffold/v4beta6
 kind: Config
 metadata:
-  name: cross-paths
+  name: send-me
 
 build:
   artifacts:
@@ -11,9 +11,9 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: cross_paths/**/*
-            dest: /app/cross_paths
-            strip: cross_paths/
+          - src: send_me/**/*
+            dest: /app/send_me
+            strip: send_me/
 
   tagPolicy:
     gitCommit:
