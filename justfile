@@ -47,5 +47,9 @@ openapi:
     #!/usr/bin/env sh
     cd ./frontend
 
-    npx @openapi-qraft/cli --plugin tanstack-query-react --plugin openapi-typescript http://localhost:5500/openapi.json --output-dir ./app/api/qraft
+    npx @openapi-qraft/cli --plugin tanstack-query-react --plugin openapi-typescript http://localhost:5500/openapi.json --output-dir ./src/api/qraft
 
+routes:
+    #!/usr/bin/env sh
+    cd ./frontend
+    npx tsr generate
