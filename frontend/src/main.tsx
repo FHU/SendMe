@@ -14,7 +14,7 @@ import { routeTree } from "./routeTree.gen";
 import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
 
 setBasePath(
-  "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/"
+	"https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/",
 );
 
 // Create a new router instance
@@ -22,13 +22,13 @@ const router = createRouter({ routeTree });
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
+	interface Register {
+		router: typeof router;
+	}
 }
 
 ReactDOM.createRoot(document.getElementById("main")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+	<React.StrictMode>
+		<RouterProvider router={router} />
+	</React.StrictMode>,
 );

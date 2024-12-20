@@ -1,4 +1,4 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 import { QraftContext, requestFn } from "@openapi-qraft/react";
@@ -21,30 +21,30 @@ const ContentArea = styled.main`
 `;
 
 function Providers({ children }: { children: JSX.Element[] }) {
-  const queryClient = useMemo(() => new QueryClient(), []);
+	const queryClient = useMemo(() => new QueryClient(), []);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <QraftContext.Provider
-        value={{
-          baseUrl: "/api", // base URL for all requests
-          requestFn, // `requestFn(...)` will be invoked for every request
-        }}
-      >
-        {children}
-      </QraftContext.Provider>
-    </QueryClientProvider>
-  );
+	return (
+		<QueryClientProvider client={queryClient}>
+			<QraftContext.Provider
+				value={{
+					baseUrl: "/api", // base URL for all requests
+					requestFn, // `requestFn(...)` will be invoked for every request
+				}}
+			>
+				{children}
+			</QraftContext.Provider>
+		</QueryClientProvider>
+	);
 }
 
 export const Route = createRootRoute({
-  component: () => (
-    <Providers>
-      <AppBar>Send Me!</AppBar>
-      <ContentArea>
-        <Outlet />
-      </ContentArea>
-      <TanStackRouterDevtools />
-    </Providers>
-  ),
+	component: () => (
+		<Providers>
+			<AppBar>Send Me!</AppBar>
+			<ContentArea>
+				<Outlet />
+			</ContentArea>
+			<TanStackRouterDevtools />
+		</Providers>
+	),
 });

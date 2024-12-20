@@ -1,17 +1,17 @@
 :root {
-  --sl-color-primary-50: rgb(254 249 241);
-  --sl-color-primary-100: rgb(253 234 206);
-  --sl-color-primary-200: rgb(251 217 168);
-  --sl-color-primary-300: rgb(250 198 125);
-  --sl-color-primary-400: rgb(247 170 62);
-  --sl-color-primary-500: rgb(228 139 13);
-  --sl-color-primary-600: rgb(189 115 11);
-  --sl-color-primary-700: rgb(155 94 9);
-  --sl-color-primary-800: rgb(128 78 7);
-  --sl-color-primary-900: rgb(91 55 5);
-  --sl-color-primary-950: rgb(56 34 3);
+	--sl-color-primary-50: rgb(254 249 241);
+	--sl-color-primary-100: rgb(253 234 206);
+	--sl-color-primary-200: rgb(251 217 168);
+	--sl-color-primary-300: rgb(250 198 125);
+	--sl-color-primary-400: rgb(247 170 62);
+	--sl-color-primary-500: rgb(228 139 13);
+	--sl-color-primary-600: rgb(189 115 11);
+	--sl-color-primary-700: rgb(155 94 9);
+	--sl-color-primary-800: rgb(128 78 7);
+	--sl-color-primary-900: rgb(91 55 5);
+	--sl-color-primary-950: rgb(56 34 3);
 }
 
 body {
-  background: var(--sl-color-neutral-200);
+	background: var(--sl-color-neutral-200);
 }

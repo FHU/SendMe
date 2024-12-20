@@ -1,5 +1,6 @@
 
 import 'backend/lint.just'
+import 'frontend/lint.just'
 
 check:
     #!/usr/bin/env sh

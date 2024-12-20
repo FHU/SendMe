@@ -23,21 +23,21 @@ const Title = styled.h5`
 const Description = styled.div``;
 
 export function OpportunitiesList({
-  data,
+	data,
 }: {
-  data: components["schemas"]["Opportunity"][];
+	data: components["schemas"]["Opportunity"][];
 }): JSX.Element {
-  return (
-    <>
-      {data?.map((o) => (
-        <OpportunityBox key={o.id}>
-          <TitleBar>
-            <Title>{o.name}</Title>
-            <SlRelativeTime>{o.created_at}</SlRelativeTime>
-          </TitleBar>
-          <Description>{o.description}</Description>
-        </OpportunityBox>
-      ))}
-    </>
-  );
+	return (
+		<>
+			{data?.map((o) => (
+				<OpportunityBox key={o.id}>
+					<TitleBar>
+						<Title>{o.name}</Title>
+						<SlRelativeTime>{o.created_at}</SlRelativeTime>
+					</TitleBar>
+					<Description>{o.description}</Description>
+				</OpportunityBox>
+			))}
+		</>
+	);
 }
