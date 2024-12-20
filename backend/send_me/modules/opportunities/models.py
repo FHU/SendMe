@@ -11,6 +11,8 @@ This class represents an Opportunity in the database.
 SQLAlchemy uses this to write the appropiate SQL
 for various operations.
 """
+
+
 class Opportunity(Base):
     __tablename__ = "opportunities"
 

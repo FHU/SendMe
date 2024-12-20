@@ -16,7 +16,12 @@ The handler to create an opportunity.
 """
 
 
-@router.post("/opportunities", response_model=schemas.Opportunity, status_code=201, operation_id="create")
+@router.post(
+    "/opportunities",
+    response_model=schemas.Opportunity,
+    status_code=201,
+    operation_id="create",
+)
 def create_opportunity(
     input: schemas.CreateOpportunityRequest,
     db: Session = Depends(get_db),
@@ -46,7 +51,9 @@ This handler just gets a simple list of the opportunities.
 """
 
 
-@router.get("/opportunities", response_model=list[schemas.Opportunity], operation_id="list")
+@router.get(
+    "/opportunities", response_model=list[schemas.Opportunity], operation_id="list"
+)
 def get_opportunities(
     db: Session = Depends(get_db),
 ):

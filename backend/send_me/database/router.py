@@ -1,9 +1,7 @@
 from fastapi import APIRouter
 
-from .models import Base
-
 from .engine import engine
-
+from .models import Base
 
 router = APIRouter(
     tags=["database"],
@@ -14,7 +12,6 @@ router = APIRouter(
 @router.post("/database/init")
 def database_init():
     Base.metadata.create_all(bind=engine)
-
 
 
 @router.post("/database/delete")

@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./root";
 
 import "./styles/normalize.css";
 import "@shoelace-style/shoelace/dist/themes/light.css";
@@ -27,7 +26,7 @@ declare module "@tanstack/react-router" {
 	}
 }
 
-ReactDOM.createRoot(document.getElementById("main")).render(
+ReactDOM.createRoot(document.getElementById("main") as HTMLElement).render(
 	<React.StrictMode>
 		<RouterProvider router={router} />
 	</React.StrictMode>,
