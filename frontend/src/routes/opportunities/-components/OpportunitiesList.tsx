@@ -1,4 +1,4 @@
-import api from "@sendme/api";
+import api, { type components } from "@sendme/api";
 import styled from "styled-components";
 
 import { SlRelativeTime } from "@shoelace-style/shoelace/dist/react";
@@ -8,6 +8,7 @@ const OpportunityBox = styled.article`
   padding: var(--sl-spacing-medium);
   border-radius: var(--sl-border-radius-medium);
   box-shadow: var(--sl-shadow-small);
+  margin-bottom: var(--sl-spacing-medium);
 `;
 
 const TitleBar = styled.div`
@@ -21,9 +22,11 @@ const Title = styled.h5`
 
 const Description = styled.div``;
 
-export function OpportunitiesList(): JSX.Element {
-  const { data } = api.opportunities.list.useQuery();
-
+export function OpportunitiesList({
+  data,
+}: {
+  data: components["schemas"]["Opportunity"][];
+}): JSX.Element {
   return (
     <>
       {data?.map((o) => (

@@ -22,8 +22,8 @@ const ToTheRight = styled.div`
   justify-content: flex-end;
 `;
 
-export function CreateOpportunity() {
-  const { mutate, isPending } = api.opportunities.create.useMutation();
+export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
+  const { mutateAsync, isPending } = api.opportunities.create.useMutation();
 
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,14 +31,16 @@ export function CreateOpportunity() {
 
       const formData = new FormData(e.currentTarget);
 
-      mutate({
+      mutateAsync({
         body: {
           name: formData.get("name")?.toString() || "",
           description: formData.get("description")?.toString() || "",
         },
+      }).then(() => {
+        onCreated();
       });
     },
-    [mutate],
+    [mutateAsync, onCreated],
   );
 
   return (
