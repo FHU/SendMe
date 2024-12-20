@@ -36,6 +36,20 @@ dev:
     #!/usr/bin/env sh
     skaffold dev
 
+# Run after dev
+init:
+    #!/usr/bin/env sh
+    curl -X POST http://localhost:30500/database/init
+
+# Reset an already initialized database
+reset:
+    #!/usr/bin/env sh
+    curl -X POST http://localhost:30500/database/delete
+    echo ""
+    curl -X POST http://localhost:30500/database/init
+    echo ""
+
+
 frontend:
     #!/usr/bin/env sh
     cd frontend/
@@ -47,7 +61,7 @@ openapi:
     #!/usr/bin/env sh
     cd ./frontend
 
-    npx @openapi-qraft/cli --plugin tanstack-query-react --plugin openapi-typescript http://localhost:5500/openapi.json --output-dir ./src/api/qraft
+    npx @openapi-qraft/cli --plugin tanstack-query-react --plugin openapi-typescript http://localhost:30500/openapi.json --output-dir ./src/api/qraft
 
 routes:
     #!/usr/bin/env sh

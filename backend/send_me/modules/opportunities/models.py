@@ -14,7 +14,7 @@ for various operations.
 class Opportunity(Base):
     __tablename__ = "opportunities"
 
-    id: Mapped[uuid.UUID] = mapped_column(primary_key=True)
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     name: Mapped[str]
     description: Mapped[str]
 

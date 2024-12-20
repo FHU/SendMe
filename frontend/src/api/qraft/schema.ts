@@ -12,10 +12,44 @@ export interface paths {
             cookie?: never;
         };
         /** Get Opportunities */
-        get: operations["get_opportunities_opportunities_get"];
+        get: operations["list"];
         put?: never;
         /** Create Opportunity */
-        post: operations["create_opportunity_opportunities_post"];
+        post: operations["create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/database/init": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Database Init */
+        post: operations["database_init_database_init_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/database/delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Database Data */
+        post: operations["database_data_database_delete_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -95,7 +129,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    get_opportunities_opportunities_get: {
+    list: {
         parameters: {
             query?: never;
             header?: never;
@@ -122,7 +156,7 @@ export interface operations {
             };
         };
     };
-    create_opportunity_opportunities_post: {
+    create: {
         parameters: {
             query?: never;
             header?: never;
@@ -159,6 +193,60 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
+            };
+        };
+    };
+    database_init_database_init_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    database_data_database_delete_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

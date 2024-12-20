@@ -7,12 +7,12 @@ import type { paths } from "../schema";
 import type { ServiceOperationQuery, ServiceOperationMutation } from "@openapi-qraft/react";
 export interface OpportunitiesService {
     /** @summary Get Opportunities */
-    getOpportunitiesOpportunitiesGet: ServiceOperationQuery<{
+    list: ServiceOperationQuery<{
         method: "get";
         url: "/opportunities";
     }, paths["/opportunities"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
     /** @summary Create Opportunity */
-    createOpportunityOpportunitiesPost: ServiceOperationMutation<{
+    create: ServiceOperationMutation<{
         method: "post";
         url: "/opportunities";
         mediaType: "application/json";
@@ -20,14 +20,14 @@ export interface OpportunitiesService {
 }
 export const opportunitiesService: {
     /** @summary Get Opportunities */
-    getOpportunitiesOpportunitiesGet: {
+    list: {
         schema: {
             method: "get";
             url: "/opportunities";
         };
     };
     /** @summary Create Opportunity */
-    createOpportunityOpportunitiesPost: {
+    create: {
         schema: {
             method: "post";
             url: "/opportunities";
@@ -35,13 +35,13 @@ export const opportunitiesService: {
         };
     };
 } = {
-    getOpportunitiesOpportunitiesGet: {
+    list: {
         schema: {
             method: "get",
             url: "/opportunities"
         }
     },
-    createOpportunityOpportunitiesPost: {
+    create: {
         schema: {
             method: "post",
             url: "/opportunities",
