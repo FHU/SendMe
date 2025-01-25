@@ -3,8 +3,8 @@
 ruff:
   #!/usr/bin/env sh
   cd backend
-  poetry run ruff check sendme/ --fix
-  poetry run ruff format sendme/
+  poetry run ruff check send_me/ --fix
+  poetry run ruff format send_me/
 
 pyright:
   #!/usr/bin/env sh
