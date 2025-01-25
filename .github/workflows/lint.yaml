@@ -47,7 +47,7 @@ jobs:
         run: npm ci
         working-directory: frontend
       - name: NPM Run Biome
-        run: npm run biome
+        run: npx @biomejs/biome check
         working-directory: frontend
 
   tsc:
