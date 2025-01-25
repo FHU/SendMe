@@ -1,11 +1,12 @@
 {
-  "name": "cross-paths",
+  "name": "send-me",
   "private": true,
   "sideEffects": false,
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_ENV=production vite build",
     "dev": "vite dev",
+    "biome": "@biomejs/biome check",
     "typecheck": "tsr generate && tsc"
   },
   "dependencies": {
