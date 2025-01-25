@@ -3,6 +3,8 @@ FROM python:3.13-bullseye AS requirements
 WORKDIR /app
 COPY pyproject.toml poetry.lock /app/
 RUN pip install poetry
+# Install the poetry-plugin-export plugin, needed for poetry versions >= 2.0.0
+RUN poetry self add poetry-plugin-export 
 RUN poetry export > requirements.txt
 
 
