@@ -30,23 +30,23 @@ NPM:
 10.2.4
 NodeJS:
 v20.11.1
-Python 3.13.0
-Poetry (version 1.8.4)
+Python 3.13.1
+Poetry (version 1.8.5)
 Skaffold:
 v2.13.2
 Helm:
-version.BuildInfo{Version:"v3.16.2", GitCommit:"13654a52f7c70a143b1dd51416d633e1071faffb", GitTreeState:"dirty", GoVersion:"go1.23.2"}
+version.BuildInfo{Version:"v3.16.4", GitCommit:"7877b45b63f95635153b29a42c0c2f4273ec45ca", GitTreeState:"dirty", GoVersion:"go1.23.4"}
 Kubectl:
-Client Version: v1.31.2
-Kustomize Version: v5.4.2
-Server Version: v1.31.0
+Client Version: v1.32.0
+Kustomize Version: v5.5.0
+Server Version: v1.32.0
 ```
 
 ## How to run
 
 1. `just setup` to install dependencies from poetry and npm.
-2. `just dev` in one terminal. This runs the backend. Keep it running.
-3. `just frontend` in another terminal. This runs Vite with the frontend.
+2. `just dev-backend` in one terminal. This runs the backend. Keep it running.
+3. `just dev-frontend` in another terminal. This runs Vite with the frontend.
 
 TODO: Make sure these scripts run on Windows.
 

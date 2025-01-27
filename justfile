@@ -33,7 +33,7 @@ kind-start:
     kind create cluster --config kind-cluster-config.yaml
     kubectl config use-context kind-kind
 
-dev:
+dev-backend:
     #!/usr/bin/env sh
     skaffold dev
 
@@ -51,7 +51,7 @@ reset:
     echo ""
 
 
-frontend:
+dev-frontend:
     #!/usr/bin/env sh
     cd frontend/
     npm run dev
@@ -68,3 +68,6 @@ routes:
     #!/usr/bin/env sh
     cd ./frontend
     npx tsr generate
+
+
+pr: ruff pyright biome ts
