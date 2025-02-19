@@ -1,4 +1,4 @@
 apiVersion: v2
-name: SeekPaths
+name: SendMe
 version: 0.1.0
-description: SeekPaths connects Christians to missions.
+description: SendMe connects Christians to missions.
