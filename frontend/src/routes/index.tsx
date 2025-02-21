@@ -16,6 +16,9 @@ function Index() {
 			<Link to="/opportunities">
 				<SlButton>Test</SlButton>
 			</Link>
+			<Link to="/messages">
+				<SlButton>Messages</SlButton>
+			</Link>
 		</div>
 	);
 }
