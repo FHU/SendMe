@@ -1,8 +1,7 @@
 import api from "@sendme/api";
 import { SlButton } from "@shoelace-style/shoelace/dist/react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
-
 
 export const Route = createFileRoute("/messages/")({
 	component: RouteComponent,
