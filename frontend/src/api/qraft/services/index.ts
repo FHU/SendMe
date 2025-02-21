@@ -3,16 +3,19 @@
  * Do not make direct changes to the file.
  */
 
-import { OpportunitiesService, opportunitiesService } from "./OpportunitiesService";
+import {
+	OpportunitiesService,
+	opportunitiesService,
+} from "./OpportunitiesService";
 import { DatabaseService, databaseService } from "./DatabaseService";
 import { HelloService, helloService } from "./HelloService";
 export type Services = {
-    opportunities: OpportunitiesService;
-    database: DatabaseService;
-    hello: HelloService;
+	opportunities: OpportunitiesService;
+	database: DatabaseService;
+	hello: HelloService;
 };
 export const services = {
-    opportunities: opportunitiesService,
-    database: databaseService,
-    hello: helloService
+	opportunities: opportunitiesService,
+	database: databaseService,
+	hello: helloService,
 } as const;

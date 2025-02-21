@@ -4,48 +4,64 @@
  */
 
 import type { paths } from "../schema";
-import type { ServiceOperationQuery, ServiceOperationMutation } from "@openapi-qraft/react";
+import type {
+	ServiceOperationQuery,
+	ServiceOperationMutation,
+} from "@openapi-qraft/react";
 export interface OpportunitiesService {
-    /** @summary Get Opportunities */
-    list: ServiceOperationQuery<{
-        method: "get";
-        url: "/opportunities";
-    }, paths["/opportunities"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
-    /** @summary Create Opportunity */
-    create: ServiceOperationMutation<{
-        method: "post";
-        url: "/opportunities";
-        mediaType: "application/json";
-    }, NonNullable<paths["/opportunities"]["post"]["requestBody"]>["content"]["application/json"], paths["/opportunities"]["post"]["responses"]["201"]["content"]["application/json"], undefined, paths["/opportunities"]["post"]["responses"]["422"]["content"]["application/json"]>;
+	/** @summary Get Opportunities */
+	list: ServiceOperationQuery<
+		{
+			method: "get";
+			url: "/opportunities";
+		},
+		paths["/opportunities"]["get"]["responses"]["200"]["content"]["application/json"],
+		undefined,
+		unknown
+	>;
+	/** @summary Create Opportunity */
+	create: ServiceOperationMutation<
+		{
+			method: "post";
+			url: "/opportunities";
+			mediaType: "application/json";
+		},
+		NonNullable<
+			paths["/opportunities"]["post"]["requestBody"]
+		>["content"]["application/json"],
+		paths["/opportunities"]["post"]["responses"]["201"]["content"]["application/json"],
+		undefined,
+		paths["/opportunities"]["post"]["responses"]["422"]["content"]["application/json"]
+	>;
 }
 export const opportunitiesService: {
-    /** @summary Get Opportunities */
-    list: {
-        schema: {
-            method: "get";
-            url: "/opportunities";
-        };
-    };
-    /** @summary Create Opportunity */
-    create: {
-        schema: {
-            method: "post";
-            url: "/opportunities";
-            mediaType: "application/json";
-        };
-    };
+	/** @summary Get Opportunities */
+	list: {
+		schema: {
+			method: "get";
+			url: "/opportunities";
+		};
+	};
+	/** @summary Create Opportunity */
+	create: {
+		schema: {
+			method: "post";
+			url: "/opportunities";
+			mediaType: "application/json";
+		};
+	};
 } = {
-    list: {
-        schema: {
-            method: "get",
-            url: "/opportunities"
-        }
-    },
-    create: {
-        schema: {
-            method: "post",
-            url: "/opportunities",
-            mediaType: "application/json"
-        }
-    }
+	list: {
+		schema: {
+			method: "get",
+			url: "/opportunities",
+		},
+	},
+	create: {
+		schema: {
+			method: "post",
+			url: "/opportunities",
+			mediaType: "application/json",
+		},
+	},
 };

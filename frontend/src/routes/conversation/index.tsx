@@ -3,7 +3,6 @@ import { SlButton } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import styled from "styled-components";
 
-
 export const Route = createFileRoute("/conversation/")({
 	component: RouteComponent,
 });
