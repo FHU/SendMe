@@ -6,25 +6,30 @@
 import type { paths } from "../schema";
 import type { ServiceOperationQuery } from "@openapi-qraft/react";
 export interface HelloService {
-    /** @summary Hello World */
-    helloWorldHelloGet: ServiceOperationQuery<{
-        method: "get";
-        url: "/hello";
-    }, paths["/hello"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
+	/** @summary Hello World */
+	helloWorldHelloGet: ServiceOperationQuery<
+		{
+			method: "get";
+			url: "/hello";
+		},
+		paths["/hello"]["get"]["responses"]["200"]["content"]["application/json"],
+		undefined,
+		unknown
+	>;
 }
 export const helloService: {
-    /** @summary Hello World */
-    helloWorldHelloGet: {
-        schema: {
-            method: "get";
-            url: "/hello";
-        };
-    };
+	/** @summary Hello World */
+	helloWorldHelloGet: {
+		schema: {
+			method: "get";
+			url: "/hello";
+		};
+	};
 } = {
-    helloWorldHelloGet: {
-        schema: {
-            method: "get",
-            url: "/hello"
-        }
-    }
+	helloWorldHelloGet: {
+		schema: {
+			method: "get",
+			url: "/hello",
+		},
+	},
 };

@@ -6,43 +6,55 @@
 import type { paths } from "../schema";
 import type { ServiceOperationMutation } from "@openapi-qraft/react";
 export interface DatabaseService {
-    /** @summary Database Init */
-    databaseInitDatabaseInitPost: ServiceOperationMutation<{
-        method: "post";
-        url: "/database/init";
-    }, undefined, paths["/database/init"]["post"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
-    /** @summary Database Data */
-    databaseDataDatabaseDeletePost: ServiceOperationMutation<{
-        method: "post";
-        url: "/database/delete";
-    }, undefined, paths["/database/delete"]["post"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
+	/** @summary Database Init */
+	databaseInitDatabaseInitPost: ServiceOperationMutation<
+		{
+			method: "post";
+			url: "/database/init";
+		},
+		undefined,
+		paths["/database/init"]["post"]["responses"]["200"]["content"]["application/json"],
+		undefined,
+		unknown
+	>;
+	/** @summary Database Data */
+	databaseDataDatabaseDeletePost: ServiceOperationMutation<
+		{
+			method: "post";
+			url: "/database/delete";
+		},
+		undefined,
+		paths["/database/delete"]["post"]["responses"]["200"]["content"]["application/json"],
+		undefined,
+		unknown
+	>;
 }
 export const databaseService: {
-    /** @summary Database Init */
-    databaseInitDatabaseInitPost: {
-        schema: {
-            method: "post";
-            url: "/database/init";
-        };
-    };
-    /** @summary Database Data */
-    databaseDataDatabaseDeletePost: {
-        schema: {
-            method: "post";
-            url: "/database/delete";
-        };
-    };
+	/** @summary Database Init */
+	databaseInitDatabaseInitPost: {
+		schema: {
+			method: "post";
+			url: "/database/init";
+		};
+	};
+	/** @summary Database Data */
+	databaseDataDatabaseDeletePost: {
+		schema: {
+			method: "post";
+			url: "/database/delete";
+		};
+	};
 } = {
-    databaseInitDatabaseInitPost: {
-        schema: {
-            method: "post",
-            url: "/database/init"
-        }
-    },
-    databaseDataDatabaseDeletePost: {
-        schema: {
-            method: "post",
-            url: "/database/delete"
-        }
-    }
+	databaseInitDatabaseInitPost: {
+		schema: {
+			method: "post",
+			url: "/database/init",
+		},
+	},
+	databaseDataDatabaseDeletePost: {
+		schema: {
+			method: "post",
+			url: "/database/delete",
+		},
+	},
 };
