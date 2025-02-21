@@ -11,8 +11,8 @@ const AreaHeading = styled.h2``;
 
 function RouteComponent() {
 	return (
-		<>
-      <h3>Messages</h3>
-		</>
+		<div>
+			<h3>Messages</h3>
+		</div>
 	);
 }
