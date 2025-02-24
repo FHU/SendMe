@@ -1,4 +1,3 @@
-import random
 import secrets
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -31,7 +30,7 @@ def request_pin(input: schemas.LoginRequest, db: Session = Depends(get_db)):
 
     # Create a login
     item = models.Login(
-        pin=str(random.randint(0, 999999)),
+        pin=str(secrets.randbelow(0,999999)),
         token=str(secrets.token_urlsafe(16)),
         email=input.email,
     )
