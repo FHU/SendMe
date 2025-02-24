@@ -1,15 +1,18 @@
 from send_me.schemas import SendMeModel
 
+
 class LoginRequest(SendMeModel):
-    email:str
+    email: str
+
 
 class LoginResponse(SendMeModel):
-    token:str
+    token: str
+
 
 class SessionRequest(SendMeModel):
-    pin:str
-    token:str
+    pin: str
+    token: str
+
 
 class SessionResponse(SendMeModel):
-    token:str
-
+    token: str
