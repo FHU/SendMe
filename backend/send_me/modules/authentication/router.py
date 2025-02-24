@@ -9,12 +9,13 @@ from send_me.database.engine import get_db
 from . import models, schemas, helpers
 
 router = APIRouter(
+    prefix="/auth",
     tags=["authentication"],
     responses={404:{"description":"Not Found"}}
 )
 
 @router.post(
-    "/request_pin",
+    "/pin",
     response_model=schemas.LoginResponse,
 )
 def request_pin(
@@ -51,7 +52,7 @@ def request_pin(
 
 #TODO Create endpoint for starting session
 @router.post(
-    "/request_session",
+    "/sessiontoken",
     response_model=schemas.RequestSessionRequest
 )
 def request_session(
