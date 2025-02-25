@@ -1,11 +1,14 @@
 from fastapi import Depends, Header, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+import datetime
 
 from send_me.database.engine import get_db
 
 from . import models
 
+
+TWENTY_FOUR_HOURS_OLD = datetime.timedelta(hours=24)
 
 def get_token(authorization: str = Header(...)):
     """
@@ -18,15 +21,18 @@ def get_token(authorization: str = Header(...)):
 
 
 def get_session(db: Session = Depends(get_db), token: str = Depends(get_token)):
-    query = select(models.Session).where(models.Session.token == token)
+    session_query = select(models.Session).where(models.Session.token == token)
 
-    result: models.Session = db.execute(query).first()
+    session: models.Session = db.execute(session_query).first()
 
-    if not result:
+    if not session:
         raise HTTPException(status_code=404, detail="Session Not Found")
 
     # TODO Check if Session is old
-    if result.created_at == "Too Old":
+    session_delta = datetime.datetime(session.created_at) - datetime.datetime.now()
+
+    if session_delta > TWENTY_FOUR_HOURS_OLD:
+        db.delete(session)
         raise HTTPException(status_code=400, detail="Session Expired")
 
-    return result
+    return session
