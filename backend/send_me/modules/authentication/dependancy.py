@@ -28,7 +28,6 @@ def get_session(db: Session = Depends(get_db), token: str = Depends(get_token)):
     if not session:
         raise HTTPException(status_code=404, detail="Session Not Found")
 
-    # TODO Check if Session is old
     session_delta = datetime.datetime(session.created_at) - datetime.datetime.now()
 
     if session_delta > TWENTY_FOUR_HOURS_OLD:
