@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime
+from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from send_me.database.models import Base
@@ -19,7 +19,9 @@ class Session(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     token: Mapped[str]
-    user: Mapped[User] = relationship(back_populates="users")  # This seems wrong
+    user_id = relationship(uuid.uuid4, ForeignKey('users.id'), unique=True)
+
+    user = relationship("User", back_populates="sessions")
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now
