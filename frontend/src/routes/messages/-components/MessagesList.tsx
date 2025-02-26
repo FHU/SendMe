@@ -22,13 +22,30 @@ const ReadButton = styled.div`
 	width: 15px;
 	background-color: #32B4FF;
 	border-radius: 50%;
-
+	grid-column: 5;
+	grid-row: 2;
 `
-const unReadButton = styled.div`
-	height: 15px;
-	width: 15px;
-	background-color: #fff;
-	border-radius: 50%;
+
+const UserName = styled.h2`
+	grid-row-start: 1;
+	grid-row-end: 3;
+	grid-column-start: 2;
+	grid-column-end: 4;
+	
+`
+
+const LastReadText = styled.p`
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 2;
+	grid-column-end: 5;
+	padding-top: 40px;
+`
+const LastReadTime = styled.p`
+	grid-row-start: 1;
+	grid-row-end: 3;
+	grid-column-start: 4;
+	padding-top: 6px;
 
 `
 
@@ -55,17 +72,17 @@ const Message: React.FC<MessageProps> = ({
 					style={{gridRowStart: '1', gridRowEnd: "3", placeSelf: "center", paddingTop: '10px'}}
 					></SlAvatar>
 				{isRead ? <>
-				<h2 style={{gridRowStart: "1", gridRowEnd: '3', gridColumnStart: "2", gridColumnEnd: '4', color:"gray"}}>{userName}</h2>
-				<p style={{gridRowStart: "2", gridRowEnd: '3', gridColumnStart:"2", gridColumnEnd: "5", paddingTop: '40px', color:"gray"}}>{lastReadMessage}</p>
-				<p style={{gridRowStart: "1", gridRowEnd: '3', gridColumnStart:"4", color:"gray", paddingTop: '6px'}}>{lastReadTime}</p>
+				<UserName style={{color:"gray"}}>{userName}</UserName>
+				<LastReadText style={{color:"gray"}}>{lastReadMessage}</LastReadText>
+				<LastReadTime style={{color:"gray"}}>{lastReadTime}</LastReadTime>
 				</> : 
 				<>
-				<h2 style={{gridRowStart: "1", gridRowEnd: '3', gridColumnStart: "2", gridColumnEnd: '4'}}>{userName}</h2>
-				<p style={{gridRowStart: "2", gridRowEnd: '3', gridColumnStart:"2", gridColumnEnd: "5", paddingTop: '40px'}}>{lastReadMessage}</p>
-				<p style={{gridRowStart: "1", gridRowEnd: '3', gridColumnStart:"4", paddingTop: '6px'}}>{lastReadTime}</p>		
+				<UserName>{userName}</UserName>
+				<LastReadText>{lastReadMessage}</LastReadText>
+				<LastReadTime>{lastReadTime}</LastReadTime>		
 				</>}
 
-				{isRead ? <ReadButton style={{gridColumn: '5', gridRow:'2', backgroundColor: 'white'}}/> : <ReadButton style={{gridColumn: '5', gridRow:'2', alignSelf: 'center', marginTop: '15px'}}/>}
+				{isRead ? <ReadButton style={{backgroundColor: 'white'}}/> : <ReadButton style={{gridColumn: '5', gridRow:'2', alignSelf: 'center', marginTop: '15px'}}/>}
 			</MessageCard>
 
 	</div>
