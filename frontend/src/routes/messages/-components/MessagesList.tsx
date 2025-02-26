@@ -24,6 +24,7 @@ const ReadButton = styled.div`
 	border-radius: 50%;
 	grid-column: 5;
 	grid-row: 2;
+	align-self: center;
 `
 
 const UserName = styled.h2`
@@ -69,7 +70,7 @@ const Message: React.FC<MessageProps> = ({
 			<MessageCard style={{gridColumn:"1"}}>
 					<SlAvatar
 					image={imagePath}
-					style={{gridRowStart: '1', gridRowEnd: "3", placeSelf: "center", paddingTop: '10px'}}
+					style={{gridRowStart: '1', gridRowEnd: "3", placeSelf: "center"}}
 					></SlAvatar>
 				{isRead ? <>
 				<UserName style={{color:"gray"}}>{userName}</UserName>
@@ -82,7 +83,7 @@ const Message: React.FC<MessageProps> = ({
 				<LastReadTime>{lastReadTime}</LastReadTime>		
 				</>}
 
-				{isRead ? <ReadButton style={{backgroundColor: 'white'}}/> : <ReadButton style={{gridColumn: '5', gridRow:'2', alignSelf: 'center', marginTop: '15px'}}/>}
+				{isRead ? <ReadButton style={{backgroundColor: 'white'}}/> : <ReadButton/>}
 			</MessageCard>
 
 	</div>
