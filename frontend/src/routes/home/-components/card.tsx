@@ -82,19 +82,19 @@ const Card = () => (
         <br />
         <div className="tags">
             <SlTag variant="warning" size="medium" pill>
-                Medium
+                Preacher
             </SlTag>
             <SlTag variant="warning" size="medium" pill>
-                Medium
+                Youth
             </SlTag>
             <SlTag variant="warning" size="medium" pill>
-                Medium
+                Education
             </SlTag>
             <SlTag variant="warning" size="medium" pill>
-                Medium
+                Leadership
             </SlTag> 
             <SlTag variant="warning" size="medium" pill>
-                Medium
+                Paid
             </SlTag>
         </div>
         <br />
