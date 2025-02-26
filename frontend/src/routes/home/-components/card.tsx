@@ -6,7 +6,7 @@ import { SlTag, SlAvatar, SlIconButton } from "@shoelace-style/shoelace/dist/rea
 
 const css = `
   .card-overview {
-    max-width: 300px;
+    max-width: 400px;
   }
 
   .card-title {
@@ -24,15 +24,29 @@ const css = `
     justify-content: space-between;
     align-items: center;
   }
+
   .avatar {
     display: flex;
     display-content: row;
+    gap: 10px;
   }
+
+  SlAvatar.avatar-image {
+    --size: 600px;
+  }
+
   .tags {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
   }
+
+  .more-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
 `;
 const Card = () => (
     <>
@@ -55,10 +69,9 @@ const Card = () => (
         <br />
         <div className="avatar">
             <div className="avatar-image">
-            <SlAvatar
-                image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
-                label="Avatar of a gray tabby kitten looking down"
-                />  
+                <SlAvatar
+                    image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+                > </SlAvatar> 
             </div>
             <div className="avatar-info">
                 Liam Carter
@@ -87,10 +100,23 @@ const Card = () => (
             </SlTag>
         </div>
         <br />
+        <div className="short-bio">
+            Youth Ministry experience needed at Oak Tree Church of Christ!
+        </div>
+        <br />
         <div className="details">
-            <SlDetails summary="Toggle Me">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            <SlDetails summary="More Details">
+                <div className="more-details">
+                    <strong>Position</strong> 
+                    Ministry Leadership and Staff
+                    <br />
+                    <strong>Description</strong>
+                    Our congregation is holding sessions for spirituality in different facets of life, and we are seeking someone knowledgeable in psychology and/or sociology for this job. There will be two days of sessions, and we would like anyone who has availability for these times. Thank you!
+                    <br />
+                    <strong>Time of Event</strong>
+                    N/A  
+                </div>
+                
             </SlDetails> 
         </div>
         
