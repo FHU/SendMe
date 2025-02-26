@@ -13,7 +13,9 @@ class User(Base):
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     username: Mapped[str]
     email: Mapped[str]
-    session = relationship("Session", uselist=False, back_populates="user", cascade="all, delete-orphan")
+    session = relationship(
+        "Session", uselist=False, back_populates="user", cascade="all, delete-orphan"
+    )
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now

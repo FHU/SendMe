@@ -5,7 +5,6 @@ from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from send_me.database.models import Base
-from send_me.modules.users.models import User
 
 """
 This class represents an Session in the database.

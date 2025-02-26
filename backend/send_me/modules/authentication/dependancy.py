@@ -1,14 +1,15 @@
+import datetime
+
 from fastapi import Depends, Header, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-import datetime
 
 from send_me.database.engine import get_db
 
 from . import models
 
-
 TWENTY_FOUR_HOURS_OLD = datetime.timedelta(hours=24)
+
 
 def get_token(authorization: str = Header(...)):
     """

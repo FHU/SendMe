@@ -27,7 +27,7 @@ def request_pin(input: schemas.LoginRequest, db: Session = Depends(get_db)):
     user = db.execute(user_query)
 
     if not user:
-        #TODO Create a user
+        # TODO Create a user
         raise HTTPException(status_code=404, detail="User Not Found")
 
     # Create a login
@@ -49,7 +49,6 @@ def request_pin(input: schemas.LoginRequest, db: Session = Depends(get_db)):
 
     # return token for future auth
     return {"token": login.token}
-
 
 
 @router.post("/sessiontoken", response_model=schemas.SessionRequest)
@@ -77,10 +76,7 @@ def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)
     if not user:
         raise HTTPException(status_code=500, detail="Unable to find user")
 
-    session = models.Session(
-        token=secrets.token_urlsafe(32),
-        user=user
-    )
+    session = models.Session(token=secrets.token_urlsafe(32), user=user)
 
     # Add new session to db
     db.add(session)
