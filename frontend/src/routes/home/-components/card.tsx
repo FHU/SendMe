@@ -1,6 +1,6 @@
-import { SlButton, SlCard, SlRating } from "@shoelace-style/shoelace/dist/react";
+import { SlButton, SlCard } from "@shoelace-style/shoelace/dist/react";
 import { SlDetails } from "@shoelace-style/shoelace/dist/react";
-import { SlTag, SlAvatar, SlIconButton } from "@shoelace-style/shoelace/dist/react";
+import { SlTag, SlAvatar, SlIconButton, SlIcon } from "@shoelace-style/shoelace/dist/react";
 
 
 
@@ -24,10 +24,16 @@ const css = `
     color: var(--sl-color-neutral-500);
   }
 
-  .avatar {
+  .avatar-info {
     display: flex;
     display-content: row;
     gap: 10px;
+  }
+
+  .avatar {
+    display: flex;
+    display-content: row;
+    justify-content: space-between;
   }
 
   SlAvatar.avatar-image {
@@ -66,18 +72,24 @@ const Card = () => (
         </div>
         <br />
         <div className="avatar">
-            <div className="avatar-image">
-                <SlAvatar
-                    image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
-                > </SlAvatar> 
-            </div>
             <div className="avatar-info">
-                Liam Carter
-                <br />
-                <small>Oak Tree Church of Christ</small>
-                <br />
-                <small>Dallas, TX, USA</small>
-            </div>  
+                <div className="avatar-image">
+                    <SlAvatar
+                        image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+                    > </SlAvatar> 
+                </div>
+                <div className="avatar-details">
+                    Liam Carter
+                    <br />
+                    <small>Oak Tree Church of Christ</small>
+                    <br />
+                    <small>Dallas, TX, USA</small>
+                </div>   
+            </div>
+            <SlButton variant="default" size="large">
+                <SlIcon slot="prefix" name="envelope" color="orange"></SlIcon>
+                Message
+            </SlButton>
         </div>
         <br />
         <div className="tags">
@@ -105,12 +117,18 @@ const Card = () => (
         <div className="details">
             <SlDetails summary="More Details">
                 <div className="more-details">
-                    <h3>Position</h3>
-                    <p>Ministry Leadership and Staff</p> 
-                    <h3>Description</h3>
-                    <p>Our congregation is holding sessions for spirituality in different facets of life, and we are seeking someone knowledgeable in psychology and/or sociology for this job. There will be two days of sessions, and we would like anyone who has availability for these times. Thank you!</p>
-                    <h3>Time of Event</h3>
-                    <p>N/A</p>  
+                    <div className="position">
+                        <h3>Position</h3>
+                        <p>Ministry Leadership and Staff</p>   
+                    </div>
+                    <div className="description">
+                        <h3>Description</h3>
+                        <p>Our congregation is holding sessions for spirituality in different facets of life, and we are seeking someone knowledgeable in psychology and/or sociology for this job. There will be two days of sessions, and we would like anyone who has availability for these times. Thank you!</p> 
+                    </div>
+                    <div className="time">
+                        <h3>Time of Event</h3>
+                        <p>N/A</p>   
+                    </div>
                 </div>
                 
             </SlDetails> 
