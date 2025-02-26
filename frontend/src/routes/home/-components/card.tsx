@@ -7,6 +7,11 @@ import { SlTag, SlAvatar, SlIconButton } from "@shoelace-style/shoelace/dist/rea
 const css = `
   .card-overview {
     max-width: 400px;
+    --border-radius: 7%;
+  }
+
+  strong {
+  font-size: 30px;
   }
 
   .card-title {
@@ -17,12 +22,6 @@ const css = `
 
   .card-overview small {
     color: var(--sl-color-neutral-500);
-  }
-
-  .card-overview [slot="footer"] {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
 
   .avatar {
@@ -44,7 +43,6 @@ const css = `
   .more-details {
     display: flex;
     flex-direction: column;
-    gap: 10px;
   }
 
 `;
@@ -107,14 +105,12 @@ const Card = () => (
         <div className="details">
             <SlDetails summary="More Details">
                 <div className="more-details">
-                    <strong>Position</strong> 
-                    Ministry Leadership and Staff
-                    <br />
-                    <strong>Description</strong>
-                    Our congregation is holding sessions for spirituality in different facets of life, and we are seeking someone knowledgeable in psychology and/or sociology for this job. There will be two days of sessions, and we would like anyone who has availability for these times. Thank you!
-                    <br />
-                    <strong>Time of Event</strong>
-                    N/A  
+                    <h3>Position</h3>
+                    <p>Ministry Leadership and Staff</p> 
+                    <h3>Description</h3>
+                    <p>Our congregation is holding sessions for spirituality in different facets of life, and we are seeking someone knowledgeable in psychology and/or sociology for this job. There will be two days of sessions, and we would like anyone who has availability for these times. Thank you!</p>
+                    <h3>Time of Event</h3>
+                    <p>N/A</p>  
                 </div>
                 
             </SlDetails> 
