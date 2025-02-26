@@ -3,18 +3,18 @@ import styled from "styled-components";
 import { SlAvatar } from "@shoelace-style/shoelace/dist/react";
 import React from "react";
 
-
-const images = ['../../../public/images/christian-buehner-DItYlc26zVI-unsplash.jpg', '../../../public/images/microsoft-365-7mBictB_urk-unsplash.jpg']
-const userNames = ['John Smith', 'Clara Donovan']
-const lastReadMessage = ["Hey! I heard about Servant's Day and would love to contribute...", "Hello! My name is Clara and I was wondering if there might..."]
-const lastReadTime = ['3:53 P.M.', '1:23 P.M.']
+const messages = [
+	{imagePath: '../../../public/images/christian-buehner-DItYlc26zVI-unsplash.jpg', userName: 'John Smith', lastReadMessage: "Hey! I heard about Servant's Day and would love to contribute...", lastReadTime: '3:53 P.M.', isRead: false},
+	{imagePath: '../../../public/images/microsoft-365-7mBictB_urk-unsplash.jpg', userName: 'Clara Donovan', lastReadMessage: "Hello! My name is Clara and I was wondering if there might...", lastReadTime: '1:23 P.M.', isRead: false},
+	{imagePath: '../../public/images/karl-fredrickson-JRsZWmRd_Ws-unsplash.jpg', userName: 'Estes CoC', lastReadMessage: "Hi! I’m interested in helping with the food drive and I thought that...", lastReadTime: '7:23 A.M.', isRead: true},
+	{imagePath: '../../public/images/cosmic-timetraveler-_R1cc2IHk70-unsplash.jpg', userName: 'Henderson CoC', lastReadMessage: "That sounds doable! Do I need to make an appointment with an elder or can I...", lastReadTime: '2:42 P.M.', isRead: true}
+]
 
 const MessageCard = styled.div`
 	display: grid;
 	grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
-	grid-template-rows: 1fr 1fr;
-	background-color: hsl(240 5.9% 90%);
-	margin-bottom: 20px;
+	grid-template-rows: 1fr 0.5fr 0.5;
+	background-color: #fff;
 `;
 
 const ReadButton = styled.div`
@@ -24,55 +24,69 @@ const ReadButton = styled.div`
 	border-radius: 50%;
 
 `
+const unReadButton = styled.div`
+	height: 15px;
+	width: 15px;
+	background-color: #fff;
+	border-radius: 50%;
+
+`
 
 interface MessageProps {
 	imagePath?: string;
 	userName?: string;
 	lastReadMessage?: string;
 	lastReadTime: string;
+	isRead: boolean;
 }
 
 const Message: React.FC<MessageProps> = ({
 	imagePath, 
 	userName,
 	lastReadMessage,
-	lastReadTime
+	lastReadTime,
+	isRead
 }) => {
 	return(
 		<div style={{display: 'grid', gridTemplateColumns: "1fr .025fr"}}>
 			<MessageCard style={{gridColumn:"1"}}>
 					<SlAvatar
 					image={imagePath}
-					style={{gridRowStart: '1', gridRowEnd: "3", placeSelf: "center"}}
+					style={{gridRowStart: '1', gridRowEnd: "3", placeSelf: "center", paddingTop: '10px'}}
 					></SlAvatar>
-				<h3 style={{gridRowStart: "1", gridColumnStart: "2"}}>{userName}</h3>
-				<p style={{gridRowStart: "2", gridColumnStart:"2", gridColumnEnd: "5"}}>{lastReadMessage}</p>
-				<p style={{gridRowStart: "1", gridColumnStart:"4"}}>{lastReadTime}</p>
+				{isRead ? <>
+				<h2 style={{gridRowStart: "1", gridRowEnd: '3', gridColumnStart: "2", paddingTop: '5px', color:"gray"}}>{userName}</h2>
+				<p style={{gridRowStart: "2", gridRowEnd: '3', gridColumnStart:"2", gridColumnEnd: "5", color:"gray"}}>{lastReadMessage}</p>
+				<p style={{gridRowStart: "1", gridColumnStart:"4", color:"gray"}}>{lastReadTime}</p>
+				</> : 
+				<>
+				<h2 style={{gridRowStart: "1", gridRowEnd: '3', gridColumnStart: "2", paddingTop: '5px'}}>{userName}</h2>
+				<p style={{gridRowStart: "2", gridRowEnd: '3', gridColumnStart:"2", gridColumnEnd: "5"}}>{lastReadMessage}</p>
+				<p style={{gridRowStart: "1", gridColumnStart:"4"}}>{lastReadTime}</p>		
+				</>}
 
+				{isRead ? <ReadButton style={{gridColumn: '5', gridRow:'2', backgroundColor: 'white'}}/> : <ReadButton style={{gridColumn: '5', gridRow:'2'}}/>}
 			</MessageCard>
-			<ReadButton style={{gridColumn: '2', placeSelf: "center"}}></ReadButton>
+
 	</div>
 	)
 
 }
 
-export function MessagesList({
-}): JSX.Element {
+
+export function MessagesList({}): JSX.Element {
 	return (
 		<>
-			<Message
-			imagePath={images[0]}
-			userName={userNames[0]}
-			lastReadMessage={lastReadMessage[0]}
-			lastReadTime={lastReadTime[0]}>
-			</Message>
-			<Message
-			imagePath={images[1]}
-			userName={userNames[1]}
-			lastReadMessage={lastReadMessage[1]}
-			lastReadTime={lastReadTime[1]}>
-			</Message>
-		</>
+		{messages.map((message) => (
+		  <Message
+			imagePath={message.imagePath}
+			userName={message.userName}
+			lastReadMessage={message.lastReadMessage}
+			lastReadTime={message.lastReadTime}
+			isRead={message.isRead}
+		  />
+		))}
+	  </>
 
 		  )
 		};
