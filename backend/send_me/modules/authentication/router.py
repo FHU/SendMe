@@ -22,7 +22,7 @@ router = APIRouter(
 )
 def request_pin(input: schemas.LoginRequest, db: Session = Depends(get_db)):
     # Check if user exists
-    user_query = select(models.User).where(models.User.email == input.email)
+    user_query = select(User).where(User.email == input.email)
 
     user = db.execute(user_query)
 
@@ -58,7 +58,7 @@ def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)
         (models.Login.token == input.token) & (models.Login.pin == input.pin)
     )
 
-    login: models.Login = db.execute(login_query)
+    login = db.execute(login_query).first()
 
     if not login:
         raise HTTPException(status_code=404, detail="Login not found")

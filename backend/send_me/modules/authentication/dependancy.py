@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timedelta
 
 from fastapi import Depends, Header, HTTPException
 from sqlalchemy import select
@@ -8,7 +8,7 @@ from send_me.database.engine import get_db
 
 from . import models
 
-TWENTY_FOUR_HOURS_OLD = datetime.timedelta(hours=24)
+TWENTY_FOUR_HOURS_OLD = timedelta(hours=24)
 
 
 def get_token(authorization: str = Header(...)):
@@ -24,12 +24,12 @@ def get_token(authorization: str = Header(...)):
 def get_session(db: Session = Depends(get_db), token: str = Depends(get_token)):
     session_query = select(models.Session).where(models.Session.token == token)
 
-    session: models.Session = db.execute(session_query).first()
+    session = db.execute(session_query).first()
 
     if not session:
         raise HTTPException(status_code=404, detail="Session Not Found")
 
-    session_delta = datetime.datetime(session.created_at) - datetime.datetime.now()
+    session_delta = session.created_at - datetime.now()
 
     if session_delta > TWENTY_FOUR_HOURS_OLD:
         db.delete(session)
