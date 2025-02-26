@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@shoelace-style/shoelace": "^2.20.0"
+  }
+}
