@@ -65,7 +65,7 @@ const Navbar: React.FC<NavbarProps> = ({ appName }) => {
         </IconButton>
 
         <IconButton>
-          <UserImage src="../images/profile.jpg" alt=""/>
+          <UserImage src="" alt=""/>
         </IconButton>
       </NavIcons>
     </NavbarContainer>
