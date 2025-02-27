@@ -19,7 +19,7 @@ const messages = [
 	{
 	  id: 1,
 	  user: {
-		profilePicture: "../../../public/images/microsoft-365-7mBictB_urk-unsplash.jpg",
+		profilePicture: "/images/microsoft-365-7mBictB_urk-unsplash.jpg",
 		userName: "Clara Donovan",
 		userID: 1,
 	  },
@@ -31,7 +31,7 @@ const messages = [
 	{
 	  id: 2,
 	  user: {
-		profilePicture: "",
+		profilePicture: "/images/cosmic-timetraveler-_R1cc2IHk70-unsplash.jpg",
 		userName: "Estes Church of Christ",
 		userID: 2,
 	  },
@@ -43,7 +43,7 @@ const messages = [
 	{
 	  id: 3,
 	  user: {
-		profilePicture: "",
+		profilePicture: "/images/karl-fredrickson-JRsZWmRd_Ws-unsplash.jpg",
 		userName: "Henderson Church of Christ",
 		userID: 3,
 	  },
@@ -58,7 +58,7 @@ const messages = [
 const MessageCard = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 0.5fr 0.5;
   background-color: #fff;
   margin-bottom: 20px;
 `;
@@ -68,7 +68,32 @@ const ReadButton = styled.div`
   width: 15px;
   background-color: #32b4ff;
   border-radius: 50%;
+  grid-column: 5;
+  grid-row: 1;
+  align-self: center;
 `;
+
+const UserName = styled.h2`
+	grid-row-start: 1;
+	grid-row-end: 3;
+	grid-column-start: 2;
+	grid-column-end: 4;	
+
+`
+const LastReadText = styled.p`
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 2;
+	grid-column-end: 5;
+	padding-top: 40px;
+`
+const LastReadTime = styled.p`
+	grid-row-start: 1;
+	grid-row-end: 3;
+	grid-column-start: 4;
+	padding-top: 6px;
+
+`
 
 interface MessageProps {
   imagePath?: string;
@@ -91,7 +116,7 @@ const Message: React.FC<MessageProps> = ({
   const fontWeight = showReadButton ? "bold" : "thin";
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr .025fr" }}>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr .025fr"}}>
       <MessageCard style={{ gridColumn: "1" }}>
         <SlAvatar
           image={imagePath}
@@ -102,41 +127,33 @@ const Message: React.FC<MessageProps> = ({
             transform: "scale(1.5)",
           }}
         ></SlAvatar>
-        <h3
+        <UserName
           style={{
-            gridRowStart: "1",
-            gridColumnStart: "2",
             color: textColor,
             fontWeight: fontWeight,
           }}
         >
           {userName}
-        </h3>
-        <p
+        </UserName>
+        <LastReadText
           style={{
-            gridRowStart: "2",
-            gridColumnStart: "2",
-            gridColumnEnd: "5",
             color: messageColor,
             fontWeight: fontWeight,
           }}
         >
           {lastReadMessage}
-        </p>
-        <p
+        </LastReadText>
+        <LastReadTime
           style={{
-            gridRowStart: "1",
-            gridColumnStart: "4",
             color: timeColor,
             fontWeight: fontWeight,
           }}
         >
           {lastReadTime}
-        </p>
+        </LastReadTime>
       </MessageCard>
       {showReadButton && (
         <ReadButton
-          style={{ gridColumn: "2", placeSelf: "center" }}
         ></ReadButton>
       )}
     </div>
