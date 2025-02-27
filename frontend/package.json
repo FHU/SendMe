@@ -11,12 +11,13 @@
   },
   "dependencies": {
     "@openapi-qraft/react": "^1.14.2",
-    "@shoelace-style/shoelace": "^2.19.1",
+    "@shoelace-style/shoelace": "^2.20.0",
     "@tanstack/react-query": "^5.62.7",
     "isbot": "^5",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router": "^7.0.2",
+    "shoelace": "^0.1.1",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {

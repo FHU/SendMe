@@ -1,0 +1,12 @@
+{
+  "name": "sendme",
+  "version": "1.0.0",
+  "description": "We connect service-minded people to mission efforts. Missionaries can post opportunities\r and specify specific talents needed (think language skills, medical skills, etc.)\r Users can create profiles listing their talents, and find matching opportunities.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
