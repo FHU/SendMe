@@ -59,7 +59,7 @@ const MessageCard = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
   grid-template-rows: 1fr 1fr;
-  background-color: hsl(240 5.9% 90%);
+  background-color: #fff;
   margin-bottom: 20px;
 `;
 
