@@ -10,85 +10,104 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as IndexImport } from "./routes/index";
-import { Route as OpportunitiesIndexImport } from "./routes/opportunities/index";
+import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
+import { Route as OpportunitiesIndexImport } from './routes/opportunities/index'
+import { Route as HomeIndexImport } from './routes/home/index'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
-	id: "/",
-	path: "/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const OpportunitiesIndexRoute = OpportunitiesIndexImport.update({
-	id: "/opportunities/",
-	path: "/opportunities/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/opportunities/',
+  path: '/opportunities/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeIndexRoute = HomeIndexImport.update({
+  id: '/home/',
+  path: '/home/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
-	interface FileRoutesByPath {
-		"/": {
-			id: "/";
-			path: "/";
-			fullPath: "/";
-			preLoaderRoute: typeof IndexImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/opportunities/": {
-			id: "/opportunities/";
-			path: "/opportunities";
-			fullPath: "/opportunities";
-			preLoaderRoute: typeof OpportunitiesIndexImport;
-			parentRoute: typeof rootRoute;
-		};
-	}
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/home/': {
+      id: '/home/'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/opportunities/': {
+      id: '/opportunities/'
+      path: '/opportunities'
+      fullPath: '/opportunities'
+      preLoaderRoute: typeof OpportunitiesIndexImport
+      parentRoute: typeof rootRoute
+    }
+  }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-	"/": typeof IndexRoute;
-	"/opportunities": typeof OpportunitiesIndexRoute;
+  '/': typeof IndexRoute
+  '/home': typeof HomeIndexRoute
+  '/opportunities': typeof OpportunitiesIndexRoute
 }
 
 export interface FileRoutesByTo {
-	"/": typeof IndexRoute;
-	"/opportunities": typeof OpportunitiesIndexRoute;
+  '/': typeof IndexRoute
+  '/home': typeof HomeIndexRoute
+  '/opportunities': typeof OpportunitiesIndexRoute
 }
 
 export interface FileRoutesById {
-	__root__: typeof rootRoute;
-	"/": typeof IndexRoute;
-	"/opportunities/": typeof OpportunitiesIndexRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/home/': typeof HomeIndexRoute
+  '/opportunities/': typeof OpportunitiesIndexRoute
 }
 
 export interface FileRouteTypes {
-	fileRoutesByFullPath: FileRoutesByFullPath;
-	fullPaths: "/" | "/opportunities";
-	fileRoutesByTo: FileRoutesByTo;
-	to: "/" | "/opportunities";
-	id: "__root__" | "/" | "/opportunities/";
-	fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/home' | '/opportunities'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/home' | '/opportunities'
+  id: '__root__' | '/' | '/home/' | '/opportunities/'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-	IndexRoute: typeof IndexRoute;
-	OpportunitiesIndexRoute: typeof OpportunitiesIndexRoute;
+  IndexRoute: typeof IndexRoute
+  HomeIndexRoute: typeof HomeIndexRoute
+  OpportunitiesIndexRoute: typeof OpportunitiesIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-	IndexRoute: IndexRoute,
-	OpportunitiesIndexRoute: OpportunitiesIndexRoute,
-};
+  IndexRoute: IndexRoute,
+  HomeIndexRoute: HomeIndexRoute,
+  OpportunitiesIndexRoute: OpportunitiesIndexRoute,
+}
 
 export const routeTree = rootRoute
-	._addFileChildren(rootRouteChildren)
-	._addFileTypes<FileRouteTypes>();
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -97,11 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/home/",
         "/opportunities/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/home/": {
+      "filePath": "home/index.tsx"
     },
     "/opportunities/": {
       "filePath": "opportunities/index.tsx"
