@@ -7,9 +7,17 @@ const Conversation = () => {
   const [messages, setMessages] = useState(messagesData);
   const [input, setInput] = useState("");
 
+  const getCurrentTime = (): string => {
+    const now = new Date();
+    return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  };
+
   const handleSend = () => {
     if (input.trim() === "") return;
-    setMessages([...messages, { id: messages.length, text: input, isUser: true }]);
+    setMessages([
+      ...messages,
+      { id: messages.length, text: input, timestamp: getCurrentTime(), isUser: true },
+    ]);
     setInput("");
   };
 
@@ -17,13 +25,19 @@ const Conversation = () => {
     <Container>
       <ChatContainer>
         {messages.map((msg) => (
-          <Message key={msg.id} $isUser={msg.isUser}>
-            {msg.text}
-          </Message>
+          <MessageContainer key={msg.id} $isUser={msg.isUser}>
+            <Message $isUser={msg.isUser}>{msg.text}</Message>
+            <Timestamp>{msg.timestamp}</Timestamp>
+          </MessageContainer>
         ))}
       </ChatContainer>
       <InputContainer>
-        <SlTextarea value={input} onSlInput={(e) => setInput(e.detail.value)} placeholder="Type a message..." filled />
+        <SlTextarea
+          value={input}
+          onSlInput={(e) => setInput(e.detail.value)}
+          placeholder="Type a message..."
+          filled
+        />
         <SlButton onClick={handleSend}>Send</SlButton>
       </InputContainer>
     </Container>
@@ -58,20 +72,30 @@ const ChatContainer = styled.div`
   max-width: 500px;
   height: 80vh;
   overflow-y: auto;
-  background: #f5f5f5;
+  background: #FFFFFFFF;
   border-radius: 10px;
   padding: 10px;
-  margin-top: 0;
 `;
 
-const Message = styled.div<{ $isUser: boolean }> `
+const MessageContainer = styled.div<{ $isUser: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: ${(props) => (props.$isUser ? "flex-end" : "flex-start")};
+  margin: 5px;
+`;
+
+const Message = styled.div<{ $isUser: boolean }>`
   padding: 10px;
   border-radius: 10px;
-  margin: 5px;
   max-width: 75%;
-  background: ${(props) => (props.$isUser ? "#d97706" : "#e5e7eb")};
-  color: ${(props) => (props.$isUser ? "#fff" : "#000")};
-  align-self: ${(props) => (props.$isUser ? "flex-end" : "flex-start")};
+  background: ${(props) => (props.$isUser ? "#F6CFB1" : "#D9D9D9")};
+  color: ${(props) => (props.$isUser ? "#000" : "#000")};
+`;
+
+const Timestamp = styled.div`
+  font-size: 12px;
+  color: #555;
+  margin-top: 2px;
 `;
 
 const InputContainer = styled.div`
@@ -83,38 +107,24 @@ const InputContainer = styled.div`
   max-width: 500px;
 `;
 
-const ConversationHeader = styled.div`
-  width: 100%;
-  text-align: center;
-  background: #d97706;
-  color: white;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 10px 10px 0 0;
-  margin-top: 0;
-`;
-
 const messagesData = [
   {
     id: 0,
     text: "Hey! I heard about Servant’s Day and I would love to contribute. Do you have any open projects?",
+    timestamp: "3:50 PM",
     isUser: false,
   },
   {
     id: 1,
     text: "We desperately need people to paint Bradfield Hall’s lobby if you’re interested.",
+    timestamp: "3:52 PM",
     isUser: true,
   },
   {
     id: 2,
     text: "That sounds great! I have lots of experience painting so I think I could be a good fit. What’s the next step?",
+    timestamp: "3:53 PM",
     isUser: false,
-  },
-  {
-    id: 3,
-    text: "We just have to get you a date to...",
-    isUser: true,
   },
 ];
 
