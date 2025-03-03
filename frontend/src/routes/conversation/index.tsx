@@ -57,7 +57,7 @@ const Container = styled.div`
   margin: auto;
   width: 100%;
   overflow-x: hidden;
-  height: 100vh;
+  height: 80vh;
   justify-content: flex-start;
 
   @media (max-width: 768px) {
@@ -72,7 +72,7 @@ const ChatContainer = styled.div`
   max-width: 500px;
   height: 80vh;
   overflow-y: auto;
-  background: #FFFFFFFF;
+  background: #ffffff;
   border-radius: 10px;
   padding: 10px;
 `;
@@ -89,7 +89,7 @@ const Message = styled.div<{ $isUser: boolean }>`
   border-radius: 10px;
   max-width: 75%;
   background: ${(props) => (props.$isUser ? "#F6CFB1" : "#D9D9D9")};
-  color: ${(props) => (props.$isUser ? "#000" : "#000")};
+  color: #000;
 `;
 
 const Timestamp = styled.div`
@@ -100,12 +100,15 @@ const Timestamp = styled.div`
 
 const InputContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
   margin-top: 10px;
   width: 100%;
   max-width: 500px;
 `;
+
+
 
 const messagesData = [
   {
