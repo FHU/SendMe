@@ -14,7 +14,7 @@ const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #BE5D14;
+  background-color: #2E8B57;
   padding: 5px 20px;
   box-shadow: var(--sl-shadow-x-large);
   color: white;
@@ -48,7 +48,7 @@ const IconButton = styled.button`
   cursor: pointer;
   
   &:hover {
-    color: #f39c12;
+    color:rgb(33, 197, 104);
   }
 `;
 

@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { SlButton, SlCard, SlDetails, SlTag, SlAvatar, SlIconButton, SlIcon } from "@shoelace-style/shoelace/dist/react";
 
 const CardContainer = styled(SlCard)`
+  display: flex;
   max-width: 400px;
-  --border-radius: 30px;
+  --border-radius: 7%;
   margin: 5px;
 `;
 
@@ -37,6 +38,21 @@ const MoreDetails = styled.div`
   flex-direction: column;
 `;
 
+const Bookmark = styled.div`
+  .icon-button-color sl-icon-button::part(base) {
+    color: black;
+  }
+
+  .icon-button-color sl-icon-button::part(base):hover,
+  .icon-button-color sl-icon-button::part(base):focus {
+    color: black;
+  }
+
+  .icon-button-color sl-icon-button::part(base):active {
+    color:rgb(18, 203, 98);
+  }
+  `;
+
 const Card = () => (
     <CardContainer>
         <CardTitle>
@@ -45,9 +61,12 @@ const Card = () => (
                 <br />
                 <small>12/14/24</small>  
             </div>
-            <div>
-                <SlIconButton name="bookmark" label="Bookmark" />
-            </div>
+            <Bookmark>
+               <div className="icon-button-color">
+                    <SlIconButton color='green' name="bookmark" label="Bookmark"/>
+                </div> 
+            </Bookmark>
+            
         </CardTitle>
         <br />
         <AvatarSection>
@@ -63,18 +82,18 @@ const Card = () => (
                     <small>Dallas, TX, USA</small>
                 </div>   
             </AvatarInfo>
-            <SlButton variant="default" size="large">
-                <SlIcon slot="prefix" name="envelope" color="orange"></SlIcon>
+            <SlButton variant="success" size="large" outline>
+                <SlIcon slot="prefix" name="envelope" color="green"></SlIcon>
                 Message
             </SlButton>
         </AvatarSection>
         <br />
         <TagsContainer>
-            <SlTag variant="warning" size="medium" pill>Preacher</SlTag>
-            <SlTag variant="warning" size="medium" pill>Youth</SlTag>
-            <SlTag variant="warning" size="medium" pill>Education</SlTag>
-            <SlTag variant="warning" size="medium" pill>Leadership</SlTag> 
-            <SlTag variant="warning" size="medium" pill>Paid</SlTag>
+            <SlTag variant="success" size="medium" pill>Preacher</SlTag>
+            <SlTag variant="success" size="medium" pill>Youth</SlTag>
+            <SlTag variant="success" size="medium" pill>Education</SlTag>
+            <SlTag variant="success" size="medium" pill>Leadership</SlTag> 
+            <SlTag variant="success" size="medium" pill>Paid</SlTag>
         </TagsContainer>
         <br />
         <div>Youth Ministry experience needed at Oak Tree Church of Christ!</div>

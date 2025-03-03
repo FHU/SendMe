@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { SlButton, SlCard, SlDetails, SlTag, SlAvatar, SlIconButton, SlIcon } from "@shoelace-style/shoelace/dist/react";
 
 const CardContainer = styled(SlCard)`
+  display: flex;
   max-width: 400px;
-  --border-radius: 30px;
+  --border-radius: 7%;
   margin: 5px;
 `;
 
@@ -37,17 +38,35 @@ const MoreDetails = styled.div`
   flex-direction: column;
 `;
 
-const Card1 = () => (
+const Bookmark = styled.div`
+  .icon-button-color sl-icon-button::part(base) {
+    color: black;
+  }
+
+  .icon-button-color sl-icon-button::part(base):hover,
+  .icon-button-color sl-icon-button::part(base):focus {
+    color: black;
+  }
+
+  .icon-button-color sl-icon-button::part(base):active {
+    color:rgb(18, 203, 98);
+  }
+  `;
+
+const Card = () => (
     <CardContainer>
         <CardTitle>
             <div>
-                <StrongText>Youth Ministry Internship</StrongText>
+                <StrongText>Ministry Leadership</StrongText>
                 <br />
-                <small>12/20/24</small>  
+                <small>12/14/24</small>  
             </div>
-            <div>
-                <SlIconButton name="bookmark" label="Bookmark" />
-            </div>
+            <Bookmark>
+               <div className="icon-button-color">
+                    <SlIconButton color='green' name="bookmark" label="Bookmark"/>
+                </div> 
+            </Bookmark>
+            
         </CardTitle>
         <br />
         <AvatarSection>
@@ -56,27 +75,28 @@ const Card1 = () => (
                     image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
                 />
                 <div>
-                    David Reynolds
+                    Liam Carter
                     <br />
-                    <small>Dallas Church of Christ</small>
+                    <small>Oak Tree Church of Christ</small>
                     <br />
                     <small>Dallas, TX, USA</small>
                 </div>   
             </AvatarInfo>
-            <SlButton variant="default" size="large">
-                <SlIcon slot="prefix" name="envelope" color="orange"></SlIcon>
+            <SlButton variant="success" size="large" outline>
+                <SlIcon slot="prefix" name="envelope" color="green"></SlIcon>
                 Message
             </SlButton>
         </AvatarSection>
         <br />
         <TagsContainer>
-            <SlTag variant="warning" size="medium" pill>Preacher</SlTag>
-            <SlTag variant="warning" size="medium" pill>Youth</SlTag>
-            <SlTag variant="warning" size="medium" pill>Education</SlTag>
-            <SlTag variant="warning" size="medium" pill>Leadership</SlTag>
+            <SlTag variant="success" size="medium" pill>Preacher</SlTag>
+            <SlTag variant="success" size="medium" pill>Youth</SlTag>
+            <SlTag variant="success" size="medium" pill>Education</SlTag>
+            <SlTag variant="success" size="medium" pill>Leadership</SlTag> 
+            <SlTag variant="success" size="medium" pill>Paid</SlTag>
         </TagsContainer>
         <br />
-        <div>A summer internship designed for seminary students or aspiring preachers to gain hands-on ministry experience.</div>
+        <div>Youth Ministry experience needed at Oak Tree Church of Christ!</div>
         <br />
         <SlDetails summary="More Details">
             <MoreDetails>
@@ -86,7 +106,7 @@ const Card1 = () => (
                 </div>
                 <div>
                     <h3>Description</h3>
-                    <p>This preaching internship at Dallas Church of Christ is an opportunity for young ministers to develop their preaching skills. Interns will assist in sermon preparation, deliver messages in small group settings, participate in visitations, and receive mentorship from seasoned ministers. The program is structured to provide real-world ministry experience in a supportive church environment.</p> 
+                    <p>Our congregation is holding sessions for spirituality in different facets of life, and we are seeking someone knowledgeable in psychology and/or sociology for this job. There will be two days of sessions, and we would like anyone who has availability for these times. Thank you!</p> 
                 </div>
                 <div>
                     <h3>Time of Event</h3>
@@ -97,4 +117,4 @@ const Card1 = () => (
     </CardContainer>
 );
 
-export default Card1;
+export default Card;
