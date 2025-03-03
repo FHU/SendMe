@@ -198,7 +198,7 @@ const Message: React.FC<MessageProps> = ({
 export function MessagesList(): JSX.Element {
 	return (
 	  <>
-		<h1 style={{ color: "#BE5D14", marginTop: "-20px" }}>Messages</h1>
+		<h1 style={{ color: "#BE5D14", marginTop: "-20px", marginLeft: '20px' }}>Messages</h1>
 		{messages.map((message, index) => (
 		  <Message
 			key={index} // Ensure each element has a unique key
