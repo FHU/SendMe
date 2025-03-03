@@ -48,7 +48,7 @@ const IconButton = styled.button`
   cursor: pointer;
   
   &:hover {
-    color:rgb(33, 197, 104);
+    color:#A0EB9F;
   }
 `;
 
