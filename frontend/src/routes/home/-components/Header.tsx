@@ -1,22 +1,42 @@
-import api, { type components } from "@sendme/api";
-import styled from "styled-components";
+import styled from 'styled-components';
+import { SlButton, SlCard, SlDetails, SlTag, SlAvatar, SlIconButton, SlIcon } from "@shoelace-style/shoelace/dist/react";
 
-import { SlRelativeTime } from "@shoelace-style/shoelace/dist/react";
+const HeaderContainer = styled(SlCard)`
+  max-width: 400px;
+  background-color: #F6CFB1;
+`;
 
+const HeaderTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
-interface HeaderProps {
-	title: string;
-	subtitle?: string;
-  }
-  
-  const Header: React.FC<HeaderProps> = ({ }) => {
-	return (
-	  <header>
-		<h1>Test Header</h1>
-		<p>Test Subheader</p>
-	  </header>
-	);
-  };
-  
-  export default Header;
-  
+const HeaderSubtitle = styled.div`
+  display: flex
+  justify-content: space-between;
+`;
+
+const StrongText = styled.strong`
+  font-size: 36px;
+`;
+
+const MediumText = styled.strong`
+  font-size: 14px;
+`;
+
+const Header = () => (
+    <HeaderContainer>
+        <HeaderTitle>
+            <div>
+                <StrongText>Opportunities</StrongText>
+            </div>
+        </HeaderTitle>
+		<HeaderSubtitle>
+            <div>
+                <MediumText>Tags Selected</MediumText>
+            </div>
+        </HeaderSubtitle>
+    </HeaderContainer>
+);
+
+export default Header;
