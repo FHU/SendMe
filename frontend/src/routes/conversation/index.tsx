@@ -63,10 +63,14 @@ const Conversation = () => {
     <Container>
       <ChatContainer>
         {messages.map((msg) => (
-          <MessageContainer key={msg.id} $isUser={msg.isUser}>
-            <Message $isUser={msg.isUser}>{msg.text}</Message>
-            <Timestamp>{msg.timestamp}</Timestamp>
-          </MessageContainer>
+          <>
+            <MessageContainer key={msg.id} $isUser={msg.isUser}>
+                <Message $isUser={msg.isUser}>{msg.text}</Message>
+                {/* <Timestamp>{msg.timestamp}</Timestamp> */}
+
+            </MessageContainer>
+            <Timestamp $isUser={msg.isUser}>{msg.timestamp}</Timestamp>
+          </>
         ))}
         <div ref={chatEndRef} />
       </ChatContainer>
@@ -115,6 +119,7 @@ const ChatContainer = styled.div`
   background: #ffffff;
   border-radius: 10px;
   padding: 10px;
+  margin-right: 10px;
 `;
 
 const MessageContainer = styled.div<{ $isUser: boolean }>`
@@ -122,6 +127,7 @@ const MessageContainer = styled.div<{ $isUser: boolean }>`
   flex-direction: column;
   align-items: ${({ $isUser }) => ($isUser ? "flex-end" : "flex-start")};
   margin: 5px;
+
 `;
 
 const Message = styled.div<{ $isUser: boolean }>`
@@ -130,11 +136,17 @@ const Message = styled.div<{ $isUser: boolean }>`
   max-width: 75%;
   background: ${({ $isUser }) => ($isUser ? "#F6CFB1" : "#D9D9D9")};
   color: #000;
+  height: 100%;
+  word-wrap: break-word; /* Ensures long words break and wrap */
+  overflow-wrap: break-word; /* Ensures long words break and wrap */
 `;
 
-const Timestamp = styled.div`
+const Timestamp = styled.div<{ $isUser: boolean }>`
   font-size: 12px;
   color: #555;
+  align-self: ${({ $isUser }) => ($isUser ? "flex-end" : "flex-start")};
+  margin-left: ${({ $isUser }) => ($isUser ? "0px" : "20px")};
+  margin-right: ${({ $isUser }) => ($isUser ? "20px" : "0px")};
   margin-top: 2px;
 `;
 
