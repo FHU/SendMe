@@ -37,13 +37,13 @@ const MoreDetails = styled.div`
   flex-direction: column;
 `;
 
-const Card = () => (
+const Card2 = () => (
     <CardContainer>
         <CardTitle>
             <div>
-                <StrongText>Ministry Leadership</StrongText>
+                <StrongText>Mission Work</StrongText>
                 <br />
-                <small>12/14/24</small>  
+                <small>1/20/2025</small>  
             </div>
             <div>
                 <SlIconButton name="bookmark" label="Bookmark" />
@@ -56,11 +56,11 @@ const Card = () => (
                     image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
                 />
                 <div>
-                    Liam Carter
+                    Samuel Thompson
                     <br />
-                    <small>Oak Tree Church of Christ</small>
+                    <small>Global Hands Outreach</small>
                     <br />
-                    <small>Dallas, TX, USA</small>
+                    <small>Rio de Janiero, Brazil</small>
                 </div>   
             </AvatarInfo>
             <SlButton variant="default" size="large">
@@ -70,24 +70,23 @@ const Card = () => (
         </AvatarSection>
         <br />
         <TagsContainer>
-            <SlTag variant="warning" size="medium" pill>Preacher</SlTag>
-            <SlTag variant="warning" size="medium" pill>Youth</SlTag>
+            <SlTag variant="warning" size="medium" pill>Mission Work</SlTag>
+            <SlTag variant="warning" size="medium" pill>Healthcare</SlTag>
             <SlTag variant="warning" size="medium" pill>Education</SlTag>
-            <SlTag variant="warning" size="medium" pill>Leadership</SlTag> 
-            <SlTag variant="warning" size="medium" pill>Paid</SlTag>
+            <SlTag variant="warning" size="medium" pill>Leadership</SlTag>
         </TagsContainer>
         <br />
-        <div>Youth Ministry experience needed at Oak Tree Church of Christ!</div>
+        <div>Mission trip outreach in neighboring cities of Rio.</div>
         <br />
         <SlDetails summary="More Details">
             <MoreDetails>
                 <div>
                     <h3>Position</h3>
-                    <p>Ministry Leadership and Staff</p>   
+                    <p>Mission Trip Participant</p>   
                 </div>
                 <div>
                     <h3>Description</h3>
-                    <p>Our congregation is holding sessions for spirituality in different facets of life, and we are seeking someone knowledgeable in psychology and/or sociology for this job. There will be two days of sessions, and we would like anyone who has availability for these times. Thank you!</p> 
+                    <p>Join us on a mission trip to the neighboring cities of Rio, where we will engage in outreach efforts to serve local communities. Activities will include distributing essential supplies, assisting with community projects, and sharing the message of faith. This trip is a wonderful opportunity to make a meaningful impact while growing spiritually and building lasting relationships with fellow believers.</p> 
                 </div>
                 <div>
                     <h3>Time of Event</h3>
@@ -98,4 +97,4 @@ const Card = () => (
     </CardContainer>
 );
 
-export default Card;
+export default Card2;

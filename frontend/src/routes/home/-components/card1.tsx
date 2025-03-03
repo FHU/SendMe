@@ -37,13 +37,13 @@ const MoreDetails = styled.div`
   flex-direction: column;
 `;
 
-const Card = () => (
+const Card1 = () => (
     <CardContainer>
         <CardTitle>
             <div>
-                <StrongText>Ministry Leadership</StrongText>
+                <StrongText>Youth Ministry Internship</StrongText>
                 <br />
-                <small>12/14/24</small>  
+                <small>12/20/24</small>  
             </div>
             <div>
                 <SlIconButton name="bookmark" label="Bookmark" />
@@ -56,9 +56,9 @@ const Card = () => (
                     image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
                 />
                 <div>
-                    Liam Carter
+                    David Reynolds
                     <br />
-                    <small>Oak Tree Church of Christ</small>
+                    <small>Dallas Church of Christ</small>
                     <br />
                     <small>Dallas, TX, USA</small>
                 </div>   
@@ -73,11 +73,10 @@ const Card = () => (
             <SlTag variant="warning" size="medium" pill>Preacher</SlTag>
             <SlTag variant="warning" size="medium" pill>Youth</SlTag>
             <SlTag variant="warning" size="medium" pill>Education</SlTag>
-            <SlTag variant="warning" size="medium" pill>Leadership</SlTag> 
-            <SlTag variant="warning" size="medium" pill>Paid</SlTag>
+            <SlTag variant="warning" size="medium" pill>Leadership</SlTag>
         </TagsContainer>
         <br />
-        <div>Youth Ministry experience needed at Oak Tree Church of Christ!</div>
+        <div>A summer internship designed for seminary students or aspiring preachers to gain hands-on ministry experience.</div>
         <br />
         <SlDetails summary="More Details">
             <MoreDetails>
@@ -87,7 +86,7 @@ const Card = () => (
                 </div>
                 <div>
                     <h3>Description</h3>
-                    <p>Our congregation is holding sessions for spirituality in different facets of life, and we are seeking someone knowledgeable in psychology and/or sociology for this job. There will be two days of sessions, and we would like anyone who has availability for these times. Thank you!</p> 
+                    <p>This preaching internship at Dallas Church of Christ is an opportunity for young ministers to develop their preaching skills. Interns will assist in sermon preparation, deliver messages in small group settings, participate in visitations, and receive mentorship from seasoned ministers. The program is structured to provide real-world ministry experience in a supportive church environment.</p> 
                 </div>
                 <div>
                     <h3>Time of Event</h3>
@@ -98,4 +97,4 @@ const Card = () => (
     </CardContainer>
 );
 
-export default Card;
+export default Card1;
