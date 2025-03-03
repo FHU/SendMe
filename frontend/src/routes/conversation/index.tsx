@@ -1,23 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { SlButton, SlTextarea } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
 
+interface MessageType {
+  id: number;
+  text: string;
+  timestamp: string;
+  isUser: boolean;
+}
+
+const messagesData: MessageType[] = [
+  {
+    id: 0,
+    text: "Hey! I heard about Servant’s Day and I would love to contribute. Do you have any open projects?",
+    timestamp: "3:50 PM",
+    isUser: false,
+  },
+  {
+    id: 1,
+    text: "We desperately need people to paint Bradfield Hall’s lobby if you’re interested.",
+    timestamp: "3:52 PM",
+    isUser: true,
+  },
+  {
+    id: 2,
+    text: "That sounds great! I have lots of experience painting so I think I could be a good fit. What’s the next step?",
+    timestamp: "3:53 PM",
+    isUser: false,
+  },
+];
+
 const Conversation = () => {
-  const [messages, setMessages] = useState(messagesData);
-  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState<MessageType[]>(messagesData);
+  const [input, setInput] = useState<string>("");
+  const chatEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const getCurrentTime = (): string => {
     const now = new Date();
-    return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true });
   };
 
   const handleSend = () => {
-    if (input.trim() === "") return;
-    setMessages([
-      ...messages,
-      { id: messages.length, text: input, timestamp: getCurrentTime(), isUser: true },
-    ]);
+    if (!input.trim()) return;
+
+    const newMessage: MessageType = {
+      id: messages.length + 1, // Ensure unique ID
+      text: input,
+      timestamp: getCurrentTime(),
+      isUser: true,
+    };
+
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
     setInput("");
   };
 
@@ -30,11 +68,12 @@ const Conversation = () => {
             <Timestamp>{msg.timestamp}</Timestamp>
           </MessageContainer>
         ))}
+        <div ref={chatEndRef} />
       </ChatContainer>
       <InputContainer>
         <SlTextarea
           value={input}
-          onSlInput={(e) => setInput(e.detail.value)}
+          onInput={(e) => setInput((e.target as HTMLTextAreaElement).value)} // Corrected event handler
           placeholder="Type a message..."
           filled
         />
@@ -48,6 +87,7 @@ export const Route = createFileRoute("/conversation/")({
   component: Conversation,
 });
 
+// Styled components remain unchanged
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -80,7 +120,7 @@ const ChatContainer = styled.div`
 const MessageContainer = styled.div<{ $isUser: boolean }>`
   display: flex;
   flex-direction: column;
-  align-items: ${(props) => (props.$isUser ? "flex-end" : "flex-start")};
+  align-items: ${({ $isUser }) => ($isUser ? "flex-end" : "flex-start")};
   margin: 5px;
 `;
 
@@ -88,7 +128,7 @@ const Message = styled.div<{ $isUser: boolean }>`
   padding: 10px;
   border-radius: 10px;
   max-width: 75%;
-  background: ${(props) => (props.$isUser ? "#F6CFB1" : "#D9D9D9")};
+  background: ${({ $isUser }) => ($isUser ? "#F6CFB1" : "#D9D9D9")};
   color: #000;
 `;
 
@@ -107,28 +147,5 @@ const InputContainer = styled.div`
   width: 100%;
   max-width: 500px;
 `;
-
-
-
-const messagesData = [
-  {
-    id: 0,
-    text: "Hey! I heard about Servant’s Day and I would love to contribute. Do you have any open projects?",
-    timestamp: "3:50 PM",
-    isUser: false,
-  },
-  {
-    id: 1,
-    text: "We desperately need people to paint Bradfield Hall’s lobby if you’re interested.",
-    timestamp: "3:52 PM",
-    isUser: true,
-  },
-  {
-    id: 2,
-    text: "That sounds great! I have lots of experience painting so I think I could be a good fit. What’s the next step?",
-    timestamp: "3:53 PM",
-    isUser: false,
-  },
-];
 
 export default Conversation;
