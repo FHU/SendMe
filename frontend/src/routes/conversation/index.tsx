@@ -163,6 +163,10 @@ const InputContainer = styled.div`
   margin-top: 10px;
   width: 100%;
   max-width: 500px;
+  
+  @media (max-width: 768px) {
+    margin-right: 105px;
+  }
 `;
 
 export default Conversation;
