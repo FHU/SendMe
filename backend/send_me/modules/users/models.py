@@ -1,10 +1,12 @@
 import uuid
 from datetime import datetime
+from typing import Optional
 
 from sqlalchemy import DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from send_me.database.models import Base
+from send_me.modules.authentication.models import Session
 
 
 class User(Base):
@@ -12,8 +14,8 @@ class User(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     username: Mapped[str]
-    email: Mapped[str]
-    session = relationship(
+    email: Mapped[str] = mapped_column(unique=True)
+    session: Mapped[Optional[Session]] = relationship(
         "Session", uselist=False, back_populates="user", cascade="all, delete-orphan"
     )
 

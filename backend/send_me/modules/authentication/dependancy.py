@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from fastapi import Depends, Header, HTTPException
 from sqlalchemy import select
@@ -29,7 +29,7 @@ def get_session(db: Session = Depends(get_db), token: str = Depends(get_token)):
     if not session:
         raise HTTPException(status_code=404, detail="Session Not Found")
 
-    session_delta = session.created_at - datetime.now()
+    session_delta = session.created_at - datetime.now(timezone.utc)
 
     if session_delta > TWENTY_FOUR_HOURS_OLD:
         db.delete(session)
