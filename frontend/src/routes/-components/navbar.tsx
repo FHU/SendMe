@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 // import { FaUserCircle, FaEnvelope, FaSearch } from "react-icons/fa";
 import { SlIcon, SlIconButton } from "@shoelace-style/shoelace/dist/react";
+import { BiColor } from "react-icons/bi";
 
 // Define Props (if needed)
 interface NavbarProps {
@@ -15,8 +16,9 @@ const NavbarContainer = styled.nav`
   align-items: center;
   background-color: #BE5D14;
   padding: 5px 20px;
+  box-shadow: var(--sl-shadow-x-large);
   color: white;
-  width: 100%;
+  margin: 0 auto var(--sl-spacing-4x-large) auto;
 `;
 
 const AppName = styled.h1`
@@ -30,13 +32,13 @@ const NavIcons = styled.div`
   gap: 2px;
 `;
 
-const UserImage = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-`;
+// const UserImage = styled.img`
+//   width: 30px;
+//   height: 30px;
+//   border-radius: 50%;
+//   object-fit: cover;
+//   cursor: pointer;
+// `;
 
 const IconButton = styled.button`
   background: none;
@@ -65,7 +67,8 @@ const Navbar: React.FC<NavbarProps> = ({ appName }) => {
         </IconButton>
 
         <IconButton>
-          <UserImage src="" alt=""/>
+          {/* Where the user image will be placed. Look into having a default icon go there if there is no image */}
+          <SlIcon name="person-circle" />
         </IconButton>
       </NavIcons>
     </NavbarContainer>
