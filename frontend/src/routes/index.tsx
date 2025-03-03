@@ -1,7 +1,7 @@
 import api from "@sendme/api";
 import { SlButton } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
 	component: Index,
