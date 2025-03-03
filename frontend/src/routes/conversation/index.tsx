@@ -96,12 +96,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 20px;
   max-width: 600px;
   margin: auto;
   width: 100%;
   overflow-x: hidden;
-  height: 80vh;
+  height: 75vh;
   justify-content: flex-start;
 
   @media (max-width: 768px) {
@@ -120,6 +121,7 @@ const ChatContainer = styled.div`
   border-radius: 10px;
   padding: 10px;
   margin-right: 10px;
+  max-width: 100%;
 `;
 
 const MessageContainer = styled.div<{ $isUser: boolean }>`
@@ -127,6 +129,7 @@ const MessageContainer = styled.div<{ $isUser: boolean }>`
   flex-direction: column;
   align-items: ${({ $isUser }) => ($isUser ? "flex-end" : "flex-start")};
   margin: 5px;
+  max-width: 80%;
 
 `;
 
@@ -137,16 +140,17 @@ const Message = styled.div<{ $isUser: boolean }>`
   background: ${({ $isUser }) => ($isUser ? "#F6CFB1" : "#D9D9D9")};
   color: #000;
   height: 100%;
-  word-wrap: break-word; /* Ensures long words break and wrap */
-  overflow-wrap: break-word; /* Ensures long words break and wrap */
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+  margin-right: 10px;
 `;
 
 const Timestamp = styled.div<{ $isUser: boolean }>`
   font-size: 12px;
   color: #555;
   align-self: ${({ $isUser }) => ($isUser ? "flex-end" : "flex-start")};
-  margin-left: ${({ $isUser }) => ($isUser ? "0px" : "20px")};
-  margin-right: ${({ $isUser }) => ($isUser ? "20px" : "0px")};
+  margin-left: ${({ $isUser }) => ($isUser ? "0px" : "10px")};
+  margin-right: ${({ $isUser }) => ($isUser ? "125px" : "0px")};
   margin-top: 2px;
 `;
 
@@ -154,6 +158,7 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-self: center;
   gap: 10px;
   margin-top: 10px;
   width: 100%;
