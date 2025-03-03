@@ -1,10 +1,11 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey
+from sqlalchemy import DateTime, ForeignKey, PrimaryKeyConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from send_me.database.models import Base
+
 
 """
 This class represents an Session in the database.
@@ -20,7 +21,7 @@ class Session(Base):
     token: Mapped[str]
     user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"), unique=True)
 
-    user = relationship("User", back_populates="sessions")
+    user = relationship("User", back_populates="session")
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now
@@ -42,3 +43,5 @@ class Login(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now
     )
+
+    __table_args__ = (PrimaryKeyConstraint('pin', 'token'),)
