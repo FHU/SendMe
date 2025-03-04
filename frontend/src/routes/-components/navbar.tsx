@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 // import { FaUserCircle, FaEnvelope, FaSearch } from "react-icons/fa";
-import { SlIcon, SlIconButton } from "@shoelace-style/shoelace/dist/react";
-import { BiColor } from "react-icons/bi";
+import { SlIcon, SlAvatar } from "@shoelace-style/shoelace/dist/react";
+// import { BiColor } from "react-icons/bi";
 import { Link } from "@tanstack/react-router";
 
 // Define Props (if needed)
@@ -61,14 +61,6 @@ const IconButton = styled.button`
   &:hover {
     color:#A0EB9F;
   }
-`;
-
-const AvatarIcon = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  width: 32px;
-  height: 32px;
 `;
 
 const AvatarIcon = styled.div`
