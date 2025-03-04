@@ -4,7 +4,7 @@ import { SlButton, SlCard, SlDetails, SlTag, SlAvatar, SlIconButton, SlIcon } fr
 const CardContainer = styled(SlCard)`
   display: flex;
   max-width: 400px;
-  --border-radius: 7%;
+  --border-radius: 30px;
   margin: 5px;
 `;
 
