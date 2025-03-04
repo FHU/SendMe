@@ -3,6 +3,7 @@ import styled from "styled-components";
 // import { FaUserCircle, FaEnvelope, FaSearch } from "react-icons/fa";
 import { SlIcon, SlIconButton } from "@shoelace-style/shoelace/dist/react";
 import { BiColor } from "react-icons/bi";
+import { Link } from "@tanstack/react-router";
 
 // Define Props (if needed)
 interface NavbarProps {
@@ -10,6 +11,22 @@ interface NavbarProps {
 }
 
 // Styled Components
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: var(--sm-hover-green);
+    cursor: pointer;
+  }
+
+  &:active {
+    color: var(--sm-active-green);
+    }
+`;
+
+
+
 const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
@@ -56,7 +73,10 @@ const IconButton = styled.button`
 const Navbar: React.FC<NavbarProps> = ({ appName }) => {
   return (
     <NavbarContainer>
-      <AppName>{appName}</AppName>
+      <StyledLink to="/">
+        <AppName>{appName}</AppName>
+      </StyledLink>
+      
       <NavIcons>
         <IconButton>
           <SlIcon name="search" />

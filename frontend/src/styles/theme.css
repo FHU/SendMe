@@ -12,6 +12,10 @@
 	--sl-color-primary-800: rgb(128 78 7);
 	--sl-color-primary-900: rgb(91 55 5);
 	--sl-color-primary-950: rgb(56 34 3);
+
+	--sm-seafoam-green: #2E8B57;
+	--sm-hover-green: #A0EB9F;
+	--sm-active-green: #21C568;
 }
 
 body {
