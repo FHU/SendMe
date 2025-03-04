@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as OpportunitiesIndexImport } from './routes/opportunities/index'
+import { Route as HomeIndexImport } from './routes/home/index'
 
 // Create/Update Routes
 
@@ -28,6 +29,12 @@ const OpportunitiesIndexRoute = OpportunitiesIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const HomeIndexRoute = HomeIndexImport.update({
+  id: '/home/',
+  path: '/home/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -37,6 +44,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/home/': {
+      id: '/home/'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeIndexImport
       parentRoute: typeof rootRoute
     }
     '/opportunities/': {
@@ -53,36 +67,41 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/home': typeof HomeIndexRoute
   '/opportunities': typeof OpportunitiesIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/home': typeof HomeIndexRoute
   '/opportunities': typeof OpportunitiesIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/home/': typeof HomeIndexRoute
   '/opportunities/': typeof OpportunitiesIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/opportunities'
+  fullPaths: '/' | '/home' | '/opportunities'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/opportunities'
-  id: '__root__' | '/' | '/opportunities/'
+  to: '/' | '/home' | '/opportunities'
+  id: '__root__' | '/' | '/home/' | '/opportunities/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HomeIndexRoute: typeof HomeIndexRoute
   OpportunitiesIndexRoute: typeof OpportunitiesIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HomeIndexRoute: HomeIndexRoute,
   OpportunitiesIndexRoute: OpportunitiesIndexRoute,
 }
 
@@ -97,11 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/home/",
         "/opportunities/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/home/": {
+      "filePath": "home/index.tsx"
     },
     "/opportunities/": {
       "filePath": "opportunities/index.tsx"

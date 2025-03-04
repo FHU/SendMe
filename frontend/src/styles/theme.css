@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 :root {
 	--sl-color-primary-50: rgb(254 249 241);
 	--sl-color-primary-100: rgb(253 234 206);
@@ -10,8 +12,13 @@
 	--sl-color-primary-800: rgb(128 78 7);
 	--sl-color-primary-900: rgb(91 55 5);
 	--sl-color-primary-950: rgb(56 34 3);
+
+	--sm-seafoam-green: #2E8B57;
+	--sm-hover-green: #A0EB9F;
+	--sm-active-green: #21C568;
 }
 
 body {
-	background: var(--sl-color-neutral-200);
+	background: var(--sl-color-neutral-50);
+	font-family: 'Roboto', sans-serif;
 }
