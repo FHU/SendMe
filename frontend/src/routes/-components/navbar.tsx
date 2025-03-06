@@ -84,12 +84,12 @@ const Navbar: React.FC<NavbarProps> = ({ appName }) => {
 					<SlIcon name="chat-right" />
 				</IconButton>
 
-				<AvatarIcon>
+				{/* <AvatarIcon>
 					<SlAvatar
 						image="https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=800"
 						label="Avatar of a gray tabby kitten looking down"
 					/>
-				</AvatarIcon>
+				</AvatarIcon> */}
 			</NavIcons>
 		</NavbarContainer>
 	);
