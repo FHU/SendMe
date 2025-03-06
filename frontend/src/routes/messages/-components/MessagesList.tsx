@@ -159,7 +159,7 @@ const Message: React.FC<MessageProps> = ({
 						transform: "scale(1.5)",
 						marginTop: "10px",
 					}}
-				></SlAvatar>
+				/>
 				<UserName
 					style={{
 						color: textColor,
@@ -184,7 +184,7 @@ const Message: React.FC<MessageProps> = ({
 				>
 					{lastReadTime}
 				</LastReadTime>
-				{showReadButton && <ReadButton></ReadButton>}
+				{showReadButton && <ReadButton />}
 			</MessageCard>
 		</div>
 	);
@@ -196,9 +196,9 @@ export function MessagesList(): JSX.Element {
 			<h1 style={{ color: "#BE5D14", marginTop: "-20px", marginLeft: "20px" }}>
 				Messages
 			</h1>
-			{messages.map((message, index) => (
+			{messages.map((message) => (
 				<Message
-					key={index} // Ensure each element has a unique key
+					key={message.user.userID} // Ensure each element has a unique key
 					imagePath={message.user.profilePicture}
 					userName={message.user.userName}
 					lastReadMessage={message.messagePreview}

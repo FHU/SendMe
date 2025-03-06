@@ -1,6 +1,6 @@
 import { SlButton, SlTextarea } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 interface MessageType {
@@ -38,7 +38,7 @@ const Conversation = () => {
 
 	useEffect(() => {
 		chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-	}, [messages]);
+	});
 
 	const getCurrentTime = (): string => {
 		const now = new Date();
@@ -72,7 +72,9 @@ const Conversation = () => {
 							<Message $isUser={msg.isUser}>{msg.text}</Message>
 							{/* <Timestamp>{msg.timestamp}</Timestamp> */}
 						</MessageContainer>
-						<Timestamp $isUser={msg.isUser}>{msg.timestamp}</Timestamp>
+						<Timestamp key={msg.id} $isUser={msg.isUser}>
+							{msg.timestamp}
+						</Timestamp>
 					</>
 				))}
 				<div ref={chatEndRef} />
