@@ -1,13 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-// import { FaUserCircle, FaEnvelope, FaSearch } from "react-icons/fa";
-import { SlIcon, SlAvatar } from "@shoelace-style/shoelace/dist/react";
-// import { BiColor } from "react-icons/bi";
+import { SlAvatar, SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { Link } from "@tanstack/react-router";
+import type React from "react";
+import styled from "styled-components";
 
 // Define Props (if needed)
 interface NavbarProps {
-  appName: string;
+	appName: string;
 }
 
 // Styled Components
@@ -24,8 +22,6 @@ const StyledLink = styled(Link)`
     color: var(--sm-active-green);
     }
 `;
-
-
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -73,32 +69,30 @@ const AvatarIcon = styled.div`
 
 // Component
 const Navbar: React.FC<NavbarProps> = ({ appName }) => {
-  return (
-    <NavbarContainer>
-      <StyledLink to="/">
-        <AppName>{appName}</AppName>
-      </StyledLink>
-      
-      <NavIcons>
-        <IconButton>
-          <SlIcon name="search" />
-        </IconButton>
+	return (
+		<NavbarContainer>
+			<StyledLink to="/">
+				<AppName>{appName}</AppName>
+			</StyledLink>
 
-        <IconButton>
-          <SlIcon name="chat-right" />
-        </IconButton>
+			<NavIcons>
+				<IconButton>
+					<SlIcon name="search" />
+				</IconButton>
 
-        <AvatarIcon>
-            {/* Where the user image will be placed. Look into having a default icon go there if there is no image */}
-            {/* <SlIcon name="person-circle" /> */}
-            <SlAvatar
-              image="https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=800"
-              label="Avatar of a gray tabby kitten looking down"
-            />
-          </AvatarIcon>
-      </NavIcons>
-    </NavbarContainer>
-  );
+				<IconButton>
+					<SlIcon name="chat-right" />
+				</IconButton>
+
+				<AvatarIcon>
+					<SlAvatar
+						image="https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=800"
+						label="Avatar of a gray tabby kitten looking down"
+					/>
+				</AvatarIcon>
+			</NavIcons>
+		</NavbarContainer>
+	);
 };
 
 export default Navbar;
