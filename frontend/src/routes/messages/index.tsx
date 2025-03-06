@@ -22,7 +22,6 @@ function RouteComponent() {
 			>
 				<MessagesList />
 			</Link>
-
 		</>
 	);
 }
