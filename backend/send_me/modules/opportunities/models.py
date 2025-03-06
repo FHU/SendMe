@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import DateTime
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, ForeignKey
 
 from send_me.database.models import Base
 
@@ -19,7 +19,10 @@ class Opportunity(Base):
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     name: Mapped[str]
     description: Mapped[str]
-
+    short_description: Mapped[str]
+    orgId: Mapped[uuid.UUID] = mapped_column(ForeignKey("Organizations.id"))
+    eventDate: Mapped[datetime]
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now
     )
+
