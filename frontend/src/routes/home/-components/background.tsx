@@ -18,9 +18,7 @@ const Background = () => (
         <Card/>
         <Card1/>
         <Card2/>
-    </BackGround>
-      
+    </BackGround>  
 );
 
 export default Background;
-
