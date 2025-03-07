@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
-import Header from "./-components/header1";
+import Header from "./-components/header";
 
 export const Route = createFileRoute("/home/")({
 	component: RouteComponent,
