@@ -88,7 +88,7 @@ const Card = () => (
 				</div>
 			</AvatarInfo>
 			<SlButton variant="success" size="large" outline>
-				<SlIcon slot="prefix" name="envelope" color="green"/>
+				<SlIcon slot="prefix" name="envelope" color="green" />
 				Message
 			</SlButton>
 		</AvatarSection>
