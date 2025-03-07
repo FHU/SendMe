@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const FooterContainer = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const Attribute = styled.a`
     text-decoration: none;
     color: #2E8B57;
     margin: 1rem;
-`
+`;
 
 const Sitetitle = styled.h2`
   font-size: 16px;
@@ -28,16 +28,16 @@ const Sitetitle = styled.h2`
 `;
 
 const Footer = () => (
-    <FooterContainer>
-            <AttributesCont>
-                <Attribute href="#">About</Attribute>
-                <Attribute href="#">Accessibility</Attribute>
-                <Attribute href="#">Help Center</Attribute>
-                <Attribute href="#">Privacy & Terms</Attribute>
-                <Attribute href="#">More</Attribute>
-            </AttributesCont>
-            <Sitetitle>Sendme &copy; 2025</Sitetitle>
-    </FooterContainer>
+	<FooterContainer>
+		<AttributesCont>
+			<Attribute href="#">About</Attribute>
+			<Attribute href="#">Accessibility</Attribute>
+			<Attribute href="#">Help Center</Attribute>
+			<Attribute href="#">Privacy & Terms</Attribute>
+			<Attribute href="#">More</Attribute>
+		</AttributesCont>
+		<Sitetitle>Sendme &copy; 2025</Sitetitle>
+	</FooterContainer>
 );
 
 export default Footer;

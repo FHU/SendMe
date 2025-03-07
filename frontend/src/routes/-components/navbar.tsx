@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
 // import { FaUserCircle, FaEnvelope, FaSearch } from "react-icons/fa";
 import { SlIcon, SlIconButton } from "@shoelace-style/shoelace/dist/react";
-import { BiColor } from "react-icons/bi";
 import { Link } from "@tanstack/react-router";
+import type React from "react";
+import { BiColor } from "react-icons/bi";
+import styled from "styled-components";
 
 // Define Props (if needed)
 interface NavbarProps {
-  appName: string;
+	appName: string;
 }
 
 // Styled Components
@@ -24,8 +24,6 @@ const StyledLink = styled(Link)`
     color: var(--sm-active-green);
     }
 `;
-
-
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -71,28 +69,28 @@ const IconButton = styled.button`
 
 // Component
 const Navbar: React.FC<NavbarProps> = ({ appName }) => {
-  return (
-    <NavbarContainer>
-      <StyledLink to="/">
-        <AppName>{appName}</AppName>
-      </StyledLink>
-      
-      <NavIcons>
-        <IconButton>
-          <SlIcon name="search" />
-        </IconButton>
+	return (
+		<NavbarContainer>
+			<StyledLink to="/">
+				<AppName>{appName}</AppName>
+			</StyledLink>
 
-        <IconButton>
-          <SlIcon name="envelope" />
-        </IconButton>
+			<NavIcons>
+				<IconButton>
+					<SlIcon name="search" />
+				</IconButton>
 
-        <IconButton>
-          {/* Where the user image will be placed. Look into having a default icon go there if there is no image */}
-          <SlIcon name="person-circle" />
-        </IconButton>
-      </NavIcons>
-    </NavbarContainer>
-  );
+				<IconButton>
+					<SlIcon name="envelope" />
+				</IconButton>
+
+				<IconButton>
+					{/* Where the user image will be placed. Look into having a default icon go there if there is no image */}
+					<SlIcon name="person-circle" />
+				</IconButton>
+			</NavIcons>
+		</NavbarContainer>
+	);
 };
 
 export default Navbar;
