@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 import { useMemo } from "react";
 
-import Navbar from './-components/navbar'
+import Navbar from "./-components/navbar";
 
 // const AppBar = styled.div`
 //   background: var(--sl-color-primary-600);
