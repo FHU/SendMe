@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import { createFileRoute } from '@tanstack/react-router'
-import Header from './-components/header'
+import { createFileRoute } from "@tanstack/react-router";
+import styled from "styled-components";
+import Header from "./-components/header";
 
-export const Route = createFileRoute('/home/')({
-  component: RouteComponent,
-})
+export const Route = createFileRoute("/home/")({
+	component: RouteComponent,
+});
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -12,7 +12,9 @@ const HeaderContainer = styled.div`
 `;
 
 function RouteComponent() {
-  return <HeaderContainer>
-    <Header/>
-  </HeaderContainer>
+	return (
+		<HeaderContainer>
+			<Header />
+		</HeaderContainer>
+	);
 }

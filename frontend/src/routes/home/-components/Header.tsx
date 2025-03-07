@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const HeaderContainer = styled.div`
   width: 400px;
@@ -23,14 +23,14 @@ const Subtitle = styled.h2`
 `;
 
 const Header = () => (
-    <HeaderContainer>
-        <div>
-            <Title>Opportunities</Title>
-        </div>
-        <div>
-            <Subtitle>Tags Selected</Subtitle>
-        </div>
-    </HeaderContainer>
+	<HeaderContainer>
+		<div>
+			<Title>Opportunities</Title>
+		</div>
+		<div>
+			<Subtitle>Tags Selected</Subtitle>
+		</div>
+	</HeaderContainer>
 );
 
 export default Header;
