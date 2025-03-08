@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { useMemo } from "react";
 
 const AppBar = styled.div`
-  background: var(--sl-color-primary-600);
+  background: #2E8B57;
   padding: var(--sl-spacing-large);
   color: var(--sl-color-neutral-0);
   box-shadow: var(--sl-shadow-x-large);

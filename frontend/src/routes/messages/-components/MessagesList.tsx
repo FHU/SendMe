@@ -148,52 +148,54 @@ const Message: React.FC<MessageProps> = ({
 	const fontWeight = showReadButton ? "bold" : "thin";
 
 	return (
-		<div style={{ display: "grid", gridTemplateColumns: "1fr .025fr" }}>
-			<MessageCard style={{ gridColumn: "1" }}>
-				<SlAvatar
-					image={imagePath}
-					style={{
-						gridRowStart: "1",
-						gridRowEnd: "3",
-						placeSelf: "center",
-						transform: "scale(1.5)",
-						marginTop: "10px",
-					}}
-				/>
-				<UserName
-					style={{
-						color: textColor,
-						fontWeight: fontWeight,
-					}}
-				>
-					{userName}
-				</UserName>
-				<LastReadText
-					style={{
-						color: messageColor,
-						fontWeight: fontWeight,
-					}}
-				>
-					{lastReadMessage}
-				</LastReadText>
-				<LastReadTime
-					style={{
-						color: timeColor,
-						fontWeight: fontWeight,
-					}}
-				>
-					{lastReadTime}
-				</LastReadTime>
-				{showReadButton && <ReadButton />}
-			</MessageCard>
-		</div>
+		<>
+			<div style={{ display: "grid", gridTemplateColumns: "1fr .025fr" }}>
+				<MessageCard style={{ gridColumn: "1" }}>
+					<SlAvatar
+						image={imagePath}
+						style={{
+							gridRowStart: "1",
+							gridRowEnd: "3",
+							placeSelf: "center",
+							transform: "scale(1.5)",
+							marginTop: "10px",
+						}}
+					/>
+					<UserName
+						style={{
+							color: textColor,
+							fontWeight: fontWeight,
+						}}
+					>
+						{userName}
+					</UserName>
+					<LastReadText
+						style={{
+							color: messageColor,
+							fontWeight: fontWeight,
+						}}
+					>
+						{lastReadMessage}
+					</LastReadText>
+					<LastReadTime
+						style={{
+							color: timeColor,
+							fontWeight: fontWeight,
+						}}
+					>
+						{lastReadTime}
+					</LastReadTime>
+					{showReadButton && <ReadButton />}
+				</MessageCard>
+			</div>
+		</>
 	);
 };
 
 export function MessagesList(): JSX.Element {
 	return (
 		<>
-			<h1 style={{ color: "#BE5D14", marginTop: "-20px", marginLeft: "20px" }}>
+			<h1 style={{ color: "#2E8B57", marginTop: "-20px", marginLeft: "20px" }}>
 				Messages
 			</h1>
 			{messages.map((message) => (

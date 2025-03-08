@@ -142,7 +142,7 @@ const Message = styled.div<{ $isUser: boolean }>`
   padding: 10px;
   border-radius: 10px;
   max-width: 75%;
-  background: ${({ $isUser }) => ($isUser ? "#F6CFB1" : "#D9D9D9")};
+  background: ${({ $isUser }) => ($isUser ? "#DCFFDB" : "#D9D9D9")};
   color: #000;
   height: 100%;
   word-wrap: break-word; 
