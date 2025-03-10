@@ -24,8 +24,8 @@ const Subtitle = styled.h2`
 
 const Header = () => (
 	<HeaderContainer>
-			<Title>Opportunities</Title>
-			<Subtitle>Tags Selected</Subtitle>
+		<Title>Opportunities</Title>
+		<Subtitle>Tags Selected</Subtitle>
 	</HeaderContainer>
 );
 
