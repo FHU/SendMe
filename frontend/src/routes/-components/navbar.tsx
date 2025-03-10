@@ -2,7 +2,6 @@
 import { SlIcon, SlIconButton } from "@shoelace-style/shoelace/dist/react";
 import { Link } from "@tanstack/react-router";
 import type React from "react";
-import { BiColor } from "react-icons/bi";
 import styled from "styled-components";
 
 // Define Props (if needed)
