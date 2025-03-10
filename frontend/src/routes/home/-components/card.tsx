@@ -7,8 +7,8 @@ import {
 	SlIconButton,
 	SlTag,
 } from "@shoelace-style/shoelace/dist/react";
-import styled from "styled-components";
 import cardData from "public/data/cardData.json";
+import styled from "styled-components";
 
 const CardContainer = styled(SlCard)`
   display: flex;
@@ -122,9 +122,7 @@ const Card = () => (
 				</div>
 				<div>
 					<h3>Description</h3>
-					<p>
-						{cardData.longDescription}
-					</p>
+					<p>{cardData.longDescription}</p>
 				</div>
 				<div>
 					<h3>Time of Event</h3>
