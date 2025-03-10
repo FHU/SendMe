@@ -1,4 +1,9 @@
-import { SlButton, SlTextarea } from "@shoelace-style/shoelace/dist/react";
+import {
+	SlButton,
+	SlIconButton,
+	SlInput,
+	SlTextarea,
+} from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
@@ -79,15 +84,16 @@ const Conversation = () => {
 				))}
 				<div ref={chatEndRef} />
 			</ChatContainer>
-			<InputContainer>
-				<SlTextarea
-					value={input}
-					onInput={(e) => setInput((e.target as HTMLTextAreaElement).value)} // Corrected event handler
-					placeholder="Type a message..."
-					filled
-				/>
-				<SlButton onClick={handleSend}>Send</SlButton>
-			</InputContainer>
+
+			<SlInput
+				value={input}
+				onInput={(e) => setInput((e.target as HTMLTextAreaElement).value)} // Corrected event handler
+				placeholder="Type a message..."
+				spellCheck
+				style={{ width: "100%" }}
+			>
+				<SlIconButton name="send" slot="suffix" onClick={handleSend} />
+			</SlInput>
 		</Container>
 	);
 };
@@ -157,21 +163,6 @@ const Timestamp = styled.div<{ $isUser: boolean }>`
   margin-left: ${({ $isUser }) => ($isUser ? "0px" : "10px")};
   margin-right: ${({ $isUser }) => ($isUser ? "125px" : "0px")};
   margin-top: 2px;
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-self: center;
-  gap: 10px;
-  margin-top: 10px;
-  width: 100%;
-  max-width: 500px;
-  
-  @media (max-width: 768px) {
-    margin-right: 105px;
-  }
 `;
 
 export default Conversation;
