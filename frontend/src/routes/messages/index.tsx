@@ -14,7 +14,7 @@ const CreateNewMessage = styled(Link)`
 	background-color: #2E8B57;
 	border-radius: 50%;
 	align-self: flex-end;
-	margin-top: 50px;
+	margin-top: 30px;
 	font-size: 28px;
 	color: #fff;
 	display: flex;
@@ -22,7 +22,7 @@ const CreateNewMessage = styled(Link)`
 	align-items: center;
 
 	@media screen and (max-width: 700px){
-		margin-top: 80px;
+		margin-top: 50px;
 		margin-right: 150px;
   }
 
@@ -46,10 +46,6 @@ function RouteComponent() {
 			<CreateNewMessage to="/conversation" className="createNewMessage">
 				<SlIcon name="pencil-fill" />
 			</CreateNewMessage>
-			{/* <Link
-				to="/conversation"
-				className="CreateNewMessage">
-			</Link> */}
 		</div>
 	);
 }
