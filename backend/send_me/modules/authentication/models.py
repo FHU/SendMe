@@ -36,12 +36,11 @@ A class that represents a login attempt in the database.
 class Login(Base):
     __tablename__ = "logins"
 
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     pin: Mapped[str]
     token: Mapped[str]
-    email: Mapped[str]
+    email: Mapped[str] = mapped_column(unique=True)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now
     )
-
-    __table_args__ = (PrimaryKeyConstraint('pin', 'token'),)
