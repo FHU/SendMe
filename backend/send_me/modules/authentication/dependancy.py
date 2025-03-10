@@ -24,7 +24,7 @@ def get_token(authorization: str = Header(...)):
 def get_session(db: Session = Depends(get_db), token: str = Depends(get_token)):
     session_query = select(models.Session).where(models.Session.token == token)
 
-    session = db.execute(session_query).first()
+    session = db.execute(session_query).scalar()
 
     if not session:
         raise HTTPException(status_code=404, detail="Session Not Found")
