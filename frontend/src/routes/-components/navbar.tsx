@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 // Define Props (if needed)
 interface NavbarProps {
-	appName: string;
+  appName: string;
 }
 
 // Styled Components
