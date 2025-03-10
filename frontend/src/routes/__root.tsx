@@ -7,9 +7,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import styled from "styled-components";
 
 import { useMemo } from "react";
-
-import Footer from "./-components/footer";
 import Navbar from "./-components/navbar";
+import Footer from "./-components/footer";
 
 // const AppBar = styled.div`
 //   background: var(--sl-color-primary-600);
