@@ -1,99 +1,109 @@
+import React, { useEffect, useRef, useState } from 'react'; // Add React import
 import { SlButton, SlTextarea } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 interface MessageType {
-	id: number;
-	text: string;
-	timestamp: string;
-	isUser: boolean;
+  id: number;
+  text: string;
+  timestamp: string;
+  isUser: boolean;
 }
 
-const messagesData: MessageType[] = [
-	{
-		id: 0,
-		text: "Hey! I heard about Servant’s Day and I would love to contribute. Do you have any open projects?",
-		timestamp: "3:50 PM",
-		isUser: false,
-	},
-	{
-		id: 1,
-		text: "We desperately need people to paint Bradfield Hall’s lobby if you’re interested.",
-		timestamp: "3:52 PM",
-		isUser: true,
-	},
-	{
-		id: 2,
-		text: "That sounds great! I have lots of experience painting so I think I could be a good fit. What’s the next step?",
-		timestamp: "3:53 PM",
-		isUser: false,
-	},
-];
+interface ConversationType {
+  id: number;
+  user: {
+    profilePicture: string;
+    userName: string;
+    userID: number;
+  };
+  timestamp: string;
+  messagePreview: string;
+  readMessage: boolean;
+  conversation: MessageType[];
+}
 
 const Conversation = () => {
-	const [messages, setMessages] = useState<MessageType[]>(messagesData);
-	const [input, setInput] = useState<string>("");
-	const chatEndRef = useRef<HTMLDivElement | null>(null);
+  const [messages, setMessages] = useState<MessageType[]>([]);
+  const [input, setInput] = useState<string>("");
+  const chatEndRef = useRef<HTMLDivElement | null>(null);
 
-	useEffect(() => {
-		chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-	});
-
-	const getCurrentTime = (): string => {
-		const now = new Date();
-		return now.toLocaleTimeString([], {
-			hour: "2-digit",
-			minute: "2-digit",
-			hour12: true,
-		});
+  // Fetch data from JSON file when the component mounts
+  useEffect(() => {
+	const fetchData = async () => {
+	  try {
+		const response = await fetch('/conversation.json');
+		const data = await response.json();
+		console.log(data);  // Log the fetched data
+  
+		const conversationData = data.find((conv: ConversationType) => conv.id === 0);
+		if (conversationData) {
+		  setMessages(conversationData.conversation);
+		}
+	  } catch (error) {
+		console.error("Error fetching data:", error);
+	  }
 	};
+  
+	fetchData();
+  }, []);
+  
 
-	const handleSend = () => {
-		if (!input.trim()) return;
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
-		const newMessage: MessageType = {
-			id: messages.length + 1, // Ensure unique ID
-			text: input,
-			timestamp: getCurrentTime(),
-			isUser: true,
-		};
+  const getCurrentTime = (): string => {
+    const now = new Date();
+    return now.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
 
-		setMessages((prevMessages) => [...prevMessages, newMessage]);
-		setInput("");
-	};
+  const handleSend = () => {
+    if (!input.trim()) return;
 
-	return (
-		<Container>
-			<ChatContainer>
-				{messages.map((msg) => (
-					<>
-						<MessageContainer key={msg.id} $isUser={msg.isUser}>
-							<Message $isUser={msg.isUser}>{msg.text}</Message>
-							{/* <Timestamp>{msg.timestamp}</Timestamp> */}
-						</MessageContainer>
-						<Timestamp key={msg.id} $isUser={msg.isUser}>
-							{msg.timestamp}
-						</Timestamp>
-					</>
-				))}
-				<div ref={chatEndRef} />
-			</ChatContainer>
-			<InputContainer>
-				<SlTextarea
-					value={input}
-					onInput={(e) => setInput((e.target as HTMLTextAreaElement).value)} // Corrected event handler
-					placeholder="Type a message..."
-					filled
-				/>
-				<SlButton onClick={handleSend}>Send</SlButton>
-			</InputContainer>
-		</Container>
-	);
+    const newMessage: MessageType = {
+      id: messages.length + 1, // Ensure unique ID
+      text: input,
+      timestamp: getCurrentTime(),
+      isUser: true,
+    };
+
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+    setInput("");
+  };
+
+  return (
+    <Container>
+      <ChatContainer>
+        {messages.map((msg) => (
+          <React.Fragment key={msg.id}>
+            <MessageContainer $isUser={msg.isUser}>
+              <Message $isUser={msg.isUser}>{msg.text}</Message>
+            </MessageContainer>
+            <Timestamp $isUser={msg.isUser}>{msg.timestamp}</Timestamp>
+          </React.Fragment>
+        ))}
+        <div ref={chatEndRef} />
+      </ChatContainer>
+      <InputContainer>
+        <SlTextarea
+          value={input}
+          onInput={(e) => setInput((e.target as HTMLTextAreaElement).value)} // Corrected event handler
+          placeholder="Type a message..."
+          filled
+        />
+        <SlButton onClick={handleSend}>Send</SlButton>
+      </InputContainer>
+    </Container>
+  );
 };
 
 export const Route = createFileRoute("/conversation/")({
-	component: Conversation,
+  component: Conversation,
 });
 
 // Styled components remain unchanged
@@ -135,7 +145,6 @@ const MessageContainer = styled.div<{ $isUser: boolean }>`
   align-items: ${({ $isUser }) => ($isUser ? "flex-end" : "flex-start")};
   margin: 5px;
   max-width: 80%;
-
 `;
 
 const Message = styled.div<{ $isUser: boolean }>`
