@@ -3,6 +3,7 @@ import styled from "styled-components";
 const HeaderContainer = styled.div`
   width: 400px;
   height: 250px;
+  z-index: -1;
   background-color: #E6FCE5;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
