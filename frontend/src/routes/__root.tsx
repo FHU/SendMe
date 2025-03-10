@@ -10,13 +10,6 @@ import { useMemo } from "react";
 
 import Navbar from "./-components/navbar";
 
-// const AppBar = styled.div`
-//   background: var(--sl-color-primary-600);
-//   padding: var(--sl-spacing-large);
-//   color: var(--sl-color-neutral-0);
-//   box-shadow: var(--sl-shadow-x-large);
-// `;
-
 const ContentArea = styled.main`
   width: 600px;
   margin: var(--sl-spacing-4x-large) auto;

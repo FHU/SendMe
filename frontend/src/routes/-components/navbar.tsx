@@ -1,8 +1,6 @@
-// import { FaUserCircle, FaEnvelope, FaSearch } from "react-icons/fa";
-import { SlIcon, SlIconButton } from "@shoelace-style/shoelace/dist/react";
+import { SlAvatar, SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { Link } from "@tanstack/react-router";
 import type React from "react";
-import { BiColor } from "react-icons/bi";
 import styled from "styled-components";
 
 // Define Props (if needed)
@@ -37,34 +35,36 @@ const NavbarContainer = styled.nav`
 `;
 
 const AppName = styled.h1`
-  font-size: 25px;
+  font-size: 28px;
   font-weight: bold;
 `;
 
 const NavIcons = styled.div`
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 10px;
 `;
-
-// const UserImage = styled.img`
-//   width: 30px;
-//   height: 30px;
-//   border-radius: 50%;
-//   object-fit: cover;
-//   cursor: pointer;
-// `;
 
 const IconButton = styled.button`
   background: none;
   border: none;
   color: white;
-  font-size: 30px;
+  font-size: 2rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
   
   &:hover {
     color:#A0EB9F;
   }
+`;
+
+const AvatarIcon = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 32px;
+  height: 32px;
 `;
 
 // Component
@@ -81,13 +81,15 @@ const Navbar: React.FC<NavbarProps> = ({ appName }) => {
 				</IconButton>
 
 				<IconButton>
-					<SlIcon name="envelope" />
+					<SlIcon name="chat-right" />
 				</IconButton>
 
-				<IconButton>
-					{/* Where the user image will be placed. Look into having a default icon go there if there is no image */}
-					<SlIcon name="person-circle" />
-				</IconButton>
+				<AvatarIcon>
+					<SlAvatar
+						image="https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=800"
+						label="Avatar of a gray tabby kitten looking down"
+					/>
+				</AvatarIcon>
 			</NavIcons>
 		</NavbarContainer>
 	);
