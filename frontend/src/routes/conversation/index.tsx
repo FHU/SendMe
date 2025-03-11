@@ -1,53 +1,57 @@
-import React, { useEffect, useRef, useState } from 'react'; // Add React import
+import React, { useEffect, useRef, useState } from "react"; // Add React import
 import { SlButton, SlTextarea } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 
-interface MessageType {
+interface ConversationType {
   id: number;
   text: string;
   timestamp: string;
+  //senderID: number;
   isUser: boolean;
 }
 
-interface ConversationType {
+interface MessageType {
   id: number;
-  user: {
-    profilePicture: string;
-    userName: string;
-    userID: number;
-  };
-  timestamp: string;
+  user: { profilePicture: string; userName: string; userID: number };
+  timestamp?: string;
   messagePreview: string;
   readMessage: boolean;
-  conversation: MessageType[];
+  conversation: ConversationType[];
 }
 
-const Conversation = () => {
-  const [messages, setMessages] = useState<MessageType[]>([]);
+interface ConversationProps {
+  message: MessageType;
+}
+
+const Conversation = (message: MessageType) => {
+  const [messages, setMessages] = useState<ConversationType[]>([]);
   const [input, setInput] = useState<string>("");
   const chatEndRef = useRef<HTMLDivElement | null>(null);
 
+  console.log(message);
+
+  setMessages(message.conversation);
+
   // Fetch data from JSON file when the component mounts
-  useEffect(() => {
-	const fetchData = async () => {
-	  try {
-		const response = await fetch('/conversation.json');
-		const data = await response.json();
-		console.log(data);  // Log the fetched data
-  
-		const conversationData = data.find((conv: ConversationType) => conv.id === 0);
-		if (conversationData) {
-		  setMessages(conversationData.conversation);
-		}
-	  } catch (error) {
-		console.error("Error fetching data:", error);
-	  }
-	};
-  
-	fetchData();
-  }, []);
-  
+  // useEffect(() => {
+  // const fetchData = async () => {
+  //   try {
+  // 	const response = await fetch('/conversation.json');
+  // 	const data = await response.json();
+  // 	console.log(data);  // Log the fetched data
+
+  // 	const conversationData = data.messages.find((conv: ConversationType) => conv.id === 0);
+  // 	if (conversationData) {
+  // 	  setMessages(conversationData.conversation);
+  // 	}
+  //   } catch (error) {
+  // 	console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  // fetchData();
+  // }, []);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -154,8 +158,8 @@ const Message = styled.div<{ $isUser: boolean }>`
   background: ${({ $isUser }) => ($isUser ? "#DCFFDB" : "#D9D9D9")};
   color: #000;
   height: 100%;
-  word-wrap: break-word; 
-  overflow-wrap: break-word; 
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   margin-right: 10px;
 `;
 
@@ -177,7 +181,7 @@ const InputContainer = styled.div`
   margin-top: 10px;
   width: 100%;
   max-width: 500px;
-  
+
   @media (max-width: 768px) {
     margin-right: 105px;
   }
