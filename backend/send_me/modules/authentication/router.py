@@ -42,7 +42,7 @@ def request_pin(input: schemas.LoginRequest, db: Session = Depends(get_db)):
     # Create a login
     login = models.Login(
         pin=str(secrets.randbelow(1_000_000)),
-        token=str(secrets.token_urlsafe(16)),
+        login_token=str(secrets.token_urlsafe(16)),
         email=input.email,
     )
 
@@ -54,11 +54,11 @@ def request_pin(input: schemas.LoginRequest, db: Session = Depends(get_db)):
     # Add login to DB
     # I think there is likely a better way to do this
     insert_command = insert(models.Login).values(
-        pin=login.pin, token=login.token, email=login.email
+        pin=login.pin, login_token=login.login_token, email=login.email
     )
     insert_command = insert_command.on_conflict_do_update(
         index_elements=[models.Login.email],
-        set_={models.Login.pin: login.pin, models.Login.token: login.token},
+        set_={models.Login.pin: login.pin, models.Login.login_token: login.login_token},
     )
 
     db.execute(insert_command)
@@ -68,14 +68,14 @@ def request_pin(input: schemas.LoginRequest, db: Session = Depends(get_db)):
         print(login.pin)
 
     # return token for future auth
-    return {"token": login.token}
+    return {"login_token": login.login_token}
 
 
 @router.post("/sessiontoken", response_model=schemas.SessionResponse)
 def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)):
     # Check if pin and token are in db
     login_query = select(models.Login).where(
-        models.Login.token == input.token, models.Login.pin == input.pin
+        models.Login.login_token == input.login_token, models.Login.pin == input.pin
     )
 
     try:
@@ -103,7 +103,7 @@ def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)
     if not user:
         raise HTTPException(status_code=404, detail="Unable to find user")
 
-    session = models.Session(token=secrets.token_urlsafe(32), user=user)
+    session = models.Session(session_token=secrets.token_urlsafe(32), user=user)
 
     # Add new session to db
     db.add(session)
@@ -112,4 +112,4 @@ def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)
     db.refresh(session)
 
     # return token for future auth
-    return {"token": session.token}
+    return {"session_token": session.session_token}

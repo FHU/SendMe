@@ -17,7 +17,7 @@ class Session(Base):
     __tablename__ = "sessions"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    token: Mapped[str]
+    session_token: Mapped[str]
     user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"), unique=True)
 
     user = relationship("User", back_populates="session")
@@ -37,7 +37,7 @@ class Login(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     pin: Mapped[str]
-    token: Mapped[str]
+    login_token: Mapped[str]
     email: Mapped[str] = mapped_column(unique=True)
 
     created_at: Mapped[datetime] = mapped_column(

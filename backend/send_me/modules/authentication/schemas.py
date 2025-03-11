@@ -11,8 +11,8 @@ class LoginResponse(SendMeModel):
 
 class SessionRequest(SendMeModel):
     pin: str
-    token: str
+    login_token: str
 
 
 class SessionResponse(SendMeModel):
-    token: str
+    session_token: str
