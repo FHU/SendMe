@@ -24,14 +24,12 @@ interface ConversationProps {
   message: MessageType;
 }
 
-const Conversation = (message: MessageType) => {
+const Conversation = ({message}: ConversationProps) => {
   const [messages, setMessages] = useState<ConversationType[]>([]);
   const [input, setInput] = useState<string>("");
   const chatEndRef = useRef<HTMLDivElement | null>(null);
 
   console.log(message);
-
-  setMessages(message.conversation);
 
   // Fetch data from JSON file when the component mounts
   // useEffect(() => {
@@ -53,6 +51,10 @@ const Conversation = (message: MessageType) => {
   // fetchData();
   // }, []);
 
+  useEffect( ()=> {
+    setMessages(message.conversation);
+  }, [message])
+
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -69,7 +71,7 @@ const Conversation = (message: MessageType) => {
   const handleSend = () => {
     if (!input.trim()) return;
 
-    const newMessage: MessageType = {
+    const newMessage: ConversationType = {
       id: messages.length + 1, // Ensure unique ID
       text: input,
       timestamp: getCurrentTime(),
