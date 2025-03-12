@@ -1,3 +1,5 @@
+from typing import Optional
+
 from send_me.schemas import SendMeModel
 
 
@@ -6,7 +8,8 @@ class LoginRequest(SendMeModel):
 
 
 class LoginResponse(SendMeModel):
-    token: str
+    login_token: str
+    pin: Optional[str] = None
 
 
 class SessionRequest(SendMeModel):
