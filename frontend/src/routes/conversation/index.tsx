@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"; // Add React import
+import React, { useEffect, useRef, useState } from "react";
 import { SlButton, SlTextarea } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
@@ -7,7 +7,6 @@ interface ConversationType {
   id: number;
   text: string;
   timestamp: string;
-  //senderID: number;
   isUser: boolean;
 }
 
@@ -21,39 +20,20 @@ interface MessageType {
 }
 
 interface ConversationProps {
-  message: MessageType;
+  message: MessageType | null | undefined; // Handle null/undefined messages
 }
 
-const Conversation = ({message}: ConversationProps) => {
+const Conversation = ({ message }: ConversationProps) => {
   const [messages, setMessages] = useState<ConversationType[]>([]);
   const [input, setInput] = useState<string>("");
   const chatEndRef = useRef<HTMLDivElement | null>(null);
 
-  console.log(message);
-
-  // Fetch data from JSON file when the component mounts
-  // useEffect(() => {
-  // const fetchData = async () => {
-  //   try {
-  // 	const response = await fetch('/conversation.json');
-  // 	const data = await response.json();
-  // 	console.log(data);  // Log the fetched data
-
-  // 	const conversationData = data.messages.find((conv: ConversationType) => conv.id === 0);
-  // 	if (conversationData) {
-  // 	  setMessages(conversationData.conversation);
-  // 	}
-  //   } catch (error) {
-  // 	console.error("Error fetching data:", error);
-  //   }
-  // };
-
-  // fetchData();
-  // }, []);
-
-  useEffect( ()=> {
-    setMessages(message.conversation);
-  }, [message])
+  // Ensure message exists before setting conversations
+  useEffect(() => {
+    if (message?.conversation) {
+      setMessages(message.conversation);
+    }
+  }, [message]);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -81,6 +61,11 @@ const Conversation = ({message}: ConversationProps) => {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
     setInput("");
   };
+
+  // Handle case where message is undefined or null
+  if (!message || !message.conversation) {
+    return <div>Error: Message data is unavailable.</div>;
+  }
 
   return (
     <Container>
