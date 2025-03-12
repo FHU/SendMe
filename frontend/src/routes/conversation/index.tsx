@@ -81,28 +81,21 @@ const Conversation = () => {
 			</ChatContainer>
 
 			<SendMessageContainer>
-					
-			<SendNewMessage
-				value={input}
-				onInput={(e) => setInput((e.target as HTMLTextAreaElement).value)}
-				placeholder="Type a message..."
-				spellCheck
-				rows = {1}
-				resize = "auto"
-			>
-
-			</SendNewMessage>
-			<SlIconButton
+				<SendNewMessage
+					value={input}
+					onInput={(e) => setInput((e.target as HTMLTextAreaElement).value)}
+					placeholder="Type a message..."
+					spellCheck
+					rows={1}
+					resize="auto"
+				></SendNewMessage>
+				<SlIconButton
 					name="send"
 					slot="suffix"
 					onClick={handleSend}
 					style={{ fontSize: "20px" }}
 				/>
 			</SendMessageContainer>
-
-
-
-
 		</Container>
 	);
 };
@@ -195,7 +188,7 @@ const SendMessageContainer = styled.div`
 		width: 80%;
 		margin-right: 125px;
   }
-`
+`;
 
 const SendNewMessage = styled(SlTextarea)`
 	width: 100%;
