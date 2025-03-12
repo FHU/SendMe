@@ -24,3 +24,30 @@ class Opportunity(SendMeModel):
     name: str
     description: str
     created_at: datetime
+
+
+from uuid import UUID
+from pydantic import BaseModel
+from typing import List
+
+class OpportunityMessage(BaseModel):
+    id: int
+    text: str
+    timestamp: str
+    is_user: bool
+
+class ConversationMessage(BaseModel):
+    id:int
+    text: str
+    timestamp: str 
+    is_user:bool
+
+class ConversationTag(BaseModel):
+    id: int
+    user_name: str
+    user_profile_picture: str
+    timestamp: str
+    message_preview: str
+    read_message: bool
+    conversation: List[ConversationMessage]
+

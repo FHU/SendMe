@@ -17,7 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/modules/*"],
-      "@sendme/api": ["src/api/main.ts"]
+      "@sendme/api": ["src/api/main.ts"],
     },
 
     // Remix takes care of building everything in `remix build`.

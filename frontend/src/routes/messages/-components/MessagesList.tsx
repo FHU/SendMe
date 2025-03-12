@@ -1,7 +1,8 @@
-import { Message, MessageProps } from "./Message";
+// MessagesList.tsx
+import { Message } from "./Message"; // Import Message component
 
 interface MessagesListProps {
-  messages: { 
+  messages: {
     id: number;
     user: {
       profilePicture: string;
@@ -20,14 +21,14 @@ interface MessagesListProps {
   }[];
 }
 
-const MessagesList: React.FC<MessagesListProps> = ({ messages }) => {
+export const MessagesList: React.FC<MessagesListProps> = ({ messages }) => {
   if (!messages || messages.length === 0) {
     return <p>No messages available.</p>;
   }
 
   return (
     <>
-      {messages.map((msg) => (
+      {messages?.map((msg) => (
         <Message
           key={msg.id}
           imagePath={msg.user.profilePicture}
@@ -41,4 +42,4 @@ const MessagesList: React.FC<MessagesListProps> = ({ messages }) => {
   );
 };
 
-export default MessagesList;
+// export default MessagesList;
