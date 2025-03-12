@@ -70,12 +70,12 @@ const Conversation = () => {
 
 	return (
 		<Container>
+			<DisplayName>John Smith</DisplayName>
 			<ChatContainer>
 				{messages.map((msg) => (
 					<>
 						<MessageContainer key={msg.id} $isUser={msg.isUser}>
 							<Message $isUser={msg.isUser}>{msg.text}</Message>
-							{/* <Timestamp>{msg.timestamp}</Timestamp> */}
 						</MessageContainer>
 						<Timestamp key={msg.id} $isUser={msg.isUser}>
 							{msg.timestamp}
@@ -85,15 +85,19 @@ const Conversation = () => {
 				<div ref={chatEndRef} />
 			</ChatContainer>
 
-			<SlInput
+			<SendNewMessage
 				value={input}
-				onInput={(e) => setInput((e.target as HTMLTextAreaElement).value)} // Corrected event handler
+				onInput={(e) => setInput((e.target as HTMLTextAreaElement).value)}
 				placeholder="Type a message..."
 				spellCheck
-				style={{ width: "100%" }}
 			>
-				<SlIconButton name="send" slot="suffix" onClick={handleSend} />
-			</SlInput>
+				<SlIconButton
+					name="send"
+					slot="suffix"
+					onClick={handleSend}
+					style={{ fontSize: "20px" }}
+				/>
+			</SendNewMessage>
 		</Container>
 	);
 };
@@ -102,20 +106,20 @@ export const Route = createFileRoute("/conversation/")({
 	component: Conversation,
 });
 
-// Styled components remain unchanged
+const DisplayName = styled.h2`
+ @media (max-width: 768px) {
+	margin-right: 130px;
+  }
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
   max-width: 600px;
   margin: auto;
   width: 100%;
-  overflow-x: hidden;
-  height: 75vh;
-  justify-content: flex-start;
-
+  
   @media (max-width: 768px) {
     padding: 10px;
   }
@@ -124,15 +128,15 @@ const Container = styled.div`
 const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 500px;
-  height: 80vh;
+  align-items: center;
   overflow-y: auto;
   background: #ffffff;
   border-radius: 10px;
   padding: 10px;
-  margin-right: 10px;
-  max-width: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  height: 50vh;
+
 `;
 
 const MessageContainer = styled.div<{ $isUser: boolean }>`
@@ -140,7 +144,10 @@ const MessageContainer = styled.div<{ $isUser: boolean }>`
   flex-direction: column;
   align-items: ${({ $isUser }) => ($isUser ? "flex-end" : "flex-start")};
   margin: 5px;
-  max-width: 80%;
+  width: 80%;
+  @media (max-width: 768px) {
+	margin-right: 120px;
+  }
 
 `;
 
@@ -160,9 +167,30 @@ const Timestamp = styled.div<{ $isUser: boolean }>`
   font-size: 12px;
   color: #555;
   align-self: ${({ $isUser }) => ($isUser ? "flex-end" : "flex-start")};
-  margin-left: ${({ $isUser }) => ($isUser ? "0px" : "10px")};
-  margin-right: ${({ $isUser }) => ($isUser ? "125px" : "0px")};
+  margin-left: ${({ $isUser }) => ($isUser ? "0px" : "65px")};
+  margin-right: ${({ $isUser }) => ($isUser ? "80px" : "0px")};
   margin-top: 2px;
+  @media (max-width: 768px) {
+	margin-left: ${({ $isUser }) => ($isUser ? "0px" : "10px")};
+	margin-right: ${({ $isUser }) => ($isUser ? "130px" : "0px")};
+  }
+`;
+
+const SendNewMessage = styled(SlInput)`
+	width: 100%;
+	margin-top: 20px;
+
+	&::part(base) {
+		box-shadow: none;
+		border: 1px solid #2E8B57;
+		border-radius: 20px;
+		
+  }
+
+	@media (max-width: 768px) {
+		margin-right: 125px;
+		width: 80%;
+  }
 `;
 
 export default Conversation;
