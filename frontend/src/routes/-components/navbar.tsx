@@ -10,6 +10,8 @@ interface NavbarProps {
 
 // Styled Components
 const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color: inherit;
 
@@ -43,18 +45,21 @@ const AppName = styled.h1`
 const NavIcons = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-evenly;
+  width: 150px;
 `;
 
 const IconButton = styled.button`
   background: none;
   border: none;
+  width: 48px;
+  height: 48px;
   color: white;
-  font-size: 2rem;
+  font-size: 2.5rem;
   cursor: pointer;
   display: flex;
   align-items: center;
-  
+
   &:hover {
     color:#A0EB9F;
   }
@@ -63,9 +68,6 @@ const IconButton = styled.button`
 const AvatarIcon = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
-  width: 32px;
-  height: 32px;
 `;
 
 // Component
