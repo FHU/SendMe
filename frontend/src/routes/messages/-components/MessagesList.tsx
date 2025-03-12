@@ -61,6 +61,11 @@ const MessageCard = styled.div`
   background-color: #fff;
   margin-bottom: 20px;
 
+  &:hover{
+	background-color: #D9D9D9;
+	border-radius: 20px;
+  }
+
   @media screen and (max-width: 700px){
     grid-template-columns: 0.5fr 1fr 1fr;
     grid-template-rows: 1fr 0.5fr;
@@ -76,13 +81,12 @@ const ReadButton = styled.div`
   grid-column: 5;
   grid-row: 2;
   align-self: center;
-  margin-top: 40px;
   
   @media screen and (max-width: 700px){
     grid-row-start: 1;
     grid-row-end: 2;
     grid-column: 3;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 90px;
 
   }
