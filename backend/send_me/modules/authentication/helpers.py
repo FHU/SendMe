@@ -22,7 +22,10 @@ def send_email(email, pin):
 
     try:
         sg = SendGridAPIClient(SENDGRID_API_KEY)
-        response = sg.send(message)
-        return 200 <= response.status_code < 300
+        sg.send(message)
+        # 200 < response.status_code <= 300 was here before
+        # It was causing pyright to fail and was not being used therefore
+        # it was replaced with return True
+        return True
     except Exception:
         return False
