@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import styled from "styled-components";
 
 import { useMemo } from "react";
-
+import Footer from "./-components/footer";
 import Navbar from "./-components/navbar";
 
 const ContentArea = styled.main`
@@ -40,6 +40,7 @@ export const Route = createRootRoute({
 			<ContentArea>
 				<Outlet />
 			</ContentArea>
+			<Footer />
 			<TanStackRouterDevtools />
 		</Providers>
 	),
