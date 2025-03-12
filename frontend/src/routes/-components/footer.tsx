@@ -34,9 +34,8 @@ const Footer = () => (
 			<Attribute href="#">Accessibility</Attribute>
 			<Attribute href="#">Help Center</Attribute>
 			<Attribute href="#">Privacy & Terms</Attribute>
-			<Attribute href="#">More</Attribute>
 		</AttributesCont>
-		<Sitetitle>Sendme &copy; 2025</Sitetitle>
+		<Sitetitle>SendMe &copy; 2025</Sitetitle>
 	</FooterContainer>
 );
 
