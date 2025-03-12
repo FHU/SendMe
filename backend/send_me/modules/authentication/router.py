@@ -12,6 +12,8 @@ from send_me.modules.users.models import User
 
 from . import helpers, models, schemas
 
+IN_DEVELOPMENT = os.environ.get("environment", "development") == "development"
+
 TEN_MINUTES_OLD = timedelta(minutes=10)
 
 router = APIRouter(
@@ -48,7 +50,8 @@ def request_pin(input: schemas.LoginRequest, db: Session = Depends(get_db)):
 
     email_sent = helpers.send_email(login.email, login.pin)
 
-    if not email_sent:
+    # To avoid development dependancies this check can be ignored in dev mode
+    if not email_sent and not IN_DEVELOPMENT:
         raise HTTPException(status_code=500, detail="Error when sending email")
 
     # Add login to DB
@@ -63,9 +66,9 @@ def request_pin(input: schemas.LoginRequest, db: Session = Depends(get_db)):
 
     db.execute(insert_command)
 
-    # Dr. Casey has asked the pin be printed to the console in dev
-    if os.environ.get("ENVIRONMENT", "FALSE") == "TRUE":
-        print(login.pin)
+    # Dr. Casey has asked the pin be shared to the developer somehow if the backend was in dev mode
+    if IN_DEVELOPMENT:
+        return {"login_token": login.login_token, "pin": login.pin}
 
     # return token for future auth
     return {"login_token": login.login_token}
@@ -78,19 +81,14 @@ def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)
         models.Login.login_token == input.login_token, models.Login.pin == input.pin
     )
 
-    try:
-        login = db.execute(login_query).scalar()
-    except:
-        raise HTTPException(
-            status_code=500, detail="An error occured when looking for your login"
-        )
+    login = db.execute(login_query).scalar()
 
     if not login:
         raise HTTPException(status_code=404, detail="Login not found")
 
-    time_delta = login.created_at - datetime.now(timezone.utc)
+    login_age = login.created_at - datetime.now(timezone.utc)
 
-    if time_delta > TEN_MINUTES_OLD:
+    if login_age > TEN_MINUTES_OLD:
         raise HTTPException(status_code=403, detail="TOKEN EXPIRED")
 
     # Create Session
@@ -106,10 +104,16 @@ def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)
     session = models.Session(session_token=secrets.token_urlsafe(32), user=user)
 
     # Add new session to db
-    db.add(session)
+    session_upsert = insert(models.Session).values(
+        session_token=session.session_token, user_id=session.user.id
+    )
+    session_upsert = session_upsert.on_conflict_do_update(
+        index_elements=[models.Session.user_id],
+        set_={models.Session.session_token: session.session_token},
+    )
+    db.execute(session_upsert)
     db.delete(login)
     db.flush()
-    db.refresh(session)
 
     # return token for future auth
     return {"session_token": session.session_token}
