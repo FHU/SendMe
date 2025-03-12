@@ -65,6 +65,7 @@ const IconButton = styled.button`
   }
 `;
 
+// Eventually make this clickable to go to user profile
 const AvatarIcon = styled.div`
   display: flex;
   align-items: center;
