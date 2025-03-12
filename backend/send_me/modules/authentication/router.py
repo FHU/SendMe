@@ -12,7 +12,7 @@ from send_me.modules.users.models import User
 
 from . import helpers, models, schemas
 
-IN_DEVELOPMENT = os.environ.get("environment", "development") == "development"
+IN_DEVELOPMENT = os.environ.get("environment", "production") == "development"
 
 TEN_MINUTES_OLD = timedelta(minutes=10)
 
