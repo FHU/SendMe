@@ -61,11 +61,6 @@ const MessageCard = styled.div`
   background-color: #fff;
   margin-bottom: 20px;
 
-  &:hover{
-	background-color: #D9D9D9;
-	border-radius: 20px;
-  }
-
   @media screen and (max-width: 700px){
     grid-template-columns: 0.5fr 1fr 1fr;
     grid-template-rows: 1fr 0.5fr;
@@ -130,22 +125,6 @@ const LastReadTime = styled.p`
     grid-column-start: 3;
   }
 
-`;
-
-const SearchMessages = styled(SlInput)`
-	width: 100%;
-
-
-	&::part(base) {
-		box-shadow: none;
-		border: 1px solid #2E8B57;
-		border-radius: 20px;
-	}
-	
-	@media (max-width: 768px) {
-		margin-left: 10px;
-		width: 80%;
-  }
 `;
 
 interface MessageProps {

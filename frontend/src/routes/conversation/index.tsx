@@ -1,4 +1,4 @@
-import { SlIconButton, SlInput } from "@shoelace-style/shoelace/dist/react";
+import { SlIconButton, SlTextarea } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
@@ -80,19 +80,29 @@ const Conversation = () => {
 				<div ref={chatEndRef} />
 			</ChatContainer>
 
+			<SendMessageContainer>
+					
 			<SendNewMessage
 				value={input}
 				onInput={(e) => setInput((e.target as HTMLTextAreaElement).value)}
 				placeholder="Type a message..."
 				spellCheck
+				rows = {1}
+				resize = "auto"
 			>
-				<SlIconButton
+
+			</SendNewMessage>
+			<SlIconButton
 					name="send"
 					slot="suffix"
 					onClick={handleSend}
 					style={{ fontSize: "20px" }}
 				/>
-			</SendNewMessage>
+			</SendMessageContainer>
+
+
+
+
 		</Container>
 	);
 };
@@ -105,6 +115,7 @@ const DisplayName = styled.h2`
 	margin-top: -20px;
  @media (max-width: 768px) {
 	margin-right: 130px;
+	margin-top: -40px;
   }
 `;
 
@@ -172,21 +183,30 @@ const Timestamp = styled.div<{ $isUser: boolean }>`
   }
 `;
 
-const SendNewMessage = styled(SlInput)`
+const SendMessageContainer = styled.div`
 	width: 100%;
-	margin-top: 20px;
-
-	&::part(base) {
-		box-shadow: none;
-		border: 1px solid #2E8B57;
-		border-radius: 20px;
-		
-  }
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #2E8B57;	
+	border-radius: 20px;
 
 	@media (max-width: 768px) {
-		margin-right: 125px;
 		width: 80%;
+		margin-right: 125px;
   }
+`
+
+const SendNewMessage = styled(SlTextarea)`
+	width: 100%;
+	&::part(base) {
+		box-shadow: none;
+		border: 1px solid #2E8B57;	
+		border-radius: 20px;
+		width: 100%;	
+		border: none;
+  }
+
 `;
 
 export default Conversation;

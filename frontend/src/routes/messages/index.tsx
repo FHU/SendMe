@@ -35,7 +35,7 @@ const CreateNewMessage = styled(Link)`
 	border-radius: 50%;
 	align-self: flex-end;
 	margin-top: 10px;
-	font-size: 28px;
+	font-size: 24px;
 	color: #fff;
 	display: flex;
 	justify-content: center;
@@ -51,7 +51,7 @@ const CreateNewMessage = styled(Link)`
 function RouteComponent() {
 	return (
 		<>
-			<h1 style={{ color: "#2E8B57", marginTop: "-40px", marginLeft: "20px" }}>
+			<h1 style={{ color: "#2E8B57", marginTop: "-50px", marginLeft: "20px" }}>
 				Messages
 			</h1>
 			<SearchMessages placeholder="Search messages..." spellCheck>
