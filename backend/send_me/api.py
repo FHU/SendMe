@@ -1,10 +1,10 @@
-from fastapi import FastAPI, Depends
+from fastapi import Depends, FastAPI
 
 from send_me.database.router import router as database_router
+from send_me.modules.authentication.dependancy import get_session
 from send_me.modules.authentication.router import router as authorization_router
 from send_me.modules.opportunities.router import router as opportunities_router
 from send_me.schemas import SendMeModel
-from send_me.modules.authentication.dependancy import get_session
 
 app = FastAPI()
 
@@ -21,6 +21,7 @@ class HelloWorldResponse(SendMeModel):
 async def hello_world():
     return HelloWorldResponse(message="Hello, World!")
 
+
 @app.get("/protected")
-async def protected_example(session = Depends(get_session)):
-    return {"message":"protected content"}
+async def protected_example(session=Depends(get_session)):
+    return {"message": "protected content"}

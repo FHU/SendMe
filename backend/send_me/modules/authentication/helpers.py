@@ -3,9 +3,9 @@ import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
-# This method was chosen so the app would crash if no key was present
-SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
-SENDGRID_SENDER_EMAIL = os.environ["SENDGRID_SENDER_EMAIL"]
+# Default to empty strings to allow the app to run in development without the need for emails
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY", "")
+SENDGRID_SENDER_EMAIL = os.environ.get("SENDGRID_SENDER_EMAIL", "")
 
 
 def send_email(email, pin):
