@@ -3,6 +3,9 @@ import styled from "styled-components";
 const HeaderContainer = styled.div`
   width: 400px;
   height: 250px;
+  position: absolute;
+  top: 0;
+  margin-top: 4.5rem;
   z-index: -1;
   background-color: #E6FCE5;
   border-bottom-left-radius: 1rem;
