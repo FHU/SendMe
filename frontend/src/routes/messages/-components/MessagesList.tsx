@@ -1,5 +1,5 @@
 // import api, { type components } from "@sendme/api";
-import { SlAvatar } from "@shoelace-style/shoelace/dist/react";
+import { SlAvatar, SlIcon, SlInput } from "@shoelace-style/shoelace/dist/react";
 import type React from "react";
 import styled from "styled-components";
 
@@ -132,6 +132,22 @@ const LastReadTime = styled.p`
 
 `;
 
+const SearchMessages = styled(SlInput)`
+	width: 100%;
+
+
+	&::part(base) {
+		box-shadow: none;
+		border: 1px solid #2E8B57;
+		border-radius: 20px;
+	}
+	
+	@media (max-width: 768px) {
+		margin-left: 10px;
+		width: 80%;
+  }
+`;
+
 interface MessageProps {
 	imagePath?: string;
 	userName?: string;
@@ -200,9 +216,6 @@ const Message: React.FC<MessageProps> = ({
 export function MessagesList(): JSX.Element {
 	return (
 		<>
-			<h1 style={{ color: "#2E8B57", marginTop: "-20px", marginLeft: "20px" }}>
-				Messages
-			</h1>
 			{messages.map((message) => (
 				<Message
 					key={message.user.userID} // Ensure each element has a unique key

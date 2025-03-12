@@ -1,9 +1,4 @@
-import {
-	SlButton,
-	SlIconButton,
-	SlInput,
-	SlTextarea,
-} from "@shoelace-style/shoelace/dist/react";
+import { SlIconButton, SlInput } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
@@ -107,6 +102,7 @@ export const Route = createFileRoute("/conversation/")({
 });
 
 const DisplayName = styled.h2`
+	margin-top: -20px;
  @media (max-width: 768px) {
 	margin-right: 130px;
   }
