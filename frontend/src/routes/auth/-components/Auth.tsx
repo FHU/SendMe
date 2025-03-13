@@ -9,7 +9,6 @@ const FormWrapper = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f7f7f7; /* Page background color */
 `;
 
 const RedBanner = styled.div`
@@ -24,6 +23,7 @@ const RedBanner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: 24px;
 `;
 
 const CloseButton = styled.button`
@@ -44,12 +44,13 @@ const InvisibleCard = styled(SlCard)`
   border: none;
   box-shadow: none;
   padding: 0;
+  border-radius: 60px; /* Increased to make the main box VERY rounded */
 `;
 
 const CardBody = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem; /* Increased to add more vertical padding between elements */
+  gap: 2rem; /* Vertical space between elements */
   padding: 1rem;
   align-items: center;
 `;
@@ -69,6 +70,7 @@ const StyledInput = styled(SlInput)`
   --sl-input-border-color: #000;
   --sl-input-font-size-medium: 1rem;
   --sl-input-height-medium: 2.75rem;
+  border-radius: 24px;
 `;
 
 const LoginButton = styled(SlButton)`
@@ -76,7 +78,7 @@ const LoginButton = styled(SlButton)`
     background-color: #007bff;
     color: #fff;
     border: 2px solid #007bff;
-    border-radius: 24px;
+    border-radius: 30px;
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     text-transform: uppercase;
@@ -104,67 +106,68 @@ const LoginButton = styled(SlButton)`
 type RequestPinFormProps = Record<string, never>;
 
 const RequestPinForm: React.FC<RequestPinFormProps> = () => {
-	const [email, setEmail] = useState<string>("");
-	const [responseMessage, setResponseMessage] = useState<string>("");
-	const [isError, setIsError] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+  const [responseMessage, setResponseMessage] = useState<string>("");
+  const [isError, setIsError] = useState<boolean>(false);
 
-	const requestPin = async (): Promise<void> => {
-		setResponseMessage("");
-		setIsError(false);
+  const requestPin = async (): Promise<void> => {
+    setResponseMessage("");
+    setIsError(false);
 
-		try {
-			const response = await fetch("/api/auth/pin", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email }),
-			});
+    try {
+      const response = await fetch("/api/auth/pin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
 
-			if (!response.ok) {
-				setIsError(true);
-				setResponseMessage("Something went wrong.");
-				return;
-			}
-			setResponseMessage("Check your email for your pin.");
-		} catch (error) {
-			setIsError(true);
-			setResponseMessage("Something went wrong.");
-		}
-	};
+      if (!response.ok) {
+        setIsError(true);
+        setResponseMessage("Something went wrong.");
+        return;
+      }
 
-	const handleCloseBanner = (): void => {
-		setResponseMessage("");
-	};
+      setResponseMessage("Check your email for your pin.");
+    } catch (error) {
+      setIsError(true);
+      setResponseMessage("Something went wrong.");
+    }
+  };
 
-	const handleSlInput = (e: Event) => {
-		const target = e.target as HTMLInputElement;
-		setEmail(target.value);
-	};
+  const handleCloseBanner = (): void => {
+    setResponseMessage("");
+  };
 
-	return (
-		<FormWrapper>
-			{responseMessage && (
-				<RedBanner>
-					<span>{responseMessage}</span>
-					<CloseButton onClick={handleCloseBanner}>×</CloseButton>
-				</RedBanner>
-			)}
+  const handleSlInput = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    setEmail(target.value);
+  };
 
-			<InvisibleCard>
-				<CardBody>
-					<Title>Sign in to Your Account.</Title>
+  return (
+    <FormWrapper>
+      {responseMessage && (
+        <RedBanner>
+          <span>{responseMessage}</span>
+          <CloseButton onClick={handleCloseBanner}>×</CloseButton>
+        </RedBanner>
+      )}
 
-					<StyledInput
-						placeholder="   Enter your email"
-						value={email}
-						onSlInput={handleSlInput}
-						clearable
-					/>
+      <InvisibleCard>
+        <CardBody>
+          <Title>Sign in to Your Account.</Title>
 
-					<LoginButton onClick={requestPin}>LOGIN</LoginButton>
-				</CardBody>
-			</InvisibleCard>
-		</FormWrapper>
-	);
+          <StyledInput
+            placeholder="Enter your email"
+            value={email}
+            onSlInput={handleSlInput}
+            clearable
+          />
+
+          <LoginButton onClick={requestPin}>LOGIN</LoginButton>
+        </CardBody>
+      </InvisibleCard>
+    </FormWrapper>
+  );
 };
 
 export default RequestPinForm;
