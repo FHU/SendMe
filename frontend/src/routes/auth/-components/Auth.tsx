@@ -113,7 +113,7 @@ const RequestPinForm: React.FC<RequestPinFormProps> = () => {
 		setIsError(false);
 
 		try {
-			const response = await fetch("/auth/pin", {
+			const response = await fetch("/api/auth/pin", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ email }),
