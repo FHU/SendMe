@@ -1,5 +1,3 @@
-from datetime import datetime
-from uuid import UUID
 
 from send_me.schemas import SendMeModel
 
