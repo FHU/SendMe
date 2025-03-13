@@ -88,7 +88,7 @@ const Conversation = () => {
 					spellCheck
 					rows={1}
 					resize="auto"
-				></SendNewMessage>
+				/>
 				<SlIconButton
 					name="send"
 					slot="suffix"
