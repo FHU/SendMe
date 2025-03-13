@@ -4,6 +4,24 @@
  */
 
 export interface paths {
+    "/conversation/tags": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Conversation Tags */
+        get: operations["list_tags"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+
     "/opportunities": {
         parameters: {
             query?: never;
@@ -119,6 +137,35 @@ export interface components {
             msg: string;
             /** Error Type */
             type: string;
+        };
+
+        /** Conversation Tag */
+        ConversationTag: {
+            /** Id */
+            id: number;
+            /** User Name */
+            user_name: string;
+            /** User Profile Picture */
+            user_profile_picture: string;
+            /** Timestamp */
+            timestamp: string;
+            /** Message Preview */
+            message_preview: string;
+            /** Read Message */
+            read_message: boolean;
+            /** Conversation Messages */
+            conversation: components["schemas"]["ConversationMessage"][];
+        };
+        /** Conversation Message */
+        ConversationMessage: {
+            /** Id */
+            id: number;
+            /** Text */
+            text: string;
+            /** Timestamp */
+            timestamp: string;
+            /** Is User */
+            is_user: boolean;
         };
     };
     responses: never;
@@ -266,6 +313,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HelloWorldResponse"];
+                };
+            };
+        };
+    };
+    list_tags: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConversationTag"][];
                 };
             };
         };

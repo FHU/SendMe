@@ -4,6 +4,7 @@ import styled from "styled-components";
 import MessagesList from "./-components/MessagesList";
 import api from "@sendme/api";
 import { SlSpinner } from "@shoelace-style/shoelace/dist/react";
+import { useQuery } from '@tanstack/react-query';
 
 
 export const loader = async () => {
@@ -48,7 +49,15 @@ export const loader = async () => {
   `;
   
   function RouteComponent() {
-	const { data: messages, refetch } = api.conversation.tags.useQuery();
+	const { data: messages, refetch } = useQuery({
+		queryKey: ['conversation'],
+		queryFn: async () => {
+		  const response = await fetch('/conversation.json');
+		  if (!response.ok) throw new Error('Failed to fetch messages');
+		  return response.json();
+		},
+	  });
+
 	
 	return (
 	  <div style={{ display: "flex", flexDirection: "column" }}>
