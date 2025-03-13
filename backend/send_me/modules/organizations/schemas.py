@@ -19,11 +19,12 @@ class CreateOrganizationRequest(SendMeModel):
     location: str
     type: str
 
+
 # This is the general definition of what an Organization looks like.
 class Organization(SendMeModel):
-    id: UUID
+    id: int # This will be a UUID in the DB, but for the purposes of static data an int will suffice
     name: str
     description: str
     location: str
     type: str
-    created_at: datetime
+    created_at: str # Will be a proper datetime object in the DB, but a string is good for now

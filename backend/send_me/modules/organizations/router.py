@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends
-from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from send_me.database.engine import get_db
@@ -52,33 +51,36 @@ This handler just gets a simple list of the opportunities.
 
 
 @router.get(
-    "/organizations", response_model=list[schemas.Organization], operation_id="list_organizations"
+    "/organizations",
+    response_model=list[schemas.Organization],
+    operation_id="list_organizations",
 )
 def get_organizations(
     db: Session = Depends(get_db),
 ):
-    return [schemas.Organization(
-        id = 0,
-        name = "Oak Tree Church of Christ",
-        location = "Dallas, TX, USA",
-        type = "church",
-        description = "Dedicated gathering of Christians striving to live life according to the pattern and direction of Jesus and the Apostles!",
-        created_at = '2025-03-05T11:20:00Z'
-
-        ), schemas.Organization(
-        id = 1,
-        name ="Hope Haven Community Center",
-        location = "Houston, TX, USA",
-        type = "nonprofit",
-        description = "A faith-based community center providing resources, mentorship, and outreach programs for families in need.",
-        created_at = '2024-06-05T11:20:00Z'
-
-        ), schemas.Organization(
-        id = 2,
-        name = "New Light Church of Christ",
-        location = "Atlanta, GA, USA",
-        type = "church",
-        desc = "A welcoming congregation focused on worship, discipleship, and community service to spread the message of Christ.",
-        created_at = '2025-02-05T01:40:00Z'
-        )
-        ]
+    return [
+        schemas.Organization(
+            id=0,
+            name="Oak Tree Church of Christ",
+            location="Dallas, TX, USA",
+            type="church",
+            description="Dedicated gathering of Christians striving to live life according to the pattern and direction of Jesus and the Apostles!",
+            created_at="2025-03-05T11:20:00Z",
+        ),
+        schemas.Organization(
+            id=1,
+            name="Hope Haven Community Center",
+            location="Houston, TX, USA",
+            type="nonprofit",
+            description="A faith-based community center providing resources, mentorship, and outreach programs for families in need.",
+            created_at='2025-04-13T03:52:07.492266Z',
+        ),
+        schemas.Organization(
+            id=2,
+            name="New Light Church of Christ",
+            location="Atlanta, GA, USA",
+            type="church",
+            description="A welcoming congregation focused on worship, discipleship, and community service to spread the message of Christ.",
+            created_at="2025-03-13T03:52:07.492266Z",
+        ),
+    ]

@@ -6,7 +6,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from send_me.database.models import Base
 
-
 """
 This class represents an Session in the database.
 SQLAlchemy uses this to write the appropiate SQL
@@ -44,4 +43,4 @@ class Login(Base):
         DateTime(timezone=True), nullable=False, default=datetime.now
     )
 
-    __table_args__ = (PrimaryKeyConstraint('pin', 'token'),)
+    __table_args__ = (PrimaryKeyConstraint("pin", "token"),)

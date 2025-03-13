@@ -1,8 +1,8 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime
-from sqlalchemy.orm import Mapped, mapped_column, ForeignKey
+from sqlalchemy import DateTime, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column
 
 from send_me.database.models import Base
 
@@ -20,6 +20,7 @@ class Organization(Base):
     name: Mapped[str]
     description: Mapped[str]
     location: Mapped[str]
+    type: Mapped[str]
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now
     )

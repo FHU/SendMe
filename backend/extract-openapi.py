@@ -18,11 +18,11 @@ if __name__ == "__main__":
     openapi = app.openapi()
     version = openapi.get("openapi", "unknown version")
 
-    print(f"writing openapi spec v{version}")
+    # print(f"writing openapi spec v{version}")
     with open(args.out, "w") as f:
         if args.out.endswith(".json"):
             json.dump(openapi, f, indent=2)
         else:
             yaml.dump(openapi, f, sort_keys=False)
 
-    print(f"spec written to {args.out}")
+    # print(f"spec written to {args.out}")

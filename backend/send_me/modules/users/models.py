@@ -2,8 +2,8 @@ import uuid
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import DateTime
-from sqlalchemy.orm import Mapped, mapped_column, relationship, ForeignKey
+from sqlalchemy import DateTime, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from send_me.database.models import Base
 from send_me.modules.authentication.models import Session
@@ -21,8 +21,8 @@ class User(Base):
     location: Mapped[str]
     bio: Mapped[str]
     profile_picture: Mapped[str]
-    linkedin: Mapped[Optional[str]] = mapped_column(unique = True)
-    facebook: Mapped[Optional[str]] = mapped_column(unique = True)
+    linkedin: Mapped[Optional[str]] = mapped_column(unique=True)
+    facebook: Mapped[Optional[str]] = mapped_column(unique=True)
     session: Mapped[Optional[Session]] = relationship(
         "Session", uselist=False, back_populates="user", cascade="all, delete-orphan"
     )

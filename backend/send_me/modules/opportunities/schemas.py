@@ -17,10 +17,13 @@ class CreateOpportunityRequest(SendMeModel):
     name: str
     description: str
 
-
 # This is the general definition of what an Opportunity looks like.
 class Opportunity(SendMeModel):
     id: UUID
     name: str
     description: str
+    short_description: str
+    orgId: UUID
+    eventDate: datetime
     created_at: datetime
+    location: str
