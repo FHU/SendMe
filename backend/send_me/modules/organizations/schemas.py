@@ -16,10 +16,14 @@ OpenAPI spec.
 class CreateOrganizationRequest(SendMeModel):
     name: str
     description: str
-
+    location: str
+    type: str
 
 # This is the general definition of what an Organization looks like.
 class Organization(SendMeModel):
     id: UUID
     name: str
+    description: str
+    location: str
+    type: str
     created_at: datetime
