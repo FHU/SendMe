@@ -75,7 +75,7 @@ export const loader = async () => {
 			color: "black",
 		  }}
 		>
-		  {!messages ? <SlSpinner /> : <MessagesList messages={messages} />}
+		  {!messages ? <SlSpinner /> : <MessagesList messages={messages.messages} />}
 		</Link>
   
 		<CreateNewMessage to="/conversation" className="createNewMessage">
