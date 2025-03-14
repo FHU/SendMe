@@ -7,7 +7,7 @@ from send_me.database.engine import get_db
 from . import models, schemas
 
 router = APIRouter(
-    tags=["opportunities"],
+    tags=["opportunities", "conversation/tags"],
     responses={404: {"description": "Not found"}},
 )
 
