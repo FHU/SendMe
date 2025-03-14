@@ -12,8 +12,7 @@ const messages = [
 			userID: 0,
 		},
 		timeStamp: "3:53 PM",
-		messagePreview:
-			"Hey! I heard about Servant's Day and would love to contribute...",
+		messagePreview: "Hey! I heard about Servant's Day and would love to...",
 		readMessage: true,
 	},
 	{
@@ -54,28 +53,14 @@ const messages = [
 	},
 ];
 
-const MessageCard = styled.div`
-  display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
-  grid-template-rows: 1fr 0.5fr 0.5;
-  background-color: #fff;
-  margin-bottom: 20px;
-
-  @media screen and (max-width: 700px){
-    grid-template-columns: 0.5fr 1fr 1fr;
-    grid-template-rows: 1fr 0.5fr;
-    margin-bottom: 0px;
-  }
-`;
-
 const ReadButton = styled.div`
   height: 15px;
   width: 15px;
-  background-color: #32b4ff;
   border-radius: 50%;
   grid-column: 5;
   grid-row: 2;
   align-self: center;
+  margin-left: 130%;
   
   @media screen and (max-width: 700px){
     grid-row-start: 1;
@@ -84,6 +69,26 @@ const ReadButton = styled.div`
     margin-top: 30px;
     margin-left: 90px;
 
+  }
+`;
+
+const MessageCard = styled.div`
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
+  grid-template-rows: 1fr 0.5fr 0.5;
+  background-color: #fff;
+  margin-bottom: 20px;
+  width: 100%;
+
+  &:hover{
+	border-radius: 20px;
+	background-color: #D9D9D9;
+  }
+
+  @media screen and (max-width: 700px){
+    grid-template-columns: 0.5fr 1fr 1fr;
+    grid-template-rows: 1fr 0.5fr;
+    margin-bottom: 0px;
   }
 `;
 
@@ -132,7 +137,7 @@ interface MessageProps {
 	userName?: string;
 	lastReadMessage?: string;
 	lastReadTime: string;
-	showReadButton: boolean;
+	hasBeenRead: boolean;
 }
 
 const Message: React.FC<MessageProps> = ({
@@ -140,17 +145,17 @@ const Message: React.FC<MessageProps> = ({
 	userName,
 	lastReadMessage,
 	lastReadTime,
-	showReadButton,
+	hasBeenRead,
 }) => {
-	const textColor = showReadButton ? "#000000" : "#898989FF";
-	const messageColor = showReadButton ? "#000000" : "#898989FF";
-	const timeColor = showReadButton ? "#000000" : "#898989FF";
-	const fontWeight = showReadButton ? "bold" : "thin";
+	const color = hasBeenRead ? "#000000" : "#898989FF";
+	const fontWeight = hasBeenRead ? "bold" : "thin";
+	const readButtonVisibility = hasBeenRead ? "visible" : "hidden";
+	const readButtonColor = hasBeenRead ? "#32B4FF" : "#fff";
 
 	return (
 		<>
-			<div style={{ display: "grid", gridTemplateColumns: "1fr .025fr" }}>
-				<MessageCard style={{ gridColumn: "1" }}>
+			<div style={{ marginTop: "10px" }}>
+				<MessageCard>
 					<SlAvatar
 						image={imagePath}
 						style={{
@@ -158,12 +163,11 @@ const Message: React.FC<MessageProps> = ({
 							gridRowEnd: "3",
 							placeSelf: "center",
 							transform: "scale(1.5)",
-							marginTop: "10px",
 						}}
 					/>
 					<UserName
 						style={{
-							color: textColor,
+							color: color,
 							fontWeight: fontWeight,
 						}}
 					>
@@ -171,7 +175,7 @@ const Message: React.FC<MessageProps> = ({
 					</UserName>
 					<LastReadText
 						style={{
-							color: messageColor,
+							color: color,
 							fontWeight: fontWeight,
 						}}
 					>
@@ -179,13 +183,18 @@ const Message: React.FC<MessageProps> = ({
 					</LastReadText>
 					<LastReadTime
 						style={{
-							color: timeColor,
+							color: color,
 							fontWeight: fontWeight,
 						}}
 					>
 						{lastReadTime}
 					</LastReadTime>
-					{showReadButton && <ReadButton />}
+					<ReadButton
+						style={{
+							visibility: readButtonVisibility,
+							backgroundColor: readButtonColor,
+						}}
+					/>
 				</MessageCard>
 			</div>
 		</>
@@ -202,7 +211,7 @@ export function MessagesList(): JSX.Element {
 					userName={message.user.userName}
 					lastReadMessage={message.messagePreview}
 					lastReadTime={message.timeStamp}
-					showReadButton={message.readMessage}
+					hasBeenRead={message.readMessage}
 				/>
 			))}
 		</>

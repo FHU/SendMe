@@ -13,7 +13,9 @@ export const Route = createFileRoute("/messages/")({
 });
 
 const SearchMessages = styled(SlInput)`
-	width: 100%;
+
+	width: 105%;
+	margin-left: 15px;
 
 
 	&::part(base) {
@@ -22,9 +24,9 @@ const SearchMessages = styled(SlInput)`
 		border-radius: 20px;
 	}
 	
-	@media (max-width: 768px) {
+	@media (max-width: 700px) {
 		margin-left: 10px;
-		width: 80%;
+		width: 78%;
   }
 `;
 
@@ -35,6 +37,7 @@ const CreateNewMessage = styled(Link)`
 	border-radius: 50%;
 	align-self: flex-end;
 	margin-top: 10px;
+	margin-right: -7%;
 	font-size: 24px;
 	color: #fff;
 	display: flex;
@@ -43,14 +46,14 @@ const CreateNewMessage = styled(Link)`
 
 	@media screen and (max-width: 700px){
 		margin-top: 50px;
-		margin-right: 150px;
+		margin-right: 130px;
   }
 
 `;
 
 function RouteComponent() {
 	return (
-		<>
+		<div>
 			<h1 style={{ color: "#2E8B57", marginTop: "-50px", marginLeft: "20px" }}>
 				Messages
 			</h1>
@@ -78,6 +81,6 @@ function RouteComponent() {
 					<SlIcon name="pencil-fill" />
 				</CreateNewMessage>
 			</div>
-		</>
+		</div>
 	);
 }
