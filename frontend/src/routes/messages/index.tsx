@@ -10,8 +10,9 @@ import { useQuery } from '@tanstack/react-query';
 export const loader = async () => {
 	try {
 	  console.log('Fetching messages...');
-	  const response = await fetch('/conversation.json');
+	  const response = await fetch('/conversation/tags');
 	  console.log('Response status:', response.status);
+	  
 	  if (!response.ok) {
 		throw new Error('Failed to fetch messages');
 	  }
@@ -49,15 +50,21 @@ export const loader = async () => {
   `;
   
   function RouteComponent() {
-	const { data: messages, refetch } = useQuery({
+	const { data: messages, isLoading, error, refetch } = useQuery({
 		queryKey: ['conversation'],
 		queryFn: async () => {
-		  const response = await fetch('/conversation.json');
+		  const response = await fetch('/conversation/tags');
 		  if (!response.ok) throw new Error('Failed to fetch messages');
-		  return response.json();
+		  const data = await response.json();
+		  console.log('Fetched Data:', data);  // Log the fetched data to inspect its structure
+		  return data;
 		},
 	  });
+	  console.log(messages)
 
+	  if (error) {
+		return <div>Error loading messages: {error.message}</div>;  // Show error if fetch fails
+	  }
 	
 	return (
 	  <div style={{ display: "flex", flexDirection: "column" }}>

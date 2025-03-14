@@ -3,6 +3,7 @@ import { SlButton, SlTextarea } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 
+
 interface ConversationType {
   id: number;
   text: string;
@@ -27,12 +28,15 @@ const Conversation = ({ message }: ConversationProps) => {
   const [messages, setMessages] = useState<ConversationType[]>([]);
   const [input, setInput] = useState<string>("");
   const chatEndRef = useRef<HTMLDivElement | null>(null);
+  console.log("Query data:", messages);
+
 
   // Ensure message exists before setting conversations
   useEffect(() => {
     if (message?.conversation) {
       setMessages(message.conversation);
     }
+    
   }, [message]);
 
   useEffect(() => {
