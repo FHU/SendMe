@@ -57,7 +57,7 @@ const Bookmark = styled.div`
   }
 
   .icon-button-color sl-icon-button::part(base):active {
-    color:rgb(18, 203, 98);
+    color: var(--sl-color-primary-700);
   }
   `;
 
