@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from send_me.database.engine import get_db
 
-from . import models, schemas
+from . import schemas
 
 "PLEASE PUT STATIC DATA IN THE router.get FUNCTION"
 
@@ -12,8 +12,11 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+
 @router.get(
-    "/conversation/tags", response_model=list[schemas.ConversationTag], operation_id="list_tags"
+    "/conversation/tags",
+    response_model=list[schemas.ConversationTag],
+    operation_id="list_tags",
 )
 def get_conversation_tags(
     db: Session = Depends(get_db),
@@ -31,21 +34,21 @@ def get_conversation_tags(
                     id=0,
                     text="Hey! I heard about Servant’s Day and I would love to contribute. Do you have any open projects?",
                     timestamp="3:50 PM",
-                    is_user=False
+                    is_user=False,
                 ),
                 schemas.ConversationMessage(
                     id=1,
                     text="We desperately need people to paint Bradfield Hall’s lobby if you’re interested.",
                     timestamp="3:52 PM",
-                    is_user=True
+                    is_user=True,
                 ),
                 schemas.ConversationMessage(
                     id=2,
                     text="That sounds great! I have lots of experience painting so I think I could be a good fit. What’s the next step?",
                     timestamp="3:53 PM",
-                    is_user=False
+                    is_user=False,
                 ),
-            ]
+            ],
         ),
         schemas.ConversationTag(
             id=1,
@@ -59,15 +62,15 @@ def get_conversation_tags(
                     id=1,
                     text="Hello! My name is Clara and I was wondering if there might be an opening for volunteers?",
                     timestamp="1:23 PM",
-                    is_user=False
+                    is_user=False,
                 ),
                 schemas.ConversationMessage(
                     id=2,
                     text="Sure! We’re always looking for volunteers to help around the church.",
                     timestamp="1:25 PM",
-                    is_user=True
+                    is_user=True,
                 ),
-            ]
+            ],
         ),
         schemas.ConversationTag(
             id=2,
@@ -81,15 +84,15 @@ def get_conversation_tags(
                     id=2,
                     text="We have an opening for a 5th grade teacher. We saw you had experience with teaching children. Would you be interested?",
                     timestamp="2:40 AM",
-                    is_user=False
+                    is_user=False,
                 ),
                 schemas.ConversationMessage(
                     id=3,
                     text="Thank you for reaching out! I’m interested. Can you provide more details about the position?",
                     timestamp="2:45 AM",
-                    is_user=True
+                    is_user=True,
                 ),
-            ]
+            ],
         ),
         schemas.ConversationTag(
             id=3,
@@ -103,14 +106,14 @@ def get_conversation_tags(
                     id=3,
                     text="We wanted to take a moment to thank you for your incredible work in the community. Your support means a lot to us!",
                     timestamp="9:00 AM",
-                    is_user=False
+                    is_user=False,
                 ),
                 schemas.ConversationMessage(
                     id=4,
                     text="You're very welcome! I’m always happy to help out. I appreciate the recognition.",
                     timestamp="9:10 AM",
-                    is_user=True
+                    is_user=True,
                 ),
-            ]
+            ],
         ),
     ]

@@ -1,7 +1,7 @@
+from datetime import datetime
+from uuid import UUID
 
 from send_me.schemas import SendMeModel
-from uuid import UUID
-from datetime import datetime
 
 """
 Unlike models, these are not used for database access.
