@@ -71,7 +71,7 @@ const Card = () => (
 			</div>
 			<Bookmark>
 				<div className="icon-button-color">
-					<SlIconButton color="green" name="bookmark" label="Bookmark" />
+					<SlIconButton name="bookmark" label="Bookmark" />
 				</div>
 			</Bookmark>
 		</CardTitle>
