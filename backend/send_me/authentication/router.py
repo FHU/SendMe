@@ -23,11 +23,7 @@ router = APIRouter(
 )
 
 
-@router.post(
-    "/pin",
-    response_model=schemas.LoginChallengeResponse,
-    status_code=201
-)
+@router.post("/pin", response_model=schemas.LoginChallengeResponse, status_code=201)
 def request_pin(input: schemas.LoginChallengeRequest, db: Session = Depends(get_db)):
     # Check if user exists
     user_query = select(User).where(User.email == input.email)
@@ -58,18 +54,26 @@ def request_pin(input: schemas.LoginChallengeRequest, db: Session = Depends(get_
     # Add login_challenge to DB
     # I think there is likely a better way to do this
     insert_command = insert(models.LoginChallenge).values(
-        code=login_challenge.code, login_challenge_token=login_challenge.login_challenge_token, email=login_challenge.email
+        code=login_challenge.code,
+        login_challenge_token=login_challenge.login_challenge_token,
+        email=login_challenge.email,
     )
     insert_command = insert_command.on_conflict_do_update(
         index_elements=[models.LoginChallenge.email],
-        set_={models.LoginChallenge.code: login_challenge.code, models.LoginChallenge.login_challenge_token: login_challenge.login_challenge_token},
+        set_={
+            models.LoginChallenge.code: login_challenge.code,
+            models.LoginChallenge.login_challenge_token: login_challenge.login_challenge_token,
+        },
     )
 
     db.execute(insert_command)
 
     # Dr. Casey has asked the code be shared to the developer somehow if the backend was in dev mode
     if IN_DEVELOPMENT:
-        return {"login_challenge_token": login_challenge.login_challenge_token, "code": login_challenge.code}
+        return {
+            "login_challenge_token": login_challenge.login_challenge_token,
+            "code": login_challenge.code,
+        }
 
     # return token for future auth
     return {"login_challenge_token": login_challenge.login_challenge_token}
@@ -79,7 +83,8 @@ def request_pin(input: schemas.LoginChallengeRequest, db: Session = Depends(get_
 def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)):
     # Check if pin and token are in db
     login_query = select(models.LoginChallenge).where(
-        models.LoginChallenge.login_challenge_token == input.login_challenge_token, models.LoginChallenge.code == input.code
+        models.LoginChallenge.login_challenge_token == input.login_challenge_token,
+        models.LoginChallenge.code == input.code,
     )
 
     login = db.execute(login_query).scalar()

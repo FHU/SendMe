@@ -5,8 +5,8 @@ from typing import Optional
 from sqlalchemy import DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from send_me.database.models import Base
 from send_me.authentication.models import Session
+from send_me.database.models import Base
 
 
 class User(Base):

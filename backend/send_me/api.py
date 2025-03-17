@@ -1,8 +1,8 @@
 from fastapi import Depends, FastAPI
 
-from send_me.database.router import router as database_router
 from send_me.authentication.dependancy import get_session
 from send_me.authentication.router import router as authorization_router
+from send_me.database.router import router as database_router
 from send_me.modules.opportunities.router import router as opportunities_router
 from send_me.schemas import SendMeModel
 

@@ -106,68 +106,68 @@ const LoginButton = styled(SlButton)`
 type RequestPinFormProps = Record<string, never>;
 
 const RequestPinForm: React.FC<RequestPinFormProps> = () => {
-  const [email, setEmail] = useState<string>("");
-  const [responseMessage, setResponseMessage] = useState<string>("");
-  const [isError, setIsError] = useState<boolean>(false);
+	const [email, setEmail] = useState<string>("");
+	const [responseMessage, setResponseMessage] = useState<string>("");
+	const [isError, setIsError] = useState<boolean>(false);
 
-  const requestPin = async (): Promise<void> => {
-    setResponseMessage("");
-    setIsError(false);
+	const requestPin = async (): Promise<void> => {
+		setResponseMessage("");
+		setIsError(false);
 
-    try {
-      const response = await fetch("/api/auth/pin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+		try {
+			const response = await fetch("/api/auth/pin", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ email }),
+			});
 
-      if (!response.ok) {
-        setIsError(true);
-        setResponseMessage("Something went wrong.");
-        return;
-      }
+			if (!response.ok) {
+				setIsError(true);
+				setResponseMessage("Something went wrong.");
+				return;
+			}
 
-      setResponseMessage("Check your email for your pin.");
-    } catch (error) {
-      setIsError(true);
-      setResponseMessage("Something went wrong.");
-    }
-  };
+			setResponseMessage("Check your email for your pin.");
+		} catch (error) {
+			setIsError(true);
+			setResponseMessage("Something went wrong.");
+		}
+	};
 
-  const handleCloseBanner = (): void => {
-    setResponseMessage("");
-  };
+	const handleCloseBanner = (): void => {
+		setResponseMessage("");
+	};
 
-  const handleSlInput = (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    setEmail(target.value);
-  };
+	const handleSlInput = (e: Event) => {
+		const target = e.target as HTMLInputElement;
+		setEmail(target.value);
+	};
 
-  return (
-    <FormWrapper>
-      {responseMessage && (
-        <RedBanner>
-          <span>{responseMessage}</span>
-          <CloseButton onClick={handleCloseBanner}>×</CloseButton>
-        </RedBanner>
-      )}
+	return (
+		<FormWrapper>
+			{responseMessage && (
+				<RedBanner>
+					<span>{responseMessage}</span>
+					<CloseButton onClick={handleCloseBanner}>×</CloseButton>
+				</RedBanner>
+			)}
 
-      <InvisibleCard>
-        <CardBody>
-          <Title>Sign in to Your Account.</Title>
+			<InvisibleCard>
+				<CardBody>
+					<Title>Sign in to Your Account.</Title>
 
-          <StyledInput
-            placeholder="Enter your email"
-            value={email}
-            onSlInput={handleSlInput}
-            clearable
-          />
+					<StyledInput
+						placeholder="Enter your email"
+						value={email}
+						onSlInput={handleSlInput}
+						clearable
+					/>
 
-          <LoginButton onClick={requestPin}>LOGIN</LoginButton>
-        </CardBody>
-      </InvisibleCard>
-    </FormWrapper>
-  );
+					<LoginButton onClick={requestPin}>LOGIN</LoginButton>
+				</CardBody>
+			</InvisibleCard>
+		</FormWrapper>
+	);
 };
 
 export default RequestPinForm;
