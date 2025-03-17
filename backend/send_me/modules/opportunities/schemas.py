@@ -23,7 +23,7 @@ class Opportunity(SendMeModel):
     name: str
     description: str
     short_description: str
-    orgId: UUID
-    eventDate: datetime
+    organization_id: UUID
+    event_date: datetime
     created_at: datetime
     location: str

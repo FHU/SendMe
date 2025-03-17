@@ -22,8 +22,7 @@ class User(Base):
     bio: Mapped[str]
     profile_picture: Mapped[str]
     linkedin: Mapped[Optional[str]] = mapped_column(unique=True)
-    facebook: Mapped[Optional[str]] = mapped_column(unique=True)
-    session: Mapped[Optional[Session]] = relationship(
+    session: Mapped[Optional[list[Session]]] = relationship(
         "Session", uselist=False, back_populates="user", cascade="all, delete-orphan"
     )
 

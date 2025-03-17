@@ -22,7 +22,7 @@ class Opportunity(Base):
     location: Mapped[str]
     short_description: Mapped[str]
     organization_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("Organizations.id"))
-    event_date: Mapped[datetime]
+    event_date: Mapped[datetime | None]
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now
     )

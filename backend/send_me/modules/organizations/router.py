@@ -6,12 +6,12 @@ from send_me.database.engine import get_db
 from . import models, schemas
 
 router = APIRouter(
-    tags=["oorganizations"],
+    tags=["organizations"],
     responses={404: {"description": "Not found"}},
 )
 
 """
-The handler to create an organization.
+The handler to create an organization. PLEASE PUT STATIC DATA IN THE router.get FUNCTION
 """
 
 
