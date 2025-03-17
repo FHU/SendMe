@@ -62,13 +62,13 @@ const Bookmark = styled.div`
   }
   `;
 
-const Card = () => (
+const Card = ({ index }: { index: number }) => (
 	<CardContainer>
 		<CardTitle>
 			<div>
-				<StrongText>{cardData.title}</StrongText>
+				<StrongText>{cardData.title[index.toString()]}</StrongText>
 				<br />
-				<small>{cardData.date}</small>
+				<small>{cardData.date[index.toString()]}</small>
 			</div>
 			<Bookmark>
 				<div className="icon-button-color">
@@ -81,11 +81,11 @@ const Card = () => (
 			<AvatarInfo>
 				<SlAvatar image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" />
 				<div>
-					{cardData.firstName} {cardData.lastName}
+					{cardData.firstName[index.toString()]} {cardData.lastName[index.toString()]}
 					<br />
-					<small>{cardData.organization}</small>
+					<small>{cardData.organization[index.toString()]}</small>
 					<br />
-					<small>{cardData.location}</small>
+					<small>{cardData.location[index.toString()]}</small>
 				</div>
 			</AvatarInfo>
 			<SlButton variant="success" size="large" outline>
@@ -96,33 +96,33 @@ const Card = () => (
 		<br />
 		<TagsContainer>
 			<SlTag variant="success" size="medium" pill>
-				{cardData.tag1}
+				{cardData.tag1[index.toString()]}
 			</SlTag>
 			<SlTag variant="success" size="medium" pill>
-				{cardData.tag2}
+				{cardData.tag2[index.toString()]}
 			</SlTag>
 			<SlTag variant="success" size="medium" pill>
-				{cardData.tag3}
+				{cardData.tag3[index.toString()]}
 			</SlTag>
 			<SlTag variant="success" size="medium" pill>
-				{cardData.tag4}
+				{cardData.tag4[index.toString()]}
 			</SlTag>
 			<SlTag variant="success" size="medium" pill>
-				{cardData.tag5}
+				{cardData.tag5[index.toString()]}
 			</SlTag>
 		</TagsContainer>
 		<br />
-		<div>{cardData.shortDescription}</div>
+		<div>{cardData.shortDescription[index.toString()]}</div>
 		<br />
 		<SlDetails summary="More Details">
 			<MoreDetails>
 				<div>
 					<h3>Position</h3>
-					<p>{cardData.position}</p>
+					<p>{cardData.position[index.toString()]}</p>
 				</div>
 				<div>
 					<h3>Description</h3>
-					<p>{cardData.longDescription}</p>
+					<p>{cardData.longDescription[index.toString()]}</p>
 				</div>
 				<div>
 					<h3>Time of Event</h3>

@@ -15,9 +15,9 @@ const BackGround = styled.div`
 
 const Background = () => (
 	<BackGround>
-		<Card />
-		<Card1 />
-		<Card2 />
+		<Card index={1}/>
+		<Card index={2}/>
+		<Card index={3}/>
 	</BackGround>
 );
 
