@@ -1,0 +1,54 @@
+{
+  "Opportunities": [
+    {
+      "id": 0,
+      "title": "Ministry Leadership",
+      "orgId": 5,
+      "eventDate": "2025-09-12T00:00:00Z",
+      "createdAt": "2025-01-05T08:00:00Z",
+      "location": "Dallas, TX, USA",
+      "shortDesc": "Youth Ministry experience needed at Oak Tree Church of Christ!",
+      "longDesc": "Our congregation is holding sessions for spirituality in different facets of life, and we are seeking someone knowledgeable in psychology and/or sociology for this job. There will be two days of sessions, and we would like anyone who has availability for these times. Thank you!"
+    },
+    {
+      "id": 1,
+      "title": "Community Food Drive Coordinator",
+      "orgId": 12,
+      "eventDate": "2025-07-22T14:00:00Z",
+      "createdAt": "2025-03-01T10:30:00Z",
+      "location": "Houston, TX, USA",
+      "shortDesc": "Seeking volunteers to help organize and distribute food to families in need!",
+      "longDesc": "Our annual community food drive is coming up, and we need dedicated individuals to help with logistics, distribution, and outreach. If you're passionate about serving those in need, join us for this impactful event!"
+    },
+    {
+      "id": 2,
+      "title": "Guest Speaker for Faith & Finance Seminar",
+      "orgId": 8,
+      "eventDate": "2025-11-15T18:00:00Z",
+      "createdAt": "2025-02-10T09:45:00Z",
+      "location": "New York, NY, USA",
+      "shortDesc": "Looking for a financial expert to discuss money management from a faith-based perspective.",
+      "longDesc": "Our church is hosting a seminar on financial stewardship and ethical wealth management. If you have experience in finance, economics, or business with a faith-based approach, we'd love to have you speak at our event!"
+    },
+    {
+      "id": 3,
+      "title": "Mission Trip Volunteer Opportunity",
+      "orgId": 20,
+      "eventDate": "2025-06-10T08:00:00Z",
+      "createdAt": "2025-01-20T15:15:00Z",
+      "location": "San Pedro Sula, Honduras",
+      "shortDesc": "Join us on a mission trip to support local communities in need.",
+      "longDesc": "We are organizing a mission trip to Honduras to assist with community development, medical outreach, and spiritual guidance. Volunteers with skills in construction, healthcare, or teaching are especially needed. Help us make a difference!"
+    },
+    {
+      "id": 4,
+      "title": "Music Director for Worship Event",
+      "orgId": 15,
+      "eventDate": "2025-08-30T17:00:00Z",
+      "createdAt": "2025-03-05T11:20:00Z",
+      "location": "Los Angeles, CA, USA",
+      "shortDesc": "Searching for a worship leader to direct music at our summer event.",
+      "longDesc": "Our congregation is hosting a special evening of worship and praise. We need an experienced musician or choir director to lead the music team and help create an inspiring worship experience. If you are passionate about leading worship through music, we'd love to have you!"
+    }
+  ]
+}
