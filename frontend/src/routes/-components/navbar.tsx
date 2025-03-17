@@ -29,7 +29,7 @@ const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2E8B57;
+  background-color: var(--sl-color-primary-500);
   padding: 5px 20px;
   box-shadow: var(--sl-shadow-x-large);
   color: white;

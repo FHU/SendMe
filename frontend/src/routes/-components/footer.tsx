@@ -4,7 +4,7 @@ const FooterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #E6FCE5;
+  background-color: var(--sl-color-primary-100);
   padding: 1rem;
 `;
 
@@ -17,7 +17,7 @@ const AttributesCont = styled.div`
 const Attribute = styled.a`
     font-size: 14px;
     text-decoration: none;
-    color: #2E8B57;
+    color: var(--sl-color-primary-500);
     margin: 1rem;
 `;
 

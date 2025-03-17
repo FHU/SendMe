@@ -7,7 +7,7 @@ const HeaderContainer = styled.div`
   top: 0;
   margin-top: 4.5rem;
   z-index: -1;
-  background-color: #E6FCE5;
+  background-color: var(--sl-color-primary-100);
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
   padding: 1rem;
