@@ -4,7 +4,7 @@ import Card1 from "./card1";
 import Card2 from "./card2";
 
 const BackGround = styled.div`
-  background: #2E8B57;
+  background: var(--sl-color-primary-500);
   padding: 10px;
   display: flex;
   flex-direction: column;
