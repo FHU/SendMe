@@ -57,7 +57,7 @@ const Bookmark = styled.div`
   }
 
   .icon-button-color sl-icon-button::part(base):active {
-    color:rgb(18, 203, 98);
+    color: var(--sl-color-primary-700);
   }
   `;
 
@@ -71,7 +71,7 @@ const Card = () => (
 			</div>
 			<Bookmark>
 				<div className="icon-button-color">
-					<SlIconButton color="green" name="bookmark" label="Bookmark" />
+					<SlIconButton name="bookmark" label="Bookmark" />
 				</div>
 			</Bookmark>
 		</CardTitle>
