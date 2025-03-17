@@ -16,12 +16,12 @@ const StyledLink = styled(Link)`
   color: inherit;
 
   &:hover {
-    color: var(--sm-hover-green);
+    color: var(--sl-color-primary-700);
     cursor: pointer;
   }
 
   &:active {
-    color: var(--sm-active-green);
+    color: var(--sl-color-primary-400);
     }
 `;
 
@@ -61,7 +61,7 @@ const IconButton = styled.button`
   align-items: center;
 
   &:hover {
-    color:#A0EB9F;
+    color: var(--sl-color-primary-700);
   }
 `;
 

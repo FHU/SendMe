@@ -17,13 +17,13 @@ const HeaderContainer = styled.div`
 const Title = styled.h1`
   font-size: 36px;
   font-weight: 500;
-  color: #2E8B57;
+  color: var(--sl-color-primary-800);
 `;
 
 const Subtitle = styled.h2`
   font-size: 14px;
   font-weight: 300;
-  color: #2E8B57;
+  color: var(--sl-color-primary-800);
 `;
 
 const Header = () => (
