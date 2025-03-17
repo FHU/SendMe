@@ -24,7 +24,7 @@ const CardTitle = styled.div`
 const CardTitleDate = styled.div`
 	display: flex;
 	flex-direction: column;
-`
+`;
 
 const StrongText = styled.strong`
   font-size: 30px;
@@ -46,7 +46,7 @@ const AvatarBio = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
-`
+`;
 
 const TagsContainer = styled.div`
   display: flex;
@@ -58,7 +58,7 @@ const TagsContainer = styled.div`
 
 const SmallBio = styled.div`
 	padding-bottom: 1rem;
-`
+`;
 
 const MoreDetails = styled.div`
   display: flex;
