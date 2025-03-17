@@ -4,18 +4,208 @@
  */
 
 import type { paths } from "../schema";
-import type { ServiceOperationMutation } from "@openapi-qraft/react";
+import type { AreAllOptional, MutationFiltersByMutationKey, MutationFiltersByParameters, MutationVariables, RequestFnResponse, ServiceOperationMutationFnOptions, ServiceOperationMutationKey, ServiceOperationUseMutationOptions } from "@openapi-qraft/tanstack-query-react-types";
+import type { UseMutationResult } from "@tanstack/react-query";
+import type { Mutation, MutationState } from "@tanstack/query-core";
 export interface DatabaseService {
     /** @summary Database Init */
-    databaseInitDatabaseInitPost: ServiceOperationMutation<{
-        method: "post";
-        url: "/database/init";
-    }, undefined, paths["/database/init"]["post"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
+    databaseInitDatabaseInitPost: {
+        /** @summary Database Init */
+        getMutationKey(parameters: DatabaseInitDatabaseInitPostParameters | void): ServiceOperationMutationKey<DatabaseInitDatabaseInitPostSchema, DatabaseInitDatabaseInitPostParameters>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.databaseService.databaseInitDatabaseInitPost.useMutation({})
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.databaseService.databaseInitDatabaseInitPost.useMutation()
+         * mutate({
+         *     body: bodyPayload
+         * });
+         * ```
+         */
+        useMutation<TVariables extends DatabaseInitDatabaseInitPostBody, TContext = unknown>(parameters: DatabaseInitDatabaseInitPostParameters, options?: ServiceOperationUseMutationOptions<DatabaseInitDatabaseInitPostSchema, DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostParameters, TVariables, DatabaseInitDatabaseInitPostError | Error, TContext>): UseMutationResult<DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.databaseService.databaseInitDatabaseInitPost.useMutation({})
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.databaseService.databaseInitDatabaseInitPost.useMutation()
+         * mutate({
+         *     body: bodyPayload
+         * });
+         * ```
+         */
+        useMutation<TVariables extends MutationVariables<DatabaseInitDatabaseInitPostBody, DatabaseInitDatabaseInitPostParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<DatabaseInitDatabaseInitPostSchema, DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostParameters, TVariables, DatabaseInitDatabaseInitPostError | Error, TContext>): UseMutationResult<DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostError | Error, TVariables, TContext>;
+        /**
+         * Returns the count of currently in-progress mutations.
+         *
+         * @summary Database Init
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+         * @example Check how many mutations are currently in progress for the specified service method.
+         * ```ts
+         * const databaseInitDatabaseInitPostTotal = qraft.databaseService.databaseInitDatabaseInitPost.useIsMutating()
+         * ```
+         * @example Check how many mutations are currently in progress with the specified parameters.
+         * ```ts
+         * const databaseInitDatabaseInitPostTotal = qraft.databaseService.databaseInitDatabaseInitPost.useIsMutating({
+         *     parameters: {}
+         * })
+         * ```
+         */
+        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<DatabaseInitDatabaseInitPostBody, DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostParameters, DatabaseInitDatabaseInitPostError | Error, TContext> | MutationFiltersByMutationKey<DatabaseInitDatabaseInitPostSchema, DatabaseInitDatabaseInitPostBody, DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostParameters, DatabaseInitDatabaseInitPostError | Error, TContext>): number;
+        /** @summary Database Init */
+        isMutating<TContext>(filters?: MutationFiltersByParameters<DatabaseInitDatabaseInitPostBody, DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostParameters, DatabaseInitDatabaseInitPostError | Error, TContext> | MutationFiltersByMutationKey<DatabaseInitDatabaseInitPostSchema, DatabaseInitDatabaseInitPostBody, DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostParameters, DatabaseInitDatabaseInitPostError | Error, TContext>): number;
+        /** @summary Database Init */
+        (options: ServiceOperationMutationFnOptions<DatabaseInitDatabaseInitPostBody, DatabaseInitDatabaseInitPostParameters>, client?: (schema: DatabaseInitDatabaseInitPostSchema, options: ServiceOperationMutationFnOptions<DatabaseInitDatabaseInitPostBody, DatabaseInitDatabaseInitPostParameters>) => Promise<RequestFnResponse<DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostError>>): Promise<RequestFnResponse<DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostError>>;
+        /**
+         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+         *
+         * @summary Database Init
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+         * @example Get all variables of all running mutations.
+         * ```ts
+         * const databaseInitDatabaseInitPostPendingMutationVariables = qraft.databaseService.databaseInitDatabaseInitPost.useMutationState({
+         *     filters: {
+         *         status: "pending"
+         *     },
+         *     select: mutation => mutation.state.variables
+         * })
+         * ```
+         * @example Get all data for specific mutations via the `parameters`.
+         * ```ts
+         * const databaseInitDatabaseInitPostMutationData = qraft.databaseService.databaseInitDatabaseInitPost.useMutationState({
+         *     filters: {
+         *         parameters: {}
+         *     },
+         *     select: mutation => mutation.state.data
+         * })
+         * ```
+         */
+        useMutationState<TContext = unknown, TResult = MutationState<DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostError | Error, MutationVariables<DatabaseInitDatabaseInitPostBody, DatabaseInitDatabaseInitPostParameters>, TContext>>(options?: {
+            filters?: MutationFiltersByParameters<DatabaseInitDatabaseInitPostBody, DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostParameters, DatabaseInitDatabaseInitPostError | Error, TContext> | MutationFiltersByMutationKey<DatabaseInitDatabaseInitPostSchema, DatabaseInitDatabaseInitPostBody, DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostParameters, DatabaseInitDatabaseInitPostError | Error, TContext>;
+            select?: (mutation: Mutation<DatabaseInitDatabaseInitPostData, DatabaseInitDatabaseInitPostError | Error, MutationVariables<DatabaseInitDatabaseInitPostBody, DatabaseInitDatabaseInitPostParameters>, TContext>) => TResult;
+        }): Array<TResult>;
+        schema: DatabaseInitDatabaseInitPostSchema;
+        types: {
+            parameters: DatabaseInitDatabaseInitPostParameters;
+            data: DatabaseInitDatabaseInitPostData;
+            error: DatabaseInitDatabaseInitPostError;
+            body: DatabaseInitDatabaseInitPostBody;
+        };
+    };
     /** @summary Database Data */
-    databaseDataDatabaseDeletePost: ServiceOperationMutation<{
-        method: "post";
-        url: "/database/delete";
-    }, undefined, paths["/database/delete"]["post"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
+    databaseDataDatabaseDeletePost: {
+        /** @summary Database Data */
+        getMutationKey(parameters: DatabaseDataDatabaseDeletePostParameters | void): ServiceOperationMutationKey<DatabaseDataDatabaseDeletePostSchema, DatabaseDataDatabaseDeletePostParameters>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.databaseService.databaseDataDatabaseDeletePost.useMutation({})
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.databaseService.databaseDataDatabaseDeletePost.useMutation()
+         * mutate({
+         *     body: bodyPayload
+         * });
+         * ```
+         */
+        useMutation<TVariables extends DatabaseDataDatabaseDeletePostBody, TContext = unknown>(parameters: DatabaseDataDatabaseDeletePostParameters, options?: ServiceOperationUseMutationOptions<DatabaseDataDatabaseDeletePostSchema, DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostParameters, TVariables, DatabaseDataDatabaseDeletePostError | Error, TContext>): UseMutationResult<DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.databaseService.databaseDataDatabaseDeletePost.useMutation({})
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.databaseService.databaseDataDatabaseDeletePost.useMutation()
+         * mutate({
+         *     body: bodyPayload
+         * });
+         * ```
+         */
+        useMutation<TVariables extends MutationVariables<DatabaseDataDatabaseDeletePostBody, DatabaseDataDatabaseDeletePostParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<DatabaseDataDatabaseDeletePostSchema, DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostParameters, TVariables, DatabaseDataDatabaseDeletePostError | Error, TContext>): UseMutationResult<DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostError | Error, TVariables, TContext>;
+        /**
+         * Returns the count of currently in-progress mutations.
+         *
+         * @summary Database Data
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+         * @example Check how many mutations are currently in progress for the specified service method.
+         * ```ts
+         * const databaseDataDatabaseDeletePostTotal = qraft.databaseService.databaseDataDatabaseDeletePost.useIsMutating()
+         * ```
+         * @example Check how many mutations are currently in progress with the specified parameters.
+         * ```ts
+         * const databaseDataDatabaseDeletePostTotal = qraft.databaseService.databaseDataDatabaseDeletePost.useIsMutating({
+         *     parameters: {}
+         * })
+         * ```
+         */
+        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<DatabaseDataDatabaseDeletePostBody, DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostParameters, DatabaseDataDatabaseDeletePostError | Error, TContext> | MutationFiltersByMutationKey<DatabaseDataDatabaseDeletePostSchema, DatabaseDataDatabaseDeletePostBody, DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostParameters, DatabaseDataDatabaseDeletePostError | Error, TContext>): number;
+        /** @summary Database Data */
+        isMutating<TContext>(filters?: MutationFiltersByParameters<DatabaseDataDatabaseDeletePostBody, DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostParameters, DatabaseDataDatabaseDeletePostError | Error, TContext> | MutationFiltersByMutationKey<DatabaseDataDatabaseDeletePostSchema, DatabaseDataDatabaseDeletePostBody, DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostParameters, DatabaseDataDatabaseDeletePostError | Error, TContext>): number;
+        /** @summary Database Data */
+        (options: ServiceOperationMutationFnOptions<DatabaseDataDatabaseDeletePostBody, DatabaseDataDatabaseDeletePostParameters>, client?: (schema: DatabaseDataDatabaseDeletePostSchema, options: ServiceOperationMutationFnOptions<DatabaseDataDatabaseDeletePostBody, DatabaseDataDatabaseDeletePostParameters>) => Promise<RequestFnResponse<DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostError>>): Promise<RequestFnResponse<DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostError>>;
+        /**
+         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+         *
+         * @summary Database Data
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+         * @example Get all variables of all running mutations.
+         * ```ts
+         * const databaseDataDatabaseDeletePostPendingMutationVariables = qraft.databaseService.databaseDataDatabaseDeletePost.useMutationState({
+         *     filters: {
+         *         status: "pending"
+         *     },
+         *     select: mutation => mutation.state.variables
+         * })
+         * ```
+         * @example Get all data for specific mutations via the `parameters`.
+         * ```ts
+         * const databaseDataDatabaseDeletePostMutationData = qraft.databaseService.databaseDataDatabaseDeletePost.useMutationState({
+         *     filters: {
+         *         parameters: {}
+         *     },
+         *     select: mutation => mutation.state.data
+         * })
+         * ```
+         */
+        useMutationState<TContext = unknown, TResult = MutationState<DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostError | Error, MutationVariables<DatabaseDataDatabaseDeletePostBody, DatabaseDataDatabaseDeletePostParameters>, TContext>>(options?: {
+            filters?: MutationFiltersByParameters<DatabaseDataDatabaseDeletePostBody, DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostParameters, DatabaseDataDatabaseDeletePostError | Error, TContext> | MutationFiltersByMutationKey<DatabaseDataDatabaseDeletePostSchema, DatabaseDataDatabaseDeletePostBody, DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostParameters, DatabaseDataDatabaseDeletePostError | Error, TContext>;
+            select?: (mutation: Mutation<DatabaseDataDatabaseDeletePostData, DatabaseDataDatabaseDeletePostError | Error, MutationVariables<DatabaseDataDatabaseDeletePostBody, DatabaseDataDatabaseDeletePostParameters>, TContext>) => TResult;
+        }): Array<TResult>;
+        schema: DatabaseDataDatabaseDeletePostSchema;
+        types: {
+            parameters: DatabaseDataDatabaseDeletePostParameters;
+            data: DatabaseDataDatabaseDeletePostData;
+            error: DatabaseDataDatabaseDeletePostError;
+            body: DatabaseDataDatabaseDeletePostBody;
+        };
+    };
 }
 export const databaseService: {
     /** @summary Database Init */
@@ -46,3 +236,19 @@ export const databaseService: {
         }
     }
 };
+type DatabaseInitDatabaseInitPostSchema = {
+    method: "post";
+    url: "/database/init";
+};
+type DatabaseInitDatabaseInitPostParameters = {};
+type DatabaseInitDatabaseInitPostData = paths["/database/init"]["post"]["responses"]["200"]["content"]["application/json"];
+type DatabaseInitDatabaseInitPostError = unknown;
+type DatabaseInitDatabaseInitPostBody = undefined;
+type DatabaseDataDatabaseDeletePostSchema = {
+    method: "post";
+    url: "/database/delete";
+};
+type DatabaseDataDatabaseDeletePostParameters = {};
+type DatabaseDataDatabaseDeletePostData = paths["/database/delete"]["post"]["responses"]["200"]["content"]["application/json"];
+type DatabaseDataDatabaseDeletePostError = unknown;
+type DatabaseDataDatabaseDeletePostBody = undefined;
