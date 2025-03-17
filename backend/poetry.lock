@@ -662,7 +662,7 @@ version = "1.9.1"
 description = "Node.js virtual environment builder"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
-groups = ["dev", "types"]
+groups = ["types"]
 files = [
     {file = "nodeenv-1.9.1-py2.py3-none-any.whl", hash = "sha256:ba11c9782d29c27c70ffbdda2d7415098754709be8a7056d79a737cd901155c9"},
     {file = "nodeenv-1.9.1.tar.gz", hash = "sha256:6ec12890a2dab7946721edbfbcd91f3319c6ccc9aec47be7c7e6b7011ee6645f"},
@@ -946,7 +946,7 @@ version = "1.1.396"
 description = "Command line wrapper for pyright"
 optional = false
 python-versions = ">=3.7"
-groups = ["dev", "types"]
+groups = ["types"]
 files = [
     {file = "pyright-1.1.396-py3-none-any.whl", hash = "sha256:c635e473095b9138c471abccca22b9fedbe63858e0b40d4fc4b67da041891844"},
     {file = "pyright-1.1.396.tar.gz", hash = "sha256:142901f5908f5a0895be3d3befcc18bedcdb8cc1798deecaec86ef7233a29b03"},
@@ -1276,7 +1276,7 @@ version = "4.12.2"
 description = "Backported and Experimental Type Hints for Python 3.8+"
 optional = false
 python-versions = ">=3.8"
-groups = ["main", "dev", "types"]
+groups = ["main", "types"]
 files = [
     {file = "typing_extensions-4.12.2-py3-none-any.whl", hash = "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d"},
     {file = "typing_extensions-4.12.2.tar.gz", hash = "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"},
@@ -1545,4 +1545,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "6ccd9f3ee1a94809eb808c2896e1af0657b68ffc15aa52bc761364bba85af8a1"
+content-hash = "9eaaf6130971d6f0e58e76f0736bed6ce96e357347669e32b52f0e01e6b85692"
