@@ -35,7 +35,6 @@ function Providers({ children }: { children: JSX.Element[] }) {
 export const Route = createRootRoute({
 	component: () => (
 		<Providers>
-			{/* <AppBar>Send Me!</AppBar> */}
 			<Navbar appName="SendMe" />
 			<ContentArea>
 				<Outlet />

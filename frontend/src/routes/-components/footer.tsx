@@ -24,7 +24,7 @@ const Attribute = styled.a`
 const Sitetitle = styled.h2`
   font-size: 16px;
   font-weight: 700;
-  color: #2E8B57;
+  color: var(--sl-color-primary-500);
 `;
 
 const Footer = () => (
