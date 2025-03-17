@@ -21,6 +21,11 @@ const CardTitle = styled.div`
   justify-content: space-between;
 `;
 
+const CardTitleDate = styled.div`
+	display: flex;
+	flex-direction: column;
+`
+
 const StrongText = styled.strong`
   font-size: 30px;
 `;
@@ -28,6 +33,8 @@ const StrongText = styled.strong`
 const AvatarSection = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 `;
 
 const AvatarInfo = styled.div`
@@ -35,11 +42,23 @@ const AvatarInfo = styled.div`
   gap: 10px;
 `;
 
+const AvatarBio = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+`
+
 const TagsContainer = styled.div`
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 `;
+
+const SmallBio = styled.div`
+	padding-bottom: 1rem;
+`
 
 const MoreDetails = styled.div`
   display: flex;
@@ -64,35 +83,30 @@ const Bookmark = styled.div`
 const Card = () => (
 	<CardContainer>
 		<CardTitle>
-			<div>
+			<CardTitleDate>
 				<StrongText>Ministry Leadership</StrongText>
-				<br />
 				<small>12/14/24</small>
-			</div>
+			</CardTitleDate>
 			<Bookmark>
 				<div className="icon-button-color">
 					<SlIconButton name="bookmark" label="Bookmark" />
 				</div>
 			</Bookmark>
 		</CardTitle>
-		<br />
 		<AvatarSection>
 			<AvatarInfo>
 				<SlAvatar image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" />
-				<div>
+				<AvatarBio>
 					Liam Carter
-					<br />
 					<small>Oak Tree Church of Christ</small>
-					<br />
 					<small>Dallas, TX, USA</small>
-				</div>
+				</AvatarBio>
 			</AvatarInfo>
 			<SlButton variant="success" size="large" outline>
 				<SlIcon slot="prefix" name="envelope" color="green" />
 				Message
 			</SlButton>
 		</AvatarSection>
-		<br />
 		<TagsContainer>
 			<SlTag variant="success" size="medium" pill>
 				Preacher
@@ -110,9 +124,9 @@ const Card = () => (
 				Paid
 			</SlTag>
 		</TagsContainer>
-		<br />
-		<div>Youth Ministry experience needed at Oak Tree Church of Christ!</div>
-		<br />
+		<SmallBio>
+			<div>Youth Ministry experience needed at Oak Tree Church of Christ!</div>
+		</SmallBio>
 		<SlDetails summary="More Details">
 			<MoreDetails>
 				<div>
