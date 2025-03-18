@@ -4,19 +4,325 @@
  */
 
 import type { paths } from "../schema";
-import type { ServiceOperationQuery, ServiceOperationMutation } from "@openapi-qraft/react";
+import type { AreAllOptional, InvalidateQueryFilters, MutationFiltersByMutationKey, MutationFiltersByParameters, MutationVariables, OperationInfiniteData, PartialParameters, QueryFiltersByParameters, QueryFiltersByQueryKey, QueryFnOptionsByParameters, QueryFnOptionsByQueryKey, RequestFnResponse, ServiceOperationEnsureInfiniteQueryDataOptions, ServiceOperationEnsureQueryDataOptions, ServiceOperationFetchInfiniteQueryOptions, ServiceOperationFetchQueryOptions, ServiceOperationInfiniteQueryKey, ServiceOperationMutationFnOptions, ServiceOperationMutationKey, ServiceOperationQueryKey, ServiceOperationUseMutationOptions, UseQueryOptionsForUseQueries, UseQueryOptionsForUseSuspenseQuery, WithOptional } from "@openapi-qraft/tanstack-query-react-types";
+import type { CancelOptions, InfiniteQueryPageParamsOptions, InvalidateOptions, Mutation, MutationState, NoInfer, QueryState, RefetchOptions, ResetOptions, SetDataOptions, Updater } from "@tanstack/query-core";
+import type { DefinedInitialDataInfiniteOptions, DefinedInitialDataOptions, DefinedUseInfiniteQueryResult, DefinedUseQueryResult, UndefinedInitialDataInfiniteOptions, UndefinedInitialDataOptions, UseInfiniteQueryResult, UseMutationResult, UseQueryResult, UseSuspenseInfiniteQueryOptions, UseSuspenseInfiniteQueryResult, UseSuspenseQueryOptions, UseSuspenseQueryResult } from "@tanstack/react-query";
 export interface OpportunitiesService {
     /** @summary Get Opportunities */
-    list: ServiceOperationQuery<{
-        method: "get";
-        url: "/opportunities";
-    }, paths["/opportunities"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
+    list: {
+        /** @summary Get Opportunities */
+        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ListSchema, ListData, TInfinite, ListParameters, ListError> | QueryFiltersByQueryKey<ListSchema, ListData, TInfinite, ListParameters, ListError>, options?: CancelOptions): Promise<void>;
+        /** @summary Get Opportunities */
+        getQueryKey(parameters: ListParameters | void): ServiceOperationQueryKey<ListSchema, ListParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get Opportunities
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.opportunitiesService.list.useQuery()
+         * ```
+         */
+        useQuery<TData = ListData>(parameters: ServiceOperationQueryKey<ListSchema, ListParameters> | (ListParameters | void), options?: Omit<UndefinedInitialDataOptions<ListData, ListError, TData, ServiceOperationQueryKey<ListSchema, ListParameters>>, "queryKey">): UseQueryResult<TData, ListError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get Opportunities
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.opportunitiesService.list.useQuery()
+         * ```
+         */
+        useQuery<TData = ListData>(parameters: ServiceOperationQueryKey<ListSchema, ListParameters> | (ListParameters | void), options: Omit<DefinedInitialDataOptions<ListData, ListError, TData, ServiceOperationQueryKey<ListSchema, ListParameters>>, "queryKey">): DefinedUseQueryResult<TData, ListError | Error>;
+        /** @summary Get Opportunities */
+        fetchInfiniteQuery<TPageParam extends ListParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ListSchema, ListData, ListParameters, TPageParam, ListError>): Promise<OperationInfiniteData<ListData, ListParameters>>;
+        /** @summary Get Opportunities */
+        prefetchInfiniteQuery<TPageParam extends ListParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ListSchema, ListData, ListParameters, TPageParam, ListError>): Promise<void>;
+        /** @summary Get Opportunities */
+        ensureInfiniteQueryData<TPageParam extends ListParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<ListSchema, ListData, ListParameters, TPageParam, ListError>): Promise<OperationInfiniteData<ListData, ListParameters>>;
+        /** @summary Get Opportunities */
+        fetchQuery(options: ServiceOperationFetchQueryOptions<ListSchema, ListData, ListParameters, ListError> | void): Promise<ListData>;
+        /** @summary Get Opportunities */
+        prefetchQuery(options: ServiceOperationFetchQueryOptions<ListSchema, ListData, ListParameters, ListError> | void): Promise<void>;
+        /** @summary Get Opportunities */
+        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<ListSchema, ListData, ListParameters, ListError> | void): Promise<ListData>;
+        /** @summary Get Opportunities */
+        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<ListSchema, ListParameters> | (ListParameters | void)): OperationInfiniteData<ListData, ListParameters> | undefined;
+        /** @summary Get Opportunities */
+        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ListSchema, ListData, TInfinite, ListParameters, ListError> | QueryFiltersByQueryKey<ListSchema, ListData, TInfinite, ListParameters, ListError>): TInfinite extends true ? Array<[
+            queryKey: ServiceOperationInfiniteQueryKey<ListSchema, ListParameters>,
+            data: NoInfer<OperationInfiniteData<ListData, ListParameters>> | undefined
+        ]> : Array<[
+            queryKey: ServiceOperationQueryKey<ListSchema, ListParameters>,
+            data: ListData | undefined
+        ]>;
+        /** @summary Get Opportunities */
+        getQueryData(parameters: ServiceOperationQueryKey<ListSchema, ListParameters> | (ListParameters | void)): ListData | undefined;
+        /** @summary Get Opportunities */
+        getQueryState(parameters: ServiceOperationQueryKey<ListSchema, ListParameters> | (ListParameters | void)): QueryState<ListData, ListError> | undefined;
+        /** @summary Get Opportunities */
+        getInfiniteQueryState(parameters: ListParameters | ServiceOperationInfiniteQueryKey<ListSchema, ListParameters> | void): QueryState<OperationInfiniteData<ListData, ListParameters>, ListError> | undefined;
+        /** @summary Get Opportunities */
+        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<ListSchema, ListData, TInfinite, ListParameters, ListError>, options?: InvalidateOptions): Promise<void>;
+        /** @summary Get Opportunities */
+        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ListSchema, ListData, TInfinite, ListParameters, ListError> | QueryFiltersByQueryKey<ListSchema, ListData, TInfinite, ListParameters, ListError>): number;
+        /** @summary Get Opportunities */
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<ListSchema, ListParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<ListParameters, TMeta, TSignal> | void), client?: (schema: ListSchema, options: {
+            parameters: ListParameters;
+            signal?: TSignal;
+            meta?: TMeta;
+        }) => Promise<RequestFnResponse<ListData, ListError>>): Promise<RequestFnResponse<ListData, ListError>>;
+        /** @summary Get Opportunities */
+        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ListSchema, ListData, TInfinite, ListParameters, ListError> | QueryFiltersByQueryKey<ListSchema, ListData, TInfinite, ListParameters, ListError>, options?: RefetchOptions): Promise<void>;
+        /** @summary Get Opportunities */
+        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ListSchema, ListData, TInfinite, ListParameters, ListError> | QueryFiltersByQueryKey<ListSchema, ListData, TInfinite, ListParameters, ListError>): void;
+        /** @summary Get Opportunities */
+        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ListSchema, ListData, TInfinite, ListParameters, ListError> | QueryFiltersByQueryKey<ListSchema, ListData, TInfinite, ListParameters, ListError>, options?: ResetOptions): Promise<void>;
+        /** @summary Get Opportunities */
+        setInfiniteQueryData(parameters: ListParameters | ServiceOperationInfiniteQueryKey<ListSchema, ListParameters>, updater: Updater<NoInfer<OperationInfiniteData<ListData, ListParameters>> | undefined, NoInfer<OperationInfiniteData<ListData, ListParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<ListData, ListParameters> | undefined;
+        /** @summary Get Opportunities */
+        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<ListSchema, ListData, TInfinite, ListParameters, ListError> | QueryFiltersByQueryKey<ListSchema, ListData, TInfinite, ListParameters, ListError>, updater: Updater<NoInfer<ListData> | undefined, NoInfer<ListData> | undefined>, options?: SetDataOptions): Array<ListData | undefined>;
+        /** @summary Get Opportunities */
+        setQueryData(parameters: (ListParameters | undefined) | ServiceOperationQueryKey<ListSchema, ListParameters>, updater: Updater<NoInfer<ListData> | undefined, NoInfer<ListData> | undefined>, options?: SetDataOptions): ListData | undefined;
+        /** @summary Get Opportunities */
+        getInfiniteQueryKey(parameters: ListParameters | void): ServiceOperationInfiniteQueryKey<ListSchema, ListParameters>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.opportunitiesService.list.useInfiniteQuery({}, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends ListParameters, TQueryFnData = ListData, TData = OperationInfiniteData<TQueryFnData, ListParameters>>(parameters: ServiceOperationInfiniteQueryKey<ListSchema, ListParameters> | (ListParameters | void), options: Omit<UndefinedInitialDataInfiniteOptions<TQueryFnData, ListError, TData, ServiceOperationInfiniteQueryKey<ListSchema, ListParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<TQueryFnData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<TData, ListError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.opportunitiesService.list.useInfiniteQuery({}, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends ListParameters, TQueryFnData = ListData, TData = OperationInfiniteData<TQueryFnData, ListParameters>>(parameters: ServiceOperationInfiniteQueryKey<ListSchema, ListParameters> | (ListParameters | void), options: Omit<DefinedInitialDataInfiniteOptions<TQueryFnData, ListError, TData, ServiceOperationInfiniteQueryKey<ListSchema, ListParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ListData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<TData, ListError | Error>;
+        /**
+         * Monitors the number of queries currently fetching, matching the provided filters.
+         * Useful for creating loading indicators or performing actions based on active requests.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+         * @example Checks the total number of queries fetching from the specified service method,
+         * both normal and infinite. If no parameters are provided, no filtering is applied.
+         * ```ts
+         * const listTotal = qraft.opportunitiesService.list.useIsFetching()
+         * ```
+         */
+        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ListSchema, ListData, TInfinite, ListParameters, ListError> | QueryFiltersByQueryKey<ListSchema, ListData, TInfinite, ListParameters, ListError>): number;
+        /**
+         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+         *
+         * @summary Get Opportunities
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+         * ```ts
+         * const listResults = qraft.opportunitiesService.list.useQueries({
+         *     queries: [
+         *         {},
+         *         {}
+         *     ]
+         * });
+         * listResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+         * ```
+         * @example Combined results. Only the data will be returned.
+         * ```ts
+         * const listCombinedResults = qraft.opportunitiesService.list.useQueries({
+         *     combine: results => results.map(result => result.data),
+         *     queries: [
+         *         {},
+         *         {}
+         *     ]
+         * });
+         * listCombinedResults.forEach(data => console.log({ data }));
+         * ```
+         */
+        useQueries<T extends Array<UseQueryOptionsForUseQueries<ListSchema, ListParameters, ListData, ListError>>, TCombinedResult = Array<UseQueryResult<ListData, ListError>>>(options: {
+            queries: T;
+            combine?: (results: Array<UseQueryResult<ListData, ListError>>) => TCombinedResult;
+        }): TCombinedResult;
+        /** @summary Get Opportunities */
+        getQueryKey(parameters: ListParameters | void): ServiceOperationQueryKey<ListSchema, ListParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get Opportunities
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.opportunitiesService.list.useQuery()
+         * ```
+         */
+        useQuery<TData = ListData>(parameters: ServiceOperationQueryKey<ListSchema, ListParameters> | (ListParameters | void), options?: Omit<UndefinedInitialDataOptions<ListData, ListError, TData, ServiceOperationQueryKey<ListSchema, ListParameters>>, "queryKey">): UseQueryResult<TData, ListError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get Opportunities
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.opportunitiesService.list.useQuery()
+         * ```
+         */
+        useQuery<TData = ListData>(parameters: ServiceOperationQueryKey<ListSchema, ListParameters> | (ListParameters | void), options: Omit<DefinedInitialDataOptions<ListData, ListError, TData, ServiceOperationQueryKey<ListSchema, ListParameters>>, "queryKey">): DefinedUseQueryResult<TData, ListError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+         *
+         * @example Suspense Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.opportunitiesService.list.useSuspenseInfiniteQuery({}, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useSuspenseInfiniteQuery<TPageParam extends ListParameters, TData = ListData>(parameters: ServiceOperationInfiniteQueryKey<ListSchema, ListParameters> | (ListParameters | void), options: Omit<UseSuspenseInfiniteQueryOptions<ListData, ListError, OperationInfiniteData<TData, ListParameters>, ListData, ServiceOperationInfiniteQueryKey<ListSchema, ListParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ListData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, ListParameters>, ListError | Error>;
+        /** @summary Get Opportunities */
+        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<ListSchema, ListParameters, ListData, ListError>>, TCombinedResult = Array<UseSuspenseQueryResult<ListData, ListError>>>(options: {
+            queries: T;
+            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<ListData, ListError>, "data">>) => TCombinedResult;
+        }): TCombinedResult;
+        /** @summary Get Opportunities */
+        useSuspenseQuery<TData = ListData>(parameters: ServiceOperationQueryKey<ListSchema, ListParameters> | (ListParameters | void), options?: Omit<UseSuspenseQueryOptions<ListData, ListError, TData, ServiceOperationQueryKey<ListSchema, ListParameters>>, "queryKey">): UseSuspenseQueryResult<TData, ListError | Error>;
+        schema: ListSchema;
+        types: {
+            parameters: ListParameters;
+            data: ListData;
+            error: ListError;
+        };
+    };
     /** @summary Create Opportunity */
-    create: ServiceOperationMutation<{
-        method: "post";
-        url: "/opportunities";
-        mediaType: "application/json";
-    }, NonNullable<paths["/opportunities"]["post"]["requestBody"]>["content"]["application/json"], paths["/opportunities"]["post"]["responses"]["201"]["content"]["application/json"], undefined, paths["/opportunities"]["post"]["responses"]["422"]["content"]["application/json"]>;
+    create: {
+        /** @summary Create Opportunity */
+        getMutationKey(parameters: CreateParameters | void): ServiceOperationMutationKey<CreateSchema, CreateParameters>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.opportunitiesService.create.useMutation({})
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.opportunitiesService.create.useMutation()
+         * mutate({
+         *     body: bodyPayload
+         * });
+         * ```
+         */
+        useMutation<TVariables extends CreateBody, TContext = unknown>(parameters: CreateParameters, options?: ServiceOperationUseMutationOptions<CreateSchema, CreateData, CreateParameters, TVariables, CreateError | Error, TContext>): UseMutationResult<CreateData, CreateError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.opportunitiesService.create.useMutation({})
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.opportunitiesService.create.useMutation()
+         * mutate({
+         *     body: bodyPayload
+         * });
+         * ```
+         */
+        useMutation<TVariables extends MutationVariables<CreateBody, CreateParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<CreateSchema, CreateData, CreateParameters, TVariables, CreateError | Error, TContext>): UseMutationResult<CreateData, CreateError | Error, TVariables, TContext>;
+        /**
+         * Returns the count of currently in-progress mutations.
+         *
+         * @summary Create Opportunity
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+         * @example Check how many mutations are currently in progress for the specified service method.
+         * ```ts
+         * const createTotal = qraft.opportunitiesService.create.useIsMutating()
+         * ```
+         * @example Check how many mutations are currently in progress with the specified parameters.
+         * ```ts
+         * const createTotal = qraft.opportunitiesService.create.useIsMutating({
+         *     parameters: {}
+         * })
+         * ```
+         */
+        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<CreateBody, CreateData, CreateParameters, CreateError | Error, TContext> | MutationFiltersByMutationKey<CreateSchema, CreateBody, CreateData, CreateParameters, CreateError | Error, TContext>): number;
+        /** @summary Create Opportunity */
+        isMutating<TContext>(filters?: MutationFiltersByParameters<CreateBody, CreateData, CreateParameters, CreateError | Error, TContext> | MutationFiltersByMutationKey<CreateSchema, CreateBody, CreateData, CreateParameters, CreateError | Error, TContext>): number;
+        /** @summary Create Opportunity */
+        (options: ServiceOperationMutationFnOptions<CreateBody, CreateParameters>, client?: (schema: CreateSchema, options: ServiceOperationMutationFnOptions<CreateBody, CreateParameters>) => Promise<RequestFnResponse<CreateData, CreateError>>): Promise<RequestFnResponse<CreateData, CreateError>>;
+        /**
+         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+         *
+         * @summary Create Opportunity
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+         * @example Get all variables of all running mutations.
+         * ```ts
+         * const createPendingMutationVariables = qraft.opportunitiesService.create.useMutationState({
+         *     filters: {
+         *         status: "pending"
+         *     },
+         *     select: mutation => mutation.state.variables
+         * })
+         * ```
+         * @example Get all data for specific mutations via the `parameters`.
+         * ```ts
+         * const createMutationData = qraft.opportunitiesService.create.useMutationState({
+         *     filters: {
+         *         parameters: {}
+         *     },
+         *     select: mutation => mutation.state.data
+         * })
+         * ```
+         */
+        useMutationState<TContext = unknown, TResult = MutationState<CreateData, CreateError | Error, MutationVariables<CreateBody, CreateParameters>, TContext>>(options?: {
+            filters?: MutationFiltersByParameters<CreateBody, CreateData, CreateParameters, CreateError | Error, TContext> | MutationFiltersByMutationKey<CreateSchema, CreateBody, CreateData, CreateParameters, CreateError | Error, TContext>;
+            select?: (mutation: Mutation<CreateData, CreateError | Error, MutationVariables<CreateBody, CreateParameters>, TContext>) => TResult;
+        }): Array<TResult>;
+        schema: CreateSchema;
+        types: {
+            parameters: CreateParameters;
+            data: CreateData;
+            error: CreateError;
+            body: CreateBody;
+        };
+    };
 }
 export const opportunitiesService: {
     /** @summary Get Opportunities */
@@ -31,7 +337,9 @@ export const opportunitiesService: {
         schema: {
             method: "post";
             url: "/opportunities";
-            mediaType: "application/json";
+            mediaType: [
+                "application/json"
+            ];
         };
     };
 } = {
@@ -45,7 +353,25 @@ export const opportunitiesService: {
         schema: {
             method: "post",
             url: "/opportunities",
-            mediaType: "application/json"
+            mediaType: ["application/json"]
         }
     }
 };
+type ListSchema = {
+    method: "get";
+    url: "/opportunities";
+};
+type ListParameters = undefined;
+type ListData = paths["/opportunities"]["get"]["responses"]["200"]["content"]["application/json"];
+type ListError = unknown;
+type CreateSchema = {
+    method: "post";
+    url: "/opportunities";
+    mediaType: [
+        "application/json"
+    ];
+};
+type CreateParameters = {};
+type CreateData = paths["/opportunities"]["post"]["responses"]["201"]["content"]["application/json"];
+type CreateError = paths["/opportunities"]["post"]["responses"]["422"]["content"]["application/json"];
+type CreateBody = NonNullable<paths["/opportunities"]["post"]["requestBody"]>["content"]["application/json"];

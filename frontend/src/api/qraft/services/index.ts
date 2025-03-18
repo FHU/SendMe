@@ -5,14 +5,20 @@
 
 import { OpportunitiesService, opportunitiesService } from "./OpportunitiesService";
 import { DatabaseService, databaseService } from "./DatabaseService";
+import { AuthService, authService } from "./AuthService";
 import { HelloService, helloService } from "./HelloService";
+import { ProtectedService, protectedService } from "./ProtectedService";
 export type Services = {
     opportunities: OpportunitiesService;
     database: DatabaseService;
+    auth: AuthService;
     hello: HelloService;
+    protected: ProtectedService;
 };
 export const services = {
     opportunities: opportunitiesService,
     database: databaseService,
-    hello: helloService
+    auth: authService,
+    hello: helloService,
+    protected: protectedService
 } as const;

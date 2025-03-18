@@ -56,6 +56,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/auth/pin": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Request Pin */
+        post: operations["request_pin_auth_pin_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/sessiontoken": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Request Session */
+        post: operations["request_session_auth_sessiontoken_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/hello": {
         parameters: {
             query?: never;
@@ -65,6 +99,23 @@ export interface paths {
         };
         /** Hello World */
         get: operations["hello_world_hello_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/protected": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Protected Example */
+        get: operations["protected_example_protected_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -94,6 +145,18 @@ export interface components {
             /** Message */
             message: string;
         };
+        /** LoginChallengeRequest */
+        LoginChallengeRequest: {
+            /** Email */
+            email: string;
+        };
+        /** LoginChallengeResponse */
+        LoginChallengeResponse: {
+            /** Login Challenge Token */
+            login_challenge_token: string;
+            /** Code */
+            code?: string | null;
+        };
         /** Opportunity */
         Opportunity: {
             /**
@@ -110,6 +173,18 @@ export interface components {
              * Format: date-time
              */
             created_at: string;
+        };
+        /** SessionRequest */
+        SessionRequest: {
+            /** Code */
+            code: string;
+            /** Login Challenge Token */
+            login_challenge_token: string;
+        };
+        /** SessionResponse */
+        SessionResponse: {
+            /** Session Token */
+            session_token: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -250,6 +325,86 @@ export interface operations {
             };
         };
     };
+    request_pin_auth_pin_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoginChallengeRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LoginChallengeResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    request_session_auth_sessiontoken_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SessionRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     hello_world_hello_get: {
         parameters: {
             query?: never;
@@ -266,6 +421,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HelloWorldResponse"];
+                };
+            };
+        };
+    };
+    protected_example_protected_get: {
+        parameters: {
+            query?: never;
+            header: {
+                authorization: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
