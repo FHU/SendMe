@@ -3,7 +3,7 @@
  * Do not make direct changes to the file.
  */
 
-export type { $defs, paths, components, operations, webhooks } from "./schema";
+export * from "./schema";
 export { services } from "./services/index";
 export type { Services } from "./services/index";
 export { createAPIClient } from "./create-api-client";
