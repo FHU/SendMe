@@ -4,5 +4,6 @@ node_modules
 /build
 /public/build
 .env
+__pycache__/
 
 .react-router/
