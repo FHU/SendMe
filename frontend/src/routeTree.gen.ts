@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as OpportunitiesIndexImport } from './routes/opportunities/index'
+import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
 
 // Create/Update Routes
@@ -26,6 +27,12 @@ const IndexRoute = IndexImport.update({
 const OpportunitiesIndexRoute = OpportunitiesIndexImport.update({
   id: '/opportunities/',
   path: '/opportunities/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeIndexRoute = HomeIndexImport.update({
+  id: '/home/',
+  path: '/home/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,6 +60,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthIndexImport
       parentRoute: typeof rootRoute
     }
+    '/home/': {
+      id: '/home/'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/opportunities/': {
       id: '/opportunities/'
       path: '/opportunities'
@@ -68,12 +82,14 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthIndexRoute
+  '/home': typeof HomeIndexRoute
   '/opportunities': typeof OpportunitiesIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthIndexRoute
+  '/home': typeof HomeIndexRoute
   '/opportunities': typeof OpportunitiesIndexRoute
 }
 
@@ -81,27 +97,30 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/auth/': typeof AuthIndexRoute
+  '/home/': typeof HomeIndexRoute
   '/opportunities/': typeof OpportunitiesIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/opportunities'
+  fullPaths: '/' | '/auth' | '/home' | '/opportunities'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/opportunities'
-  id: '__root__' | '/' | '/auth/' | '/opportunities/'
+  to: '/' | '/auth' | '/home' | '/opportunities'
+  id: '__root__' | '/' | '/auth/' | '/home/' | '/opportunities/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthIndexRoute: typeof AuthIndexRoute
+  HomeIndexRoute: typeof HomeIndexRoute
   OpportunitiesIndexRoute: typeof OpportunitiesIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthIndexRoute: AuthIndexRoute,
+  HomeIndexRoute: HomeIndexRoute,
   OpportunitiesIndexRoute: OpportunitiesIndexRoute,
 }
 
@@ -117,6 +136,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/auth/",
+        "/home/",
         "/opportunities/"
       ]
     },
@@ -125,6 +145,9 @@ export const routeTree = rootRoute
     },
     "/auth/": {
       "filePath": "auth/index.tsx"
+    },
+    "/home/": {
+      "filePath": "home/index.tsx"
     },
     "/opportunities/": {
       "filePath": "opportunities/index.tsx"

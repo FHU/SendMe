@@ -26,6 +26,7 @@ ruff = "^0.3.2"
 [tool.poetry.group.types.dependencies]
 pyright = "^1.1.353"
 
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
