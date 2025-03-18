@@ -6,20 +6,20 @@ import { CreateOpportunity } from "./-components/CreateOpportunity";
 import { OpportunitiesList } from "./-components/OpportunitiesList";
 
 export const Route = createFileRoute("/opportunities/")({
-  component: RouteComponent,
+	component: RouteComponent,
 });
 
 const AreaHeading = styled.h2``;
 
 function RouteComponent() {
-  const { data: orgs, refetch: refetchOrg } =
-    api.organizations.listOrganizations.useQuery();
-  const { data, refetch } = api.opportunities.listOpportunities.useQuery();
-  return (
-    <>
-      <CreateOpportunity onCreated={refetch} />
-      <AreaHeading>Opportunities</AreaHeading>
-      {!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
-    </>
-  );
+	const { data: orgs, refetch: refetchOrg } =
+		api.organizations.listOrganizations.useQuery();
+	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
+	return (
+		<>
+			<CreateOpportunity onCreated={refetch} />
+			<AreaHeading>Opportunities</AreaHeading>
+			{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
+		</>
+	);
 }
