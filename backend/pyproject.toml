@@ -14,6 +14,7 @@ pydantic = "^2.8.2"
 minio = "^7.2.8"
 sqlalchemy = "^2.0.36"
 psycopg2-binary = "^2.9.10"
+sendgrid = "^6.11.0"
 
 [tool.poetry.group.lint]
 optional = true
@@ -24,6 +25,7 @@ ruff = "^0.3.2"
 
 [tool.poetry.group.types.dependencies]
 pyright = "^1.1.353"
+
 
 [build-system]
 requires = ["poetry-core"]

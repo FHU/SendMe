@@ -1,18 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 :root {
-	--sl-color-primary-50: rgb(254 249 241);
-	--sl-color-primary-100: rgb(253 234 206);
-	--sl-color-primary-200: rgb(251 217 168);
-	--sl-color-primary-300: rgb(250 198 125);
-	--sl-color-primary-400: #2E8B57;
+	--sl-color-primary-50: #E6F2EC;
+	--sl-color-primary-100: #C2DDCE;
+	--sl-color-primary-200: #9EC9B0;
+	--sl-color-primary-300: #7AB593;
+	--sl-color-primary-400: #56A176;
 	--sl-color-primary-500: #2E8B57;
-	--sl-color-primary-600: #2E8B57;
-	--sl-color-primary-700: rgb(155 94 9);
-	--sl-color-primary-800: rgb(128 78 7);
-	--sl-color-primary-900: rgb(91 55 5);
-	--sl-color-primary-950: rgb(56 34 3);
+	--sl-color-primary-600: #26734A;
+	--sl-color-primary-700: #1F5C3D;
+	--sl-color-primary-800: #174530;
+	--sl-color-primary-900: #0F2E23;
+	--sl-color-primary-950: #071715;
+
+	--sl-color-neutral-50: #f8f9fa; /* Light background color */
+	--sl-color-text: #000000; /* Light text color */
+}
+
+/* Dark Mode Variables */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--sl-color-primary-50: #071715;
+		--sl-color-primary-100: #0F2E23;
+		--sl-color-primary-200: #174530;
+		--sl-color-primary-300: #1F5C3D;
+		--sl-color-primary-400: #26734A;
+		--sl-color-primary-500: #2E8B57;
+		--sl-color-primary-600: #56A176;
+		--sl-color-primary-700: #7AB593;
+		--sl-color-primary-800: #9EC9B0;
+		--sl-color-primary-900: #C2DDCE;
+		--sl-color-primary-950: #E6F2EC;
+
+
+		--sl-color-neutral-50: #121212; /* Dark background color */
+		--sl-color-text: #E0E0E0; /* Light text color for dark mode */
+	}
 }
 
 body {
-	background: #fff;
+	background: var(--sl-color-neutral-50);
 	font-family: 'Roboto', sans-serif;
 }
+
