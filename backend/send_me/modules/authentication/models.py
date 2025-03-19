@@ -32,12 +32,12 @@ A class that represents a login attempt in the database.
 """
 
 
-class Login(Base):
-    __tablename__ = "logins"
+class LoginChallenge(Base):
+    __tablename__ = "login_challenges"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    pin: Mapped[str]
-    login_token: Mapped[str]
+    code: Mapped[str]
+    login_challenge_token: Mapped[str]
     email: Mapped[str] = mapped_column(unique=True)
 
     created_at: Mapped[datetime] = mapped_column(

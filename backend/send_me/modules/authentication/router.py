@@ -10,9 +10,7 @@ from sqlalchemy.orm import Session
 from send_me.database.engine import get_db
 from send_me.modules.users.models import User
 
-from . import helpers, models, schemas
-
-IN_DEVELOPMENT = os.environ.get("environment", "production") == "development"
+from . import models, schemas, utils
 
 TEN_MINUTES_OLD = timedelta(minutes=10)
 
@@ -25,9 +23,9 @@ router = APIRouter(
 
 @router.post(
     "/pin",
-    response_model=schemas.LoginResponse,
+    response_model=schemas.LoginChallengeResponse,
 )
-def request_pin(input: schemas.LoginRequest, db: Session = Depends(get_db)):
+def request_pin(input: schemas.LoginChallengeRequest, db: Session = Depends(get_db)):
     # Check if user exists
     user_query = select(User).where(User.email == input.email)
 
@@ -42,43 +40,43 @@ def request_pin(input: schemas.LoginRequest, db: Session = Depends(get_db)):
         db.refresh(user)
 
     # Create a login
-    login = models.Login(
-        pin=str(secrets.randbelow(1_000_000)),
-        login_token=str(secrets.token_urlsafe(16)),
+    login_challenge = models.Login(
+        code=str(secrets.randbelow(1_000_000)),
+        login_challenge_token=str(secrets.token_urlsafe(16)),
         email=input.email,
     )
 
-    email_sent = helpers.send_email(login.email, login.pin)
+    email_sent = utils.send_email(login_challenge.email, login_challenge.code)
 
     # To avoid development dependancies this check can be ignored in dev mode
-    if not email_sent and not IN_DEVELOPMENT:
+    if not email_sent and utils.SENDGRID_API_KEY != "":
         raise HTTPException(status_code=500, detail="Error when sending email")
 
-    # Add login to DB
+    # Add login_challenge to DB
     # I think there is likely a better way to do this
     insert_command = insert(models.Login).values(
-        pin=login.pin, login_token=login.login_token, email=login.email
+        code=login_challenge.code, login_challenge_token=login_challenge.login_challenge_token, email=login_challenge.email
     )
     insert_command = insert_command.on_conflict_do_update(
-        index_elements=[models.Login.email],
-        set_={models.Login.pin: login.pin, models.Login.login_token: login.login_token},
+        index_elements=[models.LoginChallenge.email],
+        set_={models.LoginChallenge.code: login_challenge.code, models.LoginChallenge.login_challenge_token: login_challenge.login_challenge_token},
     )
 
     db.execute(insert_command)
 
     # Dr. Casey has asked the pin be shared to the developer somehow if the backend was in dev mode
-    if IN_DEVELOPMENT:
-        return {"login_token": login.login_token, "pin": login.pin}
+    if utils.SENDGRID_API_KEY == "":
+        return {"login_challenge_token": login_challenge.login_challenge_token, "code": login_challenge.code}
 
     # return token for future auth
-    return {"login_token": login.login_token}
+    return {"login_challenge_token": login_challenge.login_challenge_token}
 
 
 @router.post("/sessiontoken", response_model=schemas.SessionResponse)
 def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)):
     # Check if pin and token are in db
-    login_query = select(models.Login).where(
-        models.Login.login_token == input.login_token, models.Login.pin == input.pin
+    login_query = select(models.LoginChallenge).where(
+        models.LoginChallenge.login_challenge_token == input.login_challenge_token, models.LoginChallenge.code == input.code
     )
 
     login = db.execute(login_query).scalar()

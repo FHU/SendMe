@@ -3,18 +3,18 @@ from typing import Optional
 from send_me.schemas import SendMeModel
 
 
-class LoginRequest(SendMeModel):
+class LoginChallengeRequest(SendMeModel):
     email: str
 
 
-class LoginResponse(SendMeModel):
-    login_token: str
-    pin: Optional[str] = None
+class LoginChallengeResponse(SendMeModel):
+    login_challenge_token: str
+    code: Optional[str] = None
 
 
 class SessionRequest(SendMeModel):
-    pin: str
-    login_token: str
+    code: str
+    login_challenge_token: str
 
 
 class SessionResponse(SendMeModel):
