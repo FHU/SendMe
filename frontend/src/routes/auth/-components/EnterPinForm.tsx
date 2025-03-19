@@ -43,60 +43,65 @@ const SubmitButton = styled(SlButton)`
 `;
 
 type EnterPinFormProps = {
-    loginToken: string | null; 
-    onAuthSuccess: () => void;
-  };
-  
+	loginToken: string | null;
+	onAuthSuccess: () => void;
+};
 
-const EnterPinForm: React.FC<EnterPinFormProps> = ({ loginToken, onAuthSuccess }) => {
-  const [pin, setPin] = useState<string>("");
-  const [responseMessage, setResponseMessage] = useState<string>("");
+const EnterPinForm: React.FC<EnterPinFormProps> = ({
+	loginToken,
+	onAuthSuccess,
+}) => {
+	const [pin, setPin] = useState<string>("");
+	const [responseMessage, setResponseMessage] = useState<string>("");
 
-  const handleSlInput = (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    setPin(target.value);
-  };
+	const handleSlInput = (e: Event) => {
+		const target = e.target as HTMLInputElement;
+		setPin(target.value);
+	};
 
-  const submitPin = async () => {
-    if (!loginToken) {
-      console.error("Missing login token!");
-      return;
-    }
+	const submitPin = async () => {
+		if (!loginToken) {
+			console.error("Missing login token!");
+			return;
+		}
 
-    try {
-      const response = await fetch("/api/auth/sessiontoken", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ login_token: loginToken, pin }),
-      });
+		try {
+			const response = await fetch("/api/auth/sessiontoken", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ login_token: loginToken, pin }),
+			});
 
-      if (response.ok) {
-        onAuthSuccess(); 
-        const data = await response.json();
-        console.log("Session Token:", data.session_token);
-      } 
-      if (!response.ok) {
-        setResponseMessage("Something went wrong. Please try again.");
-        return;
-      }
-      else {
-        console.error("Invalid PIN.");
-      }
-    } catch (error) {
-      console.error("Network error.");
-    }
-  };
+			if (response.ok) {
+				onAuthSuccess();
+				const data = await response.json();
+				console.log("Session Token:", data.session_token);
+			}
+			if (!response.ok) {
+				setResponseMessage("Something went wrong. Please try again.");
+				return;
+			} else {
+				console.error("Invalid PIN.");
+			}
+		} catch (error) {
+			console.error("Network error.");
+		}
+	};
 
-  return (
-    <InvisibleCard>
-      <CardBody>
-        <Title>Enter Your PIN</Title>
-        <StyledInput placeholder="Enter your PIN" value={pin} onSlInput={handleSlInput} clearable />
-        <SubmitButton onClick={submitPin}>SUBMIT</SubmitButton>
-      </CardBody>
-    </InvisibleCard>
-  );
+	return (
+		<InvisibleCard>
+			<CardBody>
+				<Title>Enter Your PIN</Title>
+				<StyledInput
+					placeholder="Enter your PIN"
+					value={pin}
+					onSlInput={handleSlInput}
+					clearable
+				/>
+				<SubmitButton onClick={submitPin}>SUBMIT</SubmitButton>
+			</CardBody>
+		</InvisibleCard>
+	);
 };
 
 export default EnterPinForm;
-

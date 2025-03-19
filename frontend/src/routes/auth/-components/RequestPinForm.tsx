@@ -104,77 +104,77 @@ const LoginButton = styled(SlButton)`
 `;
 
 type RequestPinFormProps = {
-  onSuccess: (token: string) => void;
+	onSuccess: (token: string) => void;
 };
 
 const RequestPinForm: React.FC<RequestPinFormProps> = ({ onSuccess }) => {
-  const [email, setEmail] = useState<string>("");
-  const [responseMessage, setResponseMessage] = useState<string>("");
-  const [isError, setIsError] = useState<boolean>(false);
+	const [email, setEmail] = useState<string>("");
+	const [responseMessage, setResponseMessage] = useState<string>("");
+	const [isError, setIsError] = useState<boolean>(false);
 
-  const requestPin = async (): Promise<void> => {
-    setResponseMessage("");
-    setIsError(false);
+	const requestPin = async (): Promise<void> => {
+		setResponseMessage("");
+		setIsError(false);
 
-    try {
-      const response = await fetch("/api/auth/pin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+		try {
+			const response = await fetch("/api/auth/pin", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ email }),
+			});
 
-      if (response.ok) {
-        const data = await response.json();
-        onSuccess(data.login_token); // Switch to EnterPinForm
-        return;
-      }
-      if (!response.ok) {
-        setResponseMessage("Something went wrong. Please try again.");
-        return;
-      }
+			if (response.ok) {
+				const data = await response.json();
+				onSuccess(data.login_token); // Switch to EnterPinForm
+				return;
+			}
+			if (!response.ok) {
+				setResponseMessage("Something went wrong. Please try again.");
+				return;
+			}
 
-      setIsError(true);
-      setResponseMessage("Something went wrong.");
-    } catch {
-      setIsError(true);
-      setResponseMessage("Something went wrong.");
-    }
-  };
+			setIsError(true);
+			setResponseMessage("Something went wrong.");
+		} catch {
+			setIsError(true);
+			setResponseMessage("Something went wrong.");
+		}
+	};
 
-  const handleCloseBanner = (): void => {
-    setResponseMessage("");
-  };
+	const handleCloseBanner = (): void => {
+		setResponseMessage("");
+	};
 
-  const handleSlInput = (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    setEmail(target.value);
-  };
+	const handleSlInput = (e: Event) => {
+		const target = e.target as HTMLInputElement;
+		setEmail(target.value);
+	};
 
-  return (
-    <FormWrapper>
-      {responseMessage && (
-        <RedBanner>
-          <span>{responseMessage}</span>
-          <CloseButton onClick={handleCloseBanner}>×</CloseButton>
-        </RedBanner>
-      )}
+	return (
+		<FormWrapper>
+			{responseMessage && (
+				<RedBanner>
+					<span>{responseMessage}</span>
+					<CloseButton onClick={handleCloseBanner}>×</CloseButton>
+				</RedBanner>
+			)}
 
-      <InvisibleCard>
-        <CardBody>
-          <Title>Sign in to Your Account</Title>
+			<InvisibleCard>
+				<CardBody>
+					<Title>Sign in to Your Account</Title>
 
-          <StyledInput
-            placeholder="Enter your email"
-            value={email}
-            onSlInput={handleSlInput}
-            clearable
-          />
+					<StyledInput
+						placeholder="Enter your email"
+						value={email}
+						onSlInput={handleSlInput}
+						clearable
+					/>
 
-          <LoginButton onClick={requestPin}>LOGIN</LoginButton>
-        </CardBody>
-      </InvisibleCard>
-    </FormWrapper>
-  );
+					<LoginButton onClick={requestPin}>LOGIN</LoginButton>
+				</CardBody>
+			</InvisibleCard>
+		</FormWrapper>
+	);
 };
 
 export default RequestPinForm;

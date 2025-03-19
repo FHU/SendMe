@@ -9,7 +9,6 @@ class LoginChallengeRequest(SendMeModel):
 
 class LoginChallengeResponse(SendMeModel):
     login_challenge_token: str
-    code: Optional[str] = None
 
 
 class SessionRequest(SendMeModel):

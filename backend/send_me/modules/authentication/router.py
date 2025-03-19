@@ -1,4 +1,4 @@
-import os
+import logging
 import secrets
 from datetime import datetime, timedelta, timezone
 
@@ -40,7 +40,7 @@ def request_pin(input: schemas.LoginChallengeRequest, db: Session = Depends(get_
         db.refresh(user)
 
     # Create a login
-    login_challenge = models.Login(
+    login_challenge = models.LoginChallenge(
         code=str(secrets.randbelow(1_000_000)),
         login_challenge_token=str(secrets.token_urlsafe(16)),
         email=input.email,
@@ -54,19 +54,24 @@ def request_pin(input: schemas.LoginChallengeRequest, db: Session = Depends(get_
 
     # Add login_challenge to DB
     # I think there is likely a better way to do this
-    insert_command = insert(models.Login).values(
-        code=login_challenge.code, login_challenge_token=login_challenge.login_challenge_token, email=login_challenge.email
+    insert_command = insert(models.LoginChallenge).values(
+        code=login_challenge.code,
+        login_challenge_token=login_challenge.login_challenge_token,
+        email=login_challenge.email,
     )
     insert_command = insert_command.on_conflict_do_update(
         index_elements=[models.LoginChallenge.email],
-        set_={models.LoginChallenge.code: login_challenge.code, models.LoginChallenge.login_challenge_token: login_challenge.login_challenge_token},
+        set_={
+            models.LoginChallenge.code: login_challenge.code,
+            models.LoginChallenge.login_challenge_token: login_challenge.login_challenge_token,
+        },
     )
 
     db.execute(insert_command)
 
     # Dr. Casey has asked the pin be shared to the developer somehow if the backend was in dev mode
     if utils.SENDGRID_API_KEY == "":
-        return {"login_challenge_token": login_challenge.login_challenge_token, "code": login_challenge.code}
+        logging.info(login_challenge.code)
 
     # return token for future auth
     return {"login_challenge_token": login_challenge.login_challenge_token}
@@ -76,7 +81,8 @@ def request_pin(input: schemas.LoginChallengeRequest, db: Session = Depends(get_
 def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)):
     # Check if pin and token are in db
     login_query = select(models.LoginChallenge).where(
-        models.LoginChallenge.login_challenge_token == input.login_challenge_token, models.LoginChallenge.code == input.code
+        models.LoginChallenge.login_challenge_token == input.login_challenge_token,
+        models.LoginChallenge.code == input.code,
     )
 
     login = db.execute(login_query).scalar()
