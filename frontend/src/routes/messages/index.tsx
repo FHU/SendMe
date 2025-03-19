@@ -14,9 +14,7 @@ export const Route = createFileRoute("/messages/")({
 
 const SearchMessages = styled(SlInput)`
 
-	width: 105%;
-	margin-left: 15px;
-
+	width: 110%;
 
 	&::part(base) {
 		box-shadow: none;
@@ -35,14 +33,13 @@ const CreateNewMessage = styled(Link)`
 	width: 50px;
 	background-color: #2E8B57;
 	border-radius: 50%;
-	align-self: flex-end;
-	margin-top: 10px;
-	margin-right: -7%;
 	font-size: 24px;
 	color: #fff;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	align-self: flex-end;
+	margin-right: -13%;
 
 	@media screen and (max-width: 700px){
 		margin-top: 50px;
@@ -51,16 +48,24 @@ const CreateNewMessage = styled(Link)`
 
 `;
 
+const MessageHeader = styled.h1`
+	
+	color: var(--sl-color-primary-500);
+	margin-top: -150px;
+
+	@media screen and (max-width: 700px){
+		margin-left: 20px;
+  }
+`;
+
 function RouteComponent() {
 	return (
 		<div>
-			<h1 style={{ color: "#2E8B57", marginTop: "-50px", marginLeft: "20px" }}>
-				Messages
-			</h1>
+			<MessageHeader>Messages</MessageHeader>
 			<SearchMessages placeholder="Search messages..." spellCheck>
 				<SlIconButton
 					name="search"
-					slot="suffix"
+					slot="prefix"
 					style={{ fontSize: "20px" }}
 				/>
 			</SearchMessages>

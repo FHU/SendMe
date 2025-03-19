@@ -105,10 +105,9 @@ export const Route = createFileRoute("/conversation/")({
 });
 
 const DisplayName = styled.h2`
-	margin-top: -20px;
+	margin-top: -130px;
  @media (max-width: 768px) {
 	margin-right: 130px;
-	margin-top: -40px;
   }
 `;
 
@@ -195,8 +194,7 @@ const SendNewMessage = styled(SlTextarea)`
 	&::part(base) {
 		box-shadow: none;
 		border: 1px solid #2E8B57;	
-		border-radius: 20px;
-		width: 100%;	
+		border-radius: 20px;	
 		border: none;
   }
 

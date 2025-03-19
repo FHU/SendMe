@@ -60,14 +60,13 @@ const ReadButton = styled.div`
   grid-column: 5;
   grid-row: 2;
   align-self: center;
-  margin-left: 130%;
+  margin-left: -40%;
   
   @media screen and (max-width: 700px){
-    grid-row-start: 1;
-    grid-row-end: 2;
+    grid-row: 1;
     grid-column: 3;
-    margin-top: 30px;
-    margin-left: 90px;
+    margin-top: 40px;
+    margin-left: 80px;
 
   }
 `;
@@ -76,58 +75,54 @@ const MessageCard = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
   grid-template-rows: 1fr 0.5fr 0.5;
-  background-color: #fff;
+  background-color: var(--sl-color-primary);
   margin-bottom: 20px;
-  width: 100%;
+  width: 110%;
 
   &:hover{
 	border-radius: 20px;
-	background-color: #D9D9D9;
+	background-color: var(--sl-hover-color);
   }
 
   @media screen and (max-width: 700px){
-    grid-template-columns: 0.5fr 1fr 1fr;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
     grid-template-rows: 1fr 0.5fr;
     margin-bottom: 0px;
+	margin-left: 2px;
+	width: 80%;
+	align-items: center;
   }
 `;
 
 const UserName = styled.h2`
-	grid-row-start: 1;
-	grid-row-end: 3;
-	grid-column-start: 2;
-	grid-column-end: 4;	
+	grid-row: 1 / span 2;
+	grid-column: 2 / span 2;
 
   @media screen and (max-width: 700px){
-    grid-row-start: 1;
-    grid-row-end: 2;
+    grid-row: 1;
     font-size: 16px;
   }
 
 `;
 const LastReadText = styled.p`
-	grid-row-start: 2;
-	grid-row-end: 3;
-	grid-column-start: 2;
-	grid-column-end: 5;
+	grid-row: 2;
+	grid-column: 2 / span 3;
 	padding-top: 40px;
 
   @media screen and (max-width: 700px){
-    grid-row-start: 1;
-    grid-row-end: 3;
-    grid-column-end: 3;
-    padding-top: 28px;
+    grid-row: 1 / span 2;
+    grid-column: 2;
 	font-size: 14px;
   }
 `;
 const LastReadTime = styled.p`
-	grid-row-start: 1;
-	grid-row-end: 3;
-	grid-column-start: 4;
+	grid-row: 1 / span 2;
+	grid-column: 4;
 	padding-top: 6px;
 
   @media screen and (max-width: 700px){
-    grid-column-start: 3;
+    grid-column: 3;
+	align-self: start;
   }
 
 `;
