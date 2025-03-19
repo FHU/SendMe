@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 """
-The handler to create an opportunity.
+The handler to create an opportunity. PLEASE PUT STATIC DATA IN THE router.get FUNCTION
 """
 
 

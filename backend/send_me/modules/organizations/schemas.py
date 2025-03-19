@@ -12,19 +12,19 @@ OpenAPI spec.
 """
 
 
-# Specifies the client's request to create an opportunity.
-class CreateOpportunityRequest(SendMeModel):
+# Specifies the client's request to create an organization.
+class CreateOrganizationRequest(SendMeModel):
     name: str
     description: str
+    location: str
+    type: str
 
 
-# This is the general definition of what an Opportunity looks like.
-class Opportunity(SendMeModel):
+# This is the general definition of what an Organization looks like.
+class Organization(SendMeModel):
     id: UUID
     name: str
     description: str
-    short_description: str
-    organization_id: UUID
-    event_date: datetime
-    created_at: datetime
     location: str
+    type: str
+    created_at: datetime

@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import DateTime
+from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from send_me.database.models import Base
@@ -13,9 +13,16 @@ class User(Base):
     __tablename__ = "users"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    username: Mapped[str]
     email: Mapped[str] = mapped_column(unique=True)
-    session: Mapped[Optional[Session]] = relationship(
+    organization_id: Mapped[str] = mapped_column(ForeignKey("Organizations.id"))
+    first_name: Mapped[str]
+    last_name: Mapped[str]
+    position: Mapped[str]
+    location: Mapped[str]
+    bio: Mapped[str]
+    profile_picture: Mapped[str]
+    linkedin: Mapped[Optional[str]] = mapped_column(unique=True)
+    session: Mapped[Optional[list[Session]]] = relationship(
         "Session", uselist=False, back_populates="user", cascade="all, delete-orphan"
     )
 

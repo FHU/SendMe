@@ -7,13 +7,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import styled from "styled-components";
 
 import { useMemo } from "react";
-
-const AppBar = styled.div`
-  background: var(--sl-color-primary-600);
-  padding: var(--sl-spacing-large);
-  color: var(--sl-color-neutral-0);
-  box-shadow: var(--sl-shadow-x-large);
-`;
+import Footer from "./-components/footer";
+import Navbar from "./-components/navbar";
 
 const ContentArea = styled.main`
   width: 600px;
@@ -40,10 +35,11 @@ function Providers({ children }: { children: JSX.Element[] }) {
 export const Route = createRootRoute({
 	component: () => (
 		<Providers>
-			<AppBar>Send Me!</AppBar>
+			<Navbar appName="SendMe" />
 			<ContentArea>
 				<Outlet />
 			</ContentArea>
+			<Footer />
 			<TanStackRouterDevtools />
 		</Providers>
 	),
