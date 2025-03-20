@@ -23,8 +23,8 @@ class Opportunity(SendMeModel):
     id: UUID
     name: str
     description: str
-    short_description: str
-    organization_id: UUID
-    event_date: datetime
+    short_description: str | None
+    location: str | None
+    organization_id: UUID | None
+    event_date: datetime | None
     created_at: datetime
-    location: str

@@ -19,9 +19,11 @@ class Opportunity(Base):
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     name: Mapped[str]
     description: Mapped[str]
-    location: Mapped[str]
-    short_description: Mapped[str]
-    organization_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("Organizations.id"))
+    location: Mapped[str | None]
+    short_description: Mapped[str | None]
+    organization_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("organizations.id")
+    )
     event_date: Mapped[datetime | None]
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now

@@ -52,7 +52,9 @@ This handler just gets a simple list of the opportunities.
 
 
 @router.get(
-    "/opportunities", response_model=list[schemas.Opportunity], operation_id="list"
+    "/opportunities",
+    response_model=list[schemas.Opportunity],
+    operation_id="list_opportunities",
 )
 def get_opportunities(
     db: Session = Depends(get_db),

@@ -12,7 +12,7 @@ export interface paths {
             cookie?: never;
         };
         /** Get Opportunities */
-        get: operations["list"];
+        get: operations["list_opportunities"];
         put?: never;
         /** Create Opportunity */
         post: operations["create"];
@@ -56,6 +56,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/organizations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Organizations */
+        get: operations["list_organizations"];
+        put?: never;
+        /** Create Organization */
+        post: operations["create_organization"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/hello": {
         parameters: {
             query?: never;
@@ -84,6 +102,17 @@ export interface components {
             /** Description */
             description: string;
         };
+        /** CreateOrganizationRequest */
+        CreateOrganizationRequest: {
+            /** Name */
+            name: string;
+            /** Description */
+            description: string;
+            /** Location */
+            location: string;
+            /** Type */
+            type: string;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -105,6 +134,35 @@ export interface components {
             name: string;
             /** Description */
             description: string;
+            /** Short Description */
+            short_description: string | null;
+            /** Location */
+            location: string | null;
+            /** Organization Id */
+            organization_id: string | null;
+            /** Event Date */
+            event_date: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+        };
+        /** Organization */
+        Organization: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Name */
+            name: string;
+            /** Description */
+            description: string;
+            /** Location */
+            location: string;
+            /** Type */
+            type: string;
             /**
              * Created At
              * Format: date-time
@@ -129,7 +187,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    list: {
+    list_opportunities: {
         parameters: {
             query?: never;
             header?: never;
@@ -247,6 +305,73 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    list_organizations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Organization"][];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    create_organization: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateOrganizationRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Organization"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
             };
         };
     };

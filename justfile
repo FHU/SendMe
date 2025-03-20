@@ -62,7 +62,7 @@ openapi:
     #!/usr/bin/env sh
     cd ./frontend
 
-    npx @openapi-qraft/cli --plugin tanstack-query-react --plugin openapi-typescript http://localhost:30500/openapi.json --output-dir ./src/api/qraft
+    npx openapi-qraft --plugin tanstack-query-react --plugin openapi-typescript http://localhost:30500/openapi.json --output-dir ./src/api/qraft
 
 routes:
     #!/usr/bin/env sh
