@@ -1,0 +1,111 @@
+{
+    "messages": [
+      {
+        "id": 0,
+        "user": {
+          "profilePicture": "/images/christian-buehner-DItYlc26zVI-unsplash.jpg",
+          "userName": "John Smith",
+          "userID": 0
+        },
+        "timestamp": "3:50 PM",
+        "messagePreview": "Hey! I heard about Servant's Day and would love to contribute...",
+        "readMessage": true,
+        "conversation": [
+          {
+            "id": 0,
+            "text": "Hey! I heard about Servant’s Day and I would love to contribute. Do you have any open projects?",
+            "timestamp": "3:50 PM",
+            "isUser": false
+          },
+          {
+            "id": 1,
+            "text": "We desperately need people to paint Bradfield Hall’s lobby if you’re interested.",
+            "timestamp": "3:52 PM",
+            "isUser": true
+          },
+          {
+            "id": 2,
+            "text": "That sounds great! I have lots of experience painting so I think I could be a good fit. What’s the next step?",
+            "timestamp": "3:53 PM",
+            "isUser": false
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "user": {
+          "profilePicture": "/images/microsoft-365-7mBictB_urk-unsplash.jpg",
+          "userName": "Clara Donovan",
+          "userID": 1
+        },
+        "timestamp": "1:23 PM",
+        "messagePreview": "Hello! My name is Clara and I was wondering if there might...",
+        "readMessage": true,
+        "conversation": [
+          {
+            "id": 1,
+            "text": "Hello! My name is Clara and I was wondering if there might be an opening for volunteers?",
+            "timestamp": "1:23 PM",
+            "isUser": false
+          },
+          {
+            "id": 2,
+            "text": "Sure! We’re always looking for volunteers to help around the church.",
+            "timestamp": "1:25 PM",
+            "isUser": true
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "user": {
+          "profilePicture": "/images/cosmic-timetraveler-_R1cc2IHk70-unsplash.jpg",
+          "userName": "Estes Church of Christ",
+          "userID": 2
+        },
+        "timestamp": "2:40 AM",
+        "messagePreview": "We have an opening for a 5th grade teacher. We saw you had...",
+        "readMessage": false,
+        "conversation": [
+          {
+            "id": 2,
+            "text": "We have an opening for a 5th grade teacher. We saw you had experience with teaching children. Would you be interested?",
+            "timestamp": "2:40 AM",
+            "isUser": false
+          },
+          {
+            "id": 3,
+            "text": "Thank you for reaching out! I’m interested. Can you provide more details about the position?",
+            "timestamp": "2:45 AM",
+            "isUser": true
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "user": {
+          "profilePicture": "/images/karl-fredrickson-JRsZWmRd_Ws-unsplash.jpg",
+          "userName": "Henderson Church of Christ",
+          "userID": 3
+        },
+        "timestamp": "9:00 AM",
+        "messagePreview": "We wanted to take a moment to thank you for your incredible...",
+        "readMessage": false,
+        "conversation": [
+          {
+            "id": 3,
+            "text": "We wanted to take a moment to thank you for your incredible work in the community. Your support means a lot to us!",
+            "timestamp": "9:00 AM",
+            "isUser": false
+          },
+          {
+            "id": 4,
+            "text": "You're very welcome! I’m always happy to help out. I appreciate the recognition.",
+            "timestamp": "9:10 AM",
+            "isUser": true
+          }
+        ]
+      }
+    ]
+  }
+  
