@@ -22,7 +22,7 @@ The handler to create an organization. PLEASE PUT STATIC DATA IN THE router.get 
     "/organizations",
     response_model=schemas.Organization,
     status_code=201,
-    operation_id="create",
+    operation_id="create_organization",
 )
 def create_organization(
     input: schemas.CreateOrganizationRequest,

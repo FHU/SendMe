@@ -12,7 +12,9 @@ export const Route = createFileRoute("/opportunities/")({
 const AreaHeading = styled.h2``;
 
 function RouteComponent() {
-	const { data, refetch } = api.opportunities.list.useQuery();
+	const { data: orgs, refetch: refetchOrg } =
+		api.organizations.listOrganizations.useQuery();
+	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
 	return (
 		<>
 			<CreateOpportunity onCreated={refetch} />

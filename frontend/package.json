@@ -20,6 +20,7 @@
     "styled-components": "^6.1.13"
   },
   "devDependencies": {
+    "@openapi-qraft/cli": "^1.14.2",
     "@biomejs/biome": "1.9.4",
     "@tanstack/router-cli": "^1.87.7",
     "@tanstack/router-devtools": "^1.91.3",
