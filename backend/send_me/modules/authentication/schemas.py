@@ -1,18 +1,20 @@
+from typing import Optional
+
 from send_me.schemas import SendMeModel
 
 
-class LoginRequest(SendMeModel):
+class LoginChallengeRequest(SendMeModel):
     email: str
 
 
-class LoginResponse(SendMeModel):
-    token: str
+class LoginChallengeResponse(SendMeModel):
+    login_challenge_token: str
 
 
 class SessionRequest(SendMeModel):
-    pin: str
-    token: str
+    code: str
+    login_challenge_token: str
 
 
 class SessionResponse(SendMeModel):
-    token: str
+    session_token: str
