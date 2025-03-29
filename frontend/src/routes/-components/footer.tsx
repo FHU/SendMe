@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { UserEmail } from "./UserEmail";
 
 const FooterContainer = styled.div`
   display: flex;
@@ -15,10 +16,10 @@ const AttributesCont = styled.div`
 `;
 
 const Attribute = styled.a`
-    font-size: 14px;
-    text-decoration: none;
-    color: var(--sl-color-primary-500);
-    margin: 1rem;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--sl-color-primary-500);
+  margin: 1rem;
 `;
 
 const Sitetitle = styled.h2`
@@ -35,7 +36,9 @@ const Footer = () => (
 			<Attribute href="#">Help Center</Attribute>
 			<Attribute href="#">Privacy & Terms</Attribute>
 		</AttributesCont>
-		<Sitetitle>SendMe &copy; 2025</Sitetitle>
+		<Sitetitle>
+			SendMe &copy; 2025 <UserEmail />
+		</Sitetitle>
 	</FooterContainer>
 );
 
