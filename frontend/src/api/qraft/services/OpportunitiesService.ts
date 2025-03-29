@@ -7,7 +7,7 @@ import type { paths } from "../schema";
 import type { ServiceOperationQuery, ServiceOperationMutation } from "@openapi-qraft/react";
 export interface OpportunitiesService {
     /** @summary Get Opportunities */
-    list: ServiceOperationQuery<{
+    listOpportunities: ServiceOperationQuery<{
         method: "get";
         url: "/opportunities";
     }, paths["/opportunities"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
@@ -20,7 +20,7 @@ export interface OpportunitiesService {
 }
 export const opportunitiesService: {
     /** @summary Get Opportunities */
-    list: {
+    listOpportunities: {
         schema: {
             method: "get";
             url: "/opportunities";
@@ -35,7 +35,7 @@ export const opportunitiesService: {
         };
     };
 } = {
-    list: {
+    listOpportunities: {
         schema: {
             method: "get",
             url: "/opportunities"
