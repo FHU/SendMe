@@ -1,7 +1,7 @@
 import { useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import styled from "styled-components";
-import EnterPinForm from "./EnterPinForm";
+import EnterOTPForm from "./EnterPinForm";
 import RequestPinForm from "./RequestPinForm";
 
 const FormWrapper = styled.div`
@@ -14,7 +14,6 @@ const FormWrapper = styled.div`
 
 const AuthForm: React.FC = () => {
 	const [isSuccess, setIsSuccess] = useState(false);
-	const [loginToken, setLoginToken] = useState<string | null>(null);
 	const router = useRouter(); // Get the router instance
 
 	const handleAuthSuccess = () => {
@@ -24,14 +23,10 @@ const AuthForm: React.FC = () => {
 	return (
 		<FormWrapper>
 			{isSuccess ? (
-				<EnterPinForm
-					loginToken={loginToken}
-					onAuthSuccess={handleAuthSuccess}
-				/>
+				<EnterOTPForm onAuthSuccess={handleAuthSuccess} />
 			) : (
 				<RequestPinForm
-					onSuccess={(token: string) => {
-						setLoginToken(token);
+					onSuccess={() => {
 						setIsSuccess(true);
 					}}
 				/>

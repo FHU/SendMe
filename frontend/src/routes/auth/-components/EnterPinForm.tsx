@@ -1,3 +1,4 @@
+import api from "@sendme/api";
 import { SlButton, SlCard, SlInput } from "@shoelace-style/shoelace/dist/react";
 import type React from "react";
 import { useState } from "react";
@@ -39,69 +40,52 @@ const SubmitButton = styled(SlButton)`
     color: #fff;
     border-radius: 30px;
     padding: 0.75rem 1.5rem;
+    text-transform: uppercase;
   }
 `;
 
-type EnterPinFormProps = {
-	loginToken: string | null;
+type EnterOTPFormProps = {
 	onAuthSuccess: () => void;
 };
 
-const EnterPinForm: React.FC<EnterPinFormProps> = ({
-	loginToken,
-	onAuthSuccess,
-}) => {
-	const [pin, setPin] = useState<string>("");
+const EnterOTPForm: React.FC<EnterOTPFormProps> = ({ onAuthSuccess }) => {
+	const [otp, setOtp] = useState<string>("");
 	const [responseMessage, setResponseMessage] = useState<string>("");
+	const { mutateAsync: enterOtp } = api.auth.enterOtp.useMutation();
 
 	const handleSlInput = (e: Event) => {
 		const target = e.target as HTMLInputElement;
-		setPin(target.value);
+		setOtp(target.value);
 	};
 
 	const submitPin = async () => {
-		if (!loginToken) {
-			console.error("Missing login token!");
-			return;
-		}
-
 		try {
-			const response = await fetch("/api/auth/sessiontoken", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ login_token: loginToken, pin }),
+			await enterOtp({
+				body: {
+					otp: otp,
+				},
 			});
 
-			if (response.ok) {
-				onAuthSuccess();
-				const data = await response.json();
-				console.log("Session Token:", data.session_token);
-			}
-			if (!response.ok) {
-				setResponseMessage("Something went wrong. Please try again.");
-				return;
-			} else {
-				console.error("Invalid PIN.");
-			}
+			onAuthSuccess();
 		} catch (error) {
-			console.error("Network error.");
+			setResponseMessage("Something went wrong. Please try again.");
 		}
 	};
 
 	return (
 		<InvisibleCard>
 			<CardBody>
-				<Title>Enter Your PIN</Title>
+				<Title>Enter Login Code</Title>
 				<StyledInput
-					placeholder="Enter your PIN"
-					value={pin}
+					placeholder="Login Code"
+					value={otp}
 					onSlInput={handleSlInput}
 					clearable
 				/>
-				<SubmitButton onClick={submitPin}>SUBMIT</SubmitButton>
+				<SubmitButton onClick={submitPin}>Submit</SubmitButton>
 			</CardBody>
 		</InvisibleCard>
 	);
 };
 
-export default EnterPinForm;
+export default EnterOTPForm;

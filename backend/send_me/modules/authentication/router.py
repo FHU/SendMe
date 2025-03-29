@@ -1,16 +1,16 @@
-import logging
 import secrets
 from datetime import datetime, timedelta, timezone
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from sqlalchemy import select
-from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
 from send_me.database.engine import get_db
 from send_me.modules.users.models import User
 
 from . import models, schemas, utils
+from .dependencies import get_user
+from .exceptions import SendOTPFailure
 
 TEN_MINUTES_OLD = timedelta(minutes=10)
 
@@ -21,11 +21,12 @@ router = APIRouter(
 )
 
 
-@router.post(
-    "/pin",
-    response_model=schemas.LoginChallengeResponse,
-)
-def request_pin(input: schemas.LoginChallengeRequest, db: Session = Depends(get_db)):
+@router.post("/start-challenge", operation_id="request_otp")
+def request_otp(
+    input: schemas.LoginChallengeRequest,
+    response: Response,
+    db: Session = Depends(get_db),
+):
     # Check if user exists
     user_query = select(User).where(User.email == input.email)
 
@@ -34,7 +35,7 @@ def request_pin(input: schemas.LoginChallengeRequest, db: Session = Depends(get_
     if not user:
         # We discussed creating a user if one does exist which would involve a redirect
         # For now one is just forced to be created.
-        user = User(email=input.email, username=input.email)
+        user = User(email=input.email, display_name=input.email)
         db.add(user)
         db.flush()
         db.refresh(user)
@@ -46,43 +47,45 @@ def request_pin(input: schemas.LoginChallengeRequest, db: Session = Depends(get_
         email=input.email,
     )
 
-    email_sent = utils.send_email(login_challenge.email, login_challenge.code)
-
-    # To avoid development dependancies this check can be ignored in dev mode
-    if not email_sent and utils.SENDGRID_API_KEY != "":
-        raise HTTPException(status_code=500, detail="Error when sending email")
+    try:
+        utils.send_otp(login_challenge.email, login_challenge.code)
+    except SendOTPFailure as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error when sending email: {str(e)}"
+        ) from e
 
     # Add login_challenge to DB
     # I think there is likely a better way to do this
-    insert_command = insert(models.LoginChallenge).values(
-        code=login_challenge.code,
-        login_challenge_token=login_challenge.login_challenge_token,
-        email=login_challenge.email,
-    )
-    insert_command = insert_command.on_conflict_do_update(
-        index_elements=[models.LoginChallenge.email],
-        set_={
-            models.LoginChallenge.code: login_challenge.code,
-            models.LoginChallenge.login_challenge_token: login_challenge.login_challenge_token,
-        },
+    #
+    #
+    db.add(
+        models.LoginChallenge(
+            code=login_challenge.code,
+            login_challenge_token=login_challenge.login_challenge_token,
+            email=login_challenge.email,
+        )
     )
 
-    db.execute(insert_command)
-
-    # Dr. Casey has asked the pin be shared to the developer somehow if the backend was in dev mode
-    if utils.SENDGRID_API_KEY == "":
-        logging.info(login_challenge.code)
-
-    # return token for future auth
-    return {"login_challenge_token": login_challenge.login_challenge_token}
+    response.set_cookie(
+        key="challenge_session",
+        value=login_challenge.login_challenge_token,
+        httponly=True,
+        samesite="strict",
+    )
 
 
-@router.post("/sessiontoken", response_model=schemas.SessionResponse)
-def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)):
+@router.post("/challenge", operation_id="enter_otp")
+def challenge_otp(
+    input: schemas.SessionRequest,
+    request: Request,
+    response: Response,
+    db: Session = Depends(get_db),
+):
+    token = request.cookies.get("challenge_session")
     # Check if pin and token are in db
     login_query = select(models.LoginChallenge).where(
-        models.LoginChallenge.login_challenge_token == input.login_challenge_token,
-        models.LoginChallenge.code == input.code,
+        models.LoginChallenge.login_challenge_token == token,
+        models.LoginChallenge.code == input.otp,
     )
 
     login = db.execute(login_query).scalar()
@@ -105,19 +108,19 @@ def request_session(input: schemas.SessionRequest, db: Session = Depends(get_db)
     if not user:
         raise HTTPException(status_code=404, detail="Unable to find user")
 
-    session = models.Session(session_token=secrets.token_urlsafe(32), user=user)
+    session = models.Session(session_token=secrets.token_urlsafe(32), user_id=user.id)
 
-    # Add new session to db
-    session_upsert = insert(models.Session).values(
-        session_token=session.session_token, user_id=session.user.id
-    )
-    session_upsert = session_upsert.on_conflict_do_update(
-        index_elements=[models.Session.user_id],
-        set_={models.Session.session_token: session.session_token},
-    )
-    db.execute(session_upsert)
+    db.add(session)
+
     db.delete(login)
-    db.flush()
 
-    # return token for future auth
-    return {"session_token": session.session_token}
+    response.set_cookie(
+        key="token", value=session.session_token, httponly=True, samesite="strict"
+    )
+
+
+@router.get("/me", response_model=schemas.UserInfo, operation_id="get_me")
+def current_user(
+    me: User = Depends(get_user),
+):
+    return me

@@ -1,3 +1,4 @@
+import api from "@sendme/api";
 import { SlButton, SlCard, SlInput } from "@shoelace-style/shoelace/dist/react";
 import type React from "react";
 import { useState } from "react";
@@ -103,38 +104,28 @@ const LoginButton = styled(SlButton)`
   }
 `;
 
-type RequestPinFormProps = {
-	onSuccess: (token: string) => void;
+type RequestOTPFormProps = {
+	onSuccess: () => void;
 };
 
-const RequestPinForm: React.FC<RequestPinFormProps> = ({ onSuccess }) => {
+const RequestOTPForm: React.FC<RequestOTPFormProps> = ({ onSuccess }) => {
 	const [email, setEmail] = useState<string>("");
 	const [responseMessage, setResponseMessage] = useState<string>("");
 	const [isError, setIsError] = useState<boolean>(false);
+	const { mutateAsync: requestOtp } = api.auth.requestOtp.useMutation();
 
 	const requestPin = async (): Promise<void> => {
 		setResponseMessage("");
 		setIsError(false);
 
 		try {
-			const response = await fetch("/api/auth/pin", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email }),
+			await requestOtp({
+				body: {
+					email,
+				},
 			});
 
-			if (response.ok) {
-				const data = await response.json();
-				onSuccess(data.login_token); // Switch to EnterPinForm
-				return;
-			}
-			if (!response.ok) {
-				setResponseMessage("Something went wrong. Please try again.");
-				return;
-			}
-
-			setIsError(true);
-			setResponseMessage("Something went wrong.");
+			onSuccess(); // Switch to EnterPinForm
 		} catch {
 			setIsError(true);
 			setResponseMessage("Something went wrong.");
@@ -164,7 +155,7 @@ const RequestPinForm: React.FC<RequestPinFormProps> = ({ onSuccess }) => {
 					<Title>Sign in to Your Account</Title>
 
 					<StyledInput
-						placeholder="Enter your email"
+						placeholder="Email"
 						value={email}
 						onSlInput={handleSlInput}
 						clearable
@@ -177,4 +168,4 @@ const RequestPinForm: React.FC<RequestPinFormProps> = ({ onSuccess }) => {
 	);
 };
 
-export default RequestPinForm;
+export default RequestOTPForm;

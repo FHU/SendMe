@@ -14,14 +14,11 @@ class User(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     email: Mapped[str] = mapped_column(unique=True)
-    organization_id: Mapped[str] = mapped_column(ForeignKey("Organizations.id"))
-    first_name: Mapped[str]
-    last_name: Mapped[str]
-    position: Mapped[str]
-    location: Mapped[str]
-    bio: Mapped[str]
-    profile_picture: Mapped[str]
-    linkedin: Mapped[Optional[str]] = mapped_column(unique=True)
+    organization_id: Mapped[str | None] = mapped_column(ForeignKey("organizations.id"))
+    display_name: Mapped[str]
+    location: Mapped[str | None]
+    bio: Mapped[str | None]
+    profile_picture: Mapped[str | None]
     session: Mapped[Optional[list[Session]]] = relationship(
         "Session", uselist=False, back_populates="user", cascade="all, delete-orphan"
     )
