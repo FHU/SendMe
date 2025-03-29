@@ -7,3 +7,6 @@ node_modules
 __pycache__/
 
 .react-router/
+
+.DS_Store
+**/.DS_Store

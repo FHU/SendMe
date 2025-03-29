@@ -17,6 +17,9 @@ function Index() {
 				<SlButton>Test</SlButton>
 			</Link>
 
+			<Link to="/messages">
+				<SlButton>Messages</SlButton>
+			</Link>
 			<Link to="/home">
 				<SlButton>Home</SlButton>
 			</Link>
