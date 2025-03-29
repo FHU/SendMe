@@ -1,18 +1,25 @@
+from uuid import UUID
+
 from send_me.schemas import SendMeModel
 
 
-class LoginRequest(SendMeModel):
+class LoginChallengeRequest(SendMeModel):
     email: str
 
 
-class LoginResponse(SendMeModel):
-    token: str
+class LoginChallengeResponse(SendMeModel):
+    login_challenge_token: str
 
 
 class SessionRequest(SendMeModel):
-    pin: str
-    token: str
+    otp: str
 
 
 class SessionResponse(SendMeModel):
-    token: str
+    session_token: str
+
+
+class UserInfo(SendMeModel):
+    id: UUID
+    email: str
+    display_name: str
