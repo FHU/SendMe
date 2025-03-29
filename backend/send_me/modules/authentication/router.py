@@ -82,7 +82,7 @@ def challenge_otp(
     db: Session = Depends(get_db),
 ):
     token = request.cookies.get("challenge_session")
-    # Check if pin and token are in db
+    # Check if otp and token are in db
     login_query = select(models.LoginChallenge).where(
         models.LoginChallenge.login_challenge_token == token,
         models.LoginChallenge.code == input.otp,

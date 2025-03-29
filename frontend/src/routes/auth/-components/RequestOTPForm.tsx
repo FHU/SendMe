@@ -114,7 +114,7 @@ const RequestOTPForm: React.FC<RequestOTPFormProps> = ({ onSuccess }) => {
 	const [isError, setIsError] = useState<boolean>(false);
 	const { mutateAsync: requestOtp } = api.auth.requestOtp.useMutation();
 
-	const requestPin = async (): Promise<void> => {
+	const requestOTP = async (): Promise<void> => {
 		setResponseMessage("");
 		setIsError(false);
 
@@ -125,7 +125,7 @@ const RequestOTPForm: React.FC<RequestOTPFormProps> = ({ onSuccess }) => {
 				},
 			});
 
-			onSuccess(); // Switch to EnterPinForm
+			onSuccess(); // Switch to EnterOTPForm
 		} catch {
 			setIsError(true);
 			setResponseMessage("Something went wrong.");
@@ -161,7 +161,7 @@ const RequestOTPForm: React.FC<RequestOTPFormProps> = ({ onSuccess }) => {
 						clearable
 					/>
 
-					<LoginButton onClick={requestPin}>LOGIN</LoginButton>
+					<LoginButton onClick={requestOTP}>LOGIN</LoginButton>
 				</CardBody>
 			</InvisibleCard>
 		</FormWrapper>

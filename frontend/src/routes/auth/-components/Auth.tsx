@@ -1,8 +1,8 @@
 import { useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import styled from "styled-components";
-import EnterOTPForm from "./EnterPinForm";
-import RequestPinForm from "./RequestPinForm";
+import EnterOTPForm from "./EnterOTPForm";
+import RequestOTPForm from "./RequestOTPForm";
 
 const FormWrapper = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const AuthForm: React.FC = () => {
 			{isSuccess ? (
 				<EnterOTPForm onAuthSuccess={handleAuthSuccess} />
 			) : (
-				<RequestPinForm
+				<RequestOTPForm
 					onSuccess={() => {
 						setIsSuccess(true);
 					}}
