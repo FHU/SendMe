@@ -1,9 +1,9 @@
-import { useRouter } from '@tanstack/react-router';
-import { useState } from 'react';
-import styled from 'styled-components';
-import EnterOTPForm from './EnterOTPForm';
-import RequestOTPForm from './RequestOTPForm';
-import { useUser } from 'src/routes/-hooks/UseUser';
+import { useRouter } from "@tanstack/react-router";
+import { useState } from "react";
+import { useUser } from "src/routes/-hooks/UseUser";
+import styled from "styled-components";
+import EnterOTPForm from "./EnterOTPForm";
+import RequestOTPForm from "./RequestOTPForm";
 
 const FormWrapper = styled.div`
   display: flex;
@@ -14,28 +14,28 @@ const FormWrapper = styled.div`
 `;
 
 const AuthForm: React.FC = () => {
-  const [isSuccess, setIsSuccess] = useState(false);
-  const router = useRouter(); // Get the router instance
-  const { setUserToLoggedIn } = useUser();
+	const [isSuccess, setIsSuccess] = useState(false);
+	const router = useRouter(); // Get the router instance
+	const { setUserToLoggedIn } = useUser();
 
-  const handleAuthSuccess = () => {
-    setUserToLoggedIn();
-    router.navigate({ to: '/opportunities' }); // Navigate to the opportunities page
-  };
+	const handleAuthSuccess = () => {
+		setUserToLoggedIn();
+		router.navigate({ to: "/opportunities" }); // Navigate to the opportunities page
+	};
 
-  return (
-    <FormWrapper>
-      {isSuccess ? (
-        <EnterOTPForm onAuthSuccess={handleAuthSuccess} />
-      ) : (
-        <RequestOTPForm
-          onSuccess={() => {
-            setIsSuccess(true);
-          }}
-        />
-      )}
-    </FormWrapper>
-  );
+	return (
+		<FormWrapper>
+			{isSuccess ? (
+				<EnterOTPForm onAuthSuccess={handleAuthSuccess} />
+			) : (
+				<RequestOTPForm
+					onSuccess={() => {
+						setIsSuccess(true);
+					}}
+				/>
+			)}
+		</FormWrapper>
+	);
 };
 
 export default AuthForm;

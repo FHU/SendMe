@@ -1,15 +1,18 @@
-import { useState } from 'react';
-import api, { type components } from '@sendme/api';
-import { redirect } from '@tanstack/react-router';
+import api, { type components } from "@sendme/api";
+import { redirect } from "@tanstack/react-router";
+import { useState } from "react";
 
-type TUser = components['schemas']['UserInfo'];
+type TUser = components["schemas"]["UserInfo"];
+
+// This is a biome choice. Open to better names
+type functionWithVoidReturn = () => void;
 
 interface useUserReturn {
-  user: TUser;
-  checkIfLoggedIn: Function;
-  refreshUser: Function;
-  setUserToLoggedIn: Function;
-  setUserToLoggedOut: Function;
+	user: TUser;
+	checkIfLoggedIn: functionWithVoidReturn;
+	refreshUser: functionWithVoidReturn;
+	setUserToLoggedIn: functionWithVoidReturn;
+	setUserToLoggedOut: functionWithVoidReturn;
 }
 
 /**
@@ -30,43 +33,43 @@ interface useUserReturn {
  * @returns { user, checkIfLoggedIn, refreshUser, setUserToLoggedIn, setUserToLoggedOut }
  */
 export const useUser = (): useUserReturn => {
-  const queryUser = (): TUser => {
-    const { data } = api.auth.getMe.useQuery();
+	const queryUser = (): TUser => {
+		const { data } = api.auth.getMe.useQuery();
 
-    // If no user exists, redirect to a creation page... for now a login
-    if (!data) {
-      throw redirect({
-        to: '/auth',
-      });
-    }
-    return data;
-  };
+		// If no user exists, redirect to a creation page... for now a login
+		if (!data) {
+			throw redirect({
+				to: "/auth",
+			});
+		}
+		return data;
+	};
 
-  const [user, setUser] = useState<TUser>(queryUser());
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [user, setUser] = useState<TUser>(queryUser());
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const refreshUser = () => {
-    if (isLoggedIn) return;
-    setUser(queryUser());
-  };
+	const refreshUser = () => {
+		if (isLoggedIn) return;
+		setUser(queryUser());
+	};
 
-  const setUserToLoggedIn = () => setIsLoggedIn(true);
-  const setUserToLoggedOut = () => setIsLoggedIn(false);
+	const setUserToLoggedIn = () => setIsLoggedIn(true);
+	const setUserToLoggedOut = () => setIsLoggedIn(false);
 
-  const checkIfLoggedIn = (): boolean => {
-    if (isLoggedIn) return true;
+	const checkIfLoggedIn = (): boolean => {
+		if (isLoggedIn) return true;
 
-    throw redirect({
-      to: '/auth',
-    });
-  };
+		throw redirect({
+			to: "/auth",
+		});
+	};
 
-  refreshUser();
-  return {
-    user,
-    checkIfLoggedIn,
-    refreshUser,
-    setUserToLoggedIn,
-    setUserToLoggedOut,
-  };
+	refreshUser();
+	return {
+		user,
+		checkIfLoggedIn,
+		refreshUser,
+		setUserToLoggedIn,
+		setUserToLoggedOut,
+	};
 };
