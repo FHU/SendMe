@@ -106,6 +106,7 @@ export const Route = createFileRoute("/conversation/")({
 
 const DisplayName = styled.h2`
 	margin-top: -130px;
+	color: var(--sl-color-text);
  @media (max-width: 768px) {
 	margin-right: 130px;
   }
@@ -129,7 +130,7 @@ const ChatContainer = styled.div`
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
-  background: #ffffff;
+  background: var(--sl-color-neutral-50);
   border-radius: 10px;
   padding: 10px;
   width: 100%;
@@ -180,7 +181,7 @@ const SendMessageContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid #2E8B57;	
+	border: 1px solid var(--sl-color-primary-500);	
 	border-radius: 20px;
 
 	@media (max-width: 768px) {
@@ -193,9 +194,10 @@ const SendNewMessage = styled(SlTextarea)`
 	width: 100%;
 	&::part(base) {
 		box-shadow: none;
-		border: 1px solid #2E8B57;	
+		border: 1px solid var(--sl-color-primary-500);	
 		border-radius: 20px;	
 		border: none;
+		background-color: var(--sl-color-neutral-50);
   }
 
 `;

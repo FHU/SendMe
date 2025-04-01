@@ -18,8 +18,9 @@ const SearchMessages = styled(SlInput)`
 
 	&::part(base) {
 		box-shadow: none;
-		border: 1px solid #2E8B57;
+		border: 1px solid var(--sl-color-primary-500);
 		border-radius: 20px;
+		background-color: var(--sl-color-neutral-50);
 	}
 	
 	@media (max-width: 700px) {
@@ -31,7 +32,7 @@ const SearchMessages = styled(SlInput)`
 const CreateNewMessage = styled(Link)`
 	height: 50px;
 	width: 50px;
-	background-color: #2E8B57;
+	background-color: var(--sl-color-primary-500);
 	border-radius: 50%;
 	font-size: 24px;
 	color: #fff;

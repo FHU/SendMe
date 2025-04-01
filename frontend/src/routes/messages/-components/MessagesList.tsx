@@ -142,7 +142,7 @@ const Message: React.FC<MessageProps> = ({
 	lastReadTime,
 	hasBeenRead,
 }) => {
-	const color = hasBeenRead ? "#000000" : "#898989FF";
+	const color = hasBeenRead ? "var(--sl-color-text)" : "#898989FF";
 	const fontWeight = hasBeenRead ? "bold" : "thin";
 	const readButtonVisibility = hasBeenRead ? "visible" : "hidden";
 	const readButtonColor = hasBeenRead ? "#32B4FF" : "#fff";
