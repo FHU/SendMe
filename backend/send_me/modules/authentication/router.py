@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 
 from send_me.database.engine import get_db
 from send_me.modules.users.models import User
+from send_me.modules.users.schemas import User as UserSchema
 
 from . import models, schemas, utils
 from .dependencies import get_user
@@ -119,7 +120,7 @@ def challenge_otp(
     )
 
 
-@router.get("/me", response_model=User, operation_id="get_me")
+@router.get("/me", response_model=UserSchema, operation_id="get_me")
 def current_user(
     me: User = Depends(get_user),
 ):
