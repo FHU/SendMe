@@ -1,6 +1,6 @@
 import { useRouter } from "@tanstack/react-router";
 import { useState } from "react";
-import { useUser } from "src/routes/-hooks/UseUser";
+import { useUser } from "src/hooks/UseUser";
 import styled from "styled-components";
 import EnterOTPForm from "./EnterOTPForm";
 import RequestOTPForm from "./RequestOTPForm";
