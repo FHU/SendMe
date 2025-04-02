@@ -119,7 +119,7 @@ def challenge_otp(
     )
 
 
-@router.get("/me", response_model=schemas.UserInfo, operation_id="get_me")
+@router.get("/me", response_model=User, operation_id="get_me")
 def current_user(
     me: User = Depends(get_user),
 ):

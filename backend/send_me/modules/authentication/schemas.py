@@ -1,5 +1,3 @@
-from uuid import UUID
-
 from send_me.schemas import SendMeModel
 
 
@@ -17,9 +15,3 @@ class SessionRequest(SendMeModel):
 
 class SessionResponse(SendMeModel):
     session_token: str
-
-
-class UserInfo(SendMeModel):
-    id: UUID
-    email: str
-    display_name: str
