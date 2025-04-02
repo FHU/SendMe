@@ -247,8 +247,8 @@ export interface components {
             /** Otp */
             otp: string;
         };
-        /** UserInfo */
-        UserInfo: {
+        /** User */
+        User: {
             /**
              * Id
              * Format: uuid
@@ -256,8 +256,27 @@ export interface components {
             id: string;
             /** Email */
             email: string;
-            /** Display Name */
-            display_name: string;
+            /** First Name */
+            first_name: string;
+            /** Last Name */
+            last_name: string;
+            /** Position */
+            position: string;
+            /** Location */
+            location: string;
+            /** Bio */
+            bio: string;
+            /** Profile Picture */
+            profile_picture: string;
+            /** Linkedin */
+            linkedin: string;
+            /** Facebook */
+            facebook: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -560,7 +579,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["UserInfo"];
+                    "application/json": components["schemas"]["User"];
                 };
             };
             /** @description Not Found */
