@@ -4,20 +4,20 @@ import { useState } from "react";
 
 type TUser = components["schemas"]["UserInfo"];
 
-interface useUserReturn {
+type useUserReturn = {
 	getUser: () => TUser;
 	userIsLoggedIn: () => boolean;
 	refreshUser: () => void;
 	setUserToLoggedIn: () => void;
 	setUserToLoggedOut: () => void;
-}
+};
 
 /**
  * A custom hook for managing user state. It creates an abstraction for tracking
  * when one is logged in and accessing the user object appropriately if one is logged in.
  * Simply check if userIsLoggedIn and do work from there.
  *
- * @returns { user, userIsLoggedIn, refreshUser, setUserToLoggedIn, setUserToLoggedOut }
+ * @returns { useUserReturn }
  */
 export const useUser = (): useUserReturn => {
 	const userQuery = (): TUser => {
