@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Header from "./header";
-import Tags from "./tags";
 import Info from "./info";
 import PastProj from "./past_proj";
+import Tags from "./tags";
 
 const BackGround = styled.div`
   display: flex;
@@ -11,10 +11,10 @@ const BackGround = styled.div`
 
 const Background = () => (
 	<BackGround>
-    <Header/>
-    <Tags/>
-    <Info/>
-    <PastProj/>
+		<Header />
+		<Tags />
+		<Info />
+		<PastProj />
 	</BackGround>
 );
 
