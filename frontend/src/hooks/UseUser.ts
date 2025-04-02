@@ -35,8 +35,7 @@ export const useUser = (): useUserReturn => {
 		return data;
 	};
 
-	const [user, setUser] = useState<TUser>(userQuery());
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [user, setUser] = useState<TUser>();
 
 	/**
 	 * Gets an instance of the currently logged in user
@@ -45,7 +44,7 @@ export const useUser = (): useUserReturn => {
 	 * @returns an instance of the currently logged in user
 	 */
 	const getUser = () => {
-		if (!isLoggedIn) throw redirect({ to: "/auth" });
+		if (!user) throw redirect({ to: "/auth" });
 		return user;
 	};
 
@@ -53,26 +52,26 @@ export const useUser = (): useUserReturn => {
 	 * Refreshes the login for the current user
 	 */
 	const refreshUser = () => {
-		if (isLoggedIn) return;
+		if (!user) throw redirect({ to: "/auth" });
 		setUser(userQuery());
 	};
 
 	/**
 	 * Sets logged in state to true
 	 */
-	const setUserToLoggedIn = () => setIsLoggedIn(true);
+	const setUserToLoggedIn = () => setUser(userQuery());
 
 	/**
 	 * Sets logged in state to false
 	 */
-	const setUserToLoggedOut = () => setIsLoggedIn(false);
+	const setUserToLoggedOut = () => setUser(undefined);
 
 	/**
 	 * Checks if a user is logged in. If one is not, it redirects the
 	 * user to the login screen.
 	 */
 	const userIsLoggedIn = (): boolean => {
-		if (isLoggedIn) return true;
+		if (user) return true;
 
 		throw redirect({
 			to: "/auth",
