@@ -1,5 +1,6 @@
 import { useRouter } from "@tanstack/react-router";
 import { useState } from "react";
+import { useUser } from "src/hooks/UseUser";
 import styled from "styled-components";
 import EnterOTPForm from "./EnterOTPForm";
 import RequestOTPForm from "./RequestOTPForm";
@@ -15,8 +16,10 @@ const FormWrapper = styled.div`
 const AuthForm: React.FC = () => {
 	const [isSuccess, setIsSuccess] = useState(false);
 	const router = useRouter(); // Get the router instance
+	const { setUserToLoggedIn } = useUser();
 
 	const handleAuthSuccess = () => {
+		setUserToLoggedIn();
 		router.navigate({ to: "/opportunities" }); // Navigate to the opportunities page
 	};
 
