@@ -8,8 +8,9 @@ const BackGround = styled.div` background: var(--sl-color-primary-50);
   padding: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center
-  max-width: fit-content`;
+  align-items: center;
+  max-width: fit-content;
+`
 
 const Background = () => (
 	<BackGround>
