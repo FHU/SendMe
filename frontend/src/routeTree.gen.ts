@@ -15,7 +15,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as OpportunitiesIndexImport } from './routes/opportunities/index'
 import { Route as MessagesIndexImport } from './routes/messages/index'
 import { Route as HomeIndexImport } from './routes/home/index'
-import { Route as ConversationIndexImport } from './routes/conversation/index'
+import { Route as ConversationsIndexImport } from './routes/conversations/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
 
 // Create/Update Routes
@@ -44,9 +44,9 @@ const HomeIndexRoute = HomeIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ConversationIndexRoute = ConversationIndexImport.update({
-  id: '/conversation/',
-  path: '/conversation/',
+const ConversationsIndexRoute = ConversationsIndexImport.update({
+  id: '/conversations/',
+  path: '/conversations/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -74,11 +74,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthIndexImport
       parentRoute: typeof rootRoute
     }
-    '/conversation/': {
-      id: '/conversation/'
-      path: '/conversation'
-      fullPath: '/conversation'
-      preLoaderRoute: typeof ConversationIndexImport
+    '/conversations/': {
+      id: '/conversations/'
+      path: '/conversations'
+      fullPath: '/conversations'
+      preLoaderRoute: typeof ConversationsIndexImport
       parentRoute: typeof rootRoute
     }
     '/home/': {
@@ -110,7 +110,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthIndexRoute
-  '/conversation': typeof ConversationIndexRoute
+  '/conversations': typeof ConversationsIndexRoute
   '/home': typeof HomeIndexRoute
   '/messages': typeof MessagesIndexRoute
   '/opportunities': typeof OpportunitiesIndexRoute
@@ -119,7 +119,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthIndexRoute
-  '/conversation': typeof ConversationIndexRoute
+  '/conversations': typeof ConversationsIndexRoute
   '/home': typeof HomeIndexRoute
   '/messages': typeof MessagesIndexRoute
   '/opportunities': typeof OpportunitiesIndexRoute
@@ -129,7 +129,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/auth/': typeof AuthIndexRoute
-  '/conversation/': typeof ConversationIndexRoute
+  '/conversations/': typeof ConversationsIndexRoute
   '/home/': typeof HomeIndexRoute
   '/messages/': typeof MessagesIndexRoute
   '/opportunities/': typeof OpportunitiesIndexRoute
@@ -140,17 +140,23 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
-    | '/conversation'
+    | '/conversations'
     | '/home'
     | '/messages'
     | '/opportunities'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/conversation' | '/home' | '/messages' | '/opportunities'
+  to:
+    | '/'
+    | '/auth'
+    | '/conversations'
+    | '/home'
+    | '/messages'
+    | '/opportunities'
   id:
     | '__root__'
     | '/'
     | '/auth/'
-    | '/conversation/'
+    | '/conversations/'
     | '/home/'
     | '/messages/'
     | '/opportunities/'
@@ -160,7 +166,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthIndexRoute: typeof AuthIndexRoute
-  ConversationIndexRoute: typeof ConversationIndexRoute
+  ConversationsIndexRoute: typeof ConversationsIndexRoute
   HomeIndexRoute: typeof HomeIndexRoute
   MessagesIndexRoute: typeof MessagesIndexRoute
   OpportunitiesIndexRoute: typeof OpportunitiesIndexRoute
@@ -169,7 +175,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthIndexRoute: AuthIndexRoute,
-  ConversationIndexRoute: ConversationIndexRoute,
+  ConversationsIndexRoute: ConversationsIndexRoute,
   HomeIndexRoute: HomeIndexRoute,
   MessagesIndexRoute: MessagesIndexRoute,
   OpportunitiesIndexRoute: OpportunitiesIndexRoute,
@@ -187,7 +193,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/auth/",
-        "/conversation/",
+        "/conversations/",
         "/home/",
         "/messages/",
         "/opportunities/"
@@ -199,8 +205,8 @@ export const routeTree = rootRoute
     "/auth/": {
       "filePath": "auth/index.tsx"
     },
-    "/conversation/": {
-      "filePath": "conversation/index.tsx"
+    "/conversations/": {
+      "filePath": "conversations/index.tsx"
     },
     "/home/": {
       "filePath": "home/index.tsx"

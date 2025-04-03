@@ -7,6 +7,8 @@ import { OpportunitiesService, opportunitiesService } from "./OpportunitiesServi
 import { DatabaseService, databaseService } from "./DatabaseService";
 import { OrganizationsService, organizationsService } from "./OrganizationsService";
 import { AuthService, authService } from "./AuthService";
+import { ConversationService, conversationService } from "./ConversationService";
+import { MessagesService, messagesService } from "./MessagesService";
 import { HelloService, helloService } from "./HelloService";
 import { ProtectedService, protectedService } from "./ProtectedService";
 export type Services = {
@@ -14,6 +16,8 @@ export type Services = {
     database: DatabaseService;
     organizations: OrganizationsService;
     auth: AuthService;
+    conversation: ConversationService;
+    messages: MessagesService;
     hello: HelloService;
     protected: ProtectedService;
 };
@@ -22,6 +26,8 @@ export const services = {
     database: databaseService,
     organizations: organizationsService,
     auth: authService,
+    conversation: conversationService,
+    messages: messagesService,
     hello: helloService,
     protected: protectedService
 } as const;

@@ -7,6 +7,7 @@ from send_me.schemas import SendMeModel
 
 class Conversation(SendMeModel):
     id: UUID
-    most_recent: Message
+    user: str
+    most_recent: str
     is_read: bool
     last_updated: datetime

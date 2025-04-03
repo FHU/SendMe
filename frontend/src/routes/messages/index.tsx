@@ -1,91 +1,98 @@
+import api from "@sendme/api";
 import {
 	SlIcon,
 	SlIconButton,
 	SlInput,
+	SlSpinner,
+	SlTextarea,
 } from "@shoelace-style/shoelace/dist/react";
-// import api from "@sendme/api";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
-import { MessagesList } from "./-components/MessagesList";
+import { MessageList } from "./-components/MessageList";
 
 export const Route = createFileRoute("/messages/")({
 	component: RouteComponent,
 });
 
-const SearchMessages = styled(SlInput)`
-
-	width: 110%;
-
-	&::part(base) {
-		box-shadow: none;
-		border: 1px solid #2E8B57;
-		border-radius: 20px;
-	}
-	
-	@media (max-width: 700px) {
-		margin-left: 10px;
-		width: 78%;
+const DisplayName = styled.h2`
+	margin-top: -130px;
+ @media (max-width: 768px) {
+	margin-right: 130px;
   }
 `;
 
-const CreateNewMessage = styled(Link)`
-	height: 50px;
-	width: 50px;
-	background-color: #2E8B57;
-	border-radius: 50%;
-	font-size: 24px;
-	color: #fff;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: auto;
+  width: 100%;
+  
+  @media (max-width: 768px) {
+	padding: 10px;
+  }
+`;
+
+const ChatContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  overflow-x: hidden;
+  height: 50vh;
+
+`;
+
+const SendMessageContainer = styled.div`
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	align-self: flex-end;
-	margin-right: -13%;
+	border: 1px solid #2E8B57;	
+	border-radius: 20px;
+	margin-top: 50px;
 
-	@media screen and (max-width: 700px){
-		margin-top: 50px;
+	@media (max-width: 768px) {
+		width: 80%;
 		margin-right: 130px;
   }
-
 `;
 
-const MessageHeader = styled.h1`
-	
-	color: var(--sl-color-primary-500);
-	margin-top: -150px;
-
-	@media screen and (max-width: 700px){
-		margin-left: 20px;
+const SendNewMessage = styled(SlTextarea)`
+	width: 100%;
+	&::part(base) {
+		box-shadow: none;
+		border: 1px solid #2E8B57;	
+		border-radius: 20px;	
+		border: none;
   }
+
 `;
 
 function RouteComponent() {
+	const { data: conversations, refetch: refetchOrg } =
+		api.messages.listMessages.useQuery();
+	const { data, refetch } = api.messages.listMessages.useQuery();
 	return (
-		<div>
-			<MessageHeader>Messages</MessageHeader>
-			<SearchMessages placeholder="Search messages..." spellCheck>
-				<SlIconButton
-					name="search"
-					slot="prefix"
-					style={{ fontSize: "20px" }}
+		<Container>
+			<DisplayName>John Smith</DisplayName>
+			<ChatContainer>
+				{!data ? <SlSpinner /> : <MessageList data={data} />}
+			</ChatContainer>
+			<SendMessageContainer>
+				<SendNewMessage
+					placeholder="Type a message..."
+					spellCheck
+					rows={1}
+					resize="auto"
 				/>
-			</SearchMessages>
-			<div style={{ display: "flex", flexDirection: "column" }}>
-				<Link
-					to="/conversation"
-					className="messages"
-					style={{
-						display: "flex",
-						flexDirection: "column",
-						textDecoration: "none",
-						color: "black",
-					}}
-				>
-					<MessagesList />
-				</Link>
-				<CreateNewMessage to="/conversation" className="createNewMessage">
-					<SlIcon name="pencil-fill" />
-				</CreateNewMessage>
-			</div>
-		</div>
+				<SlIconButton name="send" slot="suffix" style={{ fontSize: "20px" }} />
+			</SendMessageContainer>
+		</Container>
 	);
 }

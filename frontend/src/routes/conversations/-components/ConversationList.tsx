@@ -1,57 +1,16 @@
-// import api, { type components } from "@sendme/api";
-import { SlAvatar, SlIcon, SlInput } from "@shoelace-style/shoelace/dist/react";
+import api, { type components } from "@sendme/api";
+import { SlAvatar } from "@shoelace-style/shoelace/dist/react";
 import type React from "react";
 import styled from "styled-components";
 
-const messages = [
-	{
-		id: 0,
-		user: {
-			profilePicture: "/images/christian-buehner-DItYlc26zVI-unsplash.jpg",
-			userName: "John Smith",
-			userID: 0,
-		},
-		timeStamp: "3:53 PM",
-		messagePreview: "Hey! I heard about Servant's Day and would love to...",
-		readMessage: true,
-	},
-	{
-		id: 1,
-		user: {
-			profilePicture: "/images/microsoft-365-7mBictB_urk-unsplash.jpg",
-			userName: "Clara Donovan",
-			userID: 1,
-		},
-		timeStamp: "1:23 PM",
-		messagePreview:
-			"Hello! My name is Clara and I was wondering if there might...",
-		readMessage: true,
-	},
-	{
-		id: 2,
-		user: {
-			profilePicture: "/images/cosmic-timetraveler-_R1cc2IHk70-unsplash.jpg",
-			userName: "Estes Church of Christ",
-			userID: 2,
-		},
-		timeStamp: "2:40 AM",
-		messagePreview:
-			"We have an opening for a 5th grade teacher. We saw you had...",
-		readMessage: false,
-	},
-	{
-		id: 3,
-		user: {
-			profilePicture: "/images/karl-fredrickson-JRsZWmRd_Ws-unsplash.jpg",
-			userName: "Henderson Church of Christ",
-			userID: 3,
-		},
-		timeStamp: "9:00 AM",
-		messagePreview:
-			"We wanted to take a moment to thank you for your incredible...",
-		readMessage: false,
-	},
-];
+const formatDate = (dateString: string) => {
+	const date = new Date(dateString);
+	return new Intl.DateTimeFormat("en-US", {
+		hour: "2-digit",
+		minute: "2-digit",
+		hour12: true,
+	}).format(date);
+};
 
 const ReadButton = styled.div`
   height: 15px;
@@ -127,7 +86,7 @@ const LastReadTime = styled.p`
 
 `;
 
-interface MessageProps {
+interface ConversationProps {
 	imagePath?: string;
 	userName?: string;
 	lastReadMessage?: string;
@@ -135,17 +94,19 @@ interface MessageProps {
 	hasBeenRead: boolean;
 }
 
-const Message: React.FC<MessageProps> = ({
+const Conversation: React.FC<ConversationProps> = ({
 	imagePath,
 	userName,
 	lastReadMessage,
 	lastReadTime,
 	hasBeenRead,
 }) => {
-	const color = hasBeenRead ? "#000000" : "#898989FF";
-	const fontWeight = hasBeenRead ? "bold" : "thin";
-	const readButtonVisibility = hasBeenRead ? "visible" : "hidden";
-	const readButtonColor = hasBeenRead ? "#32B4FF" : "#fff";
+	const color = hasBeenRead ? "#898989FF" : "#000000";
+	const fontWeight = hasBeenRead ? "thin" : "bold";
+	const readButtonVisibility = hasBeenRead ? "hidden" : "visible";
+	const readButtonColor = hasBeenRead ? "#fff" : "#32B4FF";
+
+	const formattedDate = formatDate(lastReadTime);
 
 	return (
 		<>
@@ -182,7 +143,7 @@ const Message: React.FC<MessageProps> = ({
 							fontWeight: fontWeight,
 						}}
 					>
-						{lastReadTime}
+						{formattedDate}
 					</LastReadTime>
 					<ReadButton
 						style={{
@@ -196,18 +157,22 @@ const Message: React.FC<MessageProps> = ({
 	);
 };
 
-export function MessagesList(): JSX.Element {
+export function ConversationList({
+	data,
+}: {
+	data: components["schemas"]["Conversation"][];
+}): JSX.Element {
 	return (
 		<>
-			{messages.map((message) => (
-				<Message
-					key={message.user.userID} // Ensure each element has a unique key
-					imagePath={message.user.profilePicture}
-					userName={message.user.userName}
-					lastReadMessage={message.messagePreview}
-					lastReadTime={message.timeStamp}
-					hasBeenRead={message.readMessage}
-				/>
+			{data?.map((conversation) => (
+				<Conversation
+					key={conversation.id}
+					imagePath={conversation.last_updated}
+					userName={conversation.user}
+					lastReadMessage={conversation.most_recent}
+					lastReadTime={conversation.last_updated}
+					hasBeenRead={conversation.is_read}
+				></Conversation>
 			))}
 		</>
 	);
