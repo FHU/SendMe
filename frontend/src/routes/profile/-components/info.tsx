@@ -65,4 +65,5 @@ const Info = () => (
   </InfoContainer>
 );
 
+
 export default Info;
