@@ -32,17 +32,17 @@ const EditContainer = styled.div`
 `;
 
 const Tags = () => (
-<TagsContainer>
-    <TagButtons>
-        <TagButton>Preacher</TagButton>
-        <TagButton>Youth</TagButton>
-        <TagButton>Spanish</TagButton>
-        <TagButton>Paid</TagButton>
-    </TagButtons>
-    <EditContainer>
-        <SlIconButton name="pencil" label="Pencil" />
-    </EditContainer>
-</TagsContainer>
-)
+	<TagsContainer>
+		<TagButtons>
+			<TagButton>Preacher</TagButton>
+			<TagButton>Youth</TagButton>
+			<TagButton>Spanish</TagButton>
+			<TagButton>Paid</TagButton>
+		</TagButtons>
+		<EditContainer>
+			<SlIconButton name="pencil" label="Pencil" />
+		</EditContainer>
+	</TagsContainer>
+);
 
 export default Tags;
