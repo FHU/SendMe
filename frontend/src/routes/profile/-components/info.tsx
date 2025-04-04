@@ -6,7 +6,7 @@ const InfoContainer = styled.div`
   padding: 15px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
-  max-width: 400px;
+  width: 400px;
 `;
 
 const Header = styled.div`
