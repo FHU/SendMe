@@ -23,6 +23,9 @@ function Index() {
 			<Link to="/home">
 				<SlButton>Home</SlButton>
 			</Link>
+			<Link to="/profile">
+				<SlButton>Profile</SlButton>
+			</Link>
 		</div>
 	);
 }
