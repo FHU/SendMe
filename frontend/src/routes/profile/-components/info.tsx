@@ -1,8 +1,5 @@
-import {
-	SlIconButton
-} from "@shoelace-style/shoelace/dist/react";
+import { SlIconButton } from "@shoelace-style/shoelace/dist/react";
 import styled from "styled-components";
-
 
 const InfoContainer = styled.div`
   background-color: white;
@@ -46,24 +43,25 @@ const Icon = styled.a`
 `;
 
 const Info = () => (
-  <InfoContainer>
-    <Header>
-      <span>About Me</span>
-      <SlIconButton name="pencil" label="Pencil" />
-    </Header>
-    <Content>
-      As a graduate from Freed-Hardeman University, I managed all aspects from logistics to program development. 
-      My work with local outreach events involved coordinating volunteers, securing resources, and building relationships 
-      with community partners. These experiences honed my leadership, organizational, and communication skills.
-    </Content>
-    <SocialIcons>
-    <SlIconButton name="facebook" label="Facebook" />
-    <SlIconButton name="tiktok" label="Tiktok" />
-    <SlIconButton name="linkedin" label="LinkedIn" />
-    <SlIconButton name="twitter-x" label="X" />
-    </SocialIcons>
-  </InfoContainer>
+	<InfoContainer>
+		<Header>
+			<span>About Me</span>
+			<SlIconButton name="pencil" label="Pencil" />
+		</Header>
+		<Content>
+			As a graduate from Freed-Hardeman University, I managed all aspects from
+			logistics to program development. My work with local outreach events
+			involved coordinating volunteers, securing resources, and building
+			relationships with community partners. These experiences honed my
+			leadership, organizational, and communication skills.
+		</Content>
+		<SocialIcons>
+			<SlIconButton name="facebook" label="Facebook" />
+			<SlIconButton name="tiktok" label="Tiktok" />
+			<SlIconButton name="linkedin" label="LinkedIn" />
+			<SlIconButton name="twitter-x" label="X" />
+		</SocialIcons>
+	</InfoContainer>
 );
-
 
 export default Info;

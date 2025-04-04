@@ -10,7 +10,7 @@ const BackGround = styled.div` background: var(--sl-color-primary-50);
   flex-direction: column;
   align-items: center;
   max-width: fit-content;
-`
+`;
 
 const Background = () => (
 	<BackGround>
