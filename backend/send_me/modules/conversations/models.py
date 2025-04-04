@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey
+from sqlalchemy import DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 
 from send_me.database.models import Base
@@ -23,5 +23,3 @@ class Conversation(Base):
     )
     most_recent: Mapped[str]
     is_read: Mapped[bool]
-
-

@@ -16,6 +16,7 @@ export const Route = createFileRoute("/messages/")({
 
 const DisplayName = styled.h2`
 	margin-top: -130px;
+	color: var(--sl-color-text);
  @media (max-width: 768px) {
 	margin-right: 130px;
   }
@@ -39,7 +40,7 @@ const ChatContainer = styled.div`
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
-  background: #ffffff;
+  background: var(--sl-color-neutral-50);
   border-radius: 10px;
   padding: 10px;
   width: 100%;
@@ -53,7 +54,7 @@ const SendMessageContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid #2E8B57;	
+	border: 1px solid var(--sl-color-primary-500);	
 	border-radius: 20px;
 	margin-top: 50px;
 
@@ -67,10 +68,11 @@ const SendNewMessage = styled(SlTextarea)`
 	width: 100%;
 	&::part(base) {
 		box-shadow: none;
-		border: 1px solid #2E8B57;	
+		border: 1px solid var(--sl-color-primary-500);
 		border-radius: 20px;	
 		border: none;
-  }
+		background-color: var(--sl-color-neutral-50);
+  	}
 
 `;
 
@@ -91,7 +93,11 @@ function RouteComponent() {
 					rows={1}
 					resize="auto"
 				/>
-				<SlIconButton name="send" slot="suffix" style={{ fontSize: "20px" }} />
+				<SlIconButton
+					name="send"
+					slot="suffix"
+					style={{ fontSize: "20px", color: "var(--sl-color-text)" }}
+				/>
 			</SendMessageContainer>
 		</Container>
 	);

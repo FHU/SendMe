@@ -13,10 +13,10 @@ const formatDate = (dateString: string) => {
 	}).format(date);
 };
 
-const MessageContainer = styled.div<{ $isUser: boolean }>`
+const MessageContainer = styled.div<{ isUser: boolean }>`
   display: flex;
   flex-direction: column;
-  align-items: ${({ $isUser }) => ($isUser ? "flex-end" : "flex-start")};
+  align-items: ${({ isUser }) => (isUser ? "flex-end" : "flex-start")};
   margin: 5px;
   width: 80%;
   @media (max-width: 768px) {
@@ -25,11 +25,11 @@ const MessageContainer = styled.div<{ $isUser: boolean }>`
 
 `;
 
-const MessageDisplay = styled.div<{ $isUser: boolean }>`
+const MessageDisplay = styled.div<{ isUser: boolean }>`
   padding: 10px;
   border-radius: 10px;
   max-width: 75%;
-  background: ${({ $isUser }) => ($isUser ? "#DCFFDB" : "#D9D9D9")};
+  background: ${({ isUser }) => (isUser ? "#DCFFDB" : "#D9D9D9")};
   color: #000;
   height: 100%;
   word-wrap: break-word; 
@@ -37,16 +37,16 @@ const MessageDisplay = styled.div<{ $isUser: boolean }>`
   margin-right: 10px;
 `;
 
-const Timestamp = styled.div<{ $isUser: boolean }>`
+const Timestamp = styled.div<{ isUser: boolean }>`
   font-size: 12px;
-  color: #555;
-  align-self: ${({ $isUser }) => ($isUser ? "flex-end" : "flex-start")};
-  margin-left: ${({ $isUser }) => ($isUser ? "0px" : "65px")};
-  margin-right: ${({ $isUser }) => ($isUser ? "80px" : "0px")};
+  color: var(--sl-color-text);
+  align-self: ${({ isUser }) => (isUser ? "flex-end" : "flex-start")};
+  margin-left: ${({ isUser }) => (isUser ? "0px" : "65px")};
+  margin-right: ${({ isUser }) => (isUser ? "80px" : "0px")};
   margin-top: 2px;
   @media (max-width: 768px) {
-	margin-left: ${({ $isUser }) => ($isUser ? "0px" : "10px")};
-	margin-right: ${({ $isUser }) => ($isUser ? "130px" : "0px")};
+	margin-left: ${({ isUser }) => (isUser ? "0px" : "10px")};
+	margin-right: ${({ isUser }) => (isUser ? "130px" : "0px")};
   }
 `;
 
@@ -71,10 +71,10 @@ export function MessageList({
 		<>
 			{data.map((msg) => (
 				<>
-					<MessageContainer key={msg.id} $isUser={msg.isUser}>
-						<MessageDisplay $isUser={msg.isUser}>{msg.text}</MessageDisplay>
+					<MessageContainer key={msg.id} isUser={msg.isUser}>
+						<MessageDisplay isUser={msg.isUser}>{msg.text}</MessageDisplay>
 					</MessageContainer>
-					<Timestamp key={msg.id} $isUser={msg.isUser}>
+					<Timestamp key={msg.created_at} isUser={msg.isUser}>
 						{formatDate(msg.created_at)}
 					</Timestamp>
 				</>

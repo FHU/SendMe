@@ -101,7 +101,7 @@ const Conversation: React.FC<ConversationProps> = ({
 	lastReadTime,
 	hasBeenRead,
 }) => {
-	const color = hasBeenRead ? "#898989FF" : "#000000";
+	const color = hasBeenRead ? "#898989FF" : "var(--sl-color-text)";
 	const fontWeight = hasBeenRead ? "thin" : "bold";
 	const readButtonVisibility = hasBeenRead ? "hidden" : "visible";
 	const readButtonColor = hasBeenRead ? "#fff" : "#32B4FF";
@@ -172,7 +172,7 @@ export function ConversationList({
 					lastReadMessage={conversation.most_recent}
 					lastReadTime={conversation.last_updated}
 					hasBeenRead={conversation.is_read}
-				></Conversation>
+				/>
 			))}
 		</>
 	);

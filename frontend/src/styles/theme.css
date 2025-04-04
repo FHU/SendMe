@@ -37,6 +37,7 @@
 
 		--sl-color-neutral-50: #121212; /* Dark background color */
 		--sl-color-text: #E0E0E0; /* Light text color for dark mode */
+		--sl-hover-color: #B0B0B0;
 	}
 }
 

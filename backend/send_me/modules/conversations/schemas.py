@@ -1,7 +1,6 @@
 from datetime import datetime
 from uuid import UUID
 
-from send_me.modules.messages.schemas import Message
 from send_me.schemas import SendMeModel
 
 
