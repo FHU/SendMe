@@ -60,24 +60,24 @@ const PastProj = () => (
 			<span>Projects</span>
 			<SlIconButton name="pencil" label="Pencil" />
 		</Header>
-        <ProjectsList>
-            <Content>
-                <ContentText>
-                    I youth ministered at Pine Cone Church of Christ.
-                </ContentText>
-                <ProjImageContainer>
-                    <ProjImage src={projImage}/>
-                </ProjImageContainer>
-            </Content>
-            <Content>
-                <ContentText>
-                    I youth ministered at Pine Cone Church of Christ.
-                </ContentText>
-                <ProjImageContainer>
-                    <ProjImage src={projImage1}/>
-                </ProjImageContainer>
-            </Content>
-        </ProjectsList>
+		<ProjectsList>
+			<Content>
+				<ContentText>
+					I youth ministered at Pine Cone Church of Christ.
+				</ContentText>
+				<ProjImageContainer>
+					<ProjImage src={projImage} />
+				</ProjImageContainer>
+			</Content>
+			<Content>
+				<ContentText>
+					I youth ministered at Pine Cone Church of Christ.
+				</ContentText>
+				<ProjImageContainer>
+					<ProjImage src={projImage1} />
+				</ProjImageContainer>
+			</Content>
+		</ProjectsList>
 	</PastProjContainer>
 );
 
