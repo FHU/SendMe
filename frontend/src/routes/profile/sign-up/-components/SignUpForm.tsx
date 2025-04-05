@@ -110,7 +110,7 @@ type SignUpFormProps = {
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 	const [responseMessage, setResponseMessage] = useState("");
-	const { mutateAsync, isError } = api.users.createUser.useMutation();
+	const { mutateAsync } = api.users.createUser.useMutation();
 
 	const onSubmit = useCallback(
 		(e: React.FormEvent<HTMLFormElement>) => {
@@ -121,9 +121,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 			mutateAsync({
 				body: {
 					email: formData.get("email")?.toString() || "",
-					display_name: formData.get("display_name")?.toString() || "",
-					first_name: formData.get("first_name")?.toString() || "",
-					last_name: formData.get("last_name")?.toString() || "",
+					display_name: formData.get("displayName")?.toString() || "",
+					first_name: formData.get("firstName")?.toString() || "",
+					last_name: formData.get("lastName")?.toString() || "",
 				},
 			})
 				.catch((error) => {
@@ -153,17 +153,13 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 				<CardBody>
 					<Title>Sign Up!</Title>
 
-					<StyledInput placeholder="Email" label="email" clearable />
+					<StyledInput label="Email" name="email" clearable />
 
-					<StyledInput placeholder="First Name" label="first_name" clearable />
+					<StyledInput label="First Name" name="firstName" clearable />
 
-					<StyledInput placeholder="Last Name" label="last_name" clearable />
+					<StyledInput label="Last Name" name="lastName" clearable />
 
-					<StyledInput
-						placeholder="Display Name"
-						label="display_name"
-						clearable
-					/>
+					<StyledInput label="Display Name" name="displayName" clearable />
 					<SignUpButton type="submit">Sign Up</SignUpButton>
 				</CardBody>
 			</InvisibleCard>

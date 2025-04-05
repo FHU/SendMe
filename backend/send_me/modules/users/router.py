@@ -34,7 +34,7 @@ def make_user(input: schemas.CreateUserRequest, db: Session = Depends(get_db)):
         db.flush()
     except IntegrityError as e:
         raise HTTPException(
-            status_code=400, detail=f"Duplicate Email Used: {new_user.email}"
+            status_code=400, detail=f"Duplicate Email Used: {input.email}"
         ) from e
 
     db.refresh(new_user)
