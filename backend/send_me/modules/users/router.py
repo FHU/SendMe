@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 
 from send_me.database.engine import get_db
 
@@ -28,7 +29,12 @@ def make_user(input: schemas.CreateUserRequest, db: Session = Depends(get_db)):
     )
 
     db.add(new_user)
-    db.flush()
+
+    try:
+        db.flush()
+    except IntegrityError as e:
+        raise HTTPException(status_code=400, detail=f"Duplicate Email Used: {new_user.email}")
+
     db.refresh(new_user)
 
     return new_user
@@ -37,7 +43,7 @@ def make_user(input: schemas.CreateUserRequest, db: Session = Depends(get_db)):
 # @router.get(
 #     "/profiles/{user_id}",
 #     response_model=schemas.GetProfileResponse,
-#     operation_id="get_profile",
+#     operation_id="getProfile",
 # )
 # def get_profile(user_id, db: Session = Depends(get_db)):
 #     pass
