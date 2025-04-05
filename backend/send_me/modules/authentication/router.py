@@ -2,6 +2,7 @@ import secrets
 from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
+from fastapi.responses import RedirectResponse
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -33,12 +34,7 @@ def request_otp(
     user = db.execute(user_query).scalar()
 
     if not user:
-        # We discussed creating a user if one does exist which would involve a redirect
-        # For now one is just forced to be created.
-        user = User(email=input.email, display_name=input.email)
-        db.add(user)
-        db.flush()
-        db.refresh(user)
+        return RedirectResponse(url="/profiles/sign-up")
 
     # Create a login
     login_challenge = models.LoginChallenge(
@@ -54,10 +50,6 @@ def request_otp(
             status_code=500, detail=f"Error when sending email: {str(e)}"
         ) from e
 
-    # Add login_challenge to DB
-    # I think there is likely a better way to do this
-    #
-    #
     db.add(
         models.LoginChallenge(
             code=login_challenge.code,
