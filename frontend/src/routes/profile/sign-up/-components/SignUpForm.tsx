@@ -1,10 +1,10 @@
 import api from "@sendme/api";
 import { SlButton, SlCard, SlInput } from "@shoelace-style/shoelace/dist/react";
 import type React from "react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import styled from "styled-components";
 
-const FormWrapper = styled.div`
+const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,7 +74,7 @@ const StyledInput = styled(SlInput)`
   border-radius: 24px;
 `;
 
-const LoginButton = styled(SlButton)`
+const SignUpButton = styled(SlButton)`
   &::part(base) {
     background-color: var(--sl-color-primary-500);
     color: #fff;
@@ -105,53 +105,43 @@ const LoginButton = styled(SlButton)`
 `;
 
 type SignUpFormProps = {
-	onSuccess: () => void;
+	onSuccess?: () => void;
 };
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
-	const [email, setEmail] = useState("");
-	const [first_name, setFirstName] = useState("");
-	const [last_name, setLastName] = useState("");
-	const [display_name, setDisplayName] = useState("");
 	const [responseMessage, setResponseMessage] = useState("");
-	const [isError, setIsError] = useState(false);
-	const { mutateAsync } = api.users.createUser.useMutation();
+	const { mutateAsync, isError } = api.users.createUser.useMutation();
 
-	const makeUser = async (): Promise<void> => {
-		setResponseMessage("");
-		setIsError(false);
+	const onSubmit = useCallback(
+		(e: React.FormEvent<HTMLFormElement>) => {
+			e.preventDefault();
 
-		try {
-			await mutateAsync({
+			const formData = new FormData(e.currentTarget);
+
+			mutateAsync({
 				body: {
-					email,
-					first_name,
-					last_name,
-					display_name,
+					email: formData.get("email")?.toString() || "",
+					display_name: formData.get("display_name")?.toString() || "",
+					first_name: formData.get("first_name")?.toString() || "",
+					last_name: formData.get("last_name")?.toString() || "",
 				},
-			});
-
-			onSuccess();
-		} catch {
-			setIsError(true);
-			setResponseMessage("Something went wrong.");
-		}
-	};
+			})
+				.catch((error) => {
+					setResponseMessage(error.detail);
+				})
+				.then(() => {
+					if (onSuccess) onSuccess();
+				});
+		},
+		[mutateAsync, onSuccess],
+	);
 
 	const handleCloseBanner = (): void => {
 		setResponseMessage("");
 	};
 
-	const handleSlInput = (
-		e: Event,
-		set: React.Dispatch<React.SetStateAction<string>>,
-	) => {
-		const target = e.target as HTMLInputElement;
-		set(target.value);
-	};
-
 	return (
-		<FormWrapper>
+		<FormWrapper onSubmit={onSubmit}>
 			{responseMessage && (
 				<RedBanner>
 					<span>{responseMessage}</span>
@@ -163,35 +153,18 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 				<CardBody>
 					<Title>Sign Up!</Title>
 
-					<StyledInput
-						placeholder="Email"
-						value={email}
-						onSlInput={(e: Event) => handleSlInput(e, setEmail)}
-						clearable
-					/>
+					<StyledInput placeholder="Email" label="email" clearable />
 
-					<StyledInput
-						placeholder="First Name"
-						value={first_name}
-						onSlInput={(e: Event) => handleSlInput(e, setFirstName)}
-						clearable
-					/>
+					<StyledInput placeholder="First Name" label="first_name" clearable />
 
-					<StyledInput
-						placeholder="Last Name"
-						value={last_name}
-						onSlInput={(e: Event) => handleSlInput(e, setLastName)}
-						clearable
-					/>
+					<StyledInput placeholder="Last Name" label="last_name" clearable />
 
 					<StyledInput
 						placeholder="Display Name"
-						value={display_name}
-						onSlInput={(e: Event) => handleSlInput(e, setDisplayName)}
+						label="display_name"
 						clearable
 					/>
-
-					<LoginButton onClick={makeUser}>Sign Up</LoginButton>
+					<SignUpButton type="submit">Sign Up</SignUpButton>
 				</CardBody>
 			</InvisibleCard>
 		</FormWrapper>
