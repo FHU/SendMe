@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
 
 from send_me.database.engine import get_db
 
@@ -33,7 +33,9 @@ def make_user(input: schemas.CreateUserRequest, db: Session = Depends(get_db)):
     try:
         db.flush()
     except IntegrityError as e:
-        raise HTTPException(status_code=400, detail=f"Duplicate Email Used: {new_user.email}")
+        raise HTTPException(
+            status_code=400, detail=f"Duplicate Email Used: {new_user.email}"
+        ) from e
 
     db.refresh(new_user)
 
