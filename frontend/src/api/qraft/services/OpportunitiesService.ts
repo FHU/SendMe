@@ -12,7 +12,7 @@ export interface OpportunitiesService {
         url: "/opportunities";
     }, paths["/opportunities"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
     /** @summary Create Opportunity */
-    create: ServiceOperationMutation<{
+    createOpprtunity: ServiceOperationMutation<{
         method: "post";
         url: "/opportunities";
         mediaType: "application/json";
@@ -27,7 +27,7 @@ export const opportunitiesService: {
         };
     };
     /** @summary Create Opportunity */
-    create: {
+    createOpprtunity: {
         schema: {
             method: "post";
             url: "/opportunities";
@@ -41,7 +41,7 @@ export const opportunitiesService: {
             url: "/opportunities"
         }
     },
-    create: {
+    createOpprtunity: {
         schema: {
             method: "post",
             url: "/opportunities",

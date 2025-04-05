@@ -1,10 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router';
-import SignUpForm from './-components/SignUpForm';
+import { createFileRoute } from "@tanstack/react-router";
+import SignUpForm from "./-components/SignUpForm";
 
-export const Route = createFileRoute('/profile/sign-up/')({
-  component: RouteComponent,
+export const Route = createFileRoute("/profile/sign-up/")({
+	component: RouteComponent,
 });
 
 function RouteComponent() {
-  return <SignUpForm onSuccess={() => 'success'} />;
+	return <SignUpForm onSuccess={() => "success"} />;
 }

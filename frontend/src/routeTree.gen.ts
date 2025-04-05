@@ -18,6 +18,7 @@ import { Route as MessagesIndexImport } from './routes/messages/index'
 import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as ConversationIndexImport } from './routes/conversation/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
+import { Route as ProfileSignUpIndexImport } from './routes/profile/sign-up/index'
 
 // Create/Update Routes
 
@@ -60,6 +61,12 @@ const ConversationIndexRoute = ConversationIndexImport.update({
 const AuthIndexRoute = AuthIndexImport.update({
   id: '/auth/',
   path: '/auth/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProfileSignUpIndexRoute = ProfileSignUpIndexImport.update({
+  id: '/profile/sign-up/',
+  path: '/profile/sign-up/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -116,6 +123,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexImport
       parentRoute: typeof rootRoute
     }
+    '/profile/sign-up/': {
+      id: '/profile/sign-up/'
+      path: '/profile/sign-up'
+      fullPath: '/profile/sign-up'
+      preLoaderRoute: typeof ProfileSignUpIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -129,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/messages': typeof MessagesIndexRoute
   '/opportunities': typeof OpportunitiesIndexRoute
   '/profile': typeof ProfileIndexRoute
+  '/profile/sign-up': typeof ProfileSignUpIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -139,6 +154,7 @@ export interface FileRoutesByTo {
   '/messages': typeof MessagesIndexRoute
   '/opportunities': typeof OpportunitiesIndexRoute
   '/profile': typeof ProfileIndexRoute
+  '/profile/sign-up': typeof ProfileSignUpIndexRoute
 }
 
 export interface FileRoutesById {
@@ -150,6 +166,7 @@ export interface FileRoutesById {
   '/messages/': typeof MessagesIndexRoute
   '/opportunities/': typeof OpportunitiesIndexRoute
   '/profile/': typeof ProfileIndexRoute
+  '/profile/sign-up/': typeof ProfileSignUpIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -162,6 +179,7 @@ export interface FileRouteTypes {
     | '/messages'
     | '/opportunities'
     | '/profile'
+    | '/profile/sign-up'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -171,6 +189,7 @@ export interface FileRouteTypes {
     | '/messages'
     | '/opportunities'
     | '/profile'
+    | '/profile/sign-up'
   id:
     | '__root__'
     | '/'
@@ -180,6 +199,7 @@ export interface FileRouteTypes {
     | '/messages/'
     | '/opportunities/'
     | '/profile/'
+    | '/profile/sign-up/'
   fileRoutesById: FileRoutesById
 }
 
@@ -191,6 +211,7 @@ export interface RootRouteChildren {
   MessagesIndexRoute: typeof MessagesIndexRoute
   OpportunitiesIndexRoute: typeof OpportunitiesIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
+  ProfileSignUpIndexRoute: typeof ProfileSignUpIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -201,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   MessagesIndexRoute: MessagesIndexRoute,
   OpportunitiesIndexRoute: OpportunitiesIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
+  ProfileSignUpIndexRoute: ProfileSignUpIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -219,7 +241,8 @@ export const routeTree = rootRoute
         "/home/",
         "/messages/",
         "/opportunities/",
-        "/profile/"
+        "/profile/",
+        "/profile/sign-up/"
       ]
     },
     "/": {
@@ -242,6 +265,9 @@ export const routeTree = rootRoute
     },
     "/profile/": {
       "filePath": "profile/index.tsx"
+    },
+    "/profile/sign-up/": {
+      "filePath": "profile/sign-up/index.tsx"
     }
   }
 }
