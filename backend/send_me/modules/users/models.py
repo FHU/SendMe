@@ -16,6 +16,8 @@ class User(Base):
     email: Mapped[str] = mapped_column(unique=True)
     organization_id: Mapped[str | None] = mapped_column(ForeignKey("organizations.id"))
     display_name: Mapped[str]
+    first_name: Mapped[str]
+    last_name: Mapped[str]
     location: Mapped[str | None]
     bio: Mapped[str | None]
     profile_picture: Mapped[str | None]
