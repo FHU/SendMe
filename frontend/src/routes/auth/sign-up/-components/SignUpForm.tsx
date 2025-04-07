@@ -110,7 +110,7 @@ type SignUpFormProps = {
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 	const [responseMessage, setResponseMessage] = useState("");
-	const { mutateAsync } = api.users.createUser.useMutation();
+	const { mutateAsync, isSuccess } = api.users.createUser.useMutation();
 
 	const onSubmit = useCallback(
 		(e: React.FormEvent<HTMLFormElement>) => {
@@ -161,6 +161,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 
 					<StyledInput label="Display Name" name="displayName" clearable />
 					<SignUpButton type="submit">Sign Up</SignUpButton>
+
+					{isSuccess && <Title>Signup Successful</Title>}
 				</CardBody>
 			</InvisibleCard>
 		</FormWrapper>

@@ -51,7 +51,7 @@ type EnterOTPFormProps = {
 const EnterOTPForm: React.FC<EnterOTPFormProps> = ({ onAuthSuccess }) => {
 	const [otp, setOtp] = useState<string>("");
 	const [responseMessage, setResponseMessage] = useState<string>("");
-	const { mutateAsync: enterOtp } = api.auth.enterOtp.useMutation();
+	const { mutateAsync: enterOtp, isSuccess } = api.auth.enterOtp.useMutation();
 
 	const handleSlInput = (e: Event) => {
 		const target = e.target as HTMLInputElement;
@@ -83,6 +83,7 @@ const EnterOTPForm: React.FC<EnterOTPFormProps> = ({ onAuthSuccess }) => {
 					clearable
 				/>
 				<SubmitButton onClick={submitPin}>Submit</SubmitButton>
+				{isSuccess && <Title>Login Successful</Title>}
 			</CardBody>
 		</InvisibleCard>
 	);
