@@ -18,10 +18,25 @@ const SLAvatar = styled.div`
     width: 80px;
     height: 80px;
     border-radius: 50%;
-`
+`;
+
+const ProfileUsername = styled.h1`
+    text-align: center;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    font-size: 40px;
+`;
+
+const ConnectionNumber = styled.p`
+    text-align: center;
+    font-size: 10px;
+`;
 
 const Header = () => <HeaderContainer>
-    <SLAvatar></SLAvatar>
+    <SLAvatar image="images/christian-buehner-DItYlc26zVI-unsplash.jpg"/>
+    <ProfileUsername>Christian Buehner</ProfileUsername>
+    <ConnectionNumber>999 Connections</ConnectionNumber>
+
 </HeaderContainer>;
 
 export default Header;
