@@ -8,6 +8,7 @@ import {
 	SlIconButton,
 	SlTag,
 } from "@shoelace-style/shoelace/dist/react";
+import { SlSpinner } from "@shoelace-style/shoelace/dist/react";
 // import { useQuery } from "@tanstack/react-query";
 import {
 	JSXElementConstructor,
@@ -18,8 +19,6 @@ import {
 } from "react";
 import styled from "styled-components";
 import { OpportunitiesList } from "../../opportunities/-components/OpportunitiesList";
-import { SlSpinner } from "@shoelace-style/shoelace/dist/react";
-
 
 const CardContainer = styled(SlCard)`
   display: flex;
@@ -96,10 +95,6 @@ const Card = () => {
 	const { data: orgs, refetch: refetchOrg } =
 		api.organizations.listOrganizations.useQuery();
 	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
-	return (
-		<>
-			{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
-		</>
-	);
+	return <>{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}</>;
 };
 export default Card;

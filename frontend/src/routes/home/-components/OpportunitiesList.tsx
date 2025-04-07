@@ -115,9 +115,9 @@ export function OpportunitiesList({
 						<AvatarInfo>
 							<SlAvatar image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" />
 							<AvatarBio>
-								Liam Carter
+								{o.name}
 								<small>Oak Tree Church of Christ</small>
-								<small>Dallas, TX, USA</small>
+								<small>{o.location}</small>
 							</AvatarBio>
 						</AvatarInfo>
 						<SlButton variant="success" size="large" outline>
@@ -143,9 +143,7 @@ export function OpportunitiesList({
 						</SlTag>
 					</TagsContainer>
 					<SmallBio>
-						<div>
-							Youth Ministry experience needed at Oak Tree Church of Christ!
-						</div>
+						<div>{o.short_description}</div>
 					</SmallBio>
 					<SlDetails summary="More Details">
 						<MoreDetails>

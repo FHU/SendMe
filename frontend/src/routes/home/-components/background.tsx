@@ -1,8 +1,8 @@
+import api from "@sendme/api";
+import { SlSpinner } from "@shoelace-style/shoelace/dist/react";
 import styled from "styled-components";
-import Card from "./card";
-import Card1 from "./card1";
-import Card2 from "./card2";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CreateOpportunity } from "../-components/CreateOpportunity";
+import { OpportunitiesList } from "../-components/OpportunitiesList";
 
 const BackGround = styled.div`
   background: var(--sl-color-primary-500);
@@ -14,12 +14,18 @@ const BackGround = styled.div`
   max-width: fit-content;
 `;
 
-const Background = () => (
-	<BackGround>
-		<Card />
-		<Card1 />
-		<Card2 />
-	</BackGround>
-);
+const Background = () => {
+	const { data: orgs, refetch: refetchOrg } =
+		api.organizations.listOrganizations.useQuery();
+	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
+
+	return (
+		<BackGround>
+			{/* <CreateOpportunity onCreated={refetch} /> */}
+
+			{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
+		</BackGround>
+	);
+};
 
 export default Background;
