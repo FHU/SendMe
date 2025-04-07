@@ -1,3 +1,4 @@
+import api from "@sendme/api";
 import {
 	SlAvatar,
 	SlButton,
@@ -7,7 +8,18 @@ import {
 	SlIconButton,
 	SlTag,
 } from "@shoelace-style/shoelace/dist/react";
+// import { useQuery } from "@tanstack/react-query";
+import {
+	JSXElementConstructor,
+	Key,
+	ReactElement,
+	ReactNode,
+	ReactPortal,
+} from "react";
 import styled from "styled-components";
+import { OpportunitiesList } from "../../opportunities/-components/OpportunitiesList";
+import { SlSpinner } from "@shoelace-style/shoelace/dist/react";
+
 
 const CardContainer = styled(SlCard)`
   display: flex;
@@ -80,76 +92,14 @@ const Bookmark = styled.div`
   }
   `;
 
-const Card = () => (
-	<CardContainer>
-		<CardTitle>
-			<CardTitleDate>
-				<StrongText>Ministry Leadership</StrongText>
-				<small>12/14/24</small>
-			</CardTitleDate>
-			<Bookmark>
-				<div className="icon-button-color">
-					<SlIconButton name="bookmark" label="Bookmark" />
-				</div>
-			</Bookmark>
-		</CardTitle>
-		<AvatarSection>
-			<AvatarInfo>
-				<SlAvatar image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" />
-				<AvatarBio>
-					Liam Carter
-					<small>Oak Tree Church of Christ</small>
-					<small>Dallas, TX, USA</small>
-				</AvatarBio>
-			</AvatarInfo>
-			<SlButton variant="success" size="large" outline>
-				<SlIcon slot="prefix" name="envelope" color="green" />
-				Message
-			</SlButton>
-		</AvatarSection>
-		<TagsContainer>
-			<SlTag variant="success" size="medium" pill>
-				Preacher
-			</SlTag>
-			<SlTag variant="success" size="medium" pill>
-				Youth
-			</SlTag>
-			<SlTag variant="success" size="medium" pill>
-				Education
-			</SlTag>
-			<SlTag variant="success" size="medium" pill>
-				Leadership
-			</SlTag>
-			<SlTag variant="success" size="medium" pill>
-				Paid
-			</SlTag>
-		</TagsContainer>
-		<SmallBio>
-			<div>Youth Ministry experience needed at Oak Tree Church of Christ!</div>
-		</SmallBio>
-		<SlDetails summary="More Details">
-			<MoreDetails>
-				<div>
-					<h3>Position</h3>
-					<p>Ministry Leadership and Staff</p>
-				</div>
-				<div>
-					<h3>Description</h3>
-					<p>
-						Our congregation is holding sessions for spirituality in different
-						facets of life, and we are seeking someone knowledgeable in
-						psychology and/or sociology for this job. There will be two days of
-						sessions, and we would like anyone who has availability for these
-						times. Thank you!
-					</p>
-				</div>
-				<div>
-					<h3>Time of Event</h3>
-					<p>N/A</p>
-				</div>
-			</MoreDetails>
-		</SlDetails>
-	</CardContainer>
-);
-
+const Card = () => {
+	const { data: orgs, refetch: refetchOrg } =
+		api.organizations.listOrganizations.useQuery();
+	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
+	return (
+		<>
+			{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
+		</>
+	);
+};
 export default Card;

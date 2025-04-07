@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Card from "./card";
 import Card1 from "./card1";
 import Card2 from "./card2";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const BackGround = styled.div`
   background: var(--sl-color-primary-500);
