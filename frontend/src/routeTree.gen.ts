@@ -18,7 +18,7 @@ import { Route as MessagesIndexImport } from './routes/messages/index'
 import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as ConversationIndexImport } from './routes/conversation/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
-import { Route as ProfileSignUpIndexImport } from './routes/profile/sign-up/index'
+import { Route as AuthSignUpIndexImport } from './routes/auth/sign-up/index'
 
 // Create/Update Routes
 
@@ -64,9 +64,9 @@ const AuthIndexRoute = AuthIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ProfileSignUpIndexRoute = ProfileSignUpIndexImport.update({
-  id: '/profile/sign-up/',
-  path: '/profile/sign-up/',
+const AuthSignUpIndexRoute = AuthSignUpIndexImport.update({
+  id: '/auth/sign-up/',
+  path: '/auth/sign-up/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -123,11 +123,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexImport
       parentRoute: typeof rootRoute
     }
-    '/profile/sign-up/': {
-      id: '/profile/sign-up/'
-      path: '/profile/sign-up'
-      fullPath: '/profile/sign-up'
-      preLoaderRoute: typeof ProfileSignUpIndexImport
+    '/auth/sign-up/': {
+      id: '/auth/sign-up/'
+      path: '/auth/sign-up'
+      fullPath: '/auth/sign-up'
+      preLoaderRoute: typeof AuthSignUpIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -143,7 +143,7 @@ export interface FileRoutesByFullPath {
   '/messages': typeof MessagesIndexRoute
   '/opportunities': typeof OpportunitiesIndexRoute
   '/profile': typeof ProfileIndexRoute
-  '/profile/sign-up': typeof ProfileSignUpIndexRoute
+  '/auth/sign-up': typeof AuthSignUpIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -154,7 +154,7 @@ export interface FileRoutesByTo {
   '/messages': typeof MessagesIndexRoute
   '/opportunities': typeof OpportunitiesIndexRoute
   '/profile': typeof ProfileIndexRoute
-  '/profile/sign-up': typeof ProfileSignUpIndexRoute
+  '/auth/sign-up': typeof AuthSignUpIndexRoute
 }
 
 export interface FileRoutesById {
@@ -166,7 +166,7 @@ export interface FileRoutesById {
   '/messages/': typeof MessagesIndexRoute
   '/opportunities/': typeof OpportunitiesIndexRoute
   '/profile/': typeof ProfileIndexRoute
-  '/profile/sign-up/': typeof ProfileSignUpIndexRoute
+  '/auth/sign-up/': typeof AuthSignUpIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -179,7 +179,7 @@ export interface FileRouteTypes {
     | '/messages'
     | '/opportunities'
     | '/profile'
-    | '/profile/sign-up'
+    | '/auth/sign-up'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -189,7 +189,7 @@ export interface FileRouteTypes {
     | '/messages'
     | '/opportunities'
     | '/profile'
-    | '/profile/sign-up'
+    | '/auth/sign-up'
   id:
     | '__root__'
     | '/'
@@ -199,7 +199,7 @@ export interface FileRouteTypes {
     | '/messages/'
     | '/opportunities/'
     | '/profile/'
-    | '/profile/sign-up/'
+    | '/auth/sign-up/'
   fileRoutesById: FileRoutesById
 }
 
@@ -211,7 +211,7 @@ export interface RootRouteChildren {
   MessagesIndexRoute: typeof MessagesIndexRoute
   OpportunitiesIndexRoute: typeof OpportunitiesIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
-  ProfileSignUpIndexRoute: typeof ProfileSignUpIndexRoute
+  AuthSignUpIndexRoute: typeof AuthSignUpIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -222,7 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   MessagesIndexRoute: MessagesIndexRoute,
   OpportunitiesIndexRoute: OpportunitiesIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
-  ProfileSignUpIndexRoute: ProfileSignUpIndexRoute,
+  AuthSignUpIndexRoute: AuthSignUpIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -242,7 +242,7 @@ export const routeTree = rootRoute
         "/messages/",
         "/opportunities/",
         "/profile/",
-        "/profile/sign-up/"
+        "/auth/sign-up/"
       ]
     },
     "/": {
@@ -266,8 +266,8 @@ export const routeTree = rootRoute
     "/profile/": {
       "filePath": "profile/index.tsx"
     },
-    "/profile/sign-up/": {
-      "filePath": "profile/sign-up/index.tsx"
+    "/auth/sign-up/": {
+      "filePath": "auth/sign-up/index.tsx"
     }
   }
 }

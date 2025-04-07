@@ -26,6 +26,12 @@ function Index() {
 			<Link to="/profile">
 				<SlButton>Profile</SlButton>
 			</Link>
+			<Link to="/auth">
+				<SlButton>Login</SlButton>
+			</Link>
+			<Link to="/auth/sign-up">
+				<SlButton>Sign Up</SlButton>
+			</Link>
 		</div>
 	);
 }
