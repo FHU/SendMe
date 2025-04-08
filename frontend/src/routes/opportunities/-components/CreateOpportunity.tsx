@@ -39,7 +39,6 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }): JSX
       e.preventDefault();
       const formData = new FormData(e.currentTarget);
 
-      // Build full payload from form data
       const fullPayload: ExtendedOpportunityPayload = {
         name: formData.get("name")?.toString() || "",
         tags: formData.get("tags")?.toString() || "",
@@ -49,7 +48,6 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }): JSX
         timeOfEvent: formData.get("timeOfEvent")?.toString() || "",
       };
 
-      // Only send the properties the mutation endpoint expects.
       const minimalPayload = {
         name: fullPayload.name,
         description: fullPayload.description,
