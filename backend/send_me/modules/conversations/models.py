@@ -9,7 +9,7 @@ from send_me.database.models import Base
 """
 This class represents a Conversation in the database.
 Conceptually, conversations contain the messages sent between users.
-This implementation allows for group messaging 
+This implementation allows for group messaging
 """
 
 
@@ -17,7 +17,7 @@ class Conversation(Base):
     __tablename__ = "conversations"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    newest_message_id: Mapped[uuid.UUID = mapped_column(
+    newest_message_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("messages.id")
     )
     last_updated: Mapped[datetime]
