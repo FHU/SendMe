@@ -10,6 +10,7 @@ class Conversation(SendMeModel):
     last_updated: datetime
     created_at: datetime
 
+
 class UserConversations(SendMeModel):
     user_id: UUID
     conversation_id: UUID

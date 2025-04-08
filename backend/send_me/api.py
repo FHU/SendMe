@@ -7,6 +7,7 @@ from send_me.modules.conversations.router import router as conversations_router
 from send_me.modules.messages.router import router as messages_router
 from send_me.modules.opportunities.router import router as opportunities_router
 from send_me.modules.organizations.router import router as organizations_router
+from send_me.modules.seed.router import router as seed_router
 from send_me.schemas import SendMeModel
 
 app = FastAPI()
@@ -17,6 +18,7 @@ app.include_router(organizations_router)
 app.include_router(authorization_router)
 app.include_router(conversations_router)
 app.include_router(messages_router)
+app.include_router(seed_router)
 
 
 class HelloWorldResponse(SendMeModel):

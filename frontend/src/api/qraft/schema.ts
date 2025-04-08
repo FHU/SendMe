@@ -125,7 +125,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/conversation/tags": {
+    conversations: {
         parameters: {
             query?: never;
             header?: never;
@@ -133,7 +133,7 @@ export interface paths {
             cookie?: never;
         };
         /** Get Conversations */
-        get: operations["list_conversations"];
+        get: operations["get_conversationsconversations_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -142,17 +142,34 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/messages/tags": {
+    messages: {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Get Conversations */
-        get: operations["list_messages"];
+        /** Get Messages */
+        get: operations["get_messagesmessages_get"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/seed/dummy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Seed Dummy Data */
+        post: operations["seed_dummy_data_seed_dummy_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -204,17 +221,21 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** User */
-            user: string;
-            /** Most Recent */
-            most_recent: string;
-            /** Is Read */
-            is_read: boolean;
+            /**
+             * Newest Message Id
+             * Format: uuid
+             */
+            newest_message_id: string;
             /**
              * Last Updated
              * Format: date-time
              */
             last_updated: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
         };
         /** CreateOpportunityRequest */
         CreateOpportunityRequest: {
@@ -256,10 +277,13 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Isuser */
-            isUser: boolean;
-            /** Text */
-            text: string;
+            /**
+             * Sender
+             * Format: uuid
+             */
+            sender: string;
+            /** Content */
+            content: string;
             /**
              * Conversation Id
              * Format: uuid
@@ -647,7 +671,7 @@ export interface operations {
             };
         };
     };
-    list_conversations: {
+    get_conversationsconversations_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -674,7 +698,7 @@ export interface operations {
             };
         };
     };
-    list_messages: {
+    get_messagesmessages_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -698,6 +722,26 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    seed_dummy_data_seed_dummy_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
             };
         };
     };

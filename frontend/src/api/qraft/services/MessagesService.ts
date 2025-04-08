@@ -6,25 +6,25 @@
 import type { paths } from "../schema";
 import type { ServiceOperationQuery } from "@openapi-qraft/react";
 export interface MessagesService {
-    /** @summary Get Conversations */
-    listMessages: ServiceOperationQuery<{
+    /** @summary Get Messages */
+    getMessagesmessagesGet: ServiceOperationQuery<{
         method: "get";
-        url: "/messages/tags";
-    }, paths["/messages/tags"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
+        url: "messages";
+    }, paths["messages"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
 }
 export const messagesService: {
-    /** @summary Get Conversations */
-    listMessages: {
+    /** @summary Get Messages */
+    getMessagesmessagesGet: {
         schema: {
             method: "get";
-            url: "/messages/tags";
+            url: "messages";
         };
     };
 } = {
-    listMessages: {
+    getMessagesmessagesGet: {
         schema: {
             method: "get",
-            url: "/messages/tags"
+            url: "messages"
         }
     }
 };
