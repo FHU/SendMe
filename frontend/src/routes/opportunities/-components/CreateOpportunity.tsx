@@ -28,10 +28,9 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-
       const formData = new FormData(e.currentTarget);
 
-      // Build payload including additional fields
+      // Build payload including additional fields.
       const payload = {
         name: formData.get("name")?.toString() || "",
         tags: formData.get("tags")?.toString() || "",
@@ -42,7 +41,8 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
       };
 
       mutateAsync({
-        body: payload as any, // Bypassing type-check with casting to any
+        // Bypassing type-check by first casting to unknown, then to the expected type.
+        body: payload as unknown as { name: string; description: string },
       }).then(() => {
         onCreated();
       });
