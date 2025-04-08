@@ -67,12 +67,7 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
       <Input disabled={isPending} label="Short Summary" name="summary" />
       <Input disabled={isPending} label="Position" name="position" />
       <Input disabled={isPending} label="Description" name="description" />
-      <Input
-        disabled={isPending}
-        label="Time of Event"
-        name="timeOfEvent"
-        type="time"
-      />
+      <Input disabled={isPending} label="Time of Event" name="timeOfEvent" type="time" />
       <ToTheRight>
         <SlButton type="submit" loading={isPending}>
           Share
