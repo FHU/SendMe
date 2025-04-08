@@ -6,7 +6,7 @@ from send_me.schemas import SendMeModel
 
 class Message(SendMeModel):
     id: UUID
-    isUser: bool
-    text: str
+    sender: UUID
+    content: str
     conversation_id: UUID
     created_at: datetime
