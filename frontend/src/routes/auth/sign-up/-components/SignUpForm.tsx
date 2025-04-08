@@ -10,6 +10,7 @@ const FormWrapper = styled.form`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background-color: var(--sl-color-neutral-50);
 `;
 
 const RedBanner = styled.div`
@@ -39,9 +40,11 @@ const CloseButton = styled.button`
 `;
 
 const InvisibleCard = styled(SlCard)`
+  &::part(base) {
+    background-color: var(--sl-color-neutral-50);
+  }
   width: 400px;
   max-width: 90%;
-  background-color: var(--sl-color-neutral-50);
   border: none;
   box-shadow: none;
   padding: 0;
@@ -60,7 +63,7 @@ const Title = styled.h2`
   margin: 0;
   font-size: 1.4rem;
   font-weight: 500;
-  color: #333;
+  color: var(--sl-color-text);
   text-align: center;
 `;
 
@@ -68,9 +71,11 @@ const StyledInput = styled(SlInput)`
   width: 100%;
   --sl-input-border-width: 2px;
   --sl-input-border-style: solid;
-  --sl-input-border-color: #000;
+  --sl-input-border-color: var(--sl-color-text);
   --sl-input-font-size-medium: 1rem;
   --sl-input-height-medium: 2.75rem;
+  --sl-input-background-color: var(--sl-color-text);
+  color: var(--sl-color-text);
   border-radius: 24px;
 `;
 
@@ -90,7 +95,7 @@ const SignUpButton = styled(SlButton)`
   }
 
   &::part(base):hover {
-    background-color: var(--sl-color-primary-700);
+    background-color: var(--sl-hover-color);
     border-color: var(--sl-color-primary-700);
   }
   &::part(base):active {
@@ -105,68 +110,68 @@ const SignUpButton = styled(SlButton)`
 `;
 
 type SignUpFormProps = {
-	onSuccess?: () => void;
+  onSuccess?: () => void;
 };
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
-	const [responseMessage, setResponseMessage] = useState("");
-	const { mutateAsync, isSuccess } = api.users.createUser.useMutation();
+  const [responseMessage, setResponseMessage] = useState("");
+  const { mutateAsync, isSuccess } = api.users.createUser.useMutation();
 
-	const onSubmit = useCallback(
-		(e: React.FormEvent<HTMLFormElement>) => {
-			e.preventDefault();
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-			const formData = new FormData(e.currentTarget);
+      const formData = new FormData(e.currentTarget);
 
-			mutateAsync({
-				body: {
-					email: formData.get("email")?.toString() || "",
-					display_name: formData.get("displayName")?.toString() || "",
-					first_name: formData.get("firstName")?.toString() || "",
-					last_name: formData.get("lastName")?.toString() || "",
-				},
-			})
-				.catch((error) => {
-					setResponseMessage(error.detail);
-				})
-				.then(() => {
-					if (onSuccess) onSuccess();
-				});
-		},
-		[mutateAsync, onSuccess],
-	);
+      mutateAsync({
+        body: {
+          email: formData.get("email")?.toString() || "",
+          display_name: formData.get("displayName")?.toString() || "",
+          first_name: formData.get("firstName")?.toString() || "",
+          last_name: formData.get("lastName")?.toString() || "",
+        },
+      })
+        .catch((error) => {
+          setResponseMessage(error.detail);
+        })
+        .then(() => {
+          if (onSuccess) onSuccess();
+        });
+    },
+    [mutateAsync, onSuccess],
+  );
 
-	const handleCloseBanner = (): void => {
-		setResponseMessage("");
-	};
+  const handleCloseBanner = (): void => {
+    setResponseMessage("");
+  };
 
-	return (
-		<FormWrapper onSubmit={onSubmit}>
-			{responseMessage && (
-				<RedBanner>
-					<span>{responseMessage}</span>
-					<CloseButton onClick={handleCloseBanner}>×</CloseButton>
-				</RedBanner>
-			)}
+  return (
+    <FormWrapper onSubmit={onSubmit}>
+      {responseMessage && (
+        <RedBanner>
+          <span>{responseMessage}</span>
+          <CloseButton onClick={handleCloseBanner}>×</CloseButton>
+        </RedBanner>
+      )}
 
-			<InvisibleCard>
-				<CardBody>
-					<Title>Sign Up!</Title>
+      <InvisibleCard>
+        <CardBody>
+          <Title>Sign Up!</Title>
 
-					<StyledInput label="Email" name="email" clearable />
+          <StyledInput label="Email" name="email" type="email" clearable />
 
-					<StyledInput label="First Name" name="firstName" clearable />
+          <StyledInput label="First Name" name="firstName" clearable />
 
-					<StyledInput label="Last Name" name="lastName" clearable />
+          <StyledInput label="Last Name" name="lastName" clearable />
 
-					<StyledInput label="Display Name" name="displayName" clearable />
-					<SignUpButton type="submit">Sign Up</SignUpButton>
+          <StyledInput label="Display Name" name="displayName" clearable />
+          <SignUpButton type="submit">Sign Up</SignUpButton>
 
-					{isSuccess && <Title>Signup Successful</Title>}
-				</CardBody>
-			</InvisibleCard>
-		</FormWrapper>
-	);
+          {isSuccess && <Title>Signup Successful</Title>}
+        </CardBody>
+      </InvisibleCard>
+    </FormWrapper>
+  );
 };
 
 export default SignUpForm;

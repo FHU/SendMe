@@ -39,9 +39,11 @@ const CloseButton = styled.button`
 `;
 
 const InvisibleCard = styled(SlCard)`
+  &::part(base) {
+    background-color: var(--sl-color-neutral-50);
+  }
   width: 400px;
   max-width: 90%;
-  background-color: #f7f7f7;
   border: none;
   box-shadow: none;
   padding: 0;
@@ -60,7 +62,7 @@ const Title = styled.h2`
   margin: 0;
   font-size: 1.4rem;
   font-weight: 500;
-  color: #333;
+  color: var(--sl-color-text);
   text-align: center;
 `;
 
@@ -68,17 +70,19 @@ const StyledInput = styled(SlInput)`
   width: 100%;
   --sl-input-border-width: 2px;
   --sl-input-border-style: solid;
-  --sl-input-border-color: #000;
+  --sl-input-border-color: var(--sl-color-text);
   --sl-input-font-size-medium: 1rem;
   --sl-input-height-medium: 2.75rem;
+  --sl-input-background-color: var(--sl-color-text);
+  color: var(--sl-color-text);
   border-radius: 24px;
 `;
 
 const LoginButton = styled(SlButton)`
   &::part(base) {
-    background-color: #007bff;
+    background-color: var(--sl-color-primary-500);
     color: #fff;
-    border: 2px solid #007bff;
+    border: 2px solid var(--sl-color-primary-700);
     border-radius: 30px;
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
@@ -90,12 +94,12 @@ const LoginButton = styled(SlButton)`
   }
 
   &::part(base):hover {
-    background-color: #0069d9;
-    border-color: #0069d9;
+    background-color: var(--sl-hover-color);
+    border-color: var(--sl-color-primary-700);
   }
   &::part(base):active {
-    background-color: #005cbf;
-    border-color: #005cbf;
+    background-color: var(--sl-color-primary-300);
+    border-color: var(--sl-color-primary-300);
   }
   &::part(base):focus,
   &::part(base):focus-visible {
@@ -105,67 +109,67 @@ const LoginButton = styled(SlButton)`
 `;
 
 type RequestOTPFormProps = {
-	onSuccess: () => void;
+  onSuccess: () => void;
 };
 
 const RequestOTPForm: React.FC<RequestOTPFormProps> = ({ onSuccess }) => {
-	const [email, setEmail] = useState<string>("");
-	const [responseMessage, setResponseMessage] = useState<string>("");
-	const [isError, setIsError] = useState<boolean>(false);
-	const { mutateAsync: requestOtp } = api.auth.requestOtp.useMutation();
+  const [email, setEmail] = useState<string>("");
+  const [responseMessage, setResponseMessage] = useState<string>("");
+  const [isError, setIsError] = useState<boolean>(false);
+  const { mutateAsync: requestOtp } = api.auth.requestOtp.useMutation();
 
-	const requestOTP = async (): Promise<void> => {
-		setResponseMessage("");
-		setIsError(false);
+  const requestOTP = async (): Promise<void> => {
+    setResponseMessage("");
+    setIsError(false);
 
-		try {
-			await requestOtp({
-				body: {
-					email,
-				},
-			});
+    try {
+      await requestOtp({
+        body: {
+          email,
+        },
+      });
 
-			onSuccess(); // Switch to EnterOTPForm
-		} catch {
-			setIsError(true);
-			setResponseMessage("Something went wrong.");
-		}
-	};
+      onSuccess(); // Switch to EnterOTPForm
+    } catch {
+      setIsError(true);
+      setResponseMessage("Something went wrong.");
+    }
+  };
 
-	const handleCloseBanner = (): void => {
-		setResponseMessage("");
-	};
+  const handleCloseBanner = (): void => {
+    setResponseMessage("");
+  };
 
-	const handleSlInput = (e: Event) => {
-		const target = e.target as HTMLInputElement;
-		setEmail(target.value);
-	};
+  const handleSlInput = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    setEmail(target.value);
+  };
 
-	return (
-		<FormWrapper>
-			{responseMessage && (
-				<RedBanner>
-					<span>{responseMessage}</span>
-					<CloseButton onClick={handleCloseBanner}>×</CloseButton>
-				</RedBanner>
-			)}
+  return (
+    <FormWrapper>
+      {responseMessage && (
+        <RedBanner>
+          <span>{responseMessage}</span>
+          <CloseButton onClick={handleCloseBanner}>×</CloseButton>
+        </RedBanner>
+      )}
 
-			<InvisibleCard>
-				<CardBody>
-					<Title>Sign in to Your Account</Title>
+      <InvisibleCard>
+        <CardBody>
+          <Title>Sign in to Your Account</Title>
 
-					<StyledInput
-						placeholder="Email"
-						value={email}
-						onSlInput={handleSlInput}
-						clearable
-					/>
+          <StyledInput
+            placeholder="Email"
+            value={email}
+            onSlInput={handleSlInput}
+            clearable
+          />
 
-					<LoginButton onClick={requestOTP}>LOGIN</LoginButton>
-				</CardBody>
-			</InvisibleCard>
-		</FormWrapper>
-	);
+          <LoginButton onClick={requestOTP}>LOGIN</LoginButton>
+        </CardBody>
+      </InvisibleCard>
+    </FormWrapper>
+  );
 };
 
 export default RequestOTPForm;
