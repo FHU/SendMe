@@ -18,7 +18,7 @@ class Message(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     sender: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey = "users.id")
+        ForeignKey("users.id")
     )
     content: Mapped[str]
     conversation_id: Mapped[uuid.UUID]
