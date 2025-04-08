@@ -74,48 +74,48 @@ const SubmitButton = styled(SlButton)`
 `;
 
 type EnterOTPFormProps = {
-  onAuthSuccess: () => void;
+	onAuthSuccess: () => void;
 };
 
 const EnterOTPForm: React.FC<EnterOTPFormProps> = ({ onAuthSuccess }) => {
-  const [otp, setOtp] = useState<string>("");
-  const [responseMessage, setResponseMessage] = useState<string>("");
-  const { mutateAsync: enterOtp, isSuccess } = api.auth.enterOtp.useMutation();
+	const [otp, setOtp] = useState<string>("");
+	const [responseMessage, setResponseMessage] = useState<string>("");
+	const { mutateAsync: enterOtp, isSuccess } = api.auth.enterOtp.useMutation();
 
-  const handleSlInput = (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    setOtp(target.value);
-  };
+	const handleSlInput = (e: Event) => {
+		const target = e.target as HTMLInputElement;
+		setOtp(target.value);
+	};
 
-  const submitPin = async () => {
-    try {
-      await enterOtp({
-        body: {
-          otp: otp,
-        },
-      });
+	const submitPin = async () => {
+		try {
+			await enterOtp({
+				body: {
+					otp: otp,
+				},
+			});
 
-      onAuthSuccess();
-    } catch (error) {
-      setResponseMessage("Something went wrong. Please try again.");
-    }
-  };
+			onAuthSuccess();
+		} catch (error) {
+			setResponseMessage("Something went wrong. Please try again.");
+		}
+	};
 
-  return (
-    <InvisibleCard>
-      <CardBody>
-        <Title>Enter Login Code</Title>
-        <StyledInput
-          placeholder="Login Code"
-          value={otp}
-          onSlInput={handleSlInput}
-          clearable
-        />
-        <SubmitButton onClick={submitPin}>Submit</SubmitButton>
-        {isSuccess && <Title>Login Successful</Title>}
-      </CardBody>
-    </InvisibleCard>
-  );
+	return (
+		<InvisibleCard>
+			<CardBody>
+				<Title>Enter Login Code</Title>
+				<StyledInput
+					placeholder="Login Code"
+					value={otp}
+					onSlInput={handleSlInput}
+					clearable
+				/>
+				<SubmitButton onClick={submitPin}>Submit</SubmitButton>
+				{isSuccess && <Title>Login Successful</Title>}
+			</CardBody>
+		</InvisibleCard>
+	);
 };
 
 export default EnterOTPForm;

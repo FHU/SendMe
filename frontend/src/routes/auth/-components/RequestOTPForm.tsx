@@ -109,67 +109,67 @@ const LoginButton = styled(SlButton)`
 `;
 
 type RequestOTPFormProps = {
-  onSuccess: () => void;
+	onSuccess: () => void;
 };
 
 const RequestOTPForm: React.FC<RequestOTPFormProps> = ({ onSuccess }) => {
-  const [email, setEmail] = useState<string>("");
-  const [responseMessage, setResponseMessage] = useState<string>("");
-  const [isError, setIsError] = useState<boolean>(false);
-  const { mutateAsync: requestOtp } = api.auth.requestOtp.useMutation();
+	const [email, setEmail] = useState<string>("");
+	const [responseMessage, setResponseMessage] = useState<string>("");
+	const [isError, setIsError] = useState<boolean>(false);
+	const { mutateAsync: requestOtp } = api.auth.requestOtp.useMutation();
 
-  const requestOTP = async (): Promise<void> => {
-    setResponseMessage("");
-    setIsError(false);
+	const requestOTP = async (): Promise<void> => {
+		setResponseMessage("");
+		setIsError(false);
 
-    try {
-      await requestOtp({
-        body: {
-          email,
-        },
-      });
+		try {
+			await requestOtp({
+				body: {
+					email,
+				},
+			});
 
-      onSuccess(); // Switch to EnterOTPForm
-    } catch {
-      setIsError(true);
-      setResponseMessage("Something went wrong.");
-    }
-  };
+			onSuccess(); // Switch to EnterOTPForm
+		} catch {
+			setIsError(true);
+			setResponseMessage("Something went wrong.");
+		}
+	};
 
-  const handleCloseBanner = (): void => {
-    setResponseMessage("");
-  };
+	const handleCloseBanner = (): void => {
+		setResponseMessage("");
+	};
 
-  const handleSlInput = (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    setEmail(target.value);
-  };
+	const handleSlInput = (e: Event) => {
+		const target = e.target as HTMLInputElement;
+		setEmail(target.value);
+	};
 
-  return (
-    <FormWrapper>
-      {responseMessage && (
-        <RedBanner>
-          <span>{responseMessage}</span>
-          <CloseButton onClick={handleCloseBanner}>×</CloseButton>
-        </RedBanner>
-      )}
+	return (
+		<FormWrapper>
+			{responseMessage && (
+				<RedBanner>
+					<span>{responseMessage}</span>
+					<CloseButton onClick={handleCloseBanner}>×</CloseButton>
+				</RedBanner>
+			)}
 
-      <InvisibleCard>
-        <CardBody>
-          <Title>Sign in to Your Account</Title>
+			<InvisibleCard>
+				<CardBody>
+					<Title>Sign in to Your Account</Title>
 
-          <StyledInput
-            placeholder="Email"
-            value={email}
-            onSlInput={handleSlInput}
-            clearable
-          />
+					<StyledInput
+						placeholder="Email"
+						value={email}
+						onSlInput={handleSlInput}
+						clearable
+					/>
 
-          <LoginButton onClick={requestOTP}>LOGIN</LoginButton>
-        </CardBody>
-      </InvisibleCard>
-    </FormWrapper>
-  );
+					<LoginButton onClick={requestOTP}>LOGIN</LoginButton>
+				</CardBody>
+			</InvisibleCard>
+		</FormWrapper>
+	);
 };
 
 export default RequestOTPForm;

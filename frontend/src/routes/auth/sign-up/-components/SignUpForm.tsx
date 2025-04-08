@@ -158,13 +158,22 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
         <CardBody>
           <Title>Sign Up!</Title>
 
-          <StyledInput label="Email" name="email" type="email" clearable />
+          <StyledInput
+            placeholder="Email"
+            name="email"
+            type="email"
+            clearable
+          />
 
-          <StyledInput label="First Name" name="firstName" clearable />
+          <StyledInput placeholder="First Name" name="firstName" clearable />
 
-          <StyledInput label="Last Name" name="lastName" clearable />
+          <StyledInput placeholder="Last Name" name="lastName" clearable />
 
-          <StyledInput label="Display Name" name="displayName" clearable />
+          <StyledInput
+            placeholder="Display Name"
+            name="displayName"
+            clearable
+          />
           <SignUpButton type="submit">Sign Up</SignUpButton>
 
           {isSuccess && <Title>Signup Successful</Title>}
