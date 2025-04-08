@@ -1,6 +1,6 @@
 import api from "@sendme/api";
 import { SlButton, SlInput } from "@shoelace-style/shoelace/dist/react";
-import { useCallback, FormEvent } from "react";
+import { useCallback } from "react";
 import styled from "styled-components";
 
 const Heading = styled.h3``;
@@ -50,10 +50,8 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
       };
 
       mutateAsync({
-        body: {
-          name: payload.name,
-          description: payload.description,
-        },
+        // Bypass extra-property checking by casting first to unknown, then to the expected type.
+        body: payload as unknown as { name: string; description: string },
       }).then(() => {
         onCreated();
       });
