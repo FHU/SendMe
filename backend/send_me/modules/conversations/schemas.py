@@ -13,4 +13,4 @@ class Conversation(SendMeModel):
 class UserConversations(SendMeModel):
     user_id: UUID
     conversation_id: UUID
-    read: boolean
+    read: bool
