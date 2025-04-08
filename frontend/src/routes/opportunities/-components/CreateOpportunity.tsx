@@ -31,16 +31,16 @@ type ExtendedOpportunityPayload = {
   timeOfEvent: string;
 };
 
-export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
+export function CreateOpportunity({ onCreated }: { onCreated: () => void }): JSX.Element {
   const { mutateAsync, isPending } = api.opportunities.create.useMutation();
 
   const onSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
+    (e: React.FormEvent<HTMLFormElement>): void => {
       e.preventDefault();
       const formData = new FormData(e.currentTarget);
 
-      // Build payload including additional fields.
-      const payload: ExtendedOpportunityPayload = {
+      // Build full payload from form data
+      const fullPayload: ExtendedOpportunityPayload = {
         name: formData.get("name")?.toString() || "",
         tags: formData.get("tags")?.toString() || "",
         summary: formData.get("summary")?.toString() || "",
@@ -49,10 +49,13 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
         timeOfEvent: formData.get("timeOfEvent")?.toString() || "",
       };
 
-      mutateAsync({
-        // Bypass extra-property checking by casting first to unknown, then to the expected type.
-        body: payload as unknown as { name: string; description: string },
-      }).then(() => {
+      // Only send the properties the mutation endpoint expects.
+      const minimalPayload = {
+        name: fullPayload.name,
+        description: fullPayload.description,
+      };
+
+      mutateAsync({ body: minimalPayload }).then(() => {
         onCreated();
       });
     },
