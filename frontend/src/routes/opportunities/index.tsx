@@ -3,7 +3,6 @@ import { SlSpinner } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 import { CreateOpportunity } from "./-components/CreateOpportunity";
-import { OpportunitiesList } from "./-components/OpportunitiesList";
 
 export const Route = createFileRoute("/opportunities/")({
 	component: RouteComponent,
@@ -18,8 +17,6 @@ function RouteComponent() {
 	return (
 		<>
 			<CreateOpportunity onCreated={refetch} />
-			<AreaHeading>Opportunities</AreaHeading>
-			{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
 		</>
 	);
 }
