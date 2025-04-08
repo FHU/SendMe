@@ -13,12 +13,6 @@ router = APIRouter(prefix="/seed", tags=["Seed Data"])
 
 @router.post("/dummy")
 def seed_dummy_data(db: Session = Depends(get_db)):
-    # Clear existing data (optional)
-    db.query(UserConversations).delete()
-    db.query(Message).delete()
-    db.query(Conversation).delete()
-    db.query(User).delete()
-    db.flush()
 
     # Create Users
     user1 = User(
