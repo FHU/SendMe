@@ -1,15 +1,15 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime
+from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
 from send_me.database.models import Base
 
 """
 This class represents a Conversation in the database.
-SQLAlchemy uses this to write the appropiate SQL
-for various operations.
+Conceptually, conversations contain the messages sent between users.
+This implementation allows for group messaging 
 """
 
 
@@ -17,9 +17,21 @@ class Conversation(Base):
     __tablename__ = "conversations"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    user: Mapped[str]
-    last_updated: Mapped[datetime] = mapped_column(
+    newest_message_id: Mapped[uuid.UUID = mapped_column(
+        ForeignKey("messages.id")
+    )
+    last_updated: Mapped[datetime]
+    created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now
     )
-    most_recent: Mapped[str]
-    is_read: Mapped[bool]
+
+class UserConversations(Base):
+    __tablename__ = "user_conversations"
+
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("users.id")
+    )
+    conversation_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("conversations.id")
+    )
+    read: Mapped[bool]
