@@ -23,36 +23,36 @@ const ToTheRight = styled.div`
 `;
 
 export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
-  const { mutateAsync, isPending } = api.opportunities.create.useMutation();
+	const { mutateAsync, isPending } = api.opportunities.create.useMutation();
 
-  const onSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+	const onSubmit = useCallback(
+		(e: React.FormEvent<HTMLFormElement>) => {
+			e.preventDefault();
 
-      const formData = new FormData(e.currentTarget);
+			const formData = new FormData(e.currentTarget);
 
-      mutateAsync({
-        body: {
-          name: formData.get("name")?.toString() || "",
-          description: formData.get("description")?.toString() || "",
-        },
-      }).then(() => {
-        onCreated();
-      });
-    },
-    [mutateAsync, onCreated]
-  );
+			mutateAsync({
+				body: {
+					name: formData.get("name")?.toString() || "",
+					description: formData.get("description")?.toString() || "",
+				},
+			}).then(() => {
+				onCreated();
+			});
+		},
+		[mutateAsync, onCreated],
+	);
 
-  return (
-    <Form onSubmit={onSubmit}>
-      <Heading>Share Opportunity</Heading>
-      <Input disabled={isPending} label="Title" name="name" />
-      <Input disabled={isPending} label="Description" name="description" />
-      <ToTheRight>
-        <SlButton type="submit" loading={isPending}>
-          Share
-        </SlButton>
-      </ToTheRight>
-    </Form>
-  );
+	return (
+		<Form onSubmit={onSubmit}>
+			<Heading>Share Opportunity</Heading>
+			<Input disabled={isPending} label="Title" name="name" />
+			<Input disabled={isPending} label="Description" name="description" />
+			<ToTheRight>
+				<SlButton type="submit" loading={isPending}>
+					Share
+				</SlButton>
+			</ToTheRight>
+		</Form>
+	);
 }
