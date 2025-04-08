@@ -22,6 +22,15 @@ const ToTheRight = styled.div`
   justify-content: flex-end;
 `;
 
+type ExtendedOpportunityPayload = {
+  name: string;
+  tags: string;
+  summary: string;
+  position: string;
+  description: string;
+  timeOfEvent: string;
+};
+
 export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
   const { mutateAsync, isPending } = api.opportunities.create.useMutation();
 
@@ -31,7 +40,7 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
       const formData = new FormData(e.currentTarget);
 
       // Build payload including additional fields.
-      const payload = {
+      const payload: ExtendedOpportunityPayload = {
         name: formData.get("name")?.toString() || "",
         tags: formData.get("tags")?.toString() || "",
         summary: formData.get("summary")?.toString() || "",
@@ -41,7 +50,7 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
       };
 
       mutateAsync({
-        // Bypassing type-check by first casting to unknown, then to the expected type.
+        // Bypass extra-property checking by casting first to unknown, then to the expected type.
         body: payload as unknown as { name: string; description: string },
       }).then(() => {
         onCreated();
@@ -58,7 +67,12 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
       <Input disabled={isPending} label="Short Summary" name="summary" />
       <Input disabled={isPending} label="Position" name="position" />
       <Input disabled={isPending} label="Description" name="description" />
-      <Input disabled={isPending} label="Time of Event" name="timeOfEvent" type="time" />
+      <Input
+        disabled={isPending}
+        label="Time of Event"
+        name="timeOfEvent"
+        type="time"
+      />
       <ToTheRight>
         <SlButton type="submit" loading={isPending}>
           Share
