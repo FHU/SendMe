@@ -46,14 +46,14 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 	return (
 		<Form onSubmit={onSubmit}>
 			<Heading>Share Opportunity</Heading>
-			<Input disabled={isPending} label="Title" name="name" required />
-			<Input disabled={isPending} label="Description" name="description" required />
-			<Input disabled={isPending} label="Tags" name="tags" />
-			<Input disabled={isPending} label="Summary" name="summary" />
-			<Input disabled={isPending} label="Location" name="location" />
-			<Input disabled={isPending} label="Event Date" name="eventDate" type="date" />
-			<Input disabled={isPending} label="Event Time" name="eventTime" type="time" />
-			<Input disabled={isPending} label="Position" name="position" />
+			<Input disabled={isPending} label="Title" name="name" />
+			<Input disabled={isPending} label="Description" name="description" />
+			<Input disabled={isPending} label="Tags" name="description" />
+			<Input disabled={isPending} label="Summary" name="description" />
+			<Input disabled={isPending} label="Location" name="description" />
+			<Input disabled={isPending} label="Event Date" name="description" />
+			<Input disabled={isPending} label="Event Time" name="description" />
+			<Input disabled={isPending} label="Position" name="description" />
 			<ToTheRight>
 				<SlButton type="submit" loading={isPending}>
 					Share
