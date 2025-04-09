@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+from typing import Optional, List
 
 from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -17,13 +18,10 @@ class Conversation(Base):
     __tablename__ = "conversations"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    newest_message_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("messages.id"), nullable=True
+    newest_message_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("messages.id"),
     )
-    last_updated: Mapped[datetime]
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, default=datetime.now
-    )
+    last_updated: Mapped[datetime | None]
 
     newest_message = relationship("messages", back_populates="conversation")
     users = relationship("user_conversations", back_populates="conversation")

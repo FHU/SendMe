@@ -19,7 +19,7 @@ router = APIRouter(
 # List Conversations
 @router.get("/", response_model=schemas.GetConversationsResponse, operation_id="getAllConversations")
 def get_conversations(db: Session = Depends(get_db), user: User = Depends(get_user)):
-    query = select(models.Conversation).where(user in models.Conversation.users).order_by(models.Conversation.created_at.desc())
+    query = select(models.Conversation).where(user in models.Conversation.users).order_by(models.Conversation.last_updated.desc())
 
     # Can throw an error -- deal with later
     conversations = db.execute(query).scalars().all()
@@ -66,22 +66,49 @@ def seed_dummy_data(db: Session = Depends(get_db)):
     db.refresh(user2)
 
     conversation = models.Conversation(
-        last_updated=datetime.now(),
+        newest_message_id = None,
+        last_updated = None
     )
+
     db.add(conversation)
     db.flush()
     db.refresh(conversation)
 
+    # Tie user to conversation
+    user_conversation_1 = models.UserConversations(
+        user_id=user1.id,
+        conversation_id=conversation.id,
+        read=False,
+        user=user1
+    )
+
+    user_conversation_2 = models.UserConversations(
+        user_id=user2.id,
+        conversation_id=conversation.id,
+        read=False,
+        user=user2
+    )
+
+    db.add_all([user_conversation_1, user_conversation_2])
+    db.flush()
+
     # Create Messages
     message1 = models.Message(
-        sender=user1.id,
+        sender_id=user1.id,
+        conversation_id=conversation.id,
         content="Hey Bob, how’s it going?",
-        conversation_id=conversation.id,
+        sender=user1,
+        conversation=conversation,
+        created_at=datetime.now()
     )
+
     message2 = models.Message(
-        sender=user2.id,
-        content="Good Alice! Building stuff as usual.",
+        sender_id=user2.id,
         conversation_id=conversation.id,
+        content="Good Alice! Building stuff as usual.",
+        sender=user2,
+        conversation=conversation,
+        created_at=datetime.now()
     )
 
     db.add_all([message1, message2])
@@ -91,19 +118,8 @@ def seed_dummy_data(db: Session = Depends(get_db)):
     # Update conversation with actual newest message ID
     conversation.newest_message_id = message2.id
     conversation.last_updated = message2.created_at
-    db.flush()
-
-    # Link Users to Conversation
-    db.add_all(
-        [
-            models.UserConversations(
-                user_id=user1.id, conversation_id=conversation.id, read=False
-            ),
-            models.UserConversations(
-                user_id=user2.id, conversation_id=conversation.id, read=True
-            ),
-        ]
-    )
+    
+    db.add(conversation)
     db.flush()
 
     return {"message": "Dummy data seeded successfully"}
