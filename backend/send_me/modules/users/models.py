@@ -2,6 +2,7 @@ import uuid
 from datetime import datetime
 from typing import Optional
 
+from send_me.modules.conversations.models import Conversation
 from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -19,6 +20,11 @@ class User(Base):
     location: Mapped[str | None]
     bio: Mapped[str | None]
     profile_picture: Mapped[str | None]
+
+    conversations: Mapped[Optional[list[Conversation]]] = relationship(
+        "Conversation", uselist=True, back_populates="user", cascade="all, delete-orphan"
+    )
+
     session: Mapped[Optional[list[Session]]] = relationship(
         "Session", uselist=False, back_populates="user", cascade="all, delete-orphan"
     )
