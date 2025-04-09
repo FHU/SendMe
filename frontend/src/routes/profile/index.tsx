@@ -11,7 +11,6 @@ function RouteComponent() {
 		<div
 			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
 		>
-			<Header />
 			<Background />
 		</div>
 	);
