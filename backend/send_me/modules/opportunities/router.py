@@ -6,7 +6,6 @@ from send_me.database.engine import get_db
 
 from . import models, schemas
 
-import uuid
 from datetime import datetime
 
 router = APIRouter(
