@@ -81,33 +81,76 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 			<Heading>Share Opportunity</Heading>
 
 			<Label htmlFor="name">Title</Label>
-			<Input id="name" name="name" type="text" disabled={isPending} />
+			<Input
+				id="name"
+				name="name"
+				type="text"
+				placeholder="Enter title"
+				disabled={isPending}
+			/>
 
 			<Label htmlFor="description">Description</Label>
 			<Input
 				id="description"
 				name="description"
 				type="text"
+				placeholder="Enter description"
 				disabled={isPending}
 			/>
 
 			<Label htmlFor="tags">Tags</Label>
-			<Input id="tags" name="tags" type="text" disabled={isPending} />
+			<Input
+				id="tags"
+				name="tags"
+				type="text"
+				placeholder="Enter tags (comma separated)"
+				disabled={isPending}
+			/>
 
 			<Label htmlFor="summary">Summary</Label>
-			<Input id="summary" name="summary" type="text" disabled={isPending} />
+			<Input
+				id="summary"
+				name="summary"
+				type="text"
+				placeholder="Enter summary"
+				disabled={isPending}
+			/>
 
 			<Label htmlFor="location">Location</Label>
-			<Input id="location" name="location" type="text" disabled={isPending} />
+			<Input
+				id="location"
+				name="location"
+				type="text"
+				placeholder="Enter location"
+				disabled={isPending}
+			/>
 
 			<Label htmlFor="eventDate">Event Date</Label>
-			<Input id="eventDate" name="eventDate" type="date" disabled={isPending} />
+			<Input
+				id="eventDate"
+				name="eventDate"
+				type="date"
+				placeholder="Select event date"
+				disabled={isPending}
+			/>
 
 			<Label htmlFor="eventTime">Event Time</Label>
-			<Input id="eventTime" name="eventTime" type="time" disabled={isPending} />
+			<Input
+				id="eventTime"
+				name="eventTime"
+				type="time"
+				placeholder="Select event time"
+				disabled={isPending}
+			/>
 
 			<Label htmlFor="position">Position</Label>
-			<Input id="position" name="position" type="text" disabled={isPending} />
+			<Input
+				id="position"
+				name="position"
+				type="text"
+				placeholder="Enter position"
+				disabled={isPending}
+			/>
 
 			<ButtonContainer>
 				<SubmitButton type="submit" disabled={isPending}>
