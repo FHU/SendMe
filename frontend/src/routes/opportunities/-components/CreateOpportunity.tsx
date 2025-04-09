@@ -42,91 +42,91 @@ const SubmitButton = styled.button`
 `;
 
 export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
-	const { mutateAsync, isPending } = api.opportunities.create.useMutation();
+  const { mutateAsync, isPending } = api.opportunities.create.useMutation();
 
-	const onSubmit = useCallback(
-		(e: React.FormEvent<HTMLFormElement>) => {
-			e.preventDefault();
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-			const formData = new FormData(e.currentTarget);
+      const formData = new FormData(e.currentTarget);
 
-			mutateAsync({
-				body: {
-					name: formData.get("name")?.toString() || "",
-					description: formData.get("description")?.toString() || "",
-				},
-			}).then(() => {
-				onCreated();
-			});
-		},
-		[mutateAsync, onCreated],
-	);
+      mutateAsync({
+        body: {
+          name: formData.get("name")?.toString() || "",
+          description: formData.get("description")?.toString() || "",
+        },
+      }).then(() => {
+        onCreated();
+      });
+    },
+    [mutateAsync, onCreated]
+  );
 
-	return (
-		<Form onSubmit={onSubmit}>
-			<Heading>Share Opportunity</Heading>
+  return (
+    <Form onSubmit={onSubmit}>
+      <Heading>Share Opportunity</Heading>
 
-			<SlInput
-				name="name"
-				label="Title"
-				placeholder="Enter title"
-				disabled={isPending}
-			/>
+      <SlInput
+        name="name"
+        label="Title"
+        placeholder="Enter title"
+        disabled={isPending}
+      />
 
-			<SlInput
-				name="description"
-				label="Description"
-				placeholder="Enter description"
-				disabled={isPending}
-			/>
+      <SlInput
+        name="description"
+        label="Description"
+        placeholder="Enter description"
+        disabled={isPending}
+      />
 
-			<SlInput
-				name="tags"
-				label="Tags"
-				placeholder="Enter tags (separated by commas)"
-				disabled={isPending}
-			/>
+      <SlInput
+        name="tags"
+        label="Tags"
+        placeholder="Enter tags"
+        disabled={isPending}
+      />
 
-			<SlInput
-				name="summary"
-				label="Summary"
-				placeholder="Enter summary"
-				disabled={isPending}
-			/>
+      <SlInput
+        name="summary"
+        label="Summary"
+        placeholder="Enter summary"
+        disabled={isPending}
+      />
 
-			<SlInput
-				name="location"
-				label="Location"
-				placeholder="Enter location"
-				disabled={isPending}
-			/>
+      <SlInput
+        name="location"
+        label="Location"
+        placeholder="Enter location"
+        disabled={isPending}
+      />
 
-			<SlInput
-				name="eventDate"
-				label="Event Date"
-				type="date"
-				disabled={isPending}
-			/>
+      <SlInput
+        name="eventDate"
+        label="Event Date"
+        type="date"
+        disabled={isPending}
+      />
 
-			<SlInput
-				name="eventTime"
-				label="Event Time"
-				type="time"
-				disabled={isPending}
-			/>
+      <SlInput
+        name="eventTime"
+        label="Event Time"
+        type="time"
+        disabled={isPending}
+      />
 
-			<SlInput
-				name="position"
-				label="Position"
-				placeholder="Enter position"
-				disabled={isPending}
-			/>
+      <SlInput
+        name="position"
+        label="Position"
+        placeholder="Enter position"
+        disabled={isPending}
+      />
 
-			<ButtonContainer>
-				<SubmitButton type="submit" disabled={isPending}>
-					{isPending ? "Sharing..." : "Share"}
-				</SubmitButton>
-			</ButtonContainer>
-		</Form>
-	);
+      <ButtonContainer>
+        <SubmitButton type="submit" disabled={isPending}>
+          {isPending ? "Sharing..." : "Share"}
+        </SubmitButton>
+      </ButtonContainer>
+    </Form>
+  );
 }
