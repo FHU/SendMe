@@ -7,7 +7,7 @@ from send_me.database.engine import get_db
 from . import models, schemas
 
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime
 
 router = APIRouter(
     tags=["opportunities"],
@@ -72,7 +72,7 @@ def get_opportunities(
 def seed_opportunities(
     db: Session = Depends(get_db),
 ):
-    sample_opps = [ 
+    sample_opps = [
         models.Opportunity(
             name="Tech Internship Program",
             description="A summer internship for students interested in backend engineering.",
