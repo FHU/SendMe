@@ -2,12 +2,12 @@ import uuid
 from datetime import datetime
 from typing import Optional
 
-from send_me.modules.conversations.models import Conversation
 from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from send_me.database.models import Base
 from send_me.modules.authentication.models import Session
+from send_me.modules.conversations.models import Conversation
 
 
 class User(Base):

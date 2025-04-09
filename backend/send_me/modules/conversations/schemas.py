@@ -1,20 +1,25 @@
 from datetime import datetime
 from uuid import UUID
-from typing import List
+from typing import List, Type
 
 from send_me.schemas import SendMeModel
 from send_me.modules.users.models import User
 
 from . import models
 
+class GetConversationsResponse(SendMeModel):
+    conversations: List[Type[models.Conversation]]
+
+class GetMessagesResponse(SendMeModel):
+    messages: List[Type[models.Message]]
 
 class Conversation(SendMeModel):
     id: UUID
     newest_message_id: UUID
     last_updated: datetime
     created_at: datetime
-    newest_message: models.Message
-    users: List[User]
+    newest_message: Type[models.Message]
+    users: List[Type[User]]
 
 class Message(SendMeModel):
     id: UUID
@@ -22,7 +27,7 @@ class Message(SendMeModel):
     conversation_id: UUID
     content: str
 
-    sender:User
-    conversation: Conversation
+    sender: Type[User]
+    conversation: Type[models.Conversation]
 
     created_at: datetime
