@@ -1,17 +1,19 @@
-import {
-    SlAvatar
-} from "@shoelace-style/shoelace/dist/react";
+
 import styled from "styled-components";
 
 const HeaderContainer = styled.div`
-
     display: flex;
     flex-direction: column;
     width: 400px;
-    height: 600px;
+    height: 440px;
     background-color: var(--sl-color-primary-500);
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
+`;
+
+const AvatarImg = styled.image`
+    border-radius: 50%;
+
 `;
 
 const ProfileUsername = styled.h1`
@@ -29,7 +31,9 @@ const ConnectionNumber = styled.p`
 `;
 
 const Header = () => <HeaderContainer>
-    <SlAvatar image="images/christian-buehner-DItYlc26zVI-unsplash.jpg"/>
+    <AvatarImg>
+        <img src="images/christian-buehner-DItYlc26zVI-unsplash.jpg" alt=""/>
+    <AvatarImg/>
     <ProfileUsername>Christian Buehner</ProfileUsername>
     <ConnectionNumber>999 Connections</ConnectionNumber>
 
