@@ -9,16 +9,16 @@ import {
 	SlTag,
 } from "@shoelace-style/shoelace/dist/react";
 // import { useQuery } from "@tanstack/react-query";
-import {
-	JSXElementConstructor,
-	Key,
-	ReactElement,
-	ReactNode,
-	ReactPortal,
-} from "react";
+// import {
+// 	JSXElementConstructor,
+// 	Key,
+// 	ReactElement,
+// 	ReactNode,
+// 	ReactPortal,
+// } from "react";
 import styled from "styled-components";
 
-import { SlRelativeTime } from "@shoelace-style/shoelace/dist/react";
+// import { SlRelativeTime } from "@shoelace-style/shoelace/dist/react";
 
 const CardContainer = styled(SlCard)`
   display: flex;

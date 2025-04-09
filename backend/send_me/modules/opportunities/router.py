@@ -6,6 +6,9 @@ from send_me.database.engine import get_db
 
 from . import models, schemas
 
+import uuid
+from datetime import datetime, timedelta
+
 router = APIRouter(
     tags=["opportunities"],
     responses={404: {"description": "Not found"}},
@@ -67,3 +70,38 @@ def get_opportunities(
     result = db.execute(query).scalars().all()
 
     return result
+
+@router.post("/opportunities/seed",status_code=201,operation_id="seed_opportunities")
+def seed_opportunities(
+    db: Session = Depends(get_db),
+):
+    sample_opps = [ 
+        models.Opportunity(
+            name="Tech Internship Program",
+            description="A summer internship for students interested in backend engineering.",
+            short_description="Summer backend internship.",
+            location="Remote",
+            event_date=datetime(2025, 6, 1),
+        ),
+        models.Opportunity(
+            name="AI Research Fellowship",
+            description="A fellowship for students interested in AI research.",
+            short_description="AI research fellowship.",
+            location="New York",
+            event_date=datetime(2025, 8, 15),
+        ),
+    ]
+        
+    db.add_all(sample_opps)
+    db.commit()
+    db.flush()
+    #     models.Opportunity(
+    #         name="Women in Tech Scholarship",
+    #         description="Scholarship for women pursuing STEM degrees.",
+    #         short_description="Support for women in STEM.",
+    #         location="Online",
+    #         event_date=(2025, 12, 14),
+    #     )
+    # ]
+
+    return {"message": f"Seeded {len(sample_opps)} opportunities"}
