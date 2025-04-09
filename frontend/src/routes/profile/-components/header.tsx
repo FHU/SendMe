@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 
 const HeaderContainer = styled.div`
@@ -39,12 +38,13 @@ const ConnectionNumber = styled.p`
     line-height: 0;
 `;
 
-const Header = () => <HeaderContainer>
-    <AvatarImg src="images/christian-buehner-DItYlc26zVI-unsplash.jpg" alt=""/>
-        
-    <ProfileUsername>Christian Buehner</ProfileUsername>
-    <ConnectionNumber>999 Connections</ConnectionNumber>
+const Header = () => (
+	<HeaderContainer>
+		<AvatarImg src="images/christian-buehner-DItYlc26zVI-unsplash.jpg" alt="" />
 
-</HeaderContainer>;
+		<ProfileUsername>Christian Buehner</ProfileUsername>
+		<ConnectionNumber>999 Connections</ConnectionNumber>
+	</HeaderContainer>
+);
 
 export default Header;

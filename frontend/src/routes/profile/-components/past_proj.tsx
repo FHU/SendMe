@@ -3,6 +3,6 @@ import styled from "styled-components";
 const PastProjectsContainer = styled.div`
 `;
 
-const PastProjects = () => <PastProjectsContainer></PastProjectsContainer>;
+const PastProjects = () => <PastProjectsContainer />;
 
 export default PastProjects;
