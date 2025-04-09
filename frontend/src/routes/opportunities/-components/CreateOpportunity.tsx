@@ -53,9 +53,9 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 				name="description"
 				required
 			/>
-			<Input disabled={isPending} label="Tags" name="tags" placeholder="e.g., remote, full-time" />
-			<Input disabled={isPending} label="Summary" name="summary"/>
-			<Input disabled={isPending} label="Location" name="location" placeholder="City, State" />
+			<Input disabled={isPending} label="Tags" name="tags" placeholder="e.g., remote, full-time" type="text" />
+			<Input disabled={isPending} label="Summary" name="summary" type="text" />
+			<Input disabled={isPending} label="Location" name="location" placeholder="City, State" type="text" />
 			<Input disabled={isPending} label="Event Date" name="eventDate" type="date" />
 			<Input disabled={isPending} label="Event Time" name="eventTime" type="time" />
 			<Input disabled={isPending} label="Position" name="position" placeholder="e.g., Software Engineer" />
