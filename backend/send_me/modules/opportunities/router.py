@@ -18,7 +18,6 @@ router = APIRouter(
 The handler to create an opportunity. PLEASE PUT STATIC DATA IN THE router.get FUNCTION
 """
 
-
 @router.post(
     "/opportunities",
     response_model=schemas.Opportunity,
@@ -48,11 +47,9 @@ def create_opportunity(
     db.refresh(item)
     return item
 
-
 """
 This handler just gets a simple list of the opportunities.
 """
-
 
 @router.get(
     "/opportunities",
@@ -91,17 +88,16 @@ def seed_opportunities(
             event_date=datetime(2025, 8, 15),
         ),
     ]
-        
+
     db.add_all(sample_opps)
     db.commit()
     db.flush()
-    #     models.Opportunity(
-    #         name="Women in Tech Scholarship",
-    #         description="Scholarship for women pursuing STEM degrees.",
-    #         short_description="Support for women in STEM.",
-    #         location="Online",
-    #         event_date=(2025, 12, 14),
-    #     )
-    # ]
+    # models.Opportunity(
+    #     name="Women in Tech Scholarship",
+    #     description="Scholarship for women pursuing STEM degrees.",
+    #     short_description="Support for women in STEM.",
+    #     location="Online",
+    #     event_date=(2025, 12, 14),
+    # )
 
     return {"message": f"Seeded {len(sample_opps)} opportunities"}
