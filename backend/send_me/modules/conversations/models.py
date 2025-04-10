@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 from typing import List, Optional
 
-from sqlalchemy import Column, DateTime, ForeignKey, Table
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Table
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from send_me.database.models import Base
@@ -19,8 +19,9 @@ UserConversations = Table(
     Base.metadata,
     Column("user_id", ForeignKey("users.id"), primary_key=True),
     Column("conversation_id", ForeignKey("conversations.id"), primary_key=True),
-    Column("read", default=False),
+    Column("read", Boolean, default=False),
 )
+
 
 class Message(Base):
     __tablename__ = "messages"
@@ -50,4 +51,6 @@ class Conversation(Base):
         "User", secondary=UserConversations, back_populates="conversations"
     )
 
-    messages: Mapped[Optional[List[Message]]] = relationship()
+    messages: Mapped[Optional[List[Message]]] = relationship(
+        cascade="all, delete-orphan"
+    )

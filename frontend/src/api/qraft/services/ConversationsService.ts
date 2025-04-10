@@ -4,27 +4,63 @@
  */
 
 import type { paths } from "../schema";
-import type { ServiceOperationQuery } from "@openapi-qraft/react";
+import type { ServiceOperationQuery, ServiceOperationMutation } from "@openapi-qraft/react";
 export interface ConversationsService {
     /** @summary Get Conversations */
-    getConversationsconversationsGet: ServiceOperationQuery<{
+    getAllConversations: ServiceOperationQuery<{
         method: "get";
-        url: "conversations";
-    }, paths["conversations"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
+        url: "/conversations/";
+    }, paths["/conversations/"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
+    /** @summary Get Messages */
+    getMessagesInConversation: ServiceOperationQuery<{
+        method: "get";
+        url: "/conversations/{conversation_id}";
+    }, paths["/conversations/{conversation_id}"]["get"]["responses"]["200"]["content"]["application/json"], paths["/conversations/{conversation_id}"]["get"]["parameters"], paths["/conversations/{conversation_id}"]["get"]["responses"]["422"]["content"]["application/json"]>;
+    /** @summary Seed Dummy Data */
+    seedDummyDataConversationsSeedPost: ServiceOperationMutation<{
+        method: "post";
+        url: "/conversations/seed";
+    }, undefined, paths["/conversations/seed"]["post"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
 }
 export const conversationsService: {
     /** @summary Get Conversations */
-    getConversationsconversationsGet: {
+    getAllConversations: {
         schema: {
             method: "get";
-            url: "conversations";
+            url: "/conversations/";
+        };
+    };
+    /** @summary Get Messages */
+    getMessagesInConversation: {
+        schema: {
+            method: "get";
+            url: "/conversations/{conversation_id}";
+        };
+    };
+    /** @summary Seed Dummy Data */
+    seedDummyDataConversationsSeedPost: {
+        schema: {
+            method: "post";
+            url: "/conversations/seed";
         };
     };
 } = {
-    getConversationsconversationsGet: {
+    getAllConversations: {
         schema: {
             method: "get",
-            url: "conversations"
+            url: "/conversations/"
+        }
+    },
+    getMessagesInConversation: {
+        schema: {
+            method: "get",
+            url: "/conversations/{conversation_id}"
+        }
+    },
+    seedDummyDataConversationsSeedPost: {
+        schema: {
+            method: "post",
+            url: "/conversations/seed"
         }
     }
 };

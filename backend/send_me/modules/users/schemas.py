@@ -25,12 +25,5 @@ class CreateUserRequest(SendMeModel):
 class User(SendMeModel):
     id: UUID
     email: str
-    first_name: str
-    last_name: str
-    position: str
-    location: str
-    bio: str
-    profile_picture: str
-    linkedin: str
-    facebook: str
+    display_name: str
     created_at: datetime

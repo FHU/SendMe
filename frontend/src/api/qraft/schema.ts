@@ -125,7 +125,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    conversations: {
+    "/conversations/": {
         parameters: {
             query?: never;
             header?: never;
@@ -133,7 +133,7 @@ export interface paths {
             cookie?: never;
         };
         /** Get Conversations */
-        get: operations["get_conversationsconversations_get"];
+        get: operations["getAllConversations"];
         put?: never;
         post?: never;
         delete?: never;
@@ -142,7 +142,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    messages: {
+    "/conversations/{conversation_id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -150,7 +150,7 @@ export interface paths {
             cookie?: never;
         };
         /** Get Messages */
-        get: operations["get_messagesmessages_get"];
+        get: operations["getMessagesInConversation"];
         put?: never;
         post?: never;
         delete?: never;
@@ -159,7 +159,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/seed/dummy": {
+    "/conversations/seed": {
         parameters: {
             query?: never;
             header?: never;
@@ -169,7 +169,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Seed Dummy Data */
-        post: operations["seed_dummy_data_seed_dummy_post"];
+        post: operations["seed_dummy_data_conversations_seed_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -222,20 +222,14 @@ export interface components {
              */
             id: string;
             /**
-             * Newest Message Id
-             * Format: uuid
-             */
-            newest_message_id: string;
-            /**
              * Last Updated
              * Format: date-time
              */
             last_updated: string;
-            /**
-             * Created At
-             * Format: date-time
-             */
-            created_at: string;
+            /** Users */
+            users: components["schemas"]["User"][];
+            /** Messages */
+            messages: components["schemas"]["Message"][];
         };
         /** CreateOpportunityRequest */
         CreateOpportunityRequest: {
@@ -278,17 +272,18 @@ export interface components {
              */
             id: string;
             /**
-             * Sender
+             * Sender Id
              * Format: uuid
              */
-            sender: string;
-            /** Content */
-            content: string;
+            sender_id: string;
             /**
              * Conversation Id
              * Format: uuid
              */
             conversation_id: string;
+            /** Content */
+            content: string;
+            user: components["schemas"]["User"];
             /**
              * Created At
              * Format: date-time
@@ -345,6 +340,23 @@ export interface components {
         SessionRequest: {
             /** Otp */
             otp: string;
+        };
+        /** User */
+        User: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Email */
+            email: string;
+            /** Display Name */
+            display_name: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
         };
         /** UserInfo */
         UserInfo: {
@@ -671,7 +683,7 @@ export interface operations {
             };
         };
     };
-    get_conversationsconversations_get: {
+    getAllConversations: {
         parameters: {
             query?: never;
             header?: never;
@@ -698,11 +710,13 @@ export interface operations {
             };
         };
     };
-    get_messagesmessages_get: {
+    getMessagesInConversation: {
         parameters: {
             query?: never;
             header?: never;
-            path?: never;
+            path: {
+                conversation_id: string;
+            };
             cookie?: never;
         };
         requestBody?: never;
@@ -723,9 +737,18 @@ export interface operations {
                 };
                 content?: never;
             };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
     };
-    seed_dummy_data_seed_dummy_post: {
+    seed_dummy_data_conversations_seed_post: {
         parameters: {
             query?: never;
             header?: never;
@@ -742,6 +765,13 @@ export interface operations {
                 content: {
                     "application/json": unknown;
                 };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

@@ -1,12 +1,15 @@
-from datetime import datetime
+# This import is for testing
+import secrets
 import uuid
+from datetime import datetime
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session as DatabaseSession
 
 from send_me.database.engine import get_db
 from send_me.modules.authentication.dependencies import get_user
+from send_me.modules.authentication.models import Session
 from send_me.modules.users.models import User
 
 from . import models, schemas
@@ -21,13 +24,15 @@ router = APIRouter(
 # List Conversations
 @router.get(
     "/",
-    response_model=schemas.GetConversationsResponse,
+    response_model=list[schemas.Conversation],
     operation_id="getAllConversations",
 )
-def get_conversations(db: Session = Depends(get_db), user: User = Depends(get_user)):
+def get_conversations(
+    db: DatabaseSession = Depends(get_db), user: User = Depends(get_user)
+):
     query = (
         select(models.Conversation)
-        .where(user in models.Conversation.users)
+        .where(models.Conversation.users.contains(user))
         .order_by(models.Conversation.last_updated.desc())
     )
 
@@ -38,27 +43,29 @@ def get_conversations(db: Session = Depends(get_db), user: User = Depends(get_us
 
 
 # List messages in a conversation
+# I think there is a better way to do this... but this works for now
 @router.get(
-    "/messages/{conversation_id}",
-    response_model=schemas.GetMessagesResponse,
+    "/{conversation_id}",
+    response_model=list[schemas.Message],
     operation_id="getMessagesInConversation",
 )
 def get_messages(
     conversation_id: uuid.UUID,
-    db: Session = Depends(get_db),
+    db: DatabaseSession = Depends(get_db),
     user: User = Depends(get_user),
 ):
-    query = select(models.Message).where(
-        models.Message.conversation_id == conversation_id,
-        user in models.Message.conversation.users,
+    query = select(models.Conversation).where(
+        models.Conversation.id == conversation_id,
+        models.Conversation.users.contains(user),
     )
 
     # This can cause errors. Deal with later
-    messages = db.execute(query).scalars().all()
+    conversation = db.execute(query).scalars().one()
 
-    return messages
+    return conversation.messages
 
 
+#TODO
 # Creating messages
 # Creating Conversations
 
@@ -66,7 +73,7 @@ def get_messages(
 
 
 @router.post("/seed")
-def seed_dummy_data(db: Session = Depends(get_db)):
+def seed_dummy_data(response: Response, db: DatabaseSession = Depends(get_db)):
     # Create Users
     user1 = User(
         email="alice@example.com",
@@ -88,13 +95,11 @@ def seed_dummy_data(db: Session = Depends(get_db)):
     db.refresh(user1)
     db.refresh(user2)
 
-    conversation = models.Conversation()
+    conversation = models.Conversation(users=[user1, user2])
 
     db.add(conversation)
     db.flush()
     db.refresh(conversation)
-
-    # Tie user to conversation
 
     # Create Messages
     message1 = models.Message(
@@ -125,5 +130,14 @@ def seed_dummy_data(db: Session = Depends(get_db)):
 
     db.add(conversation)
     db.flush()
+
+    # Create session for testing endpoints
+    session = Session(session_token=secrets.token_urlsafe(32), user_id=user1.id)
+
+    db.add(session)
+
+    response.set_cookie(
+        key="token", value=session.session_token, httponly=True, samesite="strict"
+    )
 
     return {"message": "Dummy data seeded successfully"}

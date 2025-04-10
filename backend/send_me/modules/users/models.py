@@ -21,10 +21,10 @@ class User(Base):
     bio: Mapped[str | None]
     profile_picture: Mapped[str | None]
 
-    messages = relationship("Message")
     conversations = relationship(
         "Conversation", secondary=UserConversations, back_populates="users"
     )
+    messages = relationship("Message", cascade="all, delete-orphan")
     session: Mapped[Optional[list[Session]]] = relationship(
         "Session", uselist=False, back_populates="user", cascade="all, delete-orphan"
     )
