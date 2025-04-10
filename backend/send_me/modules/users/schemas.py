@@ -1,6 +1,8 @@
 from datetime import datetime
 from uuid import UUID
 
+from pydantic import EmailStr
+
 from send_me.schemas import SendMeModel
 
 """
@@ -14,21 +16,28 @@ OpenAPI spec.
 
 # Specifies the client's request to create an user.
 class CreateUserRequest(SendMeModel):
-    email: str
+    email: EmailStr
     first_name: str
     last_name: str
+    location: str
+    bio: str | None
+    profile_picture: str | None
+    facebook: str | None
+    x: str | None
+    instagram: str | None
+    linkedin: str | None
 
 
 class GetProfileResponse(SendMeModel):
     id: UUID
     first_name: str
     last_name: str
-    email: str
+    email: EmailStr
 
 
 class User(SendMeModel):
     id: UUID
-    email: str
+    email: EmailStr
     first_name: str
     last_name: str
     position: str
