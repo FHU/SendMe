@@ -110,77 +110,71 @@ const SignUpButton = styled(SlButton)`
 `;
 
 type SignUpFormProps = {
-  onSuccess?: () => void;
+	onSuccess?: () => void;
 };
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
-  const [responseMessage, setResponseMessage] = useState("");
-  const { mutateAsync, isSuccess } = api.users.createUser.useMutation();
+	const [responseMessage, setResponseMessage] = useState("");
+	const { mutateAsync, isSuccess } = api.users.createUser.useMutation();
 
-  const onSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+	const onSubmit = useCallback(
+		(e: React.FormEvent<HTMLFormElement>) => {
+			e.preventDefault();
 
-      const formData = new FormData(e.currentTarget);
+			const formData = new FormData(e.currentTarget);
 
-      mutateAsync({
-        body: {
-          email: formData.get("email")?.toString() || "",
-          display_name: formData.get("displayName")?.toString() || "",
-          first_name: formData.get("firstName")?.toString() || "",
-          last_name: formData.get("lastName")?.toString() || "",
-        },
-      })
-        .catch((error) => {
-          setResponseMessage(error.detail);
-        })
-        .then(() => {
-          if (onSuccess) onSuccess();
-        });
-    },
-    [mutateAsync, onSuccess],
-  );
+			mutateAsync({
+				body: {
+					email: formData.get("email")?.toString() || "",
+					first_name: formData.get("firstName")?.toString() || "",
+					last_name: formData.get("lastName")?.toString() || "",
+				},
+			})
+				.catch((error) => {
+					setResponseMessage(error.detail);
+				})
+				.then(() => {
+					if (onSuccess) onSuccess();
+				});
+		},
+		[mutateAsync, onSuccess],
+	);
 
-  const handleCloseBanner = (): void => {
-    setResponseMessage("");
-  };
+	const handleCloseBanner = (): void => {
+		setResponseMessage("");
+	};
 
-  return (
-    <FormWrapper onSubmit={onSubmit}>
-      {responseMessage && (
-        <RedBanner>
-          <span>{responseMessage}</span>
-          <CloseButton onClick={handleCloseBanner}>×</CloseButton>
-        </RedBanner>
-      )}
+	return (
+		<FormWrapper onSubmit={onSubmit}>
+			{responseMessage && (
+				<RedBanner>
+					<span>{responseMessage}</span>
+					<CloseButton onClick={handleCloseBanner}>×</CloseButton>
+				</RedBanner>
+			)}
 
-      <InvisibleCard>
-        <CardBody>
-          <Title>Sign Up!</Title>
+			<InvisibleCard>
+				<CardBody>
+					<Title>Sign Up!</Title>
 
-          <StyledInput
-            placeholder="Email"
-            name="email"
-            type="email"
-            clearable
-          />
+					<StyledInput
+						placeholder="Email"
+						name="email"
+						type="email"
+						clearable
+					/>
 
-          <StyledInput placeholder="First Name" name="firstName" clearable />
+					<StyledInput placeholder="First Name" name="firstName" clearable />
 
-          <StyledInput placeholder="Last Name" name="lastName" clearable />
+					<StyledInput placeholder="Last Name" name="lastName" clearable />
 
-          <StyledInput
-            placeholder="Display Name"
-            name="displayName"
-            clearable
-          />
-          <SignUpButton type="submit">Sign Up</SignUpButton>
+					<SignUpButton type="submit">Sign Up</SignUpButton>
 
-          {isSuccess && <Title>Signup Successful</Title>}
-        </CardBody>
-      </InvisibleCard>
-    </FormWrapper>
-  );
+					{isSuccess && <Title>Signup Successful</Title>}
+				</CardBody>
+			</InvisibleCard>
+		</FormWrapper>
+	);
 };
 
 export default SignUpForm;

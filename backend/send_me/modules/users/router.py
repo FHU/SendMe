@@ -23,7 +23,6 @@ def make_user(input: schemas.CreateUserRequest, db: Session = Depends(get_db)):
     # TODO add form validation
     new_user = models.User(
         email=input.email,
-        display_name=input.display_name,
         first_name=input.first_name,
         last_name=input.last_name,
     )

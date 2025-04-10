@@ -28,5 +28,5 @@ async def hello_world():
 
 
 @app.get("/protected")
-async def protected_example(session: Session =Depends(get_session)):
+async def protected_example(session: Session = Depends(get_session)):
     return {"message": "protected content"}

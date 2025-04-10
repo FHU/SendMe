@@ -15,20 +15,17 @@ OpenAPI spec.
 # Specifies the client's request to create an user.
 class CreateUserRequest(SendMeModel):
     email: str
-    display_name: str
     first_name: str
     last_name: str
 
 
 class GetProfileResponse(SendMeModel):
     id: UUID
-    display_name: str
     first_name: str
     last_name: str
     email: str
 
 
-# This is the general definition of what an Organization looks like.
 class User(SendMeModel):
     id: UUID
     email: str

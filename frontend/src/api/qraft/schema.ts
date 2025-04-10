@@ -202,8 +202,6 @@ export interface components {
         CreateUserRequest: {
             /** Email */
             email: string;
-            /** Display Name */
-            display_name: string;
             /** First Name */
             first_name: string;
             /** Last Name */
