@@ -168,10 +168,10 @@ export function ConversationList({
 				<Conversation
 					key={conversation.id}
 					imagePath={conversation.last_updated}
-					userName={conversation.user}
-					lastReadMessage={conversation.most_recent}
+					userName={"null"}
+					lastReadMessage={"null"}
 					lastReadTime={conversation.last_updated}
-					hasBeenRead={conversation.is_read}
+					hasBeenRead={true}
 				/>
 			))}
 		</>

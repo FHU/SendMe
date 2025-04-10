@@ -71,10 +71,10 @@ export function MessageList({
 		<>
 			{data.map((msg) => (
 				<>
-					<MessageContainer key={msg.id} isUser={msg.isUser}>
-						<MessageDisplay isUser={msg.isUser}>{msg.text}</MessageDisplay>
+					<MessageContainer key={msg.id} isUser={true}>
+						<MessageDisplay isUser={true}>{null}</MessageDisplay>
 					</MessageContainer>
-					<Timestamp key={msg.created_at} isUser={msg.isUser}>
+					<Timestamp key={msg.created_at} isUser={true}>
 						{formatDate(msg.created_at)}
 					</Timestamp>
 				</>

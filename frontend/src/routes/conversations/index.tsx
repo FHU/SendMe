@@ -62,8 +62,8 @@ const MessageHeader = styled.h1`
 
 function RouteComponent() {
 	const { data: conversations, refetch: refetchOrg } =
-		api.conversation.listConversations.useQuery();
-	const { data, refetch } = api.conversation.listConversations.useQuery();
+		api.conversations.getAllConversations.useQuery();
+	const { data, refetch } = api.conversations.getAllConversations.useQuery();
 	return (
 		<div>
 			<MessageHeader>Messages</MessageHeader>

@@ -78,13 +78,13 @@ const SendNewMessage = styled(SlTextarea)`
 
 function RouteComponent() {
 	const { data: conversations, refetch: refetchOrg } =
-		api.messages.listMessages.useQuery();
-	const { data, refetch } = api.messages.listMessages.useQuery();
+		api.conversations.getAllConversations.useQuery();
+	const { data, refetch } = api.conversations.getAllConversations.useQuery();
 	return (
 		<Container>
 			<DisplayName>John Smith</DisplayName>
 			<ChatContainer>
-				{!data ? <SlSpinner /> : <MessageList data={data} />}
+				{/* {!data ? <SlSpinner /> : <MessageList data={data} />} */}
 			</ChatContainer>
 			<SendMessageContainer>
 				<SendNewMessage
