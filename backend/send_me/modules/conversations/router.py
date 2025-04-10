@@ -72,7 +72,7 @@ def get_messages(
 # Route to seed db for testing
 
 
-@router.post("/seed")
+@router.post("/seed", operation_id="seedConversations", status_code=201)
 def seed_dummy_data(response: Response, db: DatabaseSession = Depends(get_db)):
     # Create Users
     user1 = User(

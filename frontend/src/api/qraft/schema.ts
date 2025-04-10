@@ -169,7 +169,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Seed Dummy Data */
-        post: operations["seed_dummy_data_conversations_seed_post"];
+        post: operations["seedConversations"];
         delete?: never;
         options?: never;
         head?: never;
@@ -748,7 +748,7 @@ export interface operations {
             };
         };
     };
-    seed_dummy_data_conversations_seed_post: {
+    seedConversations: {
         parameters: {
             query?: never;
             header?: never;
@@ -758,7 +758,7 @@ export interface operations {
         requestBody?: never;
         responses: {
             /** @description Successful Response */
-            200: {
+            201: {
                 headers: {
                     [name: string]: unknown;
                 };
