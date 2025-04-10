@@ -17,9 +17,14 @@ class User(Base):
     organization_id: Mapped[str | None] = mapped_column(ForeignKey("organizations.id"))
     first_name: Mapped[str]
     last_name: Mapped[str]
-    location: Mapped[str | None]
+    location: Mapped[str]
     bio: Mapped[str | None]
     profile_picture: Mapped[str | None]
+    facebook: Mapped[str | None]
+    x: Mapped[str | None]
+    instagram: Mapped[str | None]
+    linkedin: Mapped[str | None]
+
     session: Mapped[Optional[list[Session]]] = relationship(
         "Session", uselist=False, back_populates="user", cascade="all, delete-orphan"
     )
