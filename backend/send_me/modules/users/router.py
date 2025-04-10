@@ -17,14 +17,20 @@ router = APIRouter(
     "/",
     response_model=schemas.CreateUserRequest,
     status_code=201,
-    operation_id="create_user",
+    operation_id="createUser",
 )
 def make_user(input: schemas.CreateUserRequest, db: Session = Depends(get_db)):
-    # TODO add form validation
     new_user = models.User(
         email=input.email,
         first_name=input.first_name,
         last_name=input.last_name,
+        location=input.location,
+        bio=input.bio,
+        profile_picture=input.profile_picture,
+        facebook=input.facebook,
+        x=input.x,
+        instagram=input.instagram,
+        linkedin=input.linkedin
     )
 
     db.add(new_user)
