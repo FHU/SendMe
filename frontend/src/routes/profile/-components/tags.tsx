@@ -8,6 +8,8 @@ const TagsContainer = styled.div`
   width: 400px;
   display: flex;
   justify-content: space-between;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 `;
 
 const TagButtons = styled.div`

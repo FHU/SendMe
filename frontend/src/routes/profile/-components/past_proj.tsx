@@ -9,6 +9,8 @@ const PastProjContainer = styled.div`
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
   width: 400px;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 `;
 
 const Header = styled.div`
