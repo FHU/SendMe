@@ -7,6 +7,7 @@ const TagsContainer = styled.div`
   font-family: Arial, sans-serif;
   width: 400px;
   display: flex;
+  margin-top: 16rem;
   justify-content: space-between;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;

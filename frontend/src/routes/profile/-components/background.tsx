@@ -4,7 +4,7 @@ import Info from "./info";
 import PastProj from "./past_proj";
 import Tags from "./tags";
 
-const BackGround = styled.div` background: var(--sl-color-primary-50);
+const BackGround = styled.div`
   padding: 10px;
   display: flex;
   flex-direction: column;
