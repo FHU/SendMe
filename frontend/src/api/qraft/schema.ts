@@ -283,19 +283,22 @@ export interface components {
              * Format: uuid
              */
             sender_id: string;
-            /**
-             * Conversation Id
-             * Format: uuid
-             */
-            conversation_id: string;
             /** Content */
             content: string;
-            user: components["schemas"]["User"];
             /**
              * Created At
              * Format: date-time
              */
             created_at: string;
+            /** Users */
+            users: components["schemas"]["User"][];
+            /**
+             * Isuser
+             * @default false
+             */
+            isUser: boolean;
+            /** Profile Picture */
+            profile_picture?: string | null;
         };
         /** Opportunity */
         Opportunity: {
