@@ -61,13 +61,12 @@ const MessageHeader = styled.h1`
 `;
 
 function RouteComponent() {
-	const { data: conversations, refetch: refetchOrg } =
-		api.conversations.getAllConversations.useQuery();
 	const { data, refetch } = api.conversations.getAllConversations.useQuery();
 	return (
 		<div>
 			<MessageHeader>Messages</MessageHeader>
-			<SearchMessages placeholder="Search messages..." spellCheck>
+			<SearchMessages placeholder="Search messages..." spellCheck={false}>
+
 				<SlIconButton
 					name="search"
 					slot="prefix"

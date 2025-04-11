@@ -221,15 +221,19 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            /** Profile Picture */
+            profile_picture?: string | null;
+            /** Users */
+            users: components["schemas"]["User"][];
+            /** Messages */
+            messages: components["schemas"]["Message"][];
             /**
              * Last Updated
              * Format: date-time
              */
             last_updated: string;
-            /** Users */
-            users: components["schemas"]["User"][];
-            /** Messages */
-            messages: components["schemas"]["Message"][];
+            /** Has Been Read */
+            has_been_read: boolean;
         };
         /** CreateOpportunityRequest */
         CreateOpportunityRequest: {
