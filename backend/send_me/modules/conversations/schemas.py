@@ -9,14 +9,11 @@ from send_me.schemas import SendMeModel
 class Message(SendMeModel):
     id: UUID
     sender_id: UUID
+    conversation_id: UUID
     content: str
-    created_at: datetime
-    users: User
-    isUser: bool = False
-    profile_picture: str | None = None
-    
+    user: User
 
-    
+    created_at: datetime
 
 
 class Conversation(SendMeModel):
