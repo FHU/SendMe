@@ -14,7 +14,7 @@ class User(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     email: Mapped[str] = mapped_column(unique=True)
-    organization_id: Mapped[str | None] = mapped_column(ForeignKey("organizations.id"))
+    organization_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("organizations.id"))
     first_name: Mapped[str]
     last_name: Mapped[str]
     location: Mapped[str]

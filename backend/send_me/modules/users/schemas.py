@@ -38,12 +38,13 @@ class GetProfileResponse(SendMeModel):
 class User(SendMeModel):
     id: UUID
     email: EmailStr
+    orginzation_id: UUID | None = None
     first_name: str
     last_name: str
-    position: str
     location: str
-    bio: str
-    profile_picture: str
-    linkedin: str
-    facebook: str
-    created_at: datetime
+    bio: str | None = None
+    profile_picture: str | None = None
+    facebook: str | None = None
+    x: str | None = None
+    linkedin: str | None = None
+    facebook: str | None = None
