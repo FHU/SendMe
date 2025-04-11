@@ -20,12 +20,12 @@ class CreateUserRequest(SendMeModel):
     first_name: str
     last_name: str
     location: str
-    bio: str | None
-    profile_picture: str | None
-    facebook: str | None
-    x: str | None
-    instagram: str | None
-    linkedin: str | None
+    bio: str | None = None
+    profile_picture: str | None = None
+    facebook: str | None = None
+    x: str | None = None
+    instagram: str | None = None
+    linkedin: str | None = None
 
 
 class GetProfileResponse(SendMeModel):
