@@ -1,6 +1,7 @@
-from pydantic import EmailStr
 from datetime import datetime
 from uuid import UUID
+
+from pydantic import EmailStr
 
 from send_me.schemas import SendMeModel
 

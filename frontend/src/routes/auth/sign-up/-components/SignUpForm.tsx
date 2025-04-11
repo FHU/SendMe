@@ -1,11 +1,11 @@
 import api from "@sendme/api";
-import { useRouter } from "@tanstack/react-router";
 import {
-  SlButton,
-  SlCard,
-  SlInput,
-  SlTooltip,
+	SlButton,
+	SlCard,
+	SlInput,
+	SlTooltip,
 } from "@shoelace-style/shoelace/dist/react";
+import { useRouter } from "@tanstack/react-router";
 import type React from "react";
 import { useCallback, useState } from "react";
 import styled from "styled-components";
@@ -127,128 +127,128 @@ const SuccessContainer = styled.div`
 `;
 
 type SignUpFormProps = {
-  onSuccess?: () => void;
+	onSuccess?: () => void;
 };
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
-  const [responseMessage, setResponseMessage] = useState("");
-  const { mutateAsync, isSuccess } = api.users.createUser.useMutation();
-  const { mutateAsync: requestOtp } = api.auth.requestOtp.useMutation();
-  const router = useRouter();
+	const [responseMessage, setResponseMessage] = useState("");
+	const { mutateAsync, isSuccess } = api.users.createUser.useMutation();
+	const { mutateAsync: requestOtp } = api.auth.requestOtp.useMutation();
+	const router = useRouter();
 
-  const onSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+	const onSubmit = useCallback(
+		(e: React.FormEvent<HTMLFormElement>) => {
+			e.preventDefault();
 
-      const formData = new FormData(e.currentTarget);
+			const formData = new FormData(e.currentTarget);
 
-      mutateAsync({
-        body: {
-          email: formData.get("email")?.toString() || "",
-          first_name: formData.get("firstName")?.toString() || "",
-          last_name: formData.get("lastName")?.toString() || "",
-          location: formData.get("location")?.toString() || "",
-        },
-      })
-        .catch((error) => {
-          console.log(error);
-          if (error.detail.includes("Duplicate Email Used")) {
-            setResponseMessage(error.detail);
-          } else {
-            setResponseMessage(error.message || "Unknown error occurred");
-          }
-        })
-        .then(async () => {
-          if (onSuccess) onSuccess();
-          try {
-            await requestOtp({
-              body: {
-                email: formData.get("email")?.toString() || "",
-              },
-            });
-          } catch {
-            setResponseMessage("Something went wrong.");
-          }
-        });
-    },
-    [mutateAsync, onSuccess],
-  );
+			mutateAsync({
+				body: {
+					email: formData.get("email")?.toString() || "",
+					first_name: formData.get("firstName")?.toString() || "",
+					last_name: formData.get("lastName")?.toString() || "",
+					location: formData.get("location")?.toString() || "",
+				},
+			})
+				.catch((error) => {
+					console.log(error);
+					if (error.detail.includes("Duplicate Email Used")) {
+						setResponseMessage(error.detail);
+					} else {
+						setResponseMessage(error.message || "Unknown error occurred");
+					}
+				})
+				.then(async () => {
+					if (onSuccess) onSuccess();
+					try {
+						await requestOtp({
+							body: {
+								email: formData.get("email")?.toString() || "",
+							},
+						});
+					} catch {
+						setResponseMessage("Something went wrong.");
+					}
+				});
+		},
+		[mutateAsync, onSuccess, requestOtp],
+	);
 
-  const handleCloseBanner = (): void => {
-    setResponseMessage("");
-  };
+	const handleCloseBanner = (): void => {
+		setResponseMessage("");
+	};
 
-  return (
-    <>
-      {isSuccess ? (
-        <SuccessContainer>
-          {responseMessage && (
-            <RedBanner>
-              <span>{responseMessage}</span>
-              <CloseButton onClick={handleCloseBanner}>×</CloseButton>
-            </RedBanner>
-          )}
-          <Title>Signup Successful!</Title>
-          <Title>
-            A one time passoword has been sent to your email. Please enter it to
-            login
-          </Title>
+	return (
+		<>
+			{isSuccess ? (
+				<SuccessContainer>
+					{responseMessage && (
+						<RedBanner>
+							<span>{responseMessage}</span>
+							<CloseButton onClick={handleCloseBanner}>×</CloseButton>
+						</RedBanner>
+					)}
+					<Title>Signup Successful!</Title>
+					<Title>
+						A one time passoword has been sent to your email. Please enter it to
+						login
+					</Title>
 
-          <EnterOTPForm
-            onAuthSuccess={() => router.navigate({ to: "/profile" })}
-          />
-        </SuccessContainer>
-      ) : (
-        <FormWrapper onSubmit={onSubmit}>
-          {responseMessage && (
-            <RedBanner>
-              <span>{responseMessage}</span>
-              <CloseButton onClick={handleCloseBanner}>×</CloseButton>
-            </RedBanner>
-          )}
+					<EnterOTPForm
+						onAuthSuccess={() => router.navigate({ to: "/profile" })}
+					/>
+				</SuccessContainer>
+			) : (
+				<FormWrapper onSubmit={onSubmit}>
+					{responseMessage && (
+						<RedBanner>
+							<span>{responseMessage}</span>
+							<CloseButton onClick={handleCloseBanner}>×</CloseButton>
+						</RedBanner>
+					)}
 
-          <InvisibleCard>
-            <CardBody>
-              <Title>Sign Up!</Title>
-              <StyledInput
-                label="Email"
-                placeholder="john@example.com"
-                name="email"
-                type="email"
-                clearable
-                required
-              />
-              <StyledInput
-                label="First Name"
-                placeholder="John"
-                name="firstName"
-                clearable
-                required
-              />
-              <StyledInput
-                label="Last Name"
-                placeholder="Doe"
-                name="lastName"
-                clearable
-                required
-              />
+					<InvisibleCard>
+						<CardBody>
+							<Title>Sign Up!</Title>
+							<StyledInput
+								label="Email"
+								placeholder="john@example.com"
+								name="email"
+								type="email"
+								clearable
+								required
+							/>
+							<StyledInput
+								label="First Name"
+								placeholder="John"
+								name="firstName"
+								clearable
+								required
+							/>
+							<StyledInput
+								label="Last Name"
+								placeholder="Doe"
+								name="lastName"
+								clearable
+								required
+							/>
 
-              <SlTooltip content="The location you're located. A state is fine.">
-                <StyledInput
-                  label="Location"
-                  placeholder="Arlington, TX"
-                  name="location"
-                  clearable
-                  required
-                />
-              </SlTooltip>
-              <SignUpButton type="submit">Sign Up</SignUpButton>
-            </CardBody>
-          </InvisibleCard>
-        </FormWrapper>
-      )}
-    </>
-  );
+							<SlTooltip content="The location you're located. A state is fine.">
+								<StyledInput
+									label="Location"
+									placeholder="Arlington, TX"
+									name="location"
+									clearable
+									required
+								/>
+							</SlTooltip>
+							<SignUpButton type="submit">Sign Up</SignUpButton>
+						</CardBody>
+					</InvisibleCard>
+				</FormWrapper>
+			)}
+		</>
+	);
 };
 
 export default SignUpForm;
