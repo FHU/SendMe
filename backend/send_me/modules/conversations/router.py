@@ -14,6 +14,8 @@ from send_me.modules.users.models import User
 
 from . import models, schemas
 
+
+
 router = APIRouter(
     tags=["conversations"],
     responses={404: {"description": "Not found"}},
@@ -59,7 +61,6 @@ def get_messages(
         models.Conversation.users.contains(user),
     )
 
-    # This can cause errors. Deal with later
     conversation = db.execute(query).scalars().one()
 
     return conversation.messages
