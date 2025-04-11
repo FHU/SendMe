@@ -128,10 +128,16 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 					email: formData.get("email")?.toString() || "",
 					first_name: formData.get("firstName")?.toString() || "",
 					last_name: formData.get("lastName")?.toString() || "",
+					location: formData.get("location")?.toString() || "",
 				},
 			})
 				.catch((error) => {
-					setResponseMessage(error.detail);
+					console.log(error);
+					if (error.detail.includes("Duplicate Email Used")) {
+						setResponseMessage(error.detail);
+					} else {
+						setResponseMessage(error.message || "Unknown error occurred");
+					}
 				})
 				.then(() => {
 					if (onSuccess) onSuccess();
@@ -156,20 +162,37 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 			<InvisibleCard>
 				<CardBody>
 					<Title>Sign Up!</Title>
-
 					<StyledInput
-						placeholder="Email"
+						label="Email"
+						placeholder="john@example.com"
 						name="email"
 						type="email"
 						clearable
+						required
+					/>
+					<StyledInput
+						label="First Name"
+						placeholder="John"
+						name="firstName"
+						clearable
+						required
+					/>
+					<StyledInput
+						label="Last Name"
+						placeholder="Doe"
+						name="lastName"
+						clearable
+						required
 					/>
 
-					<StyledInput placeholder="First Name" name="firstName" clearable />
-
-					<StyledInput placeholder="Last Name" name="lastName" clearable />
-
+					<StyledInput
+						label="Location"
+						placeholder="Arlington, TX"
+						name="location"
+						clearable
+						required
+					/>
 					<SignUpButton type="submit">Sign Up</SignUpButton>
-
 					{isSuccess && <Title>Signup Successful</Title>}
 				</CardBody>
 			</InvisibleCard>

@@ -135,7 +135,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Make User */
-        post: operations["create_user"];
+        post: operations["createUser"];
         delete?: never;
         options?: never;
         head?: never;
@@ -200,12 +200,29 @@ export interface components {
         };
         /** CreateUserRequest */
         CreateUserRequest: {
-            /** Email */
+            /**
+             * Email
+             * Format: email
+             */
             email: string;
             /** First Name */
             first_name: string;
             /** Last Name */
             last_name: string;
+            /** Location */
+            location: string;
+            /** Bio */
+            bio?: string | null;
+            /** Profile Picture */
+            profile_picture?: string | null;
+            /** Facebook */
+            facebook?: string | null;
+            /** X */
+            x?: string | null;
+            /** Instagram */
+            instagram?: string | null;
+            /** Linkedin */
+            linkedin?: string | null;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -598,7 +615,7 @@ export interface operations {
             };
         };
     };
-    create_user: {
+    createUser: {
         parameters: {
             query?: never;
             header?: never;
