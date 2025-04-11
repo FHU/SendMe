@@ -1,5 +1,10 @@
 import api from "@sendme/api";
-import { SlButton, SlCard, SlInput } from "@shoelace-style/shoelace/dist/react";
+import {
+	SlButton,
+	SlCard,
+	SlInput,
+	SlTooltip,
+} from "@shoelace-style/shoelace/dist/react";
 import type React from "react";
 import { useCallback, useState } from "react";
 import styled from "styled-components";
@@ -185,13 +190,15 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 						required
 					/>
 
-					<StyledInput
-						label="Location"
-						placeholder="Arlington, TX"
-						name="location"
-						clearable
-						required
-					/>
+					<SlTooltip content="The location you're located. A state is fine.">
+						<StyledInput
+							label="Location"
+							placeholder="Arlington, TX"
+							name="location"
+							clearable
+							required
+						/>
+					</SlTooltip>
 					<SignUpButton type="submit">Sign Up</SignUpButton>
 					{isSuccess && <Title>Signup Successful</Title>}
 				</CardBody>
