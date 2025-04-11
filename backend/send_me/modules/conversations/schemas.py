@@ -11,7 +11,7 @@ class Message(SendMeModel):
     sender_id: UUID
     content: str
     created_at: datetime
-    users: List[User]
+    users: User
     isUser: bool = False
     profile_picture: str | None = None
     
