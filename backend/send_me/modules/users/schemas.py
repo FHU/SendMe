@@ -48,3 +48,5 @@ class User(SendMeModel):
     x: str | None = None
     linkedin: str | None = None
     facebook: str | None = None
+
+    created_at: datetime
