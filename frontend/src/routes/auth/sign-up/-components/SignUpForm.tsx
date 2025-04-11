@@ -5,6 +5,7 @@ import {
 	SlInput,
 	SlTooltip,
 } from "@shoelace-style/shoelace/dist/react";
+import { Link } from "@tanstack/react-router";
 import { useRouter } from "@tanstack/react-router";
 import type React from "react";
 import { useCallback, useState } from "react";
@@ -132,6 +133,7 @@ type SignUpFormProps = {
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 	const [responseMessage, setResponseMessage] = useState("");
+	const [isDuplicateEmail, setIsDuplicateEmail] = useState(false);
 	const { mutateAsync, isSuccess } = api.users.createUser.useMutation();
 	const { mutateAsync: requestOtp } = api.auth.requestOtp.useMutation();
 	const router = useRouter();
@@ -153,29 +155,33 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 				.catch((error) => {
 					console.log(error);
 					if (error.detail.includes("Duplicate Email Used")) {
+						setIsDuplicateEmail(true);
 						setResponseMessage(error.detail);
 					} else {
 						setResponseMessage(error.message || "Unknown error occurred");
 					}
 				})
 				.then(async () => {
-					if (onSuccess) onSuccess();
-					try {
-						await requestOtp({
-							body: {
-								email: formData.get("email")?.toString() || "",
-							},
-						});
-					} catch {
-						setResponseMessage("Something went wrong.");
+					if (isSuccess) {
+						if (onSuccess) onSuccess();
+						try {
+							await requestOtp({
+								body: {
+									email: formData.get("email")?.toString() || "",
+								},
+							});
+						} catch {
+							setResponseMessage("Something went wrong.");
+						}
 					}
 				});
 		},
-		[mutateAsync, onSuccess, requestOtp],
+		[mutateAsync, onSuccess, requestOtp, isSuccess],
 	);
 
 	const handleCloseBanner = (): void => {
 		setResponseMessage("");
+		setIsDuplicateEmail(false);
 	};
 
 	return (
@@ -202,7 +208,14 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 				<FormWrapper onSubmit={onSubmit}>
 					{responseMessage && (
 						<RedBanner>
-							<span>{responseMessage}</span>
+							{isDuplicateEmail ? (
+								<span>
+									Email already in use. Would you like to{" "}
+									<Link to="/auth">login</Link>?
+								</span>
+							) : (
+								<span>{responseMessage}</span>
+							)}
 							<CloseButton onClick={handleCloseBanner}>×</CloseButton>
 						</RedBanner>
 					)}
