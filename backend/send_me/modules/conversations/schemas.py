@@ -23,8 +23,7 @@ class Conversation(SendMeModel):
     users: List[User]
     messages: List[Message]
     last_updated: datetime
-    has_been_read: bool 
-    
+    has_been_read: bool = False
 
     class Config:
         from_attributes = True

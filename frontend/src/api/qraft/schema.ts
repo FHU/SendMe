@@ -232,7 +232,10 @@ export interface components {
              * Format: date-time
              */
             last_updated: string;
-            /** Has Been Read */
+            /**
+             * Has Been Read
+             * @default false
+             */
             has_been_read: boolean;
         };
         /** CreateOpportunityRequest */

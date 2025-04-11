@@ -3,7 +3,6 @@ import { SlAvatar } from "@shoelace-style/shoelace/dist/react";
 import type React from "react";
 import styled from "styled-components";
 
-
 const formatDate = (dateString: string) => {
 	const date = new Date(dateString);
 	return new Intl.DateTimeFormat("en-US", {
@@ -162,7 +161,7 @@ export function ConversationList({
 	data,
 }: {
 	// data: (components["schemas"]["Conversation"] & { profile_picture?: string; has_been_read?: boolean })[];
-	data: (components["schemas"]["Conversation"])[];
+	data: components["schemas"]["Conversation"][];
 }): JSX.Element {
 	return (
 		<>
@@ -171,7 +170,10 @@ export function ConversationList({
 					key={conversation.id}
 					imagePath={conversation.profile_picture ?? ""}
 					userName={conversation.users[0]?.display_name}
-					lastReadMessage={conversation.messages?.[conversation.messages.length - 1]?.content ?? ""}
+					lastReadMessage={
+						conversation.messages?.[conversation.messages.length - 1]
+							?.content ?? ""
+					}
 					lastReadTime={conversation.last_updated}
 					hasBeenRead={conversation.has_been_read ?? false}
 				/>
