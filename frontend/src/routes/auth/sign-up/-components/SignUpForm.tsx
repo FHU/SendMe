@@ -134,49 +134,49 @@ type SignUpFormProps = {
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 	const [responseMessage, setResponseMessage] = useState("");
 	const [isDuplicateEmail, setIsDuplicateEmail] = useState(false);
-	const { mutateAsync, isSuccess } = api.users.createUser.useMutation();
+	const { mutateAsync: createUser, isSuccess: isCreateUserSuccess } =
+		api.users.createUser.useMutation();
 	const { mutateAsync: requestOtp } = api.auth.requestOtp.useMutation();
 	const router = useRouter();
 
 	const onSubmit = useCallback(
-		(e: React.FormEvent<HTMLFormElement>) => {
+		async (e: React.FormEvent<HTMLFormElement>) => {
 			e.preventDefault();
 
 			const formData = new FormData(e.currentTarget);
 
-			mutateAsync({
-				body: {
-					email: formData.get("email")?.toString() || "",
-					first_name: formData.get("firstName")?.toString() || "",
-					last_name: formData.get("lastName")?.toString() || "",
-					location: formData.get("location")?.toString() || "",
-				},
-			})
-				.catch((error) => {
-					console.log(error);
-					if (error.detail.includes("Duplicate Email Used")) {
-						setIsDuplicateEmail(true);
-						setResponseMessage(error.detail);
-					} else {
-						setResponseMessage(error.message || "Unknown error occurred");
-					}
-				})
-				.then(async () => {
-					if (isSuccess) {
-						if (onSuccess) onSuccess();
-						try {
-							await requestOtp({
-								body: {
-									email: formData.get("email")?.toString() || "",
-								},
-							});
-						} catch {
-							setResponseMessage("Something went wrong.");
-						}
-					}
+			try {
+				await createUser({
+					body: {
+						email: formData.get("email")?.toString() || "",
+						first_name: formData.get("firstName")?.toString() || "",
+						last_name: formData.get("lastName")?.toString() || "",
+						location: formData.get("location")?.toString() || "",
+					},
 				});
+				// biome-ignore lint/suspicious/noExplicitAny: try catch blocks require any or unknown for error type
+			} catch (error: any) {
+				if (error.detail.includes("Duplicate Email Used")) {
+					setIsDuplicateEmail(true);
+					setResponseMessage(error.detail);
+				} else {
+					setResponseMessage(error.message || "Unknown error occurred");
+				}
+			}
+
+			if (onSuccess) onSuccess();
+
+			try {
+				await requestOtp({
+					body: {
+						email: formData.get("email")?.toString() || "",
+					},
+				});
+			} catch {
+				setResponseMessage("Something went wrong.");
+			}
 		},
-		[mutateAsync, onSuccess, requestOtp, isSuccess],
+		[createUser, onSuccess, requestOtp],
 	);
 
 	const handleCloseBanner = (): void => {
@@ -186,7 +186,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 
 	return (
 		<>
-			{isSuccess ? (
+			{isCreateUserSuccess ? (
 				<SuccessContainer>
 					{responseMessage && (
 						<RedBanner>

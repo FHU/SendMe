@@ -7,7 +7,7 @@ from send_me.schemas import SendMeModel
 
 
 class LoginChallengeRequest(SendMeModel):
-    email: str
+    email: EmailStr
 
 
 class LoginChallengeResponse(SendMeModel):
