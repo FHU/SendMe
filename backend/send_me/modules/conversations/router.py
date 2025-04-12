@@ -3,7 +3,7 @@ import secrets
 import uuid
 from datetime import datetime
 
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DatabaseSession
 
@@ -64,11 +64,66 @@ def get_conversation(
 
 # TODO
 # Creating messages
+@router.post(
+    "/conversation/{conversation_id}/messages",
+    operation_id="createMessage",
+    status_code=201,
+    response_model=schemas.Message,
+)
+def create_message(
+    conversation_id: uuid.UUID,
+    input: schemas.CreateMessageRequest,
+    db: DatabaseSession = Depends(get_db),
+    user: User = Depends(get_user),
+):
+    conversation = db.get(models.Conversation, conversation_id)
+
+    if not conversation:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+
+    if user not in conversation.users:
+        raise HTTPException(status_code=403, detail="User not in conversation")
+
+    message = models.Message(
+        content=input.content,
+        user=user,
+        conversation=conversation,
+    )
+
+    db.add(message)
+    db.flush()
+    db.refresh(message)
+
+    return message
+
+
 # Creating Conversations
+@router.post(
+    "/conversation",
+    operation_id="createConversation",
+    status_code=201,
+    response_model=models.Conversation,
+)
+def create_conversation(
+    input: schemas.CreateConversationRequest,
+    db: DatabaseSession = Depends(get_db),
+    user: User = Depends(get_user),
+):
+    reciever = db.get(User, input.reciever_id)
+
+    if not reciever:
+        raise HTTPException(status_code=404, detail="Reciever not found")
+
+    conversation = models.Conversation(users=[user, reciever])
+
+    db.add(conversation)
+    db.flush()
+    db.refresh(conversation)
+
+    return conversation
+
 
 # Route to seed db for testing
-
-
 @router.post("/seed", operation_id="seedConversations", status_code=201)
 def seed_dummy_data(response: Response, db: DatabaseSession = Depends(get_db)):
     # Create Users

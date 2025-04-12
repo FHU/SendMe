@@ -31,7 +31,7 @@ class Message(Base):
     conversation_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("conversations.id"))
     content: Mapped[str]
 
-    user = relationship("User", back_populates="messages")
+    sender = relationship("User", back_populates="messages")
     conversation = relationship(
         "Conversation", back_populates="messages", foreign_keys=[conversation_id]
     )

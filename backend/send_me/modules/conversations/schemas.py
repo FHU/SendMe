@@ -11,7 +11,7 @@ class Message(SendMeModel):
     sender_id: UUID
     conversation_id: UUID
     content: str
-    user: User
+    sender: User
 
     created_at: datetime
 
@@ -22,3 +22,11 @@ class Conversation(SendMeModel):
     messages: List[Message]
     last_updated: datetime
     has_been_read: bool = False
+
+
+class CreateMessageRequest(SendMeModel):
+    content: str
+
+
+class CreateConversationRequest(SendMeModel):
+    reciever_id: UUID
