@@ -149,8 +149,8 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Messages */
-        get: operations["getMessagesInConversation"];
+        /** Get Conversation */
+        get: operations["getConversation"];
         put?: never;
         post?: never;
         delete?: never;
@@ -283,22 +283,19 @@ export interface components {
              * Format: uuid
              */
             sender_id: string;
+            /**
+             * Conversation Id
+             * Format: uuid
+             */
+            conversation_id: string;
             /** Content */
             content: string;
+            user: components["schemas"]["User"];
             /**
              * Created At
              * Format: date-time
              */
             created_at: string;
-            /** Users */
-            users: components["schemas"]["User"][];
-            /**
-             * Isuser
-             * @default false
-             */
-            isUser: boolean;
-            /** Profile Picture */
-            profile_picture?: string | null;
         };
         /** Opportunity */
         Opportunity: {
@@ -720,7 +717,7 @@ export interface operations {
             };
         };
     };
-    getMessagesInConversation: {
+    getConversation: {
         parameters: {
             query?: never;
             header?: never;
@@ -737,7 +734,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Message"][];
+                    "application/json": components["schemas"]["Conversation"];
                 };
             };
             /** @description Not found */

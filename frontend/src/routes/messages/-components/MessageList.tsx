@@ -1,18 +1,18 @@
-import { SlAvatar } from '@shoelace-style/shoelace/dist/react';
-import { useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import { SlAvatar } from "@shoelace-style/shoelace/dist/react";
+import { useEffect, useRef } from "react";
+import styled from "styled-components";
 
 const MessageCard = styled.div<{ isUser: boolean }>`
   display: grid;
   grid-template-columns: 0.5fr 3fr 1fr;
   grid-template-rows: auto auto;
-  background-color: ${({ isUser }) => (isUser ? '#DCFFDB' : '#D9D9D9')};
+  background-color: ${({ isUser }) => (isUser ? "#DCFFDB" : "#D9D9D9")};
   border-radius: 12px;
   margin: 10px 0;
   padding: 10px;
   max-width: 90%;
-  margin-left: ${({ isUser }) => (isUser ? 'auto' : '0')};
-  margin-right: ${({ isUser }) => (isUser ? '0' : 'auto')};
+  margin-left: ${({ isUser }) => (isUser ? "auto" : "0")};
+  margin-right: ${({ isUser }) => (isUser ? "0" : "auto")};
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 `;
 
@@ -39,59 +39,65 @@ const Timestamp = styled.span`
 `;
 
 interface MessageProps {
-  message: {
-    id: string;
-    sender_id: string;
-    content: string;
-    created_at: string;
-    user: {
-      display_name: string;
-      profile_picture?: string;
-    };
-  };
-  isUser: boolean;
-  imagePath?: string;
+	message: {
+		id: string;
+		sender_id: string;
+		content: string;
+		created_at: string;
+		user: {
+			display_name: string;
+			profile_picture?: string;
+		};
+	};
+	isUser: boolean;
+	imagePath?: string;
 }
 
 function Message({ message, isUser, imagePath }: MessageProps) {
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-    }).format(date);
-  };
+	const formatDate = (dateString: string) => {
+		const date = new Date(dateString);
+		return new Intl.DateTimeFormat("en-US", {
+			hour: "2-digit",
+			minute: "2-digit",
+			hour12: true,
+		}).format(date);
+	};
 
-  return (
-    <MessageCard isUser={isUser}>
-      <AvatarWrapper>
-        <SlAvatar image={imagePath ?? ''} />
-      </AvatarWrapper>
-      <MessageText>{message.content}</MessageText>
-      <Timestamp>{formatDate(message.created_at)}</Timestamp>
-    </MessageCard>
-  );
+	return (
+		<MessageCard isUser={isUser}>
+			<AvatarWrapper>
+				<SlAvatar image={imagePath ?? ""} />
+			</AvatarWrapper>
+			<MessageText>{message.content}</MessageText>
+			<Timestamp>{formatDate(message.created_at)}</Timestamp>
+		</MessageCard>
+	);
 }
 
-export function MessageList({ data, currentUserId }: { data: any[]; currentUserId: string }) {
-  const chatEndRef = useRef<HTMLDivElement | null>(null);
+export function MessageList({
+	data,
+	currentUserId,
+}: {
+	data: any[];
+	currentUserId: string;
+}) {
+	const chatEndRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [data]);
+	useEffect(() => {
+		chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+	}, []);
 
-  return (
-    <>
-      {data.map((msg) => (
-        <Message
-          key={msg.id}
-          message={msg}
-          isUser={msg.sender_id === currentUserId}
-          imagePath={msg.user.profile_picture}
-        />
-      ))}
-      <div ref={chatEndRef} />
-    </>
-  );
+	return (
+		<>
+			{data.map((msg) => (
+				<Message
+					key={msg.id}
+					message={msg}
+					isUser={msg.sender_id === currentUserId}
+					imagePath={msg.user.profile_picture}
+				/>
+			))}
+			<div ref={chatEndRef} />
+		</>
+	);
 }

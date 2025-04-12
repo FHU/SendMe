@@ -11,8 +11,8 @@ export interface ConversationsService {
         method: "get";
         url: "/conversations/";
     }, paths["/conversations/"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
-    /** @summary Get Messages */
-    getMessagesInConversation: ServiceOperationQuery<{
+    /** @summary Get Conversation */
+    getConversation: ServiceOperationQuery<{
         method: "get";
         url: "/conversations/{conversation_id}";
     }, paths["/conversations/{conversation_id}"]["get"]["responses"]["200"]["content"]["application/json"], paths["/conversations/{conversation_id}"]["get"]["parameters"], paths["/conversations/{conversation_id}"]["get"]["responses"]["422"]["content"]["application/json"]>;
@@ -30,8 +30,8 @@ export const conversationsService: {
             url: "/conversations/";
         };
     };
-    /** @summary Get Messages */
-    getMessagesInConversation: {
+    /** @summary Get Conversation */
+    getConversation: {
         schema: {
             method: "get";
             url: "/conversations/{conversation_id}";
@@ -51,7 +51,7 @@ export const conversationsService: {
             url: "/conversations/"
         }
     },
-    getMessagesInConversation: {
+    getConversation: {
         schema: {
             method: "get",
             url: "/conversations/{conversation_id}"

@@ -6,6 +6,7 @@ from datetime import datetime
 from fastapi import APIRouter, Depends, Response
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DatabaseSession
+from sqlalchemy.orm.relationships import schema
 
 from send_me.database.engine import get_db
 from send_me.modules.authentication.dependencies import get_user
@@ -13,8 +14,6 @@ from send_me.modules.authentication.models import Session
 from send_me.modules.users.models import User
 
 from . import models, schemas
-
-
 
 router = APIRouter(
     tags=["conversations"],
@@ -44,14 +43,12 @@ def get_conversations(
     return conversations
 
 
-# List messages in a conversation
-# I think there is a better way to do this... but this works for now
 @router.get(
     "/{conversation_id}",
-    response_model=list[schemas.Message],
-    operation_id="getMessagesInConversation",
+    response_model=schemas.Conversation,
+    operation_id="getConversation",
 )
-def get_messages(
+def get_conversation(
     conversation_id: uuid.UUID,
     db: DatabaseSession = Depends(get_db),
     user: User = Depends(get_user),
@@ -63,7 +60,7 @@ def get_messages(
 
     conversation = db.execute(query).scalars().one()
 
-    return conversation.messages
+    return conversation
 
 
 # TODO
