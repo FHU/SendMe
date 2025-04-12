@@ -27,4 +27,4 @@ class User(SendMeModel):
     email: str
     display_name: str
     created_at: datetime
-    profile_picture: str = ""
+    profile_picture: str | None = ""

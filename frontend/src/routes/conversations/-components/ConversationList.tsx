@@ -1,4 +1,4 @@
-import type { components } from "@sendme/api";
+import api, { type components } from "@sendme/api";
 import { SlAvatar } from "@shoelace-style/shoelace/dist/react";
 import { Link } from "@tanstack/react-router";
 import type React from "react";
@@ -85,7 +85,7 @@ const LastReadTime = styled.p`
 `;
 
 interface ConversationProps {
-	imagePath?: string;
+	imagePath?: string | null;
 	userName?: string;
 	lastReadMessage?: string;
 	lastReadTime: string;
@@ -117,7 +117,7 @@ const Conversation: React.FC<ConversationProps> = ({
 			>
 				<MessageCard>
 					<SlAvatar
-						image={imagePath}
+						image={imagePath ?? ""}
 						style={{
 							gridRowStart: "1",
 							gridRowEnd: "3",
@@ -164,18 +164,26 @@ const Conversation: React.FC<ConversationProps> = ({
 export function ConversationList({
 	data,
 }: {
-	// data: (components["schemas"]["Conversation"] & { profile_picture?: string; has_been_read?: boolean })[];
 	data: components["schemas"]["Conversation"][];
 }): JSX.Element {
+	const { data: user } = api.auth.getMe.useQuery();
+
 	return (
 		<>
 			{data?.map((conversation) => (
 				<Conversation
 					key={conversation.id}
 					conversationId={conversation.id}
-					imagePath={conversation.profile_picture ?? ""}
-					userName={conversation.users[0]?.display_name}
+					imagePath={
+						conversation.users.find((convoUser) => convoUser.id !== user?.id)
+							?.profile_picture
+					}
+					userName={
+						conversation.users.find((convoUser) => convoUser.id !== user?.id)
+							?.display_name
+					}
 					lastReadMessage={
+						// I am not sure that the messages are sorted by date when they are accessed here.
 						conversation.messages?.[conversation.messages.length - 1]
 							?.content ?? ""
 					}

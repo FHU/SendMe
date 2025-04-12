@@ -221,8 +221,6 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Profile Picture */
-            profile_picture?: string | null;
             /** Users */
             users: components["schemas"]["User"][];
             /** Messages */
@@ -368,7 +366,7 @@ export interface components {
              * Profile Picture
              * @default
              */
-            profile_picture: string;
+            profile_picture: string | null;
         };
         /** UserInfo */
         UserInfo: {

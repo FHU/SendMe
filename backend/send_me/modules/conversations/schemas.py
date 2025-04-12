@@ -18,11 +18,7 @@ class Message(SendMeModel):
 
 class Conversation(SendMeModel):
     id: UUID
-    profile_picture: str | None = None
     users: List[User]
     messages: List[Message]
     last_updated: datetime
     has_been_read: bool = False
-
-    class Config:
-        from_attributes = True

@@ -40,18 +40,9 @@ const Timestamp = styled.span`
 `;
 
 interface MessageProps {
-	message: {
-		id: string;
-		sender_id: string;
-		content: string;
-		created_at: string;
-		user: {
-			display_name: string;
-			profile_picture?: string;
-		};
-	};
+	message: components["schemas"]["Message"];
 	isUser: boolean;
-	imagePath?: string;
+	imagePath: string | null;
 }
 
 function Message({ message, isUser, imagePath }: MessageProps) {
