@@ -16,6 +16,18 @@ export interface ConversationsService {
         method: "get";
         url: "/conversations/{conversation_id}";
     }, paths["/conversations/{conversation_id}"]["get"]["responses"]["200"]["content"]["application/json"], paths["/conversations/{conversation_id}"]["get"]["parameters"], paths["/conversations/{conversation_id}"]["get"]["responses"]["422"]["content"]["application/json"]>;
+    /** @summary Create Message */
+    createMessage: ServiceOperationMutation<{
+        method: "post";
+        url: "/conversations/conversation/{conversation_id}/messages";
+        mediaType: "application/json";
+    }, NonNullable<paths["/conversations/conversation/{conversation_id}/messages"]["post"]["requestBody"]>["content"]["application/json"], paths["/conversations/conversation/{conversation_id}/messages"]["post"]["responses"]["201"]["content"]["application/json"], paths["/conversations/conversation/{conversation_id}/messages"]["post"]["parameters"], paths["/conversations/conversation/{conversation_id}/messages"]["post"]["responses"]["422"]["content"]["application/json"]>;
+    /** @summary Create Conversation */
+    createConversation: ServiceOperationMutation<{
+        method: "post";
+        url: "/conversations/conversation";
+        mediaType: "application/json";
+    }, NonNullable<paths["/conversations/conversation"]["post"]["requestBody"]>["content"]["application/json"], paths["/conversations/conversation"]["post"]["responses"]["201"]["content"]["application/json"], undefined, paths["/conversations/conversation"]["post"]["responses"]["422"]["content"]["application/json"]>;
     /** @summary Seed Dummy Data */
     seedConversations: ServiceOperationMutation<{
         method: "post";
@@ -37,6 +49,22 @@ export const conversationsService: {
             url: "/conversations/{conversation_id}";
         };
     };
+    /** @summary Create Message */
+    createMessage: {
+        schema: {
+            method: "post";
+            url: "/conversations/conversation/{conversation_id}/messages";
+            mediaType: "application/json";
+        };
+    };
+    /** @summary Create Conversation */
+    createConversation: {
+        schema: {
+            method: "post";
+            url: "/conversations/conversation";
+            mediaType: "application/json";
+        };
+    };
     /** @summary Seed Dummy Data */
     seedConversations: {
         schema: {
@@ -55,6 +83,20 @@ export const conversationsService: {
         schema: {
             method: "get",
             url: "/conversations/{conversation_id}"
+        }
+    },
+    createMessage: {
+        schema: {
+            method: "post",
+            url: "/conversations/conversation/{conversation_id}/messages",
+            mediaType: "application/json"
+        }
+    },
+    createConversation: {
+        schema: {
+            method: "post",
+            url: "/conversations/conversation",
+            mediaType: "application/json"
         }
     },
     seedConversations: {

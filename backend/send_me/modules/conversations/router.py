@@ -102,7 +102,7 @@ def create_message(
     "/conversation",
     operation_id="createConversation",
     status_code=201,
-    response_model=models.Conversation,
+    response_model=schemas.Conversation,
 )
 def create_conversation(
     input: schemas.CreateConversationRequest,
