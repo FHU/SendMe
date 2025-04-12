@@ -84,6 +84,9 @@ def create_message(
     if user not in conversation.users:
         raise HTTPException(status_code=403, detail="User not in conversation")
 
+    if input.content == "":
+        raise HTTPException(status_code=400, detail="Message cannot be empty")
+
     message = models.Message(
         content=input.content,
         sender=user,

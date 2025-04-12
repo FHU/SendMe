@@ -73,12 +73,18 @@ const SendNewMessage = styled(SlTextarea)`
   }
 `;
 
+const ErrorMessage = styled.div`
+  color: var(--sl-color-danger-500);
+  font-size: 14px;
+  margin-top: 10px;
+`;
+
 function RouteComponent() {
 	const { conversationId } = Route.useParams();
 
 	const { data: user } = api.auth.getMe.useQuery();
 
-	const { mutateAsync: createMessage } =
+	const { mutateAsync: createMessage, isError: isCreateMessageError } =
 		api.conversations.createMessage.useMutation();
 
 	const { data: conversation, refetch: refetchConversation } =
@@ -88,7 +94,9 @@ function RouteComponent() {
 
 	// I know this is gross and I should use a callback and a form event
 	const [message, setMessage] = useState("");
+	const [isNoMessageBody, setIsNoMessageBody] = useState(false);
 
+	// ReFetch messages every 30 seconds
 	useEffect(() => {
 		const intervalId = setInterval(() => {
 			refetchConversation();
@@ -108,6 +116,11 @@ function RouteComponent() {
 	};
 
 	const sendMessage = async () => {
+		if (!message) {
+			setIsNoMessageBody(true);
+			return;
+		}
+
 		try {
 			await createMessage({
 				body: { content: message },
@@ -117,6 +130,7 @@ function RouteComponent() {
 			console.error(error);
 		}
 
+		setIsNoMessageBody(false);
 		refetchConversation();
 	};
 
@@ -145,13 +159,20 @@ function RouteComponent() {
 							resize="auto"
 							onSlInput={handleInputChange}
 						/>
+
 						<SlIconButton
 							onClick={sendMessage}
 							name="send"
 							slot="suffix"
 							style={{ fontSize: "20px", color: "var(--sl-color-text)" }}
 						/>
-					</SendMessageContainer>{" "}
+					</SendMessageContainer>
+					{isCreateMessageError && (
+						<ErrorMessage>Error sending message</ErrorMessage>
+					)}
+					{isNoMessageBody && (
+						<ErrorMessage>Message must contain text</ErrorMessage>
+					)}
 				</>
 			) : (
 				<SlSpinner />
