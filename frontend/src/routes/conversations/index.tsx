@@ -1,9 +1,9 @@
 import api from "@sendme/api";
 import {
-  SlIcon,
-  SlIconButton,
-  SlInput,
-  SlSpinner,
+	SlIcon,
+	SlIconButton,
+	SlInput,
+	SlSpinner,
 } from "@shoelace-style/shoelace/dist/react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { ConversationList } from "./-components/ConversationList";
 
 export const Route = createFileRoute("/conversations/")({
-  component: RouteComponent,
+	component: RouteComponent,
 });
 
 const SearchMessages = styled(SlInput)`
@@ -59,45 +59,45 @@ const MessageHeader = styled.h1`
 `;
 
 function RouteComponent() {
-  const { data: conversations } =
-    api.conversations.getAllConversations.useQuery();
+	const { data: conversations } =
+		api.conversations.getAllConversations.useQuery();
 
-  //This useEffect is to seed the database to test conversations. Remove in the future.
+	//This useEffect is to seed the database to test conversations. Remove in the future.
 
-  useEffect(() => {
-    fetch("/api/conversations/seed", { method: "POST" });
-  }, []);
+	useEffect(() => {
+		fetch("/api/conversations/seed", { method: "POST" });
+	}, []);
 
-  return (
-    <div>
-      <MessageHeader>Messages</MessageHeader>
-      <SearchMessages placeholder="Search messages..." spellCheck={false}>
-        <SlIconButton
-          name="search"
-          slot="prefix"
-          style={{ fontSize: "20px" }}
-        />
-      </SearchMessages>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div
-          className="messages"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            textDecoration: "none",
-            color: "black",
-          }}
-        >
-          {conversations ? (
-            <ConversationList data={conversations} />
-          ) : (
-            <SlSpinner />
-          )}
-        </div>
-        <CreateNewConversation to="/messages" className="createNewMessage">
-          <SlIcon name="pencil-fill" />
-        </CreateNewConversation>
-      </div>
-    </div>
-  );
+	return (
+		<div>
+			<MessageHeader>Messages</MessageHeader>
+			<SearchMessages placeholder="Search messages..." spellCheck={false}>
+				<SlIconButton
+					name="search"
+					slot="prefix"
+					style={{ fontSize: "20px" }}
+				/>
+			</SearchMessages>
+			<div style={{ display: "flex", flexDirection: "column" }}>
+				<div
+					className="messages"
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						textDecoration: "none",
+						color: "black",
+					}}
+				>
+					{conversations ? (
+						<ConversationList data={conversations} />
+					) : (
+						<SlSpinner />
+					)}
+				</div>
+				<CreateNewConversation to="/messages" className="createNewMessage">
+					<SlIcon name="pencil-fill" />
+				</CreateNewConversation>
+			</div>
+		</div>
+	);
 }

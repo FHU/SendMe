@@ -6,7 +6,6 @@ from datetime import datetime
 from fastapi import APIRouter, Depends, Response
 from sqlalchemy import select
 from sqlalchemy.orm import Session as DatabaseSession
-from sqlalchemy.orm.relationships import schema
 
 from send_me.database.engine import get_db
 from send_me.modules.authentication.dependencies import get_user

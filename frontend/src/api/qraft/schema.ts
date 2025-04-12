@@ -364,6 +364,11 @@ export interface components {
              * Format: date-time
              */
             created_at: string;
+            /**
+             * Profile Picture
+             * @default
+             */
+            profile_picture: string;
         };
         /** UserInfo */
         UserInfo: {

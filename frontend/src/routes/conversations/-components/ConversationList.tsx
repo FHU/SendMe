@@ -1,16 +1,16 @@
-import { type components } from "@sendme/api";
+import type { components } from "@sendme/api";
 import { SlAvatar } from "@shoelace-style/shoelace/dist/react";
-import type React from "react";
 import { Link } from "@tanstack/react-router";
+import type React from "react";
 import styled from "styled-components";
 
 const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  }).format(date);
+	const date = new Date(dateString);
+	return new Intl.DateTimeFormat("en-US", {
+		hour: "2-digit",
+		minute: "2-digit",
+		hour12: true,
+	}).format(date);
 };
 
 const ReadButton = styled.div`
@@ -85,104 +85,104 @@ const LastReadTime = styled.p`
 `;
 
 interface ConversationProps {
-  imagePath?: string;
-  userName?: string;
-  lastReadMessage?: string;
-  lastReadTime: string;
-  hasBeenRead: boolean;
-  conversationId: string;
+	imagePath?: string;
+	userName?: string;
+	lastReadMessage?: string;
+	lastReadTime: string;
+	hasBeenRead: boolean;
+	conversationId: string;
 }
 
 const Conversation: React.FC<ConversationProps> = ({
-  imagePath,
-  userName,
-  lastReadMessage,
-  lastReadTime,
-  hasBeenRead,
-  conversationId,
+	imagePath,
+	userName,
+	lastReadMessage,
+	lastReadTime,
+	hasBeenRead,
+	conversationId,
 }) => {
-  const color = hasBeenRead ? "#898989FF" : "var(--sl-color-text)";
-  const fontWeight = hasBeenRead ? "thin" : "bold";
-  const readButtonVisibility = hasBeenRead ? "hidden" : "visible";
-  const readButtonColor = hasBeenRead ? "#fff" : "#32B4FF";
+	const color = hasBeenRead ? "#898989FF" : "var(--sl-color-text)";
+	const fontWeight = hasBeenRead ? "thin" : "bold";
+	const readButtonVisibility = hasBeenRead ? "hidden" : "visible";
+	const readButtonColor = hasBeenRead ? "#fff" : "#32B4FF";
 
-  const formattedDate = formatDate(lastReadTime);
+	const formattedDate = formatDate(lastReadTime);
 
-  return (
-    <>
-      <Link
-        to={`/messages/$conversationId`}
-        params={{ conversationId }}
-        style={{ marginTop: "10px", textDecoration: "none" }}
-      >
-        <MessageCard>
-          <SlAvatar
-            image={imagePath}
-            style={{
-              gridRowStart: "1",
-              gridRowEnd: "3",
-              placeSelf: "center",
-              transform: "scale(1.5)",
-            }}
-          />
-          <UserName
-            style={{
-              color: color,
-              fontWeight: fontWeight,
-            }}
-          >
-            {userName}
-          </UserName>
-          <LastReadText
-            style={{
-              color: color,
-              fontWeight: fontWeight,
-            }}
-          >
-            {lastReadMessage}
-          </LastReadText>
-          <LastReadTime
-            style={{
-              color: color,
-              fontWeight: fontWeight,
-            }}
-          >
-            {formattedDate}
-          </LastReadTime>
-          <ReadButton
-            style={{
-              visibility: readButtonVisibility,
-              backgroundColor: readButtonColor,
-            }}
-          />
-        </MessageCard>
-      </Link>
-    </>
-  );
+	return (
+		<>
+			<Link
+				to={"/messages/$conversationId"}
+				params={{ conversationId }}
+				style={{ marginTop: "10px", textDecoration: "none" }}
+			>
+				<MessageCard>
+					<SlAvatar
+						image={imagePath}
+						style={{
+							gridRowStart: "1",
+							gridRowEnd: "3",
+							placeSelf: "center",
+							transform: "scale(1.5)",
+						}}
+					/>
+					<UserName
+						style={{
+							color: color,
+							fontWeight: fontWeight,
+						}}
+					>
+						{userName}
+					</UserName>
+					<LastReadText
+						style={{
+							color: color,
+							fontWeight: fontWeight,
+						}}
+					>
+						{lastReadMessage}
+					</LastReadText>
+					<LastReadTime
+						style={{
+							color: color,
+							fontWeight: fontWeight,
+						}}
+					>
+						{formattedDate}
+					</LastReadTime>
+					<ReadButton
+						style={{
+							visibility: readButtonVisibility,
+							backgroundColor: readButtonColor,
+						}}
+					/>
+				</MessageCard>
+			</Link>
+		</>
+	);
 };
 
 export function ConversationList({
-  data,
+	data,
 }: {
-  // data: (components["schemas"]["Conversation"] & { profile_picture?: string; has_been_read?: boolean })[];
-  data: components["schemas"]["Conversation"][];
+	// data: (components["schemas"]["Conversation"] & { profile_picture?: string; has_been_read?: boolean })[];
+	data: components["schemas"]["Conversation"][];
 }): JSX.Element {
-  return (
-    <>
-      {data?.map((conversation) => (
-        <Conversation
-          key={conversation.id}
-          conversationId={conversation.id}
-          imagePath={conversation.profile_picture ?? ""}
-          userName={conversation.users[0]?.display_name}
-          lastReadMessage={
-            conversation.messages?.[conversation.messages.length - 1]
-              ?.content ?? ""
-          }
-          lastReadTime={conversation.last_updated}
-          hasBeenRead={conversation.has_been_read ?? false}
-        />
-      ))}
-    </>
-  );
+	return (
+		<>
+			{data?.map((conversation) => (
+				<Conversation
+					key={conversation.id}
+					conversationId={conversation.id}
+					imagePath={conversation.profile_picture ?? ""}
+					userName={conversation.users[0]?.display_name}
+					lastReadMessage={
+						conversation.messages?.[conversation.messages.length - 1]
+							?.content ?? ""
+					}
+					lastReadTime={conversation.last_updated}
+					hasBeenRead={conversation.has_been_read ?? false}
+				/>
+			))}
+		</>
+	);
 }

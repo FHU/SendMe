@@ -1,3 +1,4 @@
+import type { components } from "@sendme/api";
 import { SlAvatar } from "@shoelace-style/shoelace/dist/react";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
@@ -78,7 +79,7 @@ export function MessageList({
 	data,
 	currentUserId,
 }: {
-	data: any[];
+	data: components["schemas"]["Message"][];
 	currentUserId: string;
 }) {
 	const chatEndRef = useRef<HTMLDivElement | null>(null);

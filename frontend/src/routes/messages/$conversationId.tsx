@@ -1,16 +1,16 @@
 import api from "@sendme/api";
 import {
-  SlIconButton,
-  SlSpinner,
-  SlTextarea,
+	SlIconButton,
+	SlSpinner,
+	SlTextarea,
 } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { MessageList } from "./-components/MessageList";
-import { useEffect } from "react";
 
 export const Route = createFileRoute("/messages/$conversationId")({
-  component: RouteComponent,
+	component: RouteComponent,
 });
 
 const DisplayName = styled.h2`
@@ -74,62 +74,62 @@ const SendNewMessage = styled(SlTextarea)`
 `;
 
 function RouteComponent() {
-  const { conversationId } = Route.useParams();
+	const { conversationId } = Route.useParams();
 
-  const { data: user } = api.auth.getMe.useQuery();
+	const { data: user } = api.auth.getMe.useQuery();
 
-  const { data: conversation, refetch: refetchConversation } =
-    api.conversations.getConversation.useQuery({
-      path: { conversation_id: conversationId },
-    });
+	const { data: conversation, refetch: refetchConversation } =
+		api.conversations.getConversation.useQuery({
+			path: { conversation_id: conversationId },
+		});
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      refetchConversation();
-    }, 30000); // 30000 milliseconds = 30 seconds
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			refetchConversation();
+		}, 30000); // 30000 milliseconds = 30 seconds
 
-    // Cleanup function to clear the interval when component unmounts
-    return () => clearInterval(intervalId);
-  }, [refetchConversation]);
+		// Cleanup function to clear the interval when component unmounts
+		return () => clearInterval(intervalId);
+	}, [refetchConversation]);
 
-  const otherUser = conversation?.users.find(
-    (conversationUser) => user?.id !== conversationUser.id,
-  );
+	const otherUser = conversation?.users.find(
+		(conversationUser) => user?.id !== conversationUser.id,
+	);
 
-  return (
-    <Container>
-      {conversation ? (
-        <>
-          <DisplayName>
-            {otherUser ? otherUser.display_name : "An error occured "})
-          </DisplayName>
-          <ChatContainer>
-            {conversation.messages ? (
-              <MessageList
-                data={conversation.messages}
-                currentUserId={user ? user.id : ""}
-              />
-            ) : (
-              <SlSpinner />
-            )}
-          </ChatContainer>
-          <SendMessageContainer>
-            <SendNewMessage
-              placeholder="Type a message..."
-              spellCheck
-              rows={1}
-              resize="auto"
-            />
-            <SlIconButton
-              name="send"
-              slot="suffix"
-              style={{ fontSize: "20px", color: "var(--sl-color-text)" }}
-            />
-          </SendMessageContainer>{" "}
-        </>
-      ) : (
-        <SlSpinner />
-      )}
-    </Container>
-  );
+	return (
+		<Container>
+			{conversation ? (
+				<>
+					<DisplayName>
+						{otherUser ? otherUser.display_name : "An error occured "})
+					</DisplayName>
+					<ChatContainer>
+						{conversation.messages ? (
+							<MessageList
+								data={conversation.messages}
+								currentUserId={user ? user.id : ""}
+							/>
+						) : (
+							<SlSpinner />
+						)}
+					</ChatContainer>
+					<SendMessageContainer>
+						<SendNewMessage
+							placeholder="Type a message..."
+							spellCheck
+							rows={1}
+							resize="auto"
+						/>
+						<SlIconButton
+							name="send"
+							slot="suffix"
+							style={{ fontSize: "20px", color: "var(--sl-color-text)" }}
+						/>
+					</SendMessageContainer>{" "}
+				</>
+			) : (
+				<SlSpinner />
+			)}
+		</Container>
+	);
 }
