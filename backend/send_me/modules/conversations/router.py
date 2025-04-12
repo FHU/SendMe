@@ -86,7 +86,7 @@ def create_message(
 
     message = models.Message(
         content=input.content,
-        user=user,
+        sender=user,
         conversation=conversation,
     )
 
@@ -158,7 +158,7 @@ def seed_dummy_data(response: Response, db: DatabaseSession = Depends(get_db)):
         sender_id=user1.id,
         conversation_id=conversation.id,
         content="Hey Bob, how’s it going?",
-        user=user1,
+        sender=user1,
         conversation=conversation,
         created_at=datetime.now(),
     )
@@ -167,7 +167,7 @@ def seed_dummy_data(response: Response, db: DatabaseSession = Depends(get_db)):
         sender_id=user2.id,
         conversation_id=conversation.id,
         content="Good Alice! Building stuff as usual.",
-        user=user2,
+        sender=user2,
         conversation=conversation,
         created_at=datetime.now(),
     )

@@ -5,7 +5,7 @@ import {
 	SlTextarea,
 } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { MessageList } from "./-components/MessageList";
 
@@ -78,10 +78,16 @@ function RouteComponent() {
 
 	const { data: user } = api.auth.getMe.useQuery();
 
+	const { mutateAsync: createMessage } =
+		api.conversations.createMessage.useMutation();
+
 	const { data: conversation, refetch: refetchConversation } =
 		api.conversations.getConversation.useQuery({
 			path: { conversation_id: conversationId },
 		});
+
+	// I know this is gross and I should use a callback and a form event
+	const [message, setMessage] = useState("");
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {
@@ -95,6 +101,24 @@ function RouteComponent() {
 	const otherUser = conversation?.users.find(
 		(conversationUser) => user?.id !== conversationUser.id,
 	);
+
+	const handleInputChange = (event: Event) => {
+		const target = event.target as HTMLInputElement;
+		setMessage(target.value);
+	};
+
+	const sendMessage = async () => {
+		try {
+			await createMessage({
+				body: { content: message },
+				path: { conversation_id: conversationId },
+			});
+		} catch (error) {
+			console.error(error);
+		}
+
+		refetchConversation();
+	};
 
 	return (
 		<Container>
@@ -119,8 +143,10 @@ function RouteComponent() {
 							spellCheck
 							rows={1}
 							resize="auto"
+							onSlInput={handleInputChange}
 						/>
 						<SlIconButton
+							onClick={sendMessage}
 							name="send"
 							slot="suffix"
 							style={{ fontSize: "20px", color: "var(--sl-color-text)" }}

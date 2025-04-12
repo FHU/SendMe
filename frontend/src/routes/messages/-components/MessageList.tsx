@@ -86,7 +86,7 @@ export function MessageList({
 					key={msg.id}
 					message={msg}
 					isUser={msg.sender_id === currentUserId}
-					imagePath={msg.user.profile_picture}
+					imagePath={msg.sender.profile_picture}
 				/>
 			))}
 			<div ref={chatEndRef} />
