@@ -42,6 +42,32 @@ def get_conversations(
     return conversations
 
 
+# Creating Conversations
+@router.post(
+    "/",
+    operation_id="createConversation",
+    status_code=201,
+    response_model=schemas.Conversation,
+)
+def create_conversation(
+    input: schemas.CreateConversationRequest,
+    db: DatabaseSession = Depends(get_db),
+    user: User = Depends(get_user),
+):
+    reciever = db.get(User, input.reciever_id)
+
+    if not reciever:
+        raise HTTPException(status_code=404, detail="Reciever not found")
+
+    conversation = models.Conversation(users=[user, reciever])
+
+    db.add(conversation)
+    db.flush()
+    db.refresh(conversation)
+
+    return conversation
+
+
 @router.get(
     "/{conversation_id}",
     response_model=schemas.Conversation,
@@ -62,10 +88,9 @@ def get_conversation(
     return conversation
 
 
-# TODO
 # Creating messages
 @router.post(
-    "/conversation/{conversation_id}/messages",
+    "/{conversation_id}/messages",
     operation_id="createMessage",
     status_code=201,
     response_model=schemas.Message,
@@ -101,32 +126,6 @@ def create_message(
     db.refresh(message)
 
     return message
-
-
-# Creating Conversations
-@router.post(
-    "/conversation",
-    operation_id="createConversation",
-    status_code=201,
-    response_model=schemas.Conversation,
-)
-def create_conversation(
-    input: schemas.CreateConversationRequest,
-    db: DatabaseSession = Depends(get_db),
-    user: User = Depends(get_user),
-):
-    reciever = db.get(User, input.reciever_id)
-
-    if not reciever:
-        raise HTTPException(status_code=404, detail="Reciever not found")
-
-    conversation = models.Conversation(users=[user, reciever])
-
-    db.add(conversation)
-    db.flush()
-    db.refresh(conversation)
-
-    return conversation
 
 
 # Route to seed db for testing

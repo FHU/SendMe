@@ -135,7 +135,8 @@ export interface paths {
         /** Get Conversations */
         get: operations["getAllConversations"];
         put?: never;
-        post?: never;
+        /** Create Conversation */
+        post: operations["createConversation"];
         delete?: never;
         options?: never;
         head?: never;
@@ -159,7 +160,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/conversations/conversation/{conversation_id}/messages": {
+    "/conversations/{conversation_id}/messages": {
         parameters: {
             query?: never;
             header?: never;
@@ -170,23 +171,6 @@ export interface paths {
         put?: never;
         /** Create Message */
         post: operations["createMessage"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/conversations/conversation": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Create Conversation */
-        post: operations["createConversation"];
         delete?: never;
         options?: never;
         head?: never;
@@ -767,6 +751,46 @@ export interface operations {
             };
         };
     };
+    createConversation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateConversationRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Conversation"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     getConversation: {
         parameters: {
             query?: never;
@@ -827,46 +851,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Message"];
-                };
-            };
-            /** @description Not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    createConversation: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateConversationRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Conversation"];
                 };
             };
             /** @description Not found */

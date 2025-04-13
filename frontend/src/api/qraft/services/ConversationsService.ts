@@ -11,6 +11,12 @@ export interface ConversationsService {
         method: "get";
         url: "/conversations/";
     }, paths["/conversations/"]["get"]["responses"]["200"]["content"]["application/json"], undefined, unknown>;
+    /** @summary Create Conversation */
+    createConversation: ServiceOperationMutation<{
+        method: "post";
+        url: "/conversations/";
+        mediaType: "application/json";
+    }, NonNullable<paths["/conversations/"]["post"]["requestBody"]>["content"]["application/json"], paths["/conversations/"]["post"]["responses"]["201"]["content"]["application/json"], undefined, paths["/conversations/"]["post"]["responses"]["422"]["content"]["application/json"]>;
     /** @summary Get Conversation */
     getConversation: ServiceOperationQuery<{
         method: "get";
@@ -19,15 +25,9 @@ export interface ConversationsService {
     /** @summary Create Message */
     createMessage: ServiceOperationMutation<{
         method: "post";
-        url: "/conversations/conversation/{conversation_id}/messages";
+        url: "/conversations/{conversation_id}/messages";
         mediaType: "application/json";
-    }, NonNullable<paths["/conversations/conversation/{conversation_id}/messages"]["post"]["requestBody"]>["content"]["application/json"], paths["/conversations/conversation/{conversation_id}/messages"]["post"]["responses"]["201"]["content"]["application/json"], paths["/conversations/conversation/{conversation_id}/messages"]["post"]["parameters"], paths["/conversations/conversation/{conversation_id}/messages"]["post"]["responses"]["422"]["content"]["application/json"]>;
-    /** @summary Create Conversation */
-    createConversation: ServiceOperationMutation<{
-        method: "post";
-        url: "/conversations/conversation";
-        mediaType: "application/json";
-    }, NonNullable<paths["/conversations/conversation"]["post"]["requestBody"]>["content"]["application/json"], paths["/conversations/conversation"]["post"]["responses"]["201"]["content"]["application/json"], undefined, paths["/conversations/conversation"]["post"]["responses"]["422"]["content"]["application/json"]>;
+    }, NonNullable<paths["/conversations/{conversation_id}/messages"]["post"]["requestBody"]>["content"]["application/json"], paths["/conversations/{conversation_id}/messages"]["post"]["responses"]["201"]["content"]["application/json"], paths["/conversations/{conversation_id}/messages"]["post"]["parameters"], paths["/conversations/{conversation_id}/messages"]["post"]["responses"]["422"]["content"]["application/json"]>;
     /** @summary Seed Dummy Data */
     seedConversations: ServiceOperationMutation<{
         method: "post";
@@ -42,6 +42,14 @@ export const conversationsService: {
             url: "/conversations/";
         };
     };
+    /** @summary Create Conversation */
+    createConversation: {
+        schema: {
+            method: "post";
+            url: "/conversations/";
+            mediaType: "application/json";
+        };
+    };
     /** @summary Get Conversation */
     getConversation: {
         schema: {
@@ -53,15 +61,7 @@ export const conversationsService: {
     createMessage: {
         schema: {
             method: "post";
-            url: "/conversations/conversation/{conversation_id}/messages";
-            mediaType: "application/json";
-        };
-    };
-    /** @summary Create Conversation */
-    createConversation: {
-        schema: {
-            method: "post";
-            url: "/conversations/conversation";
+            url: "/conversations/{conversation_id}/messages";
             mediaType: "application/json";
         };
     };
@@ -79,6 +79,13 @@ export const conversationsService: {
             url: "/conversations/"
         }
     },
+    createConversation: {
+        schema: {
+            method: "post",
+            url: "/conversations/",
+            mediaType: "application/json"
+        }
+    },
     getConversation: {
         schema: {
             method: "get",
@@ -88,14 +95,7 @@ export const conversationsService: {
     createMessage: {
         schema: {
             method: "post",
-            url: "/conversations/conversation/{conversation_id}/messages",
-            mediaType: "application/json"
-        }
-    },
-    createConversation: {
-        schema: {
-            method: "post",
-            url: "/conversations/conversation",
+            url: "/conversations/{conversation_id}/messages",
             mediaType: "application/json"
         }
     },
