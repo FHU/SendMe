@@ -93,6 +93,9 @@ def create_message(
         conversation=conversation,
     )
 
+    # When the db session is returned to the get_db function, the conversation change will be committed.
+    conversation.last_updated = datetime.now()
+
     db.add(message)
     db.flush()
     db.refresh(message)
