@@ -5,7 +5,7 @@ import {
 	SlTextarea,
 } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { MessageList } from "./-components/MessageList";
 
@@ -62,7 +62,7 @@ const SendMessageContainer = styled.div`
   }
 `;
 
-const SendNewMessage = styled(SlTextarea)`
+const MessageInput = styled(SlTextarea).attrs({ ref: React.useRef })`
   width: 100%;
   &::part(base) {
     box-shadow: none;
@@ -71,7 +71,7 @@ const SendNewMessage = styled(SlTextarea)`
     border: none;
     background-color: var(--sl-color-neutral-50);
   }
-`;
+` as typeof SlTextarea;
 
 const ErrorMessage = styled.div`
   color: var(--sl-color-danger-500);
@@ -95,6 +95,7 @@ function RouteComponent() {
 	// I know this is gross and I should use a callback and a form event
 	const [message, setMessage] = useState("");
 	const [isNoMessageBody, setIsNoMessageBody] = useState(false);
+	const messageRef = useRef<typeof MessageInput & { value: string }>();
 
 	// ReFetch messages every 30 seconds
 	useEffect(() => {
@@ -115,6 +116,14 @@ function RouteComponent() {
 		setMessage(target.value);
 	};
 
+	const handleKeyDown = (event: Event) => {
+		const keyboardEvent = event as KeyboardEvent;
+		if (keyboardEvent.key === "Enter" && !keyboardEvent.shiftKey) {
+			keyboardEvent.preventDefault();
+			sendMessage();
+		}
+	};
+
 	const sendMessage = async () => {
 		if (!message) {
 			setIsNoMessageBody(true);
@@ -131,6 +140,8 @@ function RouteComponent() {
 		}
 
 		setIsNoMessageBody(false);
+		setMessage("");
+		if (messageRef.current) messageRef.current.value = "";
 		refetchConversation();
 	};
 
@@ -152,12 +163,16 @@ function RouteComponent() {
 						)}
 					</ChatContainer>
 					<SendMessageContainer>
-						<SendNewMessage
-							placeholder="Type a message..."
+						<MessageInput
+							placeholder={"Type a message..."}
 							spellCheck
 							rows={1}
 							resize="auto"
 							onSlInput={handleInputChange}
+							// @ts-ignore TS thinks there is no onkeydown. There is.
+							onKeyDown={handleKeyDown}
+							// @ts-ignore TS thinks i cannot pass messageRef here because of legacy typing? I am pretty sure i can in react18.
+							ref={messageRef}
 						/>
 
 						<SlIconButton
