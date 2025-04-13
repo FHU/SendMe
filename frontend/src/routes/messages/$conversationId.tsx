@@ -5,7 +5,7 @@ import {
 	SlTextarea,
 } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
-import React, { LegacyRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { MessageList } from "./-components/MessageList";
 
@@ -62,7 +62,7 @@ const SendMessageContainer = styled.div`
   }
 `;
 
-const MessageInput = styled(SlTextarea).attrs({ ref: React.useRef })`
+const MessageInput = styled(SlTextarea)`
   width: 100%;
   &::part(base) {
     box-shadow: none;
@@ -147,50 +147,44 @@ function RouteComponent() {
 
 	return (
 		<Container>
-			{conversation ? (
-				<>
-					<DisplayName>
-						{otherUser ? otherUser.display_name : "An error occured "})
-					</DisplayName>
-					<ChatContainer>
-						{conversation.messages ? (
-							<MessageList
-								data={conversation.messages}
-								currentUserId={user ? user.id : ""}
-							/>
-						) : (
-							<SlSpinner />
-						)}
-					</ChatContainer>
-					<SendMessageContainer>
-						<MessageInput
-							placeholder={"Type a message..."}
-							spellCheck
-							rows={1}
-							resize="auto"
-							onSlInput={handleInputChange}
-							// @ts-ignore TS thinks there is no onkeydown. There is.
-							onKeyDown={handleKeyDown}
-							// @ts-ignore TS thinks i cannot pass messageRef here because of legacy typing? I am pretty sure i can in react18.
-							ref={messageRef}
-						/>
+			<DisplayName>
+				{otherUser ? otherUser.display_name : "An error occured "})
+			</DisplayName>
+			<ChatContainer>
+				{conversation ? (
+					<MessageList
+						data={conversation.messages}
+						currentUserId={user ? user.id : ""}
+					/>
+				) : (
+					<SlSpinner />
+				)}
+			</ChatContainer>
+			<SendMessageContainer>
+				<MessageInput
+					placeholder={"Type a message..."}
+					spellCheck
+					rows={1}
+					resize="auto"
+					onSlInput={handleInputChange}
+					// @ts-ignore TS thinks there is no onkeydown. There is.
+					onKeyDown={handleKeyDown}
+					// @ts-ignore TS thinks i cannot pass messageRef here because of legacy typing? I am pretty sure i can in react18.
+					ref={messageRef}
+				/>
 
-						<SlIconButton
-							onClick={sendMessage}
-							name="send"
-							slot="suffix"
-							style={{ fontSize: "20px", color: "var(--sl-color-text)" }}
-						/>
-					</SendMessageContainer>
-					{isCreateMessageError && (
-						<ErrorMessage>Error sending message</ErrorMessage>
-					)}
-					{isNoMessageBody && (
-						<ErrorMessage>Message must contain text</ErrorMessage>
-					)}
-				</>
-			) : (
-				<SlSpinner />
+				<SlIconButton
+					onClick={sendMessage}
+					name="send"
+					slot="suffix"
+					style={{ fontSize: "20px", color: "var(--sl-color-text)" }}
+				/>
+			</SendMessageContainer>
+			{isCreateMessageError && (
+				<ErrorMessage>Error sending message</ErrorMessage>
+			)}
+			{isNoMessageBody && (
+				<ErrorMessage>Message must contain text</ErrorMessage>
 			)}
 		</Container>
 	);
