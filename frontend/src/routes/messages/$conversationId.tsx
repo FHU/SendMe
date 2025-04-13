@@ -5,7 +5,7 @@ import {
 	SlTextarea,
 } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { MessageList } from "./-components/MessageList";
 
@@ -95,7 +95,6 @@ function RouteComponent() {
 	// I know this is gross and I should use a callback and a form event
 	const [message, setMessage] = useState("");
 	const [isNoMessageBody, setIsNoMessageBody] = useState(false);
-	const messageRef = useRef<typeof MessageInput & { value: string }>();
 
 	// ReFetch messages every 30 seconds
 	useEffect(() => {
@@ -141,7 +140,6 @@ function RouteComponent() {
 
 		setIsNoMessageBody(false);
 		setMessage("");
-		if (messageRef.current) messageRef.current.value = "";
 		refetchConversation();
 	};
 
@@ -163,14 +161,13 @@ function RouteComponent() {
 			<SendMessageContainer>
 				<MessageInput
 					placeholder={"Type a message..."}
+					value={message}
 					spellCheck
 					rows={1}
 					resize="auto"
 					onSlInput={handleInputChange}
 					// @ts-ignore TS thinks there is no onkeydown. There is.
 					onKeyDown={handleKeyDown}
-					// @ts-ignore TS thinks i cannot pass messageRef here because of legacy typing? I am pretty sure i can in react18.
-					ref={messageRef}
 				/>
 
 				<SlIconButton
