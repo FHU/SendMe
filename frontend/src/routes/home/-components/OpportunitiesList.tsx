@@ -153,14 +153,7 @@ export function OpportunitiesList({
 							</div>
 							<div>
 								<h3>Description</h3>
-								<p>
-									{o.description}
-									{/* Our congregation is holding sessions for spirituality in
-									different facets of life, and we are seeking someone
-									knowledgeable in psychology and/or sociology for this job.
-									There will be two days of sessions, and we would like anyone
-									who has availability for these times. Thank you! */}
-								</p>
+								<p>{o.description}</p>
 							</div>
 							<div>
 								<h3>Time of Event</h3>
