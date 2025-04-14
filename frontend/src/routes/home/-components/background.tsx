@@ -21,7 +21,7 @@ const Background = () => {
 
 	return (
 		<BackGround>
-			{/* <CreateOpportunity onCreated={refetch} /> */}
+			<CreateOpportunity onCreated={refetch} />
 
 			{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
 		</BackGround>
