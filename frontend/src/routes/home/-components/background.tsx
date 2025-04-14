@@ -1,7 +1,7 @@
 import api from "@sendme/api";
 import { SlSpinner } from "@shoelace-style/shoelace/dist/react";
 import styled from "styled-components";
-import { CreateOpportunity } from "../-components/CreateOpportunity";
+// import { CreateOpportunity } from "../-components/CreateOpportunity";
 import { OpportunitiesList } from "../-components/OpportunitiesList";
 
 const BackGround = styled.div`
@@ -21,7 +21,7 @@ const Background = () => {
 
 	return (
 		<BackGround>
-			<CreateOpportunity onCreated={refetch} />
+			{/* <CreateOpportunity onCreated={refetch} /> */}
 
 			{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
 		</BackGround>
