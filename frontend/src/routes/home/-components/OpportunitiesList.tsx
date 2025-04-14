@@ -102,7 +102,7 @@ export function OpportunitiesList({
 				<CardContainer key={o.id}>
 					<CardTitle>
 						<CardTitleDate>
-							<StrongText>Ministry Leadership</StrongText>
+							<StrongText>{o.name}</StrongText>
 							<small>12/14/24</small>
 						</CardTitleDate>
 						<Bookmark>
@@ -115,8 +115,8 @@ export function OpportunitiesList({
 						<AvatarInfo>
 							<SlAvatar image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" />
 							<AvatarBio>
-								{o.name}
-								<small>Oak Tree Church of Christ</small>
+								Oak Tree Church of Christ
+								<small>liam lesson</small>
 								<small>{o.location}</small>
 							</AvatarBio>
 						</AvatarInfo>
@@ -143,7 +143,7 @@ export function OpportunitiesList({
 						</SlTag>
 					</TagsContainer>
 					<SmallBio>
-						<div>{o.short_description}</div>
+						<div>AI Research Internship</div>
 					</SmallBio>
 					<SlDetails summary="More Details">
 						<MoreDetails>
@@ -154,16 +154,18 @@ export function OpportunitiesList({
 							<div>
 								<h3>Description</h3>
 								<p>
-									Our congregation is holding sessions for spirituality in
+									{o.description}
+									{/* Our congregation is holding sessions for spirituality in
 									different facets of life, and we are seeking someone
 									knowledgeable in psychology and/or sociology for this job.
 									There will be two days of sessions, and we would like anyone
-									who has availability for these times. Thank you!
+									who has availability for these times. Thank you! */}
 								</p>
 							</div>
 							<div>
 								<h3>Time of Event</h3>
-								<p>N/A</p>
+								{/* <p>N/A</p> */}
+								<p>{o.event_date}</p>
 							</div>
 						</MoreDetails>
 					</SlDetails>

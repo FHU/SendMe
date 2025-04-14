@@ -74,16 +74,18 @@ def seed_opportunities(
     sample_opps = [
         models.Opportunity(
             name="Tech Internship Program",
-            description="A summer internship for students interested in backend engineering.",
-            short_description="Summer backend internship.",
+            contact_user="Jane Doe",
             location="Remote",
+            summary="Summer backend internship.",
+            description="A summer internship for students interested in backend engineering.",
             event_date=datetime(2025, 6, 1),
         ),
         models.Opportunity(
             name="AI Research Fellowship",
-            description="A fellowship for students interested in AI research.",
-            short_description="AI research fellowship.",
+            contact_user="John Smith",
             location="New York",
+            summary="AI research fellowship.",
+            description="A fellowship for students interested in AI research.",
             event_date=datetime(2025, 8, 15),
         ),
     ]
@@ -91,12 +93,5 @@ def seed_opportunities(
     db.add_all(sample_opps)
     db.commit()
     db.flush()
-    # models.Opportunity(
-    #     name="Women in Tech Scholarship",
-    #     description="Scholarship for women pursuing STEM degrees.",
-    #     short_description="Support for women in STEM.",
-    #     location="Online",
-    #     event_date=(2025, 12, 14),
-    # )
 
     return {"message": f"Seeded {len(sample_opps)} opportunities"}
