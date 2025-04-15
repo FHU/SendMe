@@ -174,7 +174,11 @@ function RouteComponent() {
 					onClick={sendMessage}
 					name="send"
 					slot="suffix"
-					style={{ fontSize: "20px", color: "var(--sl-color-text)", marginRight: '5px' }}
+					style={{
+						fontSize: "20px",
+						color: "var(--sl-color-text)",
+						marginRight: "5px",
+					}}
 				/>
 			</SendMessageContainer>
 			{isCreateMessageError && (
