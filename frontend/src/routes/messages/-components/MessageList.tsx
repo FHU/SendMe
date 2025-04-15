@@ -33,7 +33,7 @@ const MessageText = styled.p`
 const Timestamp = styled.span`
   grid-column: 2 / span 2;
   font-size: 12px;
-  color: var(--sl-color-text);
+  color: black;
   align-self: end;
   justify-self: end;
   padding-right: 10px;

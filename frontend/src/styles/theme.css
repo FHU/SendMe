@@ -18,7 +18,10 @@
 
 	--sl-hover-color: #D9D9D9; /* Color for hovering over a conversation */
 
+	--sl-input-background-color: #f8f9fa;
+
 	--sl-input-color-hover: #000;
+	--sl-input-color-focus: #000;
 	--sl-input-color: #000;
 }
 
@@ -40,9 +43,12 @@
 
 		--sl-color-neutral-50: #121212; /* Dark background color */
 		--sl-color-text: #E0E0E0; /* Light text color for dark mode */
-		--sl-hover-color: #B0B0B0;
+		--sl-hover-color: #838282;
+
+		--sl-input-background-color: #333;
 
 		--sl-input-color-hover: #E0E0E0;
+		--sl-input-color-focus: #E0E0E0;
 		--sl-input-color: #E0E0E0;
 	}
 }

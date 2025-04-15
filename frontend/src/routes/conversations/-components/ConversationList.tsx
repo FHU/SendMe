@@ -20,13 +20,13 @@ const ReadButton = styled.div`
   grid-column: 5;
   grid-row: 2;
   align-self: center;
-  margin-left: -40%;
+  margin-left: -80%;
 
   @media screen and (max-width: 700px) {
     grid-row: 1;
     grid-column: 3;
-    margin-top: 40px;
-    margin-left: 80px;
+    margin-top: 30px;
+    margin-left: 90px;
   }
 `;
 

@@ -55,6 +55,7 @@ const SendMessageContainer = styled.div`
   border: 1px solid var(--sl-color-primary-500);
   border-radius: 20px;
   margin-top: 50px;
+  background-color: var(--sl-input-background-color);
 
   @media (max-width: 768px) {
     width: 80%;
@@ -69,7 +70,6 @@ const MessageInput = styled(SlTextarea)`
     border: 1px solid var(--sl-color-primary-500);
     border-radius: 20px;
     border: none;
-    background-color: var(--sl-color-neutral-50);
   }
 ` as typeof SlTextarea;
 
@@ -174,7 +174,7 @@ function RouteComponent() {
 					onClick={sendMessage}
 					name="send"
 					slot="suffix"
-					style={{ fontSize: "20px", color: "var(--sl-color-text)" }}
+					style={{ fontSize: "20px", color: "var(--sl-color-text)", marginRight: '5px' }}
 				/>
 			</SendMessageContainer>
 			{isCreateMessageError && (
