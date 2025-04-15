@@ -31,6 +31,7 @@ def make_user(input: schemas.CreateUserRequest, db: Session = Depends(get_db)):
         x=input.x,
         instagram=input.instagram,
         linkedin=input.linkedin,
+        youtube=input.youtube,
     )
 
     db.add(new_user)

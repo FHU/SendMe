@@ -26,6 +26,7 @@ class CreateUserRequest(SendMeModel):
     x: str | None = None
     instagram: str | None = None
     linkedin: str | None = None
+    youtube: str | None = None
 
 
 class GetProfileResponse(SendMeModel):
@@ -48,5 +49,6 @@ class User(SendMeModel):
     x: str | None = None
     linkedin: str | None = None
     facebook: str | None = None
+    youtube: str | None = None
 
     created_at: datetime

@@ -26,6 +26,7 @@ class User(Base):
     x: Mapped[str | None]
     instagram: Mapped[str | None]
     linkedin: Mapped[str | None]
+    youtube: Mapped[str | None]
 
     session: Mapped[Optional[list[Session]]] = relationship(
         "Session", uselist=False, back_populates="user", cascade="all, delete-orphan"
