@@ -77,14 +77,12 @@ def seed_opportunities(
             location="Remote",
             summary="Summer backend internship.",
             description="A summer internship for students interested in backend engineering.",
-            event_date=datetime(2025, 6, 1),
         ),
         models.Opportunity(
             contact_user="John Smith",
             location="New York",
             summary="AI research fellowship.",
             description="A fellowship for students interested in AI research.",
-            event_date=datetime(2025, 8, 15),
         ),
     ]
 
