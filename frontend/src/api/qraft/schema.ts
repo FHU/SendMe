@@ -223,6 +223,8 @@ export interface components {
             instagram?: string | null;
             /** Linkedin */
             linkedin?: string | null;
+            /** Youtube */
+            youtube?: string | null;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -236,7 +238,10 @@ export interface components {
         };
         /** LoginChallengeRequest */
         LoginChallengeRequest: {
-            /** Email */
+            /**
+             * Email
+             * Format: email
+             */
             email: string;
         };
         /** Opportunity */
@@ -297,10 +302,34 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Email */
+            /**
+             * Email
+             * Format: email
+             */
             email: string;
-            /** Display Name */
-            display_name: string;
+            /** Orginzation Id */
+            orginzation_id?: string | null;
+            /** First Name */
+            first_name: string;
+            /** Last Name */
+            last_name: string;
+            /** Location */
+            location: string;
+            /** Bio */
+            bio?: string | null;
+            /** Profile Picture */
+            profile_picture?: string | null;
+            /** Facebook */
+            facebook?: string | null;
+            /** X */
+            x?: string | null;
+            /** Linkedin */
+            linkedin?: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
         };
         /** ValidationError */
         ValidationError: {
