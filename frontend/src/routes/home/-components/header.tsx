@@ -1,4 +1,4 @@
-import { SlIcon, SlIconButton, } from "@shoelace-style/shoelace/dist/react";
+import { SlIcon, SlIconButton } from "@shoelace-style/shoelace/dist/react";
 import styled from "styled-components";
 // import { CreateOpportunity } from "../-components/CreateOpportunity";
 
@@ -53,12 +53,12 @@ const Header = () => (
 	<HeaderContainer>
 		<TitleRow>
 			<Title>Opportunities</Title>
-      {/* <SlIconButton name="plus-lg" style={{ fontSize: "1.5rem" }}>
+			{/* <SlIconButton name="plus-lg" style={{ fontSize: "1.5rem" }}>
         <SlIcon name="plus-lg"/>
       </SlIconButton> */}
-      <AddButton name="plus-lg">
-        <SlIcon name="plus-lg" />
-      </AddButton>
+			<AddButton name="plus-lg">
+				<SlIcon name="plus-lg" />
+			</AddButton>
 		</TitleRow>
 		<Subtitle>Tags Selected</Subtitle>
 	</HeaderContainer>
