@@ -40,7 +40,7 @@ const Tags = () => (
 			<TagButton>Spanish</TagButton>
 			<TagButton>Paid</TagButton>
 		</TagButtons>
-		<EditContainer></EditContainer>
+		<EditContainer />
 	</TagsContainer>
 );
 
