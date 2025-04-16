@@ -103,7 +103,7 @@ export function OpportunitiesList({
 					<CardTitle>
 						<CardTitleDate>
 							<StrongText>{o.name}</StrongText>
-							<small>12/14/24</small>
+							<small>{o.created_at}</small>
 						</CardTitleDate>
 						<Bookmark>
 							<div className="icon-button-color">
@@ -115,8 +115,8 @@ export function OpportunitiesList({
 						<AvatarInfo>
 							<SlAvatar image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" />
 							<AvatarBio>
-								Oak Tree Church of Christ
-								<small>liam lesson</small>
+								Oak Tree Hill
+								<small>{o.contact_user}</small>
 								<small>{o.location}</small>
 							</AvatarBio>
 						</AvatarInfo>
@@ -143,7 +143,7 @@ export function OpportunitiesList({
 						</SlTag>
 					</TagsContainer>
 					<SmallBio>
-						<div>AI Research Internship</div>
+						<div>{o.summary}</div>
 					</SmallBio>
 					<SlDetails summary="More Details">
 						<MoreDetails>
@@ -158,7 +158,7 @@ export function OpportunitiesList({
 							<div>
 								<h3>Time of Event</h3>
 								{/* <p>N/A</p> */}
-								<p>{o.event_date}</p>
+								<p>Date of even</p>
 							</div>
 						</MoreDetails>
 					</SlDetails>
