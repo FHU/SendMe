@@ -29,6 +29,7 @@ def create_opportunity(
 ):
     # Create the opportunity from the input schema.
     item = models.Opportunity(
+        title =input.title,
         contact_user=input.contact_user,
         location=input.location,
         tags=input.tags,
@@ -76,6 +77,7 @@ def seed_opportunities(
 ):
     sample_opps = [
         models.Opportunity(
+            title ="Summer Internship",
             contact_user="Jane Doe",
             location="Remote",
             tags = ["software", "internship"],
@@ -83,6 +85,7 @@ def seed_opportunities(
             description="A summer internship for students interested in backend engineering.",
         ),
         models.Opportunity(
+            title = "Fall Internship",
             contact_user="John Smith",
             location="New York",
             tags = ["data science", "internship"],
