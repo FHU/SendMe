@@ -1,10 +1,16 @@
 import api from "@sendme/api";
-import { SlSpinner, SlButton, SlIcon, SlIconButton, SlPopup, SlSwitch } from "@shoelace-style/shoelace/dist/react";
+import {
+	SlButton,
+	SlIcon,
+	SlIconButton,
+	SlPopup,
+	SlSpinner,
+	SlSwitch,
+} from "@shoelace-style/shoelace/dist/react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
-import { useState, useRef } from 'react';
-import { OpportunitiesList } from "../-components/OpportunitiesList";
 import { CreateOpportunity } from "../-components/CreateOpportunity";
-
+import { OpportunitiesList } from "../-components/OpportunitiesList";
 
 const BackGround = styled.div`
   padding: 10px;
@@ -22,7 +28,7 @@ const AddButton = styled(SlIconButton)`
   margin-top: 1rem;
   padding: 0.5rem;
   color: var(--sl-color-primary-950);
-  font-size: 30px;
+  font-size: 40px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -40,16 +46,15 @@ const Background = () => {
 		api.organizations.listOrganizations.useQuery();
 	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
 
-	const [active, setActive] = useState(false);  // State for toggling popup
-	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);  // State for the anchor element
-	
+	const [active, setActive] = useState(false); // State for toggling popup
+	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null); // State for the anchor element
+
 	const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-		setAnchorEl(e.currentTarget);  // Set the anchor element when AddButton is clicked
-		setActive(prev => !prev);  // Toggle the popup
+		setAnchorEl(e.currentTarget); // Set the anchor element when AddButton is clicked
+		setActive((prev) => !prev); // Toggle the popup
 	};
 
 	return (
-
 		<>
 			<BackGround>
 				{/* Add button that will toggle the popup */}
@@ -61,15 +66,13 @@ const Background = () => {
 				<SlPopup
 					placement="bottom"
 					active={active}
-					anchor={anchorEl ?? undefined}  // Anchor the popup to the button
+					anchor={anchorEl ?? undefined} // Anchor the popup to the button
 				>
 					<CreateOpportunity onCreated={refetch} />
 				</SlPopup>
 				{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
 			</BackGround>
-			
 		</>
-		
 	);
 };
 
