@@ -29,7 +29,11 @@ def create_opportunity(
 ):
     # Create the opportunity from the input schema.
     item = models.Opportunity(
-        name=input.name,
+        organization=input.organization,
+        contact_user=input.contact_user,
+        location=input.location,
+        tags=input.tags,
+        summary=input.summary,
         description=input.description,
     )
     # Add the item to the database.
