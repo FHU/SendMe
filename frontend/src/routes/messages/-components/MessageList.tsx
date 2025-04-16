@@ -13,7 +13,7 @@ const MessageCard = styled.div<{ isUser: boolean }>`
   padding: 10px;
   max-width: 90%;
   margin-left: ${({ isUser }) => (isUser ? "auto" : "0")};
-  margin-right: ${({ isUser }) => (isUser ? "0" : "auto")}; 
+  margin-right: ${({ isUser }) => (isUser ? "0" : "auto")};
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   word-break: break-word;
   border: 2px solid red; /* Red border added for visibility */
@@ -60,7 +60,7 @@ const Timestamp = styled.span`
   color: black;
   align-self: end;
   justify-self: end;
-  padding-right: 10px; ///// FIX time stamp 
+  padding-right: 10px; ///// FIX time stamp
 
   @media (max-width: 768px) {
     font-size: 10px;
@@ -86,7 +86,6 @@ function Message({ message, isUser, imagePath }: MessageProps) {
 
 	return (
 		<MessageCard isUser={isUser}>
-			<AvatarWrapper></AvatarWrapper>
 			<MessageText>{message.content}</MessageText>
 			<Timestamp>{formatDate(message.created_at)}</Timestamp>
 		</MessageCard>
