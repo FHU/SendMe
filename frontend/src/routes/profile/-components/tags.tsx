@@ -45,7 +45,7 @@ const Tags = ({ isEditing }: { isEditing: boolean }) => (
 		<EditContainer>
 			{isEditing && (
 				<SlIconButton
-					name="plus-lg"
+					name="plus-circle"
 					label="Add tag"
 					style={{ fontSize: "2rem", fontWeight: "bold" }}
 				/>

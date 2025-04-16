@@ -60,102 +60,89 @@ const Label = styled.label`
   width: 70px;
 `;
 
+const StyledLink = styled.a`
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+const platforms = [
+  { name: "facebook", label: "Facebook" },
+  { name: "tiktok", label: "TikTok" },
+  { name: "linkedin", label: "LinkedIn" },
+  { name: "twitter-x", label: "X" },
+];
+
 const Info = ({ isEditing }: { isEditing: boolean }) => {
-	const [socialLinks, setSocialLinks] = useState({
-		facebook: "https://facebook.com/yourprofile",
-		tiktok: "https://tiktok.com/@yourprofile",
-		linkedin: "https://linkedin.com/in/yourprofile",
-		x: "https://x.com/yourprofile",
-	});
+  const [socialLinks, setSocialLinks] = useState<Record<string, string>>({
+    "facebook": "",
+    "tiktok": "",
+    "linkedin": "",
+    "twitter-x": "",
+  });
 
-	const handleChange = (platform: keyof typeof socialLinks, value: string) => {
-		setSocialLinks((prev) => ({ ...prev, [platform]: value }));
-	};
+  const handleChange = (platform: string, value: string) => {
+    setSocialLinks((prev) => ({ ...prev, [platform]: value }));
+  };
 
-	return (
-		<InfoContainer>
-			<Header>
-				<span>About Me</span>
-			</Header>
+  return (
+    <InfoContainer>
+      <Header>
+        <span>About Me</span>
+      </Header>
 
-			{isEditing ? (
-				<textarea
-					style={{
-						width: "100%",
-						height: "100px",
-						fontFamily: "Arial",
-						fontSize: "0.9rem",
-						color: "#333",
-					}}
-					defaultValue="As a graduate from Freed-Hardeman University, I managed all aspects..."
-				/>
-			) : (
-				<Content>
-					As a graduate from Freed-Hardeman University, I managed all aspects...
-				</Content>
-			)}
+      {isEditing ? (
+        <textarea
+          style={{
+            width: "100%",
+            height: "100px",
+            fontFamily: "Arial",
+            fontSize: "0.9rem",
+            color: "#333",
+          }}
+          defaultValue="As a graduate from Freed-Hardeman University, I managed all aspects..."
+        />
+      ) : (
+        <Content>
+          As a graduate from Freed-Hardeman University, I managed all aspects...
+        </Content>
+      )}
 
-			{isEditing ? (
-				<SocialInputsColumn>
-					<IconRow>
-						<Label>
-							<SlIconButton name="facebook" label="Facebook" />
-						</Label>
-						<Input
-							placeholder="Link to Facebook"
-							onChange={(e) => handleChange("facebook", e.target.value)}
-						/>
-					</IconRow>
-					<IconRow>
-						<Label>
-							<SlIconButton name="tiktok" label="TikTok" />
-						</Label>
-						<Input
-							placeholder="Link to TikTok"
-							onChange={(e) => handleChange("tiktok", e.target.value)}
-						/>
-					</IconRow>
-					<IconRow>
-						<Label>
-							<SlIconButton name="linkedin" label="LinkedIn" />
-						</Label>
-						<Input
-							placeholder="Link to LinkedIn"
-							onChange={(e) => handleChange("linkedin", e.target.value)}
-						/>
-					</IconRow>
-					<IconRow>
-						<Label>
-							<SlIconButton name="twitter-x" label="X" />
-						</Label>
-						<Input
-							placeholder="Link to X"
-							onChange={(e) => handleChange("x", e.target.value)}
-						/>
-					</IconRow>
-				</SocialInputsColumn>
-			) : (
-				<SocialIconsRow>
-					<SlIconButton
-						href={socialLinks.facebook}
-						name="facebook"
-						label="Facebook"
-					/>
-					<SlIconButton
-						href={socialLinks.tiktok}
-						name="tiktok"
-						label="TikTok"
-					/>
-					<SlIconButton
-						href={socialLinks.linkedin}
-						name="linkedin"
-						label="LinkedIn"
-					/>
-					<SlIconButton href={socialLinks.x} name="twitter-x" label="X" />
-				</SocialIconsRow>
-			)}
-		</InfoContainer>
-	);
+      {isEditing ? (
+        <SocialInputsColumn>
+          {platforms.map(({ name, label }) => (
+            <IconRow key={name}>
+              <Label>
+                <SlIconButton name={name} label={label} />
+              </Label>
+              <Input
+                placeholder={`Link to ${label}`}
+                value={socialLinks[name] || ""}
+                onChange={(e) => handleChange(name, e.target.value)}
+              />
+            </IconRow>
+          ))}
+        </SocialInputsColumn>
+      ) : (
+        <SocialIconsRow>
+          {platforms.map(({ name, label }) =>
+            socialLinks[name]?.trim() ? (
+              <StyledLink
+                key={name}
+                href={socialLinks[name]}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SlIconButton name={name} label={label} />
+              </StyledLink>
+            ) : null
+          )}
+        </SocialIconsRow>
+      )}
+    </InfoContainer>
+  );
 };
 
 export default Info;
