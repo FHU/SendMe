@@ -12,4 +12,3 @@ class Tag(SendMeModel):
 class OpportunityTags(SendMeModel):
     opportunity: UUID
     tag: int
-    

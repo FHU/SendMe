@@ -16,4 +16,3 @@ class OpportunityTags(Base):
 
     opportunity_id: Mapped[uuid.UUID] = mapped_column(primary_key = True)
     tag_id: Mapped[int] = mapped_column(primary_key = True)
-    
