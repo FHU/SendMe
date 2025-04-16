@@ -238,8 +238,6 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Name */
-            name: string;
             /** Organization */
             organization: string | null;
             /** Contact User */
