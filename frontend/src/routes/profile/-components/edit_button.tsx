@@ -23,9 +23,16 @@ const EditPressButton = styled.button`
     cursor: pointer;
 `;
 
-const EditButton = () => (
+type EditButtonProps = {
+	toggleEdit: () => void;
+	isEditing: boolean;
+};
+
+const EditButton = ({ toggleEdit, isEditing }: EditButtonProps) => (
 	<EditContainer>
-		<EditPressButton>Edit Profile</EditPressButton>
+		<EditPressButton onClick={toggleEdit}>
+			{isEditing ? "Save" : "Edit Profile"}
+		</EditPressButton>
 	</EditContainer>
 );
 

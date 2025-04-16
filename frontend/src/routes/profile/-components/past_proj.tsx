@@ -31,9 +31,9 @@ const ProjectsList = styled.div`
 `;
 
 const Content = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const ContentText = styled.p`
@@ -44,6 +44,15 @@ const ContentText = styled.p`
   width: 50%;
 `;
 
+const Textarea = styled.textarea`
+  font-size: 0.9rem;
+  color: #333;
+  width: 95%;
+  height: 100px;
+  margin-top: 10px;
+  font-family: Arial, sans-serif;
+`;
+
 const ProjImageContainer = styled.div`
   width: 50%;
   display: flex;
@@ -51,29 +60,42 @@ const ProjImageContainer = styled.div`
 `;
 
 const ProjImage = styled.img`
-    aspect-ratio: 1/1;
-    width: 50%;
-    padding: 0rem 0.5rem 0rem 0rem;
+  aspect-ratio: 1/1;
+  width: 50%;
+  padding: 0rem 0.5rem 0rem 0rem;
 `;
 
-const PastProj = () => (
+type PastProjProps = {
+	isEditing: boolean;
+};
+
+const PastProj = ({ isEditing }: PastProjProps) => (
 	<PastProjContainer>
 		<Header>
 			<span>Projects</span>
 		</Header>
 		<ProjectsList>
 			<Content>
-				<ContentText>
-					I youth ministered at Pine Cone Church of Christ.
-				</ContentText>
+				{isEditing ? (
+					<Textarea defaultValue="I youth ministered at Pine Cone Church of Christ." />
+				) : (
+					<ContentText>
+						I youth ministered at Pine Cone Church of Christ.
+					</ContentText>
+				)}
 				<ProjImageContainer>
 					<ProjImage src={projImage} />
 				</ProjImageContainer>
 			</Content>
+
 			<Content>
-				<ContentText>
-					I youth ministered at Pine Cone Church of Christ.
-				</ContentText>
+				{isEditing ? (
+					<Textarea defaultValue="I youth ministered at Pine Cone Church of Christ." />
+				) : (
+					<ContentText>
+						I youth ministered at Pine Cone Church of Christ.
+					</ContentText>
+				)}
 				<ProjImageContainer>
 					<ProjImage src={projImage1} />
 				</ProjImageContainer>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import EditButton from "./edit_button";
 import Header from "./header";
@@ -13,14 +14,22 @@ const BackGround = styled.div`
   max-width: fit-content;
 `;
 
-const Background = () => (
-	<BackGround>
-		<Header />
-		<EditButton />
-		<Tags />
-		<Info />
-		<PastProj />
-	</BackGround>
-);
+const Background = () => {
+	const [isEditing, setIsEditing] = useState(false);
+
+	const toggleEdit = () => {
+		setIsEditing((prev) => !prev);
+	};
+
+	return (
+		<BackGround>
+			<Header />
+			<EditButton toggleEdit={toggleEdit} isEditing={isEditing} />
+			<Tags />
+			<Info isEditing={isEditing} />
+			<PastProj isEditing={isEditing} />
+		</BackGround>
+	);
+};
 
 export default Background;

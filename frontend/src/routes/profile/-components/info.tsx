@@ -42,23 +42,32 @@ const Icon = styled.a`
   }
 `;
 
-const Info = () => (
+const Info = ({ isEditing }: { isEditing: boolean }) => (
 	<InfoContainer>
 		<Header>
 			<span>About Me</span>
 		</Header>
-		<Content>
-			As a graduate from Freed-Hardeman University, I managed all aspects from
-			logistics to program development. My work with local outreach events
-			involved coordinating volunteers, securing resources, and building
-			relationships with community partners. These experiences honed my
-			leadership, organizational, and communication skills.
-		</Content>
+		{isEditing ? (
+			<textarea
+				style={{
+					width: "100%",
+					height: "100px",
+					fontFamily: "Arial",
+					fontSize: "0.9rem",
+					color: "#333",
+				}}
+				defaultValue="As a graduate from Freed-Hardeman University, I managed all aspects..."
+			/>
+		) : (
+			<Content>
+				As a graduate from Freed-Hardeman University, I managed all aspects...
+			</Content>
+		)}
 		<SocialIcons>
-			<SlIconButton name="facebook" label="Facebook" />
-			<SlIconButton name="tiktok" label="Tiktok" />
-			<SlIconButton name="linkedin" label="LinkedIn" />
-			<SlIconButton name="twitter-x" label="X" />
+			<SlIconButton href="#" name="facebook" label="Facebook" />
+			<SlIconButton href="#" name="tiktok" label="Tiktok" />
+			<SlIconButton href="#" name="linkedin" label="LinkedIn" />
+			<SlIconButton href="#" name="twitter-x" label="X" />
 		</SocialIcons>
 	</InfoContainer>
 );
