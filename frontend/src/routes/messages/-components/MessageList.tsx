@@ -69,55 +69,54 @@ const Timestamp = styled.span`
 `;
 
 interface MessageProps {
-  message: components["schemas"]["Message"];
-  isUser: boolean;
-  imagePath: string | null;
+	message: components["schemas"]["Message"];
+	isUser: boolean;
+	imagePath: string | null;
 }
 
 function Message({ message, isUser, imagePath }: MessageProps) {
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    }).format(date);
-  };
+	const formatDate = (dateString: string) => {
+		const date = new Date(dateString);
+		return new Intl.DateTimeFormat("en-US", {
+			hour: "2-digit",
+			minute: "2-digit",
+			hour12: true,
+		}).format(date);
+	};
 
-  return (
-    <MessageCard isUser={isUser}>
-      <AvatarWrapper>
-      </AvatarWrapper>
-      <MessageText>{message.content}</MessageText>
-      <Timestamp>{formatDate(message.created_at)}</Timestamp>
-    </MessageCard>
-  );
+	return (
+		<MessageCard isUser={isUser}>
+			<AvatarWrapper></AvatarWrapper>
+			<MessageText>{message.content}</MessageText>
+			<Timestamp>{formatDate(message.created_at)}</Timestamp>
+		</MessageCard>
+	);
 }
 
 export function MessageList({
-  data,
-  currentUserId,
+	data,
+	currentUserId,
 }: {
-  data: components["schemas"]["Message"][];
-  currentUserId: string;
+	data: components["schemas"]["Message"][];
+	currentUserId: string;
 }) {
-  const chatEndRef = useRef<HTMLDivElement | null>(null);
+	const chatEndRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+	useEffect(() => {
+		chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+	}, []);
 
-  return (
-    <>
-      {data.map((msg) => (
-        <Message
-          key={msg.id}
-          message={msg}
-          isUser={msg.sender_id === currentUserId}
-          imagePath={msg.sender.profile_picture}
-        />
-      ))}
-      <div ref={chatEndRef} />
-    </>
-  );
+	return (
+		<>
+			{data.map((msg) => (
+				<Message
+					key={msg.id}
+					message={msg}
+					isUser={msg.sender_id === currentUserId}
+					imagePath={msg.sender.profile_picture}
+				/>
+			))}
+			<div ref={chatEndRef} />
+		</>
+	);
 }
