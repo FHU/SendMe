@@ -102,7 +102,7 @@ export function OpportunitiesList({
 				<CardContainer key={o.id}>
 					<CardTitle>
 						<CardTitleDate>
-							<StrongText>Internship</StrongText>
+							<StrongText>{o.title}</StrongText>
 							<small>{o.created_at}</small>
 						</CardTitleDate>
 						<Bookmark>
@@ -148,17 +148,8 @@ export function OpportunitiesList({
 					<SlDetails summary="More Details">
 						<MoreDetails>
 							<div>
-								<h3>Position</h3>
-								<p>Ministry Leadership and Staff</p>
-							</div>
-							<div>
 								<h3>Description</h3>
 								<p>{o.description}</p>
-							</div>
-							<div>
-								<h3>Time of Event</h3>
-								{/* <p>N/A</p> */}
-								<p>Date of even</p>
 							</div>
 						</MoreDetails>
 					</SlDetails>
