@@ -187,8 +187,8 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Organization */
-            organization: string | null;
+            /** Title */
+            title: string | null;
             /** Contact User */
             contact_user: string;
             /** Location */
@@ -238,8 +238,8 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Organization */
-            organization: string | null;
+            /** Title */
+            title: string | null;
             /** Contact User */
             contact_user: string;
             /** Location */

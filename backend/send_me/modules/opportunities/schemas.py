@@ -15,7 +15,8 @@ OpenAPI spec.
 # Specifies the client's request to create an opportunity.
 class CreateOpportunityRequest(SendMeModel):
     id: UUID
-    organization: str | None
+    title: str | None
+    # organization: str | None
     contact_user: str
     location: str | None
     tags: list[str] | None
@@ -28,7 +29,8 @@ class CreateOpportunityRequest(SendMeModel):
 # This is the general definition of what an Opportunity looks like.
 class Opportunity(SendMeModel):
     id: UUID
-    organization: str | None
+    title: str | None
+    # organization: str | None
     contact_user: str
     location: str | None
     tags: list[str] | None
