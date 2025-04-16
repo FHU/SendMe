@@ -134,14 +134,16 @@ def seed_dummy_data(response: Response, db: DatabaseSession = Depends(get_db)):
     # Create Users
     user1 = User(
         email="alice@example.com",
-        display_name="Alice",
+        first_name="Alice",
+        last_name="Joe",
         location="Wonderland",
         bio="Explorer of the unreal",
         profile_picture=None,
     )
     user2 = User(
         email="bob@example.com",
-        display_name="Bob",
+        first_name="Bob",
+        last_name="The Builder",
         location="Builderland",
         bio="Can we fix it? Yes, we can!",
         profile_picture=None,
