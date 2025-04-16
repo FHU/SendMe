@@ -73,7 +73,6 @@ def seed_opportunities(
 ):
     sample_opps = [
         models.Opportunity(
-            name="Tech Internship Program",
             contact_user="Jane Doe",
             location="Remote",
             summary="Summer backend internship.",
@@ -81,7 +80,6 @@ def seed_opportunities(
             event_date=datetime(2025, 6, 1),
         ),
         models.Opportunity(
-            name="AI Research Fellowship",
             contact_user="John Smith",
             location="New York",
             summary="AI research fellowship.",
