@@ -1,15 +1,10 @@
 import api from "@sendme/api";
 import {
-	SlButton,
-	SlIcon,
 	SlIconButton,
-	SlPopup,
 	SlSpinner,
-	SlSwitch,
 } from "@shoelace-style/shoelace/dist/react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { CreateOpportunity } from "../-components/CreateOpportunity";
 import { OpportunitiesList } from "../-components/OpportunitiesList";
 
 const BackGround = styled.div`
@@ -57,19 +52,6 @@ const Background = () => {
 	return (
 		<>
 			<BackGround>
-				{/* Add button that will toggle the popup */}
-				<AddButton name="plus-lg" onClick={handleClick}>
-					<SlIcon name="plus-lg" />
-				</AddButton>
-
-				{/* Popup Component */}
-				<SlPopup
-					placement="bottom"
-					active={active}
-					anchor={anchorEl ?? undefined} // Anchor the popup to the button
-				>
-					<CreateOpportunity onCreated={refetch} />
-				</SlPopup>
 				{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
 			</BackGround>
 		</>
