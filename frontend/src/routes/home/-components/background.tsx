@@ -1,11 +1,12 @@
 import api from "@sendme/api";
-import { SlSpinner } from "@shoelace-style/shoelace/dist/react";
+import { SlSpinner, SlButton, SlIcon, SlIconButton, SlPopup, SlSwitch } from "@shoelace-style/shoelace/dist/react";
 import styled from "styled-components";
-// import { CreateOpportunity } from "../-components/CreateOpportunity";
+import { useState, useRef } from 'react';
 import { OpportunitiesList } from "../-components/OpportunitiesList";
+import { CreateOpportunity } from "../-components/CreateOpportunity";
+
 
 const BackGround = styled.div`
-  background: var(--sl-color-primary-500);
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -14,17 +15,61 @@ const BackGround = styled.div`
   max-width: fit-content;
 `;
 
+const AddButton = styled(SlIconButton)`
+  background: var(--sl-color-primary-500);
+  border: none;
+  border-radius: 50%;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  color: var(--sl-color-primary-950);
+  font-size: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+`;
+
+const PopupContent = styled.div`
+  width: 100px;
+  height: 50px;
+  background: var(--sl-color-primary-600);
+  border-radius: var(--sl-border-radius-medium);
+`;
+
 const Background = () => {
 	const { data: orgs, refetch: refetchOrg } =
 		api.organizations.listOrganizations.useQuery();
 	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
 
-	return (
-		<BackGround>
-			{/* <CreateOpportunity onCreated={refetch} /> */}
+	const [active, setActive] = useState(false);  // State for toggling popup
+	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);  // State for the anchor element
+	
+	const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+		setAnchorEl(e.currentTarget);  // Set the anchor element when AddButton is clicked
+		setActive(prev => !prev);  // Toggle the popup
+	};
 
-			{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
-		</BackGround>
+	return (
+
+		<>
+			<BackGround>
+				{/* Add button that will toggle the popup */}
+				<AddButton name="plus-lg" onClick={handleClick}>
+					<SlIcon name="plus-lg" />
+				</AddButton>
+
+				{/* Popup Component */}
+				<SlPopup
+					placement="bottom"
+					active={active}
+					anchor={anchorEl ?? undefined}  // Anchor the popup to the button
+				>
+					<CreateOpportunity onCreated={refetch} />
+				</SlPopup>
+				{!data ? <SlSpinner /> : <OpportunitiesList data={data} />}
+			</BackGround>
+			
+		</>
+		
 	);
 };
 
