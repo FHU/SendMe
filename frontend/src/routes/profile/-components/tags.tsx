@@ -8,31 +8,33 @@ const TagsContainer = styled.div`
   width: 400px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const TagButtons = styled.div`
-    display: flex;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const TagButton = styled.button`
-    border-radius: 2rem;
-    border: none;
-    background-color: var(--sl-color-primary-500);
-    padding: 0.2rem 0.5rem;
-    margin: 0rem 0.1rem;
-    color: white;
-    font-size: 12px;
-    height: 1.5rem;
-    width: 74px;
-    cursor: pointer;
+  border-radius: 2rem;
+  border: none;
+  background-color: var(--sl-color-primary-500);
+  padding: 0.2rem 0.5rem;
+  margin: 0rem 0.1rem;
+  color: white;
+  font-size: 12px;
+  height: 1.5rem;
+  width: 74px;
+  cursor: pointer;
 `;
 
 const EditContainer = styled.div`
-    text-align: right;
-    font-size: 1.2rem;
+  text-align: right;
+  font-size: 1.2rem;
 `;
 
-const Tags = () => (
+const Tags = ({ isEditing }: { isEditing: boolean }) => (
 	<TagsContainer>
 		<TagButtons>
 			<TagButton>Preacher</TagButton>
@@ -40,7 +42,15 @@ const Tags = () => (
 			<TagButton>Spanish</TagButton>
 			<TagButton>Paid</TagButton>
 		</TagButtons>
-		<EditContainer />
+		<EditContainer>
+			{isEditing && (
+				<SlIconButton
+					name="plus-lg"
+					label="Add tag"
+					style={{ fontSize: "2rem", fontWeight: "bold" }}
+				/>
+			)}
+		</EditContainer>
 	</TagsContainer>
 );
 

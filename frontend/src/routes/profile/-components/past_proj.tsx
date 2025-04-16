@@ -73,6 +73,13 @@ const PastProj = ({ isEditing }: PastProjProps) => (
 	<PastProjContainer>
 		<Header>
 			<span>Projects</span>
+			{isEditing && (
+				<SlIconButton
+					name="plus-lg"
+					label="Add Project"
+					style={{ fontSize: "2rem", fontWeight: "bold" }}
+				/>
+			)}
 		</Header>
 		<ProjectsList>
 			<Content>

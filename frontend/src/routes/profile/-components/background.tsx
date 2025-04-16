@@ -25,7 +25,7 @@ const Background = () => {
 		<BackGround>
 			<Header />
 			<EditButton toggleEdit={toggleEdit} isEditing={isEditing} />
-			<Tags />
+			<Tags isEditing={isEditing} />
 			<Info isEditing={isEditing} />
 			<PastProj isEditing={isEditing} />
 		</BackGround>
