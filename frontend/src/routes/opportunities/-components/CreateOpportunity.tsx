@@ -115,8 +115,8 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 			<Form onSubmit={onSubmit}>
 				<Heading>Share Opportunity</Heading>
 
-				{/* 1. Organization (required) */}
-				<Label htmlFor="organization">Organization (required)</Label>
+				{/* 1. Title (required) */}
+				<Label htmlFor="organization">Title</Label>
 				<Select id="organization" name="organization" disabled={isPending}>
 					<option value="FHU">FHU</option>
 					<option value="Henderson Church of Christ">
@@ -124,19 +124,9 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 					</option>
 				</Select>
 
-				{/* 2. Contact User (required) */}
-				<Label htmlFor="contact_user">Contact User (required)</Label>
-				<Input
-					id="contact_user"
-					name="contact_user"
-					type="text"
-					placeholder="Enter contact user info"
-					disabled={isPending}
-				/>
-
-				{/* 3. Location (City, State, Country) (required) */}
+				{/* 2. Location (City, State, Country) (required) */}
 				<Label htmlFor="location">
-					Location (City, State, Country) (required)
+					Location (City, State, Country)
 				</Label>
 				<Input
 					id="location"
@@ -146,8 +136,8 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 					disabled={isPending}
 				/>
 
-				{/* 4. Tags (required) */}
-				<Label htmlFor="tags">Tags (required)</Label>
+				{/* 3. Tags (required) */}
+				<Label htmlFor="tags">Tags (optional)</Label>
 				<Input
 					id="tags"
 					name="tags"
@@ -156,8 +146,8 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 					disabled={isPending}
 				/>
 
-				{/* 5. Summary (required) */}
-				<Label htmlFor="summary">Summary (required)</Label>
+				{/* 4. Summary (required) */}
+				<Label htmlFor="summary">Summary</Label>
 				<TextArea
 					id="summary"
 					name="summary"
@@ -165,8 +155,8 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 					disabled={isPending}
 				/>
 
-				{/* 6. Position Type */}
-				<Label htmlFor="position">Position Type</Label>
+				{/* 5. Position Type */}
+				<Label htmlFor="position">Position Type (Optional)</Label>
 				<Input
 					id="position"
 					name="position"
@@ -175,8 +165,8 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 					disabled={isPending}
 				/>
 
-				{/* 7. Description (required) */}
-				<Label htmlFor="description">Description (required)</Label>
+				{/* 6. Description (required) */}
+				<Label htmlFor="description">Description</Label>
 				<TextArea
 					id="description"
 					name="description"
@@ -184,8 +174,8 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 					disabled={isPending}
 				/>
 
-				{/* 8. Time of Event */}
-				<Label>Time of Event</Label>
+				{/* 7. Time of Event */}
+				<Label>Time of Event (Optional)</Label>
 				<TimeOfEventContainer>
 					<Input
 						id="eventDate"
