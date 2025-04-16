@@ -72,7 +72,7 @@ const platforms = [
   { name: "facebook", label: "Facebook" },
   { name: "tiktok", label: "TikTok" },
   { name: "linkedin", label: "LinkedIn" },
-  { name: "twitter-x", label: "X" },
+  { name: "x", label: "X" },
 ];
 
 const Info = ({ isEditing }: { isEditing: boolean }) => {
@@ -80,7 +80,7 @@ const Info = ({ isEditing }: { isEditing: boolean }) => {
     "facebook": "",
     "tiktok": "",
     "linkedin": "",
-    "twitter-x": "",
+    "x": "",
   });
 
   const handleChange = (platform: string, value: string) => {
