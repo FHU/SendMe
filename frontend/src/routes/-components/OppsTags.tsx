@@ -1,10 +1,9 @@
 import {
-  SlButtonGroup,
   SlButton,
-  SlTag,
+  SlButtonGroup,
   SlIcon,
+  SlTag,
 } from "@shoelace-style/shoelace/dist/react";
-import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -34,18 +33,18 @@ const tags = [
 const OppTags = () => {
   const settings = {
     dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
+    infinite: false,
+    speed: 250,
+    slidesToShow: 5,
     slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 1024,
-        settings: { slidesToShow: 2 },
+        settings: { slidesToShow: 5 },
       },
       {
         breakpoint: 600,
-        settings: { slidesToShow: 1 },
+        settings: { slidesToShow: 5 },
       },
     ],
   };
