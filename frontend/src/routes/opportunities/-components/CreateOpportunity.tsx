@@ -125,9 +125,7 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 				</Select>
 
 				{/* 2. Location (City, State, Country) (required) */}
-				<Label htmlFor="location">
-					Location (City, State, Country)
-				</Label>
+				<Label htmlFor="location">Location (City, State, Country)</Label>
 				<Input
 					id="location"
 					name="location"
