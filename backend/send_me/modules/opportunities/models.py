@@ -19,6 +19,7 @@ class Opportunity(Base):
     __tablename__ = "opportunities"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    title: Mapped[str | None]
     contact_user: Mapped[str]
     description: Mapped[str]
     summary: Mapped[str | None]
