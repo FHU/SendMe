@@ -71,27 +71,28 @@ def get_opportunities(
 def seed_opportunities(
     db: Session = Depends(get_db),
 ):
-    sample_opps = [
-        models.Opportunity(
-            name="Tech Internship Program",
-            contact_user="Jane Doe",
-            location="Remote",
-            summary="Summer backend internship.",
-            description="A summer internship for students interested in backend engineering.",
-            event_date=datetime(2025, 6, 1),
-        ),
-        models.Opportunity(
-            name="AI Research Fellowship",
-            contact_user="John Smith",
-            location="New York",
-            summary="AI research fellowship.",
-            description="A fellowship for students interested in AI research.",
-            event_date=datetime(2025, 8, 15),
-        ),
-    ]
+    return{"I love life"}
+    # sample_opps = [
+    #     models.Opportunity(
+    #         name="Tech Internship Program",
+    #         contact_user="Jane Doe",
+    #         location="Remote",
+    #         summary="Summer backend internship.",
+    #         description="A summer internship for students interested in backend engineering.",
+    #         event_date=datetime(2025, 6, 1),
+    #     ),
+    #     models.Opportunity(
+    #         name="AI Research Fellowship",
+    #         contact_user="John Smith",
+    #         location="New York",
+    #         summary="AI research fellowship.",
+    #         description="A fellowship for students interested in AI research.",
+    #         event_date=datetime(2025, 8, 15),
+    #     ),
+    # ]
 
-    db.add_all(sample_opps)
-    db.commit()
-    db.flush()
+    # db.add_all(sample_opps)
+    # db.commit()
+    # db.flush()
 
-    return {"message": f"Seeded {len(sample_opps)} opportunities"}
+    # return {"message": f"Seeded {len(sample_opps)} opportunities"}
