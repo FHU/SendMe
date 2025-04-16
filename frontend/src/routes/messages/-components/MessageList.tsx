@@ -16,7 +16,7 @@ const MessageCard = styled.div<{ isUser: boolean }>`
   margin-right: ${({ isUser }) => (isUser ? "0" : "auto")};
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   word-break: break-word;
-  border: 2px solid red; /* Red border added for visibility */
+  border: 2px solid red;
 
   @media (max-width: 768px) {
     grid-template-columns: auto 1fr;
@@ -25,21 +25,7 @@ const MessageCard = styled.div<{ isUser: boolean }>`
   }
 `;
 
-const AvatarWrapper = styled.div`
-  grid-row: span 2;
-  align-self: center;
-  justify-self: center;
 
-  sl-avatar::part(base) {
-    --size: 36px;
-  }
-
-  @media (max-width: 768px) {
-    sl-avatar::part(base) {
-      --size: 28px;
-    }
-  }
-`;
 
 const MessageText = styled.p`
   grid-column: 2 / 3;
@@ -54,68 +40,69 @@ const MessageText = styled.p`
   }
 `;
 
-const Timestamp = styled.span`
+const Timestamp = styled.span<{ isUser: boolean }>`
   grid-column: 2 / 3;
   font-size: 12px;
   color: black;
-  align-self: end;
-  justify-self: end;
-  padding-right: 10px; ///// FIX time stamp
+  align-self: start;
+  justify-self: ${({ isUser }) => (isUser ? "end" : "start")};
+  padding-top: 5px;
+  padding-left: ${({ isUser }) => (isUser ? "0" : "2px")};
+  padding-right: ${({ isUser }) => (isUser ? "2px" : "0")};
 
   @media (max-width: 768px) {
     font-size: 10px;
-    padding-right: 5px;
   }
 `;
 
 interface MessageProps {
-	message: components["schemas"]["Message"];
-	isUser: boolean;
-	imagePath: string | null;
+  message: components["schemas"]["Message"];
+  isUser: boolean;
+  imagePath: string | null;
 }
 
 function Message({ message, isUser, imagePath }: MessageProps) {
-	const formatDate = (dateString: string) => {
-		const date = new Date(dateString);
-		return new Intl.DateTimeFormat("en-US", {
-			hour: "2-digit",
-			minute: "2-digit",
-			hour12: true,
-		}).format(date);
-	};
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    }).format(date);
+  };
 
-	return (
-		<MessageCard isUser={isUser}>
-			<MessageText>{message.content}</MessageText>
-			<Timestamp>{formatDate(message.created_at)}</Timestamp>
-		</MessageCard>
-	);
+  return (
+    <MessageCard isUser={isUser}>
+      <MessageText>{message.content}</MessageText>
+      <Timestamp isUser={isUser}>{formatDate(message.created_at)}</Timestamp>
+    </MessageCard>
+  );
 }
 
 export function MessageList({
-	data,
-	currentUserId,
+  data,
+  currentUserId,
 }: {
-	data: components["schemas"]["Message"][];
-	currentUserId: string;
+  data: components["schemas"]["Message"][];
+  currentUserId: string;
 }) {
-	const chatEndRef = useRef<HTMLDivElement | null>(null);
+  const chatEndRef = useRef<HTMLDivElement | null>(null);
 
-	useEffect(() => {
-		chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-	}, []);
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
-	return (
-		<>
-			{data.map((msg) => (
-				<Message
-					key={msg.id}
-					message={msg}
-					isUser={msg.sender_id === currentUserId}
-					imagePath={msg.sender.profile_picture}
-				/>
-			))}
-			<div ref={chatEndRef} />
-		</>
-	);
+  return (
+    <>
+      {data.map((msg) => (
+        <Message
+          key={msg.id}
+          message={msg}
+          isUser={msg.sender_id === currentUserId}
+          imagePath={msg.sender.profile_picture}
+        />
+      ))}
+      <div ref={chatEndRef} />
+    </>
+  );
 }

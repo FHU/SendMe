@@ -14,11 +14,15 @@ export const Route = createFileRoute("/messages/$conversationId")({
 });
 
 const DisplayName = styled.h2`
-  margin-top: -130px;
   color: var(--sl-color-text);
+  text-align: center;
+  width: 50%;
+  margin: 0 0 10px 0;
+  font-size: 1.8rem;
+  font-weight: bold;
 
   @media (max-width: 768px) {
-    margin-right: 130px;
+    font-size: 1.5rem;
   }
 `;
 
@@ -27,7 +31,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 10px;
+  padding: 0 10px 10px 10px; /* 👈 removed top spacing */
   box-sizing: border-box;
 
   @media (max-width: 768px) {
@@ -40,7 +44,7 @@ const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  justify-content: flex-start; /* 👈 restores normal top alignment */
+  justify-content: flex-start;
   overflow-y: auto;
   overflow-x: hidden;
   background: var(--sl-color-neutral-50);
