@@ -15,7 +15,7 @@ export interface paths {
         get: operations["list_opportunities"];
         put?: never;
         /** Create Opportunity */
-        post: operations["create"];
+        post: operations["create_opprtunity"];
         delete?: never;
         options?: never;
         head?: never;
@@ -194,6 +194,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/users/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Make User */
+        post: operations["createUser"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/hello": {
         parameters: {
             query?: never;
@@ -285,6 +302,34 @@ export interface components {
             /** Type */
             type: string;
         };
+        /** CreateUserRequest */
+        CreateUserRequest: {
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
+            /** First Name */
+            first_name: string;
+            /** Last Name */
+            last_name: string;
+            /** Location */
+            location: string;
+            /** Bio */
+            bio?: string | null;
+            /** Profile Picture */
+            profile_picture?: string | null;
+            /** Facebook */
+            facebook?: string | null;
+            /** X */
+            x?: string | null;
+            /** Instagram */
+            instagram?: string | null;
+            /** Linkedin */
+            linkedin?: string | null;
+            /** Youtube */
+            youtube?: string | null;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -297,7 +342,10 @@ export interface components {
         };
         /** LoginChallengeRequest */
         LoginChallengeRequest: {
-            /** Email */
+            /**
+             * Email
+             * Format: email
+             */
             email: string;
         };
         /** Message */
@@ -384,20 +432,39 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Email */
-            email: string;
-            /** Display Name */
-            display_name: string;
             /**
-             * Created At
-             * Format: date-time
+             * Email
+             * Format: email
              */
-            created_at: string;
+            email: string;
+            /** Orginzation Id */
+            orginzation_id?: string | null;
+            /** First Name */
+            first_name: string;
+            /** Last Name */
+            last_name: string;
+            /** Location */
+            location: string;
+            /** Bio */
+            bio?: string | null;
             /**
              * Profile Picture
              * @default
              */
             profile_picture: string | null;
+            /** Facebook */
+            facebook?: string | null;
+            /** X */
+            x?: string | null;
+            /** Linkedin */
+            linkedin?: string | null;
+            /** Youtube */
+            youtube?: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
         };
         /** UserInfo */
         UserInfo: {
@@ -406,10 +473,34 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Email */
+            /**
+             * Email
+             * Format: email
+             */
             email: string;
-            /** Display Name */
-            display_name: string;
+            /** Orginzation Id */
+            orginzation_id?: string | null;
+            /** First Name */
+            first_name: string;
+            /** Last Name */
+            last_name: string;
+            /** Location */
+            location: string;
+            /** Bio */
+            bio?: string | null;
+            /** Profile Picture */
+            profile_picture?: string | null;
+            /** Facebook */
+            facebook?: string | null;
+            /** X */
+            x?: string | null;
+            /** Linkedin */
+            linkedin?: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -456,7 +547,7 @@ export interface operations {
             };
         };
     };
-    create: {
+    create_opprtunity: {
         parameters: {
             query?: never;
             header?: never;
@@ -895,6 +986,46 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    createUser: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateUserRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CreateUserRequest"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
             };
         };
     };
