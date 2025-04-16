@@ -28,7 +28,6 @@ class CreateOpportunityRequest(SendMeModel):
 # This is the general definition of what an Opportunity looks like.
 class Opportunity(SendMeModel):
     id: UUID
-    name: str
     organization: str | None
     contact_user: str
     location: str | None
