@@ -8,8 +8,8 @@ import styled from "styled-components";
 
 import { useMemo } from "react";
 import Footer from "./-components/footer";
-import Navbar from "./-components/navbar";
 import Header from "./-components/header";
+import Navbar from "./-components/navbar";
 
 const ContentArea = styled.main`
   width: 600px;
@@ -21,7 +21,7 @@ const HeaderDetails = styled.div`
 	justify-content: center;
 	border-bottom-left-radius: 5rem;
 	border-top-right-radius: 5rem;
-`
+`;
 
 function Providers({ children }: { children: JSX.Element[] }) {
 	const queryClient = useMemo(() => new QueryClient(), []);
@@ -45,8 +45,8 @@ export const Route = createRootRoute({
 		<Providers>
 			<Navbar appName="SendMe" />
 			<HeaderDetails>
-				<Header />		
-			</HeaderDetails>			
+				<Header />
+			</HeaderDetails>
 			<ContentArea>
 				<Outlet />
 			</ContentArea>

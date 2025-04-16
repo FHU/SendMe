@@ -1,8 +1,5 @@
 import api from "@sendme/api";
-import {
-	SlIconButton,
-	SlSpinner,
-} from "@shoelace-style/shoelace/dist/react";
+import { SlIconButton, SlSpinner } from "@shoelace-style/shoelace/dist/react";
 import { useState } from "react";
 import styled from "styled-components";
 import { OpportunitiesList } from "../-components/OpportunitiesList";

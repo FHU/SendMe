@@ -1,8 +1,8 @@
 import api from "@sendme/api";
 import { SlIcon, SlIconButton } from "@shoelace-style/shoelace/dist/react";
-import styled from "styled-components";
-import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import styled from "styled-components";
 
 const HeaderContainer = styled.div`
   width: 400px;
@@ -61,7 +61,7 @@ const Subtitle = styled.h2`
 `;
 
 const Header = () => {
-  const { data: orgs, refetch: refetchOrg } =
+	const { data: orgs, refetch: refetchOrg } =
 		api.organizations.listOrganizations.useQuery();
 	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
 
@@ -73,20 +73,19 @@ const Header = () => {
 		setActive((prev) => !prev); // Toggle the popup
 	};
 
-  return (
-      <HeaderContainer>
-      <TitleRow>
-        <Title>Opportunities</Title>
-          <Link to="/opportunities">
-            <AddButton name="plus-lg" onClick={handleClick}>
-              <SlIcon name="plus-lg" />
-            </AddButton>
-          </Link>
-      </TitleRow>
-      <Subtitle>Tags Selected</Subtitle>
-    </HeaderContainer>
-  )
-
+	return (
+		<HeaderContainer>
+			<TitleRow>
+				<Title>Opportunities</Title>
+				<Link to="/opportunities">
+					<AddButton name="plus-lg" onClick={handleClick}>
+						<SlIcon name="plus-lg" />
+					</AddButton>
+				</Link>
+			</TitleRow>
+			<Subtitle>Tags Selected</Subtitle>
+		</HeaderContainer>
+	);
 };
 
 export default Header;
