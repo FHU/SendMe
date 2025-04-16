@@ -1,12 +1,13 @@
 import uuid
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 import yaml
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from send_me.database.engine import get_db
 from . import models, schemas
+import send_me.modules.opportunities.models as opps_models
 
 TAGS_FILE = './tags.yaml'
 
@@ -25,17 +26,16 @@ def get_tags():
     with open(TAGS_FILE) as file:
         tags = yaml.safe_load(file)
     return tags
-
 # Backend route to get tags associated with a certain opportunity
-@router.get(
-    "/tags/{opportunity_id}",
-    response_model = list[schemas.Tag],
-    operation_id = "get_opportunity_tags",
-)
 def get_opportunity_tags(
     opportunity_id: uuid.UUID,
     db: Session = Depends(get_db),
 ):
+    # Check if the requested opportunity exists
+    opportunity = db.query(opps_models.Opportunity).where(opps_models.Opportunity.id == opportunity_id)
+    if not opportunity:
+        raise HTTPException(status_code=404, detail="Opportunity not found")
+    
     query = select(models.OpportunityTags.tag_id).where(
         models.OpportunityTags.opportunity_id == opportunity_id)
 

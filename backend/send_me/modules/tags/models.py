@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Column, Mapped, mapped_column, ForeignKey, Table
 
 from send_me.database.models import Base
 
@@ -11,8 +11,15 @@ SQLAlchemy uses this to write the appropiate SQL
 for various operations.
 """
 
-class OpportunityTags(Base):
-    __tablename__ = "opportunity_tags"
+class Tags(Base):
+    __table_name__="tags"
 
-    opportunity_id: Mapped[uuid.UUID] = mapped_column(primary_key = True)
-    tag_id: Mapped[int] = mapped_column(primary_key = True)
+    id: Mapped[uuid.UUID] = mapped_column(primary_key = True)
+    name: Mapped[str]
+
+OpportunityTags = Table(
+    "opportunity_tags",
+    Base.metadata,
+    Column("opportunity_id", ForeignKey("opportunities.id"), primary_key = True),
+    Column("tag_id", ForeignKey("tags.id"), primary_key = True)
+)

@@ -2,9 +2,10 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import DateTime, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from send_me.database.models import Base
+from send_me.modules.tags.models import OpportunityTags
 
 """
 This class represents an Opportunity in the database.
@@ -25,6 +26,9 @@ class Opportunity(Base):
         ForeignKey("organizations.id")
     )
     event_date: Mapped[datetime | None]
+    tags = relationship(
+        "Tag", secondary=OpportunityTags, back_populates = "tags"
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now
     )
