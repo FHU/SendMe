@@ -17,6 +17,11 @@ export interface OpportunitiesService {
         url: "/opportunities";
         mediaType: "application/json";
     }, NonNullable<paths["/opportunities"]["post"]["requestBody"]>["content"]["application/json"], paths["/opportunities"]["post"]["responses"]["201"]["content"]["application/json"], undefined, paths["/opportunities"]["post"]["responses"]["422"]["content"]["application/json"]>;
+    /** @summary Seed Opportunities */
+    seedOpportunities: ServiceOperationMutation<{
+        method: "post";
+        url: "/opportunities/seed";
+    }, undefined, paths["/opportunities/seed"]["post"]["responses"]["201"]["content"]["application/json"], undefined, unknown>;
 }
 export const opportunitiesService: {
     /** @summary Get Opportunities */
@@ -34,6 +39,13 @@ export const opportunitiesService: {
             mediaType: "application/json";
         };
     };
+    /** @summary Seed Opportunities */
+    seedOpportunities: {
+        schema: {
+            method: "post";
+            url: "/opportunities/seed";
+        };
+    };
 } = {
     listOpportunities: {
         schema: {
@@ -46,6 +58,12 @@ export const opportunitiesService: {
             method: "post",
             url: "/opportunities",
             mediaType: "application/json"
+        }
+    },
+    seedOpportunities: {
+        schema: {
+            method: "post",
+            url: "/opportunities/seed"
         }
     }
 };

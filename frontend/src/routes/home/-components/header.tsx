@@ -1,4 +1,4 @@
-import { SlIcon } from "@shoelace-style/shoelace/dist/react";
+import { SlIcon, SlIconButton, } from "@shoelace-style/shoelace/dist/react";
 import styled from "styled-components";
 // import { CreateOpportunity } from "../-components/CreateOpportunity";
 
@@ -29,7 +29,7 @@ const Title = styled.h1`
   margin-bottom: 0;
 `;
 
-const AddButton = styled.button`
+const AddButton = styled(SlIconButton)`
   background: var(--sl-color-primary-500);
   border: none;
   border-radius: 50%;
@@ -40,10 +40,6 @@ const AddButton = styled.button`
   cursor: pointer;
   display: flex;
   align-items: center;
-
-  &:hover {
-    color: var(--sl-color-primary-50);
-  }
 `;
 
 const Subtitle = styled.h2`
@@ -57,9 +53,12 @@ const Header = () => (
 	<HeaderContainer>
 		<TitleRow>
 			<Title>Opportunities</Title>
-			<AddButton>
-				<SlIcon name="plus-lg" />
-			</AddButton>
+      {/* <SlIconButton name="plus-lg" style={{ fontSize: "1.5rem" }}>
+        <SlIcon name="plus-lg"/>
+      </SlIconButton> */}
+      <AddButton name="plus-lg">
+        <SlIcon name="plus-lg" />
+      </AddButton>
 		</TitleRow>
 		<Subtitle>Tags Selected</Subtitle>
 	</HeaderContainer>
