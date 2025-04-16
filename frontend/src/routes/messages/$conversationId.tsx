@@ -166,7 +166,9 @@ function RouteComponent() {
 	return (
 		<Container>
 			<DisplayName>
-				{otherUser ? otherUser.display_name : "An error occurred"}
+				{otherUser
+					? `${otherUser.first_name} ${otherUser.last_name}`
+					: "An error occurred"}
 			</DisplayName>
 			<ChatContainer>
 				{conversation ? (

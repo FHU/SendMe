@@ -180,7 +180,7 @@ export function ConversationList({
 					}
 					userName={
 						conversation.users.find((convoUser) => convoUser.id !== user?.id)
-							?.display_name
+							?.first_name
 					}
 					lastReadMessage={
 						// I am not sure that the messages are sorted by date when they are accessed here.
