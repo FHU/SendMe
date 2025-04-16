@@ -60,7 +60,6 @@ const PastProj = () => (
 	<PastProjContainer>
 		<Header>
 			<span>Projects</span>
-			<SlIconButton name="pencil" label="Pencil" />
 		</Header>
 		<ProjectsList>
 			<Content>

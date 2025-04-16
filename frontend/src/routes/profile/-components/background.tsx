@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import EditButton from "./edit_button";
 import Header from "./header";
 import Info from "./info";
 import PastProj from "./past_proj";
@@ -15,6 +16,7 @@ const BackGround = styled.div`
 const Background = () => (
 	<BackGround>
 		<Header />
+		<EditButton />
 		<Tags />
 		<Info />
 		<PastProj />

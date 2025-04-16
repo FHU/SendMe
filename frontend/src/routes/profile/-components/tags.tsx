@@ -7,10 +7,7 @@ const TagsContainer = styled.div`
   font-family: Arial, sans-serif;
   width: 400px;
   display: flex;
-  margin-top: 16rem;
   justify-content: space-between;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
 `;
 
 const TagButtons = styled.div`
@@ -25,6 +22,7 @@ const TagButton = styled.button`
     margin: 0rem 0.1rem;
     color: white;
     font-size: 12px;
+    height: 1.5rem;
     width: 74px;
     cursor: pointer;
 `;
@@ -42,9 +40,7 @@ const Tags = () => (
 			<TagButton>Spanish</TagButton>
 			<TagButton>Paid</TagButton>
 		</TagButtons>
-		<EditContainer>
-			<SlIconButton name="pencil" label="Pencil" />
-		</EditContainer>
+		<EditContainer></EditContainer>
 	</TagsContainer>
 );
 

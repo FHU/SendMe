@@ -46,7 +46,6 @@ const Info = () => (
 	<InfoContainer>
 		<Header>
 			<span>About Me</span>
-			<SlIconButton name="pencil" label="Pencil" />
 		</Header>
 		<Content>
 			As a graduate from Freed-Hardeman University, I managed all aspects from
