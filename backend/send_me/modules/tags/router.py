@@ -1,12 +1,11 @@
 import uuid
 
 from fastapi import APIRouter, Depends
+import yaml
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-import yaml
 
 from send_me.database.engine import get_db
-
 from . import models, schemas
 
 TAGS_FILE = './tags.yaml'
