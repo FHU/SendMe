@@ -116,13 +116,14 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 				<Heading>Share Opportunity</Heading>
 
 				{/* 1. Title (required) */}
-				<Label htmlFor="organization">Title</Label>
-				<Select id="organization" name="organization" disabled={isPending}>
-					<option value="FHU">FHU</option>
-					<option value="Henderson Church of Christ">
-						Henderson Church of Christ
-					</option>
-				</Select>
+				<Label htmlFor="location">Title</Label>
+				<Input
+					id="title"
+					name="title"
+					type="text"
+					placeholder="Enter title"
+					disabled={isPending}
+				/>
 
 				{/* 2. Location (City, State, Country) (required) */}
 				<Label htmlFor="location">Location (City, State, Country)</Label>
