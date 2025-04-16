@@ -1,12 +1,12 @@
+import uuid
+
 from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 import yaml
-import uuid
 
 from send_me.database.engine import get_db
 from . import models, schemas
-from send_me.modules.opportunities.models import Opportunity
 
 TAGS_FILE = './tags.yaml'
 
@@ -38,7 +38,7 @@ def get_opportunity_tags(
 ):
     query = select(models.OpportunityTags.tag_id).where(
         models.OpportunityTags.opportunity_id == opportunity_id)
-    
+
     opportunity_tag_list = db.execute(query)
 
     return opportunity_tag_list
