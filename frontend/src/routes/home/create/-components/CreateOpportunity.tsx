@@ -184,7 +184,8 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 							disabled={isPending}
 						/>
 					</TimeOfEventContainer>
-
+					
+					{/* Button */}
 					<ButtonContainer>
 						<SubmitButton type="submit" disabled={isPending}>
 							{isPending ? "Sharing..." : "Share"}
