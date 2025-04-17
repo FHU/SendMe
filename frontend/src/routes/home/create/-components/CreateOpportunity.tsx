@@ -192,5 +192,5 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 				</Form>
 			</RoundedContainer>
 		</>
-);
+	);
 }
