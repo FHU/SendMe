@@ -13,7 +13,7 @@ function Index() {
 		<div>
 			<h3>Server message: {data?.message}</h3>
 
-			<Link to="/opportunities">
+			<Link to="/home/create">
 				<SlButton>Test</SlButton>
 			</Link>
 
