@@ -1,6 +1,7 @@
 import api from "@sendme/api";
 import { useCallback } from "react";
 import styled from "styled-components";
+import SectionHeader from "./SectionHeader";
 
 const RoundedContainer = styled.div`
   background-color: var(--sl-color-primary-500);
@@ -111,83 +112,86 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 	);
 
 	return (
-		<RoundedContainer>
-			<Form onSubmit={onSubmit}>
-				<Heading>Share Opportunity</Heading>
+		<>
+			<SectionHeader />
+			<RoundedContainer>
+				<Form onSubmit={onSubmit}>
+					<Heading>Share Opportunity</Heading>
 
-				{/* 1. Title (required) */}
-				<Label htmlFor="location">Title</Label>
-				<Input
-					id="title"
-					name="title"
-					type="text"
-					placeholder="Enter title"
-					disabled={isPending}
-				/>
-
-				{/* 2. Location (City, State, Country) (required) */}
-				<Label htmlFor="location">Location (City, State, Country)</Label>
-				<Input
-					id="location"
-					name="location"
-					type="text"
-					placeholder="Enter location"
-					disabled={isPending}
-				/>
-
-				{/* 3. Tags (required) */}
-				<Label htmlFor="tags">Tags (optional)</Label>
-				<Input
-					id="tags"
-					name="tags"
-					type="text"
-					placeholder="Enter tags (comma separated)"
-					disabled={isPending}
-				/>
-
-				{/* 4. Summary (required) */}
-				<Label htmlFor="summary">Summary</Label>
-				<TextArea
-					id="summary"
-					name="summary"
-					placeholder="Enter summary"
-					disabled={isPending}
-				/>
-
-				{/* 5. Description (required) */}
-				<Label htmlFor="description">Description</Label>
-				<TextArea
-					id="description"
-					name="description"
-					placeholder="Enter description"
-					disabled={isPending}
-				/>
-
-				{/* 6. Time of Event */}
-				<Label>Time of Event (Optional)</Label>
-				<TimeOfEventContainer>
+					{/* 1. Title (required) */}
+					<Label htmlFor="location">Title</Label>
 					<Input
-						id="eventDate"
-						name="eventDate"
-						type="date"
-						placeholder="Select event date"
+						id="title"
+						name="title"
+						type="text"
+						placeholder="Enter title"
 						disabled={isPending}
 					/>
+
+					{/* 2. Location (City, State, Country) (required) */}
+					<Label htmlFor="location">Location (City, State, Country)</Label>
 					<Input
-						id="eventTime"
-						name="eventTime"
-						type="time"
-						placeholder="Select event time"
+						id="location"
+						name="location"
+						type="text"
+						placeholder="Enter location"
 						disabled={isPending}
 					/>
-				</TimeOfEventContainer>
 
-				<ButtonContainer>
-					<SubmitButton type="submit" disabled={isPending}>
-						{isPending ? "Sharing..." : "Share"}
-					</SubmitButton>
-				</ButtonContainer>
-			</Form>
-		</RoundedContainer>
+					{/* 3. Tags (required) */}
+					<Label htmlFor="tags">Tags (optional)</Label>
+					<Input
+						id="tags"
+						name="tags"
+						type="text"
+						placeholder="Enter tags (comma separated)"
+						disabled={isPending}
+					/>
+
+					{/* 4. Summary (required) */}
+					<Label htmlFor="summary">Summary</Label>
+					<TextArea
+						id="summary"
+						name="summary"
+						placeholder="Enter summary"
+						disabled={isPending}
+					/>
+
+					{/* 5. Description (required) */}
+					<Label htmlFor="description">Description</Label>
+					<TextArea
+						id="description"
+						name="description"
+						placeholder="Enter description"
+						disabled={isPending}
+					/>
+
+					{/* 6. Time of Event */}
+					<Label>Time of Event (Optional)</Label>
+					<TimeOfEventContainer>
+						<Input
+							id="eventDate"
+							name="eventDate"
+							type="date"
+							placeholder="Select event date"
+							disabled={isPending}
+						/>
+						<Input
+							id="eventTime"
+							name="eventTime"
+							type="time"
+							placeholder="Select event time"
+							disabled={isPending}
+						/>
+					</TimeOfEventContainer>
+
+					<ButtonContainer>
+						<SubmitButton type="submit" disabled={isPending}>
+							{isPending ? "Sharing..." : "Share"}
+						</SubmitButton>
+					</ButtonContainer>
+				</Form>
+			</RoundedContainer>
+		</>
 	);
 }
