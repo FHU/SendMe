@@ -28,7 +28,7 @@ const IndexRoute = IndexImport.update({
 
 const OpportunitiesIndexRoute = OpportunitiesIndexImport.update({
   id: '/opportunities/',
-  path: '/opportunities/',
+  path: '/home/create',
   getParentRoute: () => rootRoute,
 } as any)
 
