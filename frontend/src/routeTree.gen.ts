@@ -12,23 +12,17 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as OpportunitiesIndexImport } from './routes/opportunities/index'
 import { Route as MessagesIndexImport } from './routes/messages/index'
 import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as ConversationIndexImport } from './routes/conversation/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
+import { Route as HomeCreateIndexImport } from './routes/home/create/index'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const OpportunitiesIndexRoute = OpportunitiesIndexImport.update({
-  id: '/opportunities/',
-  path: '/home/create',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,6 +47,12 @@ const ConversationIndexRoute = ConversationIndexImport.update({
 const AuthIndexRoute = AuthIndexImport.update({
   id: '/auth/',
   path: '/auth/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeCreateIndexRoute = HomeCreateIndexImport.update({
+  id: '/home/create/',
+  path: '/home/create/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -95,11 +95,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MessagesIndexImport
       parentRoute: typeof rootRoute
     }
-    '/opportunities/': {
-      id: '/opportunities/'
-      path: '/opportunities'
-      fullPath: '/opportunities'
-      preLoaderRoute: typeof OpportunitiesIndexImport
+    '/home/create/': {
+      id: '/home/create/'
+      path: '/home/create'
+      fullPath: '/home/create'
+      preLoaderRoute: typeof HomeCreateIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -113,7 +113,7 @@ export interface FileRoutesByFullPath {
   '/conversation': typeof ConversationIndexRoute
   '/home': typeof HomeIndexRoute
   '/messages': typeof MessagesIndexRoute
-  '/opportunities': typeof OpportunitiesIndexRoute
+  '/home/create': typeof HomeCreateIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -122,7 +122,7 @@ export interface FileRoutesByTo {
   '/conversation': typeof ConversationIndexRoute
   '/home': typeof HomeIndexRoute
   '/messages': typeof MessagesIndexRoute
-  '/opportunities': typeof OpportunitiesIndexRoute
+  '/home/create': typeof HomeCreateIndexRoute
 }
 
 export interface FileRoutesById {
@@ -132,7 +132,7 @@ export interface FileRoutesById {
   '/conversation/': typeof ConversationIndexRoute
   '/home/': typeof HomeIndexRoute
   '/messages/': typeof MessagesIndexRoute
-  '/opportunities/': typeof OpportunitiesIndexRoute
+  '/home/create/': typeof HomeCreateIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -143,9 +143,9 @@ export interface FileRouteTypes {
     | '/conversation'
     | '/home'
     | '/messages'
-    | '/opportunities'
+    | '/home/create'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/conversation' | '/home' | '/messages' | '/opportunities'
+  to: '/' | '/auth' | '/conversation' | '/home' | '/messages' | '/home/create'
   id:
     | '__root__'
     | '/'
@@ -153,7 +153,7 @@ export interface FileRouteTypes {
     | '/conversation/'
     | '/home/'
     | '/messages/'
-    | '/opportunities/'
+    | '/home/create/'
   fileRoutesById: FileRoutesById
 }
 
@@ -163,7 +163,7 @@ export interface RootRouteChildren {
   ConversationIndexRoute: typeof ConversationIndexRoute
   HomeIndexRoute: typeof HomeIndexRoute
   MessagesIndexRoute: typeof MessagesIndexRoute
-  OpportunitiesIndexRoute: typeof OpportunitiesIndexRoute
+  HomeCreateIndexRoute: typeof HomeCreateIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -172,7 +172,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConversationIndexRoute: ConversationIndexRoute,
   HomeIndexRoute: HomeIndexRoute,
   MessagesIndexRoute: MessagesIndexRoute,
-  OpportunitiesIndexRoute: OpportunitiesIndexRoute,
+  HomeCreateIndexRoute: HomeCreateIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -190,7 +190,7 @@ export const routeTree = rootRoute
         "/conversation/",
         "/home/",
         "/messages/",
-        "/opportunities/"
+        "/home/create/"
       ]
     },
     "/": {
@@ -208,8 +208,8 @@ export const routeTree = rootRoute
     "/messages/": {
       "filePath": "messages/index.tsx"
     },
-    "/opportunities/": {
-      "filePath": "opportunities/index.tsx"
+    "/home/create/": {
+      "filePath": "home/create/index.tsx"
     }
   }
 }

@@ -113,7 +113,7 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 	return (
 		<RoundedContainer>
 			<Form onSubmit={onSubmit}>
-				<Heading>Post Opportunity</Heading>
+				<Heading>Share Opportunity</Heading>
 
 				{/* 1. Title (required) */}
 				<Label htmlFor="location">Title</Label>

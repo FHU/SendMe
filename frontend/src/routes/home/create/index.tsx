@@ -1,10 +1,9 @@
 import api from "@sendme/api";
-import { SlSpinner } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 import { CreateOpportunity } from "./-components/CreateOpportunity";
 
-export const Route = createFileRoute("/opportunities/")({
+export const Route = createFileRoute("/home/create/")({
 	component: RouteComponent,
 });
 
