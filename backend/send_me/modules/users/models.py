@@ -7,6 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from send_me.database.models import Base
 from send_me.modules.authentication.models import Session
+from send_me.modules.conversations.models import UserConversations
 
 
 class User(Base):
@@ -27,6 +28,11 @@ class User(Base):
     instagram: Mapped[str | None]
     linkedin: Mapped[str | None]
     youtube: Mapped[str | None]
+
+    conversations = relationship(
+        "Conversation", secondary=UserConversations, back_populates="users"
+    )
+    messages = relationship("Message", cascade="all, delete-orphan")
 
     session: Mapped[Optional[list[Session]]] = relationship(
         "Session", uselist=False, back_populates="user", cascade="all, delete-orphan"

@@ -52,3 +52,4 @@ class User(SendMeModel):
     youtube: str | None = None
 
     created_at: datetime
+    profile_picture: str | None = ""
