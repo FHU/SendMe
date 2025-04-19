@@ -5,7 +5,6 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from fastapi.responses import RedirectResponse
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from sqlalchemy.orm.relationships import Exists
 
 from send_me.database.engine import get_db
 from send_me.modules.users.models import User
