@@ -20,6 +20,20 @@ const MessageHeader = styled.h1`
   margin-left: 20px;
 `;
 
+const ConversationsContainer = styled.div`
+
+	display: flex;
+	flex-direction: column;
+	margin-left: 20px;
+
+	@media screen and (max-width: 700px) {
+		justify-content: center;
+		align-items: center;
+		margin-left: 0px;
+  	}
+
+`;
+
 function RouteComponent() {
 	const { data: conversations } =
 		api.conversations.getAllConversations.useQuery();
@@ -33,14 +47,14 @@ function RouteComponent() {
 	return (
 		<div>
 			<MessageHeader>Messages</MessageHeader>
-			<div style={{ display: "flex", flexDirection: "column" }}>
+			<ConversationsContainer>
 				<div
 					className="messages"
 					style={{
-						display: "flex",
-						flexDirection: "column",
 						textDecoration: "none",
 						color: "black",
+						marginTop: "10px",
+						marginBottom: "10px",
 					}}
 				>
 					{conversations ? (
@@ -49,7 +63,7 @@ function RouteComponent() {
 						<SlSpinner />
 					)}
 				</div>
-			</div>
+			</ConversationsContainer>
 		</div>
 	);
 }

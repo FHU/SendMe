@@ -30,9 +30,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 600px;
   padding: 0 10px 10px 10px; /* 👈 removed top spacing */
   box-sizing: border-box;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
     width: 100vw;
@@ -53,7 +54,6 @@ const ChatContainer = styled.div`
   width: 100%;
   max-width: 100%;
   height: 60vh;
-  border: 2px solid red;
 
   @media (max-width: 1024px) {
     height: 55vh;

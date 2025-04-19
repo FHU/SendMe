@@ -13,30 +13,13 @@ const formatDate = (dateString: string) => {
 	}).format(date);
 };
 
-const ReadButton = styled.div`
-  height: 15px;
-  width: 15px;
-  border-radius: 50%;
-  grid-column: 5;
-  grid-row: 2;
-  align-self: center;
-  margin-left: -80%;
-
-  @media screen and (max-width: 700px) {
-    grid-row: 1;
-    grid-column: 3;
-    margin-top: 30px;
-    margin-left: 90px;
-  }
-`;
-
 const MessageCard = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
   grid-template-rows: 1fr 0.5fr 0.5;
   background-color: var(--sl-color-primary);
-  margin-bottom: 20px;
-  width: 110%;
+  width: 600px;
+  margin-top: 20px;
 
   &:hover {
     border-radius: 20px;
@@ -48,7 +31,7 @@ const MessageCard = styled.div`
     grid-template-rows: 1fr 0.5fr;
     margin-bottom: 0px;
     margin-left: 2px;
-    width: 80%;
+    width: 100%;
     align-items: center;
   }
 `;
@@ -149,12 +132,6 @@ const Conversation: React.FC<ConversationProps> = ({
 					>
 						{formattedDate}
 					</LastReadTime>
-					<ReadButton
-						style={{
-							visibility: readButtonVisibility,
-							backgroundColor: readButtonColor,
-						}}
-					/>
 				</MessageCard>
 			</Link>
 		</>

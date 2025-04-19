@@ -11,8 +11,6 @@ import Footer from "./-components/footer";
 import Navbar from "./-components/navbar";
 
 const ContentArea = styled.main`
-  width: 600px;
-  margin: var(--sl-spacing-4x-large) auto;
 `;
 
 function Providers({ children }: { children: JSX.Element[] }) {

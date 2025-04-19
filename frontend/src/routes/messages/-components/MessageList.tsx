@@ -16,7 +16,6 @@ const MessageCard = styled.div<{ isUser: boolean }>`
   margin-right: ${({ isUser }) => (isUser ? "0" : "auto")};
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   word-break: break-word;
-  border: 2px solid red;
 
   @media (max-width: 768px) {
     grid-template-columns: auto 1fr;
