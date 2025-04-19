@@ -17,8 +17,9 @@ This implementation allows for group messaging
 UserConversations = Table(
     "user_conversations",
     Base.metadata,
-    Column("user_id", ForeignKey("users.id"), primary_key=True),
-    Column("conversation_id", ForeignKey("conversations.id"), primary_key=True),
+    # These type ignores were added to suppress pyright lint errors. I cant figure out a way to add types.
+    Column("user_id", ForeignKey("users.id"), primary_key=True),  # type: ignore
+    Column("conversation_id", ForeignKey("conversations.id"), primary_key=True),  # type: ignore
     Column("read", Boolean, default=False),
 )
 

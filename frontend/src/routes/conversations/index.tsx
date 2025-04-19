@@ -8,10 +8,12 @@ import {
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import styled from "styled-components";
+import ProtectRoute from "../-preloaders/ProtectRoute";
 import { ConversationList } from "./-components/ConversationList";
 
 export const Route = createFileRoute("/conversations/")({
 	component: RouteComponent,
+	beforeLoad: ProtectRoute,
 });
 
 const MessageHeader = styled.h1`
