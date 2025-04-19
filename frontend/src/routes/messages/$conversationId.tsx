@@ -1,16 +1,18 @@
 import api from "@sendme/api";
 import {
-	SlIconButton,
-	SlSpinner,
-	SlTextarea,
+  SlIconButton,
+  SlSpinner,
+  SlTextarea,
 } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { MessageList } from "./-components/MessageList";
+import ProtectRoute from "../-preloaders/ProtectRoute";
 
 export const Route = createFileRoute("/messages/$conversationId")({
-	component: RouteComponent,
+  component: RouteComponent,
+  beforeLoad: ProtectRoute,
 });
 
 const DisplayName = styled.h2`
@@ -104,110 +106,110 @@ const ErrorMessage = styled.div`
 `;
 
 function RouteComponent() {
-	const { conversationId } = Route.useParams();
+  const { conversationId } = Route.useParams();
 
-	const { data: user } = api.auth.getMe.useQuery();
+  const { data: user } = api.auth.getMe.useQuery();
 
-	const { mutateAsync: createMessage, isError: isCreateMessageError } =
-		api.conversations.createMessage.useMutation();
+  const { mutateAsync: createMessage, isError: isCreateMessageError } =
+    api.conversations.createMessage.useMutation();
 
-	const { data: conversation, refetch: refetchConversation } =
-		api.conversations.getConversation.useQuery({
-			path: { conversation_id: conversationId },
-		});
+  const { data: conversation, refetch: refetchConversation } =
+    api.conversations.getConversation.useQuery({
+      path: { conversation_id: conversationId },
+    });
 
-	const [message, setMessage] = useState("");
-	const [isNoMessageBody, setIsNoMessageBody] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isNoMessageBody, setIsNoMessageBody] = useState(false);
 
-	useEffect(() => {
-		const intervalId = setInterval(() => {
-			refetchConversation();
-		}, 30000);
-		return () => clearInterval(intervalId);
-	}, [refetchConversation]);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refetchConversation();
+    }, 30000);
+    return () => clearInterval(intervalId);
+  }, [refetchConversation]);
 
-	const otherUser = conversation?.users.find(
-		(conversationUser) => user?.id !== conversationUser.id,
-	);
+  const otherUser = conversation?.users.find(
+    (conversationUser) => user?.id !== conversationUser.id,
+  );
 
-	const handleInputChange = (event: Event) => {
-		const target = event.target as HTMLInputElement;
-		setMessage(target.value);
-	};
+  const handleInputChange = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    setMessage(target.value);
+  };
 
-	const handleKeyDown = (event: Event) => {
-		const keyboardEvent = event as KeyboardEvent;
-		if (keyboardEvent.key === "Enter" && !keyboardEvent.shiftKey) {
-			keyboardEvent.preventDefault();
-			sendMessage();
-		}
-	};
+  const handleKeyDown = (event: Event) => {
+    const keyboardEvent = event as KeyboardEvent;
+    if (keyboardEvent.key === "Enter" && !keyboardEvent.shiftKey) {
+      keyboardEvent.preventDefault();
+      sendMessage();
+    }
+  };
 
-	const sendMessage = async () => {
-		if (!message) {
-			setIsNoMessageBody(true);
-			return;
-		}
+  const sendMessage = async () => {
+    if (!message) {
+      setIsNoMessageBody(true);
+      return;
+    }
 
-		try {
-			await createMessage({
-				body: { content: message },
-				path: { conversation_id: conversationId },
-			});
-		} catch (error) {
-			console.error(error);
-		}
+    try {
+      await createMessage({
+        body: { content: message },
+        path: { conversation_id: conversationId },
+      });
+    } catch (error) {
+      console.error(error);
+    }
 
-		setIsNoMessageBody(false);
-		setMessage("");
-		refetchConversation();
-	};
+    setIsNoMessageBody(false);
+    setMessage("");
+    refetchConversation();
+  };
 
-	return (
-		<Container>
-			<DisplayName>
-				{otherUser
-					? `${otherUser.first_name} ${otherUser.last_name}`
-					: "An error occurred"}
-			</DisplayName>
-			<ChatContainer>
-				{conversation ? (
-					<MessageList
-						data={conversation.messages}
-						currentUserId={user ? user.id : ""}
-					/>
-				) : (
-					<SlSpinner />
-				)}
-			</ChatContainer>
-			<SendMessageContainer>
-				<MessageInput
-					placeholder="Type a message..."
-					value={message}
-					spellCheck
-					rows={1}
-					resize="auto"
-					onSlInput={handleInputChange}
-					// @ts-ignore
-					onKeyDown={handleKeyDown}
-				/>
-				<SlIconButton
-					onClick={sendMessage}
-					name="send"
-					slot="suffix"
-					style={{
-						fontSize: "20px",
-						color: "var(--sl-color-text)",
-						marginRight: "5px",
-					}}
-				/>
-			</SendMessageContainer>
-			{isCreateMessageError && (
-				<ErrorMessage>Error sending message</ErrorMessage>
-			)}
-			{isNoMessageBody && (
-				<ErrorMessage>Message must contain text</ErrorMessage>
-			)}
-		</Container>
-	);
+  return (
+    <Container>
+      <DisplayName>
+        {otherUser
+          ? `${otherUser.first_name} ${otherUser.last_name}`
+          : "An error occurred"}
+      </DisplayName>
+      <ChatContainer>
+        {conversation ? (
+          <MessageList
+            data={conversation.messages}
+            currentUserId={user ? user.id : ""}
+          />
+        ) : (
+          <SlSpinner />
+        )}
+      </ChatContainer>
+      <SendMessageContainer>
+        <MessageInput
+          placeholder="Type a message..."
+          value={message}
+          spellCheck
+          rows={1}
+          resize="auto"
+          onSlInput={handleInputChange}
+          // @ts-ignore
+          onKeyDown={handleKeyDown}
+        />
+        <SlIconButton
+          onClick={sendMessage}
+          name="send"
+          slot="suffix"
+          style={{
+            fontSize: "20px",
+            color: "var(--sl-color-text)",
+            marginRight: "5px",
+          }}
+        />
+      </SendMessageContainer>
+      {isCreateMessageError && (
+        <ErrorMessage>Error sending message</ErrorMessage>
+      )}
+      {isNoMessageBody && (
+        <ErrorMessage>Message must contain text</ErrorMessage>
+      )}
+    </Container>
+  );
 }
