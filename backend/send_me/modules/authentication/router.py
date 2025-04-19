@@ -107,7 +107,9 @@ def challenge_otp(
     if session:
         session.created_at = datetime.now(timezone.utc)
     else:
-        session = models.Session(session_token=secrets.token_urlsafe(32), user_id=user.id)
+        session = models.Session(
+            session_token=secrets.token_urlsafe(32), user_id=user.id
+        )
 
         db.add(session)
 
