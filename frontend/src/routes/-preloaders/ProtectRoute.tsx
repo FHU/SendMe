@@ -1,21 +1,27 @@
-import api from "@sendme/api";
-import { redirect } from "@tanstack/react-router";
+import { redirect, ParsedLocation } from "@tanstack/react-router";
 
-interface ProtectRouteProps {
-  location: Location;
-}
+const ProtectRoute = async ({ location }: { location: ParsedLocation<{}> }) => {
+  try {
+    const result = await fetch("/api/auth/me");
 
-const ProtectRoute = async ({ location }: ProtectRouteProps) => {
-  const { data: user, isError } = api.auth.getMe.useQuery();
+    if (!result.ok) handleError(location);
 
-  if (!user || isError) {
-    throw redirect({
-      to: "/auth",
-      search: {
-        redirect: location.href,
-      },
-    });
+    const user = await result.json();
+
+    return user;
+  } catch (error) {
+    console.log(error);
+    handleError(location);
   }
+};
+
+const handleError = (location: ParsedLocation<{}>) => {
+  throw redirect({
+    to: "/auth",
+    search: {
+      redirect: location.href,
+    },
+  });
 };
 
 export default ProtectRoute;
