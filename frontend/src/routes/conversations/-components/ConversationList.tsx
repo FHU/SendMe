@@ -67,6 +67,26 @@ const LastReadTime = styled.p`
   }
 `;
 
+const ConversationLink = styled.div`
+    display: none;
+
+
+    @media screen and (max-width: 700px) {
+        display: block;
+  }
+`
+const ConversationDiv = styled.div`
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    column-gap: 50px;
+
+
+    @media screen and (max-width: 700px) {
+        display: none;
+  }
+`
+
+
 interface ConversationProps {
 	imagePath?: string | null;
 	userName?: string;
@@ -93,81 +113,138 @@ const Conversation: React.FC<ConversationProps> = ({
 
 	return (
 		<>
+		<ConversationLink>
 			<Link
-				to={"/messages/$conversationId"}
-				params={{ conversationId }}
-				style={{ marginTop: "10px", textDecoration: "none" }}
-			>
-				<MessageCard>
-					<SlAvatar
-						image={imagePath ?? ""}
-						style={{
-							gridRowStart: "1",
-							gridRowEnd: "3",
-							placeSelf: "center",
-							transform: "scale(1.5)",
-						}}
-					/>
-					<UserName
-						style={{
-							color: color,
-							fontWeight: fontWeight,
-						}}
-					>
-						{userName}
-					</UserName>
-					<LastReadText
-						style={{
-							color: color,
-							fontWeight: fontWeight,
-						}}
-					>
-						{lastReadMessage}
-					</LastReadText>
-					<LastReadTime
-						style={{
-							color: color,
-							fontWeight: fontWeight,
-						}}
-					>
-						{formattedDate}
-					</LastReadTime>
-				</MessageCard>
-			</Link>
+					to={"/messages/$conversationId"}
+					params={{ conversationId }}
+					style={{ marginTop: "10px", textDecoration: "none" }}
+				>
+						<ConversationBubble
+							imagePath={imagePath}
+							color={color}
+							userName={userName}
+							lastReadMessage={lastReadMessage}
+							fontWeight={fontWeight}
+							visibility={readButtonVisibility}
+							readButtonColor={readButtonColor}
+							formattedDate={formatDate(lastReadTime)}
+						/>
+				</Link>
+		</ConversationLink>
+
+		<ConversationDiv>
+		<ConversationBubble
+                        imagePath={imagePath}
+                        color={color}
+                        userName={userName}
+                        lastReadMessage={lastReadMessage}
+                        fontWeight={fontWeight}
+                        visibility={readButtonVisibility}
+                        readButtonColor={readButtonColor}
+                        formattedDate={formatDate(lastReadTime)}
+                    />
+
+		</ConversationDiv>
 		</>
 	);
 };
 
+interface ConversationBubbleProps {
+    imagePath?: string | null;
+    color: string;
+    fontWeight: string;
+    userName?: string;
+    lastReadMessage?: string;
+    formattedDate: string;
+    visibility: 'hidden' | 'visible';
+    readButtonColor: string;
+}
+
+
+const ConversationBubble = ({
+    imagePath,
+    color,
+    fontWeight,
+    userName,
+    lastReadMessage,
+    formattedDate,
+    visibility = 'visible',
+    readButtonColor,
+}: ConversationBubbleProps ) => {
+    return (
+        <>
+        <MessageCard>
+            <SlAvatar
+                image={imagePath ?? ""}
+                style={{
+                    gridRowStart: "1",
+                    gridRowEnd: "3",
+                    placeSelf: "center",
+                    transform: "scale(1.5)",
+                }}
+            />
+            <UserName
+                style={{
+                    color: color,
+                    fontWeight: fontWeight,
+                }}
+            >
+                {userName}
+            </UserName>
+            <LastReadText
+                style={{
+                    color: color,
+                    fontWeight: fontWeight,
+                }}
+            >
+                {lastReadMessage}
+            </LastReadText>
+            <LastReadTime
+                style={{
+                    color: color,
+                    fontWeight: fontWeight,
+                }}
+            >
+                {formattedDate}
+            </LastReadTime>
+
+        </MessageCard>
+        </>
+    );
+};
+
+
 export function ConversationList({
 	data,
+	onSelect,
 }: {
 	data: components["schemas"]["Conversation"][];
-}): JSX.Element {
+	onSelect?: (id: string) => void;
+}) {
 	const { data: user } = api.auth.getMe.useQuery();
 
 	return (
 		<>
-			{data?.map((conversation) => (
-				<Conversation
-					key={conversation.id}
-					conversationId={conversation.id}
-					imagePath={
-						conversation.users.find((convoUser) => convoUser.id !== user?.id)
-							?.profile_picture
-					}
-					userName={
-						conversation.users.find((convoUser) => convoUser.id !== user?.id)
-							?.first_name
-					}
-					lastReadMessage={
-						// I am not sure that the messages are sorted by date when they are accessed here.
-						conversation.messages?.[conversation.messages.length - 1]
-							?.content ?? ""
-					}
-					lastReadTime={conversation.last_updated}
-					hasBeenRead={conversation.has_been_read ?? false}
-				/>
-			))}
+			{data?.map((conversation) => {
+				const otherUser = conversation.users.find((u) => u.id !== user?.id);
+				const handleClick = () => {
+					if (onSelect) onSelect(conversation.id);
+				};
+				return (
+					<div key={conversation.id} onClick={handleClick}>
+						<Conversation
+							conversationId={conversation.id}
+							imagePath={otherUser?.profile_picture}
+							userName={otherUser?.first_name}
+							lastReadMessage={
+								conversation.messages?.[conversation.messages.length - 1]?.content ?? ""
+							}
+							lastReadTime={conversation.last_updated}
+							hasBeenRead={conversation.has_been_read ?? false}
+						/>
+					</div>
+				);
+			})}
 		</>
 	);
 }

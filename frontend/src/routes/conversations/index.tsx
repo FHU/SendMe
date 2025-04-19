@@ -6,9 +6,10 @@ import {
 	SlSpinner,
 } from "@shoelace-style/shoelace/dist/react";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ConversationList } from "./-components/ConversationList";
+import { MessageList } from "../messages/-components/MessageList";
 
 export const Route = createFileRoute("/conversations/")({
 	component: RouteComponent,
@@ -20,23 +21,65 @@ const MessageHeader = styled.h1`
   margin-left: 20px;
 `;
 
-const ConversationsContainer = styled.div`
+// const ConversationsContainer = styled.div`
 
+// 	display: flex;
+// 	flex-direction: column;
+// 	margin-left: 20px;
+
+// 	@media screen and (max-width: 700px) {
+// 		justify-content: center;
+// 		align-items: center;
+// 		margin-left: 0px;
+//   	}
+
+// `;
+
+const Container = styled.div`
 	display: flex;
-	flex-direction: column;
-	margin-left: 20px;
+	height: 100vh;
 
-	@media screen and (max-width: 700px) {
-		justify-content: center;
-		align-items: center;
-		margin-left: 0px;
-  	}
+	@media (max-width: 700px) {
+		flex-direction: column;
+	}
+`;
 
+const LeftPane = styled.div`
+	width: 30%;
+	border-right: 1px solid #ccc;
+	overflow-y: auto;
+	margin-top: 20px;
+
+	@media (max-width: 700px) {
+		width: 100%;
+		border-right: none;
+	}
+`;
+
+const RightPane = styled.div`
+	flex: 1;
+	overflow-y: auto;
+	margin-top: 20px;
+
+	@media (max-width: 700px) {
+		display: none;
+	}
 `;
 
 function RouteComponent() {
-	const { data: conversations } =
-		api.conversations.getAllConversations.useQuery();
+
+	const [selectedId, setSelectedId] = useState<string | null>(null);
+
+	const handleSelect = (id: string) => setSelectedId(id);
+	
+	const { data: conversations } = api.conversations.getAllConversations.useQuery();
+
+	const selectedConversation = conversations?.find(
+		(convo) => convo.id === selectedId
+	);
+
+	
+	const { data: user } = api.auth.getMe.useQuery();
 
 	//This useEffect is to seed the database to test conversations. Remove in the future.
 
@@ -47,23 +90,27 @@ function RouteComponent() {
 	return (
 		<div>
 			<MessageHeader>Messages</MessageHeader>
-			<ConversationsContainer>
-				<div
-					className="messages"
-					style={{
-						textDecoration: "none",
-						color: "black",
-						marginTop: "10px",
-						marginBottom: "10px",
-					}}
-				>
-					{conversations ? (
-						<ConversationList data={conversations} />
+			<Container>
+			<LeftPane>
+			{conversations ? (
+						<ConversationList data={conversations} 
+						onSelect={(id) => {
+							if (window.innerWidth > 700) setSelectedId(id);
+						}}/>
 					) : (
 						<SlSpinner />
 					)}
-				</div>
-			</ConversationsContainer>
+			</LeftPane>
+			<RightPane>
+				{selectedId ? (
+					<MessageList 
+						data={selectedConversation?.messages ?? []}
+						currentUserId={user ? user.id : ""} />
+				) : (
+					<p style={{ padding: "20px" }}>Select a conversation</p>
+				)}
+			</RightPane>
+		</Container>
 		</div>
 	);
 }
