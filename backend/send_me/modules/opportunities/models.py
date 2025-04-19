@@ -26,9 +26,7 @@ class Opportunity(Base):
         ForeignKey("organizations.id")
     )
     event_date: Mapped[datetime | None]
-    tags = relationship(
-        "Tag", secondary=OpportunityTags, back_populates = "tags"
-    )
+    tags = relationship("Tag", secondary=OpportunityTags, back_populates="tags")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now
     )
