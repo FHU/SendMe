@@ -1,7 +1,11 @@
-from fastapi import APIRouter, Depends
+import uuid
+
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+import send_me.modules.tags.models as tags_models
+import send_me.modules.tags.schemas as tags_schemas
 from send_me.database.engine import get_db
 
 from . import models, schemas
@@ -30,6 +34,52 @@ def create_opportunity(
     item = models.Opportunity(
         name=input.name,
         description=input.description,
+    )
+    # Add the item to the database.
+    db.add(item)
+
+    # This sends all the database operations to the database,
+    # but doesn't yet commit them. Other connecting clients will
+    # not see this new item until it's committed, which is done
+    # in database/engine.py.
+    db.flush()
+    # The object (item) will be invalid at this point.
+
+    # Refresh it and return it, now with the id and create time.
+    db.refresh(item)
+    return item
+
+
+@router.post(
+    "/opportunities/{opportunity_id}/tags/{tag_id}",
+    response_model=tags_schemas.OpportunityTags,
+    status_code=201,
+    operation_id="create_opportunity_tags",
+)
+def create_opportunity_tag(
+    input: tags_schemas.OpportunityTags,
+    opportunity_id: uuid.UUID,
+    tag_id: int,
+    db: Session = Depends(get_db),
+):
+    opportunity = db.query(models.Opportunity).where(
+        models.Opportunity.id == opportunity_id
+    )
+
+    # Check if the opportunity exists
+    if not opportunity:
+        raise HTTPException(status_code=404, detail="Opportunity not found")
+
+    tag = db.query(tags_models.Tag).where(tags_models.Tag.id == tag_id)
+
+    # Check if the tag exists
+    if not tag:
+        raise HTTPException(status_code=404, detail="Tag not found")
+
+    # Create the OpportunityTag from the input schema.
+    item = tags_schemas.OpportunityTags(
+        opportunity=input.opportunity_id,
+        tag=input.tag_id,
     )
     # Add the item to the database.
     db.add(item)
