@@ -7,10 +7,12 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import ProtectRoute from "../-preloaders/ProtectRoute";
 import { MessageList } from "./-components/MessageList";
 
 export const Route = createFileRoute("/messages/$conversationId")({
 	component: RouteComponent,
+	beforeLoad: ProtectRoute,
 });
 
 const DisplayName = styled.h2`

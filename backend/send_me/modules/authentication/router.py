@@ -100,9 +100,18 @@ def challenge_otp(
     if not user:
         raise HTTPException(status_code=404, detail="Unable to find user")
 
-    session = models.Session(session_token=secrets.token_urlsafe(32), user_id=user.id)
+    # Check if a session already exists for the user
+    session_query = select(models.Session).where(models.Session.user_id == user.id)
+    session = db.execute(session_query).scalar_one_or_none()
 
-    db.add(session)
+    if session:
+        session.created_at = datetime.now(timezone.utc)
+    else:
+        session = models.Session(
+            session_token=secrets.token_urlsafe(32), user_id=user.id
+        )
+
+        db.add(session)
 
     db.delete(login)
 
