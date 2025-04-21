@@ -4,7 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 import { CreateOpportunity } from "./-components/CreateOpportunity";
 
-export const Route = createFileRoute("/home/create/")({
+export const Route = createFileRoute("/oppertunities/create/")({
 	component: RouteComponent,
 });
 
