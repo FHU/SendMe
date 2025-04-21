@@ -93,6 +93,44 @@ const RightPane = styled.div`
   }
 `;
 
+const ChatContainer = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  background: var(--sl-color-neutral-50);
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 100%;
+  height: 70vh;
+
+  
+  scrollbar-width: none; 
+  -ms-overflow-style: none;  
+
+  &::-webkit-scrollbar {
+	display: none; 
+  }
+
+  @media (max-width: 1024px) {
+	height: 55vh;
+  }
+
+  @media (max-width: 768px) {
+	height: 50vh;
+	padding: 6px;
+	width: 100vw;
+  }
+
+  @media (max-width: 480px) {
+	height: 45vh;
+	padding: 4px;
+  }
+`;
+
 function RouteComponent() {
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 
@@ -145,10 +183,12 @@ function RouteComponent() {
 					{selectedId ? (
 						<>
 							<MessageHeader conversationId={selectedId} />
-							<MessageList
-								data={conversation?.messages ?? []}
-								currentUserId={user ? user.id : ""}
-							/>
+							<ChatContainer>
+								<MessageList
+									data={conversation?.messages ?? []}
+									currentUserId={user ? user.id : ""}
+								/>
+							</ChatContainer>
 							<CreateMessage conversationId={selectedId} />
 						</>
 					) : (
