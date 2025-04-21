@@ -1,6 +1,4 @@
-import uuid
-
-from sqlalchemy.orm import Column, ForeignKey, Table
+from sqlalchemy import Column, ForeignKey, Table
 
 from send_me.database.models import Base
 

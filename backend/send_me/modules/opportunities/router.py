@@ -1,4 +1,5 @@
 import uuid
+import yaml
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
@@ -9,6 +10,8 @@ import send_me.modules.tags.schemas as tags_schemas
 from send_me.database.engine import get_db
 
 from . import models, schemas
+
+TAGS_FILE = "../tags/tags.yaml"
 
 router = APIRouter(
     tags=["opportunities"],
@@ -70,7 +73,14 @@ def create_opportunity_tag(
     if not opportunity:
         raise HTTPException(status_code=404, detail="Opportunity not found")
 
-    tag = db.query(tags_models.Tag).where(tags_models.Tag.id == tag_id)
+    with open(TAGS_FILE) as file:
+        tags = yaml.safe_load(file)
+        
+    for search_tag in tags:
+        if tag_id in search_tag:
+            tag = search_tag
+        else:
+            tag = None
 
     # Check if the tag exists
     if not tag:
