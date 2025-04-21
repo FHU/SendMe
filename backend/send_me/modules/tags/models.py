@@ -1,4 +1,6 @@
-from sqlalchemy import Column, ForeignKey, Table
+import uuid
+
+from sqlalchemy import ForeignKey, Mapped, mapped_column
 
 from send_me.database.models import Base
 
@@ -17,9 +19,7 @@ for various operations.
 #     name: Mapped[str]
 
 
-OpportunityTags = Table(
-    "opportunity_tags",
-    Base.metadata,
-    Column("opportunity_id", ForeignKey("opportunities.id"), primary_key=True),
-    Column("tag_id", ForeignKey("tags.id"), primary_key=True),
-)
+class OpportunityTags(Base):
+    __table_name__ = "opportunity_tags",
+    opportunity_id:  Mapped[uuid.UUID] = mapped_column(ForeignKey("opportunities.id"), primary_key=True),
+    tag_id: Mapped[int] = mapped_column(ForeignKey("tags.id"), primary_key=True),

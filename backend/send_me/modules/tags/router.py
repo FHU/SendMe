@@ -13,7 +13,7 @@ from . import schemas
 TAGS_FILE = "./tags.yaml"
 
 router = APIRouter(
-    tags=["tags"],
+    tags=["opportunity_tags"],
     responses={404: {"description": "Not found"}},
 )
 
@@ -21,7 +21,7 @@ router = APIRouter(
 @router.get(
     "/tags",
     response_model=list[schemas.Tag],
-    operation_id="list_tags",
+    operation_id="list_all_tags",
 )
 # Get all tags data to list on Opps page
 def get_tags():
@@ -29,7 +29,11 @@ def get_tags():
         tags = yaml.safe_load(file)
     return tags
 
-
+@router.get(
+    "/tags/{opportunity_id}",
+    response_model = list[schemas.Tag],
+    operation_id = "list_opp_tags",
+)
 # Backend route to get tags associated with a certain opportunity
 def get_opportunity_tags(
     opportunity_id: uuid.UUID,
@@ -52,7 +56,7 @@ def get_opportunity_tags(
         tags = yaml.safe_load(file)
         opp_tags = []
         for tag in tags:
-            if opportunity_id in tag:
+            if opportunity_id in tag[opportunity]:
                 opp_tags.append(tag)
     # return opportunity_tag_list
     return opp_tags
