@@ -2,7 +2,7 @@ import uuid
 
 import yaml
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import select
+# from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 import send_me.modules.opportunities.models as opps_models
@@ -42,10 +42,17 @@ def get_opportunity_tags(
     if not opportunity:
         raise HTTPException(status_code=404, detail="Opportunity not found")
 
-    query = select(models.OpportunityTags.tag_id).where(
-        models.OpportunityTags.opportunity_id == opportunity_id
-    )
+    # query = select(models.OpportunityTags.tag_id).where(
+    #     models.OpportunityTags.opportunity_id == opportunity_id
+    # )
 
-    opportunity_tag_list = db.execute(query)
+    # opportunity_tag_list = db.execute(query)
 
-    return opportunity_tag_list
+    with open(TAGS_FILE) as file:
+        tags = yaml.safe_load(file)
+        opp_tags = []
+        for tag in tags:
+            if opportunity_id in tag:
+                opp_tags.append(tag)
+    # return opportunity_tag_list
+    return opp_tags

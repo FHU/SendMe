@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy.orm import Column, ForeignKey, Mapped, Table, mapped_column
+from sqlalchemy.orm import Column, ForeignKey, Table
 
 from send_me.database.models import Base
 
@@ -12,11 +12,11 @@ for various operations.
 """
 
 
-class Tags(Base):
-    __table_name__ = "tags"
+# class Tags(Base):
+#     __table_name__ = "tags"
 
-    id: Mapped[uuid.UUID] = mapped_column(primary_key=True)
-    name: Mapped[str]
+#     id: Mapped[uuid.UUID] = mapped_column(primary_key=True)
+#     name: Mapped[str]
 
 
 OpportunityTags = Table(
