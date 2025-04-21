@@ -29,7 +29,11 @@ def create_opportunity(
 ):
     # Create the opportunity from the input schema.
     item = models.Opportunity(
-        name=input.name,
+        title =input.title,
+        contact_user=input.contact_user,
+        location=input.location,
+        tags=input.tags,
+        summary=input.summary,
         description=input.description,
     )
     # Add the item to the database.
@@ -71,28 +75,26 @@ def get_opportunities(
 def seed_opportunities(
     db: Session = Depends(get_db),
 ):
-    return{"I love life"}
-    # sample_opps = [
-    #     models.Opportunity(
-    #         name="Tech Internship Program",
-    #         contact_user="Jane Doe",
-    #         location="Remote",
-    #         summary="Summer backend internship.",
-    #         description="A summer internship for students interested in backend engineering.",
-    #         event_date=datetime(2025, 6, 1),
-    #     ),
-    #     models.Opportunity(
-    #         name="AI Research Fellowship",
-    #         contact_user="John Smith",
-    #         location="New York",
-    #         summary="AI research fellowship.",
-    #         description="A fellowship for students interested in AI research.",
-    #         event_date=datetime(2025, 8, 15),
-    #     ),
-    # ]
+    sample_opps = [
+        models.Opportunity(
+            title ="Summer Internship",
+            contact_user="Jane Doe",
+            location="Remote",
+            tags = ["software", "internship"],
+            summary="Summer backend internship.",
+            description="A summer internship for students interested in backend engineering.",
+        ),
+        models.Opportunity(
+            title = "Fall Internship",
+            contact_user="John Smith",
+            location="New York",
+            tags = ["data science", "internship"],
+            summary="AI research fellowship.",
+            description="A fellowship for students interested in AI research.",
+        ),
+    ]
 
-    # db.add_all(sample_opps)
-    # db.commit()
-    # db.flush()
+    db.add_all(sample_opps)
+    db.commit()
 
-    # return {"message": f"Seeded {len(sample_opps)} opportunities"}
+    return {"message": f"Seeded {len(sample_opps)} opportunities"}
