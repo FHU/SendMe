@@ -77,7 +77,7 @@ const Header = () => {
 		<HeaderContainer>
 			<TitleRow>
 				<Title>Opportunities</Title>
-				<Link to="/opportunities">
+				<Link to="/home">
 					<AddButton name="plus-lg" onClick={handleClick}>
 						<SlIcon name="plus-lg" />
 					</AddButton>
