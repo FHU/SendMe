@@ -1,8 +1,10 @@
 import uuid
 
 from sqlalchemy import ForeignKey, Mapped, mapped_column
+from sqlalchemy.orm import relationship
 
 from send_me.database.models import Base
+from send_me.modules.opportunities.models import Opportunity
 
 """
 This class creates a many-to-many relationship for
@@ -21,5 +23,6 @@ for various operations.
 
 class OpportunityTags(Base):
     __table_name__ = "opportunity_tags",
-    opportunity_id:  Mapped[uuid.UUID] = mapped_column(ForeignKey("opportunities.id"), primary_key=True),
+    opportunity_id:  Mapped[uuid.UUID] = mapped_column(ForeignKey("opportunities.id"), primary_key=True)
+    opportunity: Mapped[Opportunity]= relationship(back_populates = "opportunities")
     tag_id: Mapped[int] = mapped_column(ForeignKey("tags.id"), primary_key=True),
