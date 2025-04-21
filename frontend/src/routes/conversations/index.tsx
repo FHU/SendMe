@@ -84,6 +84,13 @@ const RightPane = styled.div`
 	@media (max-width: 700px) {
 		display: none;
 	}
+	
+   scrollbar-width: none; 
+  -ms-overflow-style: none;  
+
+  &::-webkit-scrollbar {
+    display: none; 
+  }
 `;
 
 function RouteComponent() {

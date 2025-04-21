@@ -45,6 +45,14 @@ const ChatContainer = styled.div`
   max-width: 100%;
   height: 60vh;
 
+  
+  scrollbar-width: none; 
+  -ms-overflow-style: none;  
+
+  &::-webkit-scrollbar {
+    display: none; 
+  }
+
   @media (max-width: 1024px) {
     height: 55vh;
   }
