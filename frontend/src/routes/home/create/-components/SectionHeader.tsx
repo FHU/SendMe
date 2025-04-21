@@ -6,25 +6,28 @@ const HeaderContainer = styled.div`
   position: absolute;
   top: 0;
   margin-top: 4.5rem;
-  z-index: -1;
-  background-color: var(--sl-color-primary-100);
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  padding: 1rem;
-  filter: drop-shadow(0px 10px 4px #3232324b);
+  z-index: var(--section-header-z-index);
+  background-color: var(--section-header-background-color);
+  border-bottom-left-radius: var(--section-header-border-radius);
+  border-bottom-right-radius: var(--section-header-border-radius);
+  padding: var(--section-header-padding);
+  filter: drop-shadow(var(--section-header-drop-shadow));
 `;
 
+
 const Title = styled.h1`
-  font-size: 36px;
-  font-weight: 500;
-  color: var(--sl-color-primary-800);
+  font-size: var(--section-header-title-font-size);
+  font-weight: var(--section-header-title-font-weight);
+  color: var(--section-header-text-color);
 `;
 
 const Subtitle = styled.h2`
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--sl-color-primary-800);
+  font-size: var(--section-header-subtitle-font-size);
+  font-weight: var(--section-header-subtitle-font-weight);
+  color: var(--section-header-text-color);
 `;
+
+
 
 const SectionHeader = () => (
 	<HeaderContainer>

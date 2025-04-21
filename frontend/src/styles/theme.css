@@ -17,6 +17,19 @@
 	--sl-color-text: #000000; /* Light text color */
 
 	--sl-hover-color: #D9D9D9; /* Color for hovering over a conversation */
+
+	/* --- Section Header Variables --- */
+	--section-header-z-index: -1;
+	--section-header-background-color: var(--sl-color-primary-100);
+	--section-header-border-radius: 1rem;
+	--section-header-padding: 1rem;
+	--section-header-drop-shadow: 0px 10px 4px #3232324b;
+	/* Section Header Typography */
+	--section-header-title-font-size: 36px;
+	--section-header-title-font-weight: 500;
+	--section-header-subtitle-font-size: 14px;
+	--section-header-subtitle-font-weight: 300;
+	--section-header-text-color: var(--sl-color-primary-800);
 }
 
 /* Dark Mode Variables */
@@ -44,4 +57,5 @@ body {
 	background: var(--sl-color-neutral-50);
 	font-family: 'Roboto', sans-serif;
 }
+
 
