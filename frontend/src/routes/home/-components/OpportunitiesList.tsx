@@ -102,7 +102,7 @@ export function OpportunitiesList({
 				<CardContainer key={o.id}>
 					<CardTitle>
 						<CardTitleDate>
-							<StrongText>{o.name}</StrongText>
+							<StrongText>{o.title}</StrongText>
 							<small>{o.created_at}</small>
 						</CardTitleDate>
 						<Bookmark>
