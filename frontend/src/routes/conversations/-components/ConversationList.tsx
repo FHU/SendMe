@@ -18,8 +18,9 @@ const MessageCard = styled.div`
   grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
   grid-template-rows: 1fr 0.5fr 0.5;
   background-color: var(--sl-color-primary);
-  width: 600px;
+  width: 450px;
   margin-top: 20px;
+  cursor: pointer;
 
   &:hover {
     border-radius: 20px;
@@ -74,7 +75,7 @@ const ConversationLink = styled.div`
     @media screen and (max-width: 700px) {
         display: block;
   }
-`
+`;
 const ConversationDiv = styled.div`
     display: grid;
     grid-template-columns: 0.5fr 1fr;
@@ -84,8 +85,7 @@ const ConversationDiv = styled.div`
     @media screen and (max-width: 700px) {
         display: none;
   }
-`
-
+`;
 
 interface ConversationProps {
 	imagePath?: string | null;
@@ -110,109 +110,109 @@ const Conversation: React.FC<ConversationProps> = ({
 	const readButtonColor = hasBeenRead ? "#fff" : "#32B4FF";
 
 	const formattedDate = formatDate(lastReadTime);
+	const formattedMessage =
+		lastReadMessage && lastReadMessage.length > 50
+			? `${lastReadMessage.slice(0, 50)}...`
+			: (lastReadMessage ?? "");
 
 	return (
 		<>
-		<ConversationLink>
-			<Link
+			<ConversationLink>
+				<Link
 					to={"/messages/$conversationId"}
 					params={{ conversationId }}
 					style={{ marginTop: "10px", textDecoration: "none" }}
 				>
-						<ConversationBubble
-							imagePath={imagePath}
-							color={color}
-							userName={userName}
-							lastReadMessage={lastReadMessage}
-							fontWeight={fontWeight}
-							visibility={readButtonVisibility}
-							readButtonColor={readButtonColor}
-							formattedDate={formatDate(lastReadTime)}
-						/>
+					<ConversationBubble
+						imagePath={imagePath}
+						color={color}
+						userName={userName}
+						lastReadMessage={formattedMessage}
+						fontWeight={fontWeight}
+						visibility={readButtonVisibility}
+						readButtonColor={readButtonColor}
+						formattedDate={formatDate(lastReadTime)}
+					/>
 				</Link>
-		</ConversationLink>
+			</ConversationLink>
 
-		<ConversationDiv>
-		<ConversationBubble
-                        imagePath={imagePath}
-                        color={color}
-                        userName={userName}
-                        lastReadMessage={lastReadMessage}
-                        fontWeight={fontWeight}
-                        visibility={readButtonVisibility}
-                        readButtonColor={readButtonColor}
-                        formattedDate={formatDate(lastReadTime)}
-                    />
-
-		</ConversationDiv>
+			<ConversationDiv>
+				<ConversationBubble
+					imagePath={imagePath}
+					color={color}
+					userName={userName}
+					lastReadMessage={formattedMessage}
+					fontWeight={fontWeight}
+					visibility={readButtonVisibility}
+					readButtonColor={readButtonColor}
+					formattedDate={formatDate(lastReadTime)}
+				/>
+			</ConversationDiv>
 		</>
 	);
 };
 
 interface ConversationBubbleProps {
-    imagePath?: string | null;
-    color: string;
-    fontWeight: string;
-    userName?: string;
-    lastReadMessage?: string;
-    formattedDate: string;
-    visibility: 'hidden' | 'visible';
-    readButtonColor: string;
+	imagePath?: string | null;
+	color: string;
+	fontWeight: string;
+	userName?: string;
+	lastReadMessage?: string;
+	formattedDate: string;
+	visibility: "hidden" | "visible";
+	readButtonColor: string;
 }
 
-
 const ConversationBubble = ({
-    imagePath,
-    color,
-    fontWeight,
-    userName,
-    lastReadMessage,
-    formattedDate,
-    visibility = 'visible',
-    readButtonColor,
-}: ConversationBubbleProps ) => {
-    return (
-        <>
-        <MessageCard>
-            <SlAvatar
-                image={imagePath ?? ""}
-                style={{
-                    gridRowStart: "1",
-                    gridRowEnd: "3",
-                    placeSelf: "center",
-                    transform: "scale(1.5)",
-                }}
-            />
-            <UserName
-                style={{
-                    color: color,
-                    fontWeight: fontWeight,
-                }}
-            >
-                {userName}
-            </UserName>
-            <LastReadText
-                style={{
-                    color: color,
-                    fontWeight: fontWeight,
-                }}
-            >
-                {lastReadMessage}
-            </LastReadText>
-            <LastReadTime
-                style={{
-                    color: color,
-                    fontWeight: fontWeight,
-                }}
-            >
-                {formattedDate}
-            </LastReadTime>
-
-        </MessageCard>
-        </>
-    );
+	imagePath,
+	color,
+	fontWeight,
+	userName,
+	lastReadMessage,
+	formattedDate,
+	visibility = "visible",
+	readButtonColor,
+}: ConversationBubbleProps) => {
+	return (
+		<>
+			<MessageCard>
+				<SlAvatar
+					image={imagePath ?? ""}
+					style={{
+						gridRowStart: "1",
+						gridRowEnd: "3",
+						placeSelf: "center",
+						transform: "scale(1.5)",
+					}}
+				/>
+				<UserName
+					style={{
+						color: color,
+						fontWeight: fontWeight,
+					}}
+				>
+					{userName}
+				</UserName>
+				<LastReadText
+					style={{
+						color: color,
+						fontWeight: fontWeight,
+					}}
+				>
+					{lastReadMessage}
+				</LastReadText>
+				<LastReadTime
+					style={{
+						color: color,
+						fontWeight: fontWeight,
+					}}
+				>
+					{formattedDate}
+				</LastReadTime>
+			</MessageCard>
+		</>
+	);
 };
-
 
 export function ConversationList({
 	data,
@@ -231,13 +231,18 @@ export function ConversationList({
 					if (onSelect) onSelect(conversation.id);
 				};
 				return (
-					<div key={conversation.id} onClick={handleClick}>
+					<div
+						key={conversation.id}
+						onClick={handleClick}
+						onKeyDown={handleClick}
+					>
 						<Conversation
 							conversationId={conversation.id}
 							imagePath={otherUser?.profile_picture}
 							userName={otherUser?.first_name}
 							lastReadMessage={
-								conversation.messages?.[conversation.messages.length - 1]?.content ?? ""
+								conversation.messages?.[conversation.messages.length - 1]
+									?.content ?? ""
 							}
 							lastReadTime={conversation.last_updated}
 							hasBeenRead={conversation.has_been_read ?? false}

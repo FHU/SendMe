@@ -11,15 +11,15 @@ const MessageCard = styled.div<{ isUser: boolean }>`
   border-radius: 12px;
   margin: 10px 0;
   padding: 10px;
-  max-width: 90%;
-  margin-left: ${({ isUser }) => (isUser ? "auto" : "0")};
-  margin-right: ${({ isUser }) => (isUser ? "0" : "auto")};
+  width: 450px;
+  margin-left: ${({ isUser }) => (isUser ? "auto" : "10px")};
+  margin-right: ${({ isUser }) => (isUser ? "10px" : "auto")};
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   word-break: break-word;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     grid-template-columns: auto 1fr;
-    max-width: 100%;
+	width: 200px;
     padding: 8px;
   }
 `;
