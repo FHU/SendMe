@@ -14,7 +14,6 @@ const HeaderContainer = styled.div`
   filter: drop-shadow(var(--section-header-drop-shadow));
 `;
 
-
 const Title = styled.h1`
   font-size: var(--section-header-title-font-size);
   font-weight: var(--section-header-title-font-weight);
@@ -26,8 +25,6 @@ const Subtitle = styled.h2`
   font-weight: var(--section-header-subtitle-font-weight);
   color: var(--section-header-text-color);
 `;
-
-
 
 const SectionHeader = () => (
 	<HeaderContainer>
