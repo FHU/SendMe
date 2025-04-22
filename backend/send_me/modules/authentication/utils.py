@@ -1,7 +1,7 @@
 import os
 
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+from sendgrid import SendGridAPIClient  # type:ignore
+from sendgrid.helpers.mail import Mail  # type:ignore
 
 from .exceptions import SendOTPFailure
 
@@ -29,7 +29,7 @@ def send_otp(email: str, otp: str):
 
     try:
         sg = SendGridAPIClient(SENDGRID_API_KEY)
-        sg.send(message)
+        sg.send(message)  # type: ignore
         # 200 < response.status_code <= 300 was here before
         # It was causing pyright to fail and was not being used therefore
         # it was replaced with return True

@@ -1,12 +1,10 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey
+from sqlalchemy import ARRAY, DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from send_me.database.models import Base
-
-from sqlalchemy import ARRAY, String
 
 """
 This class represents an Opportunity in the database.
