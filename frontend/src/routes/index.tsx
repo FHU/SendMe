@@ -13,15 +13,24 @@ function Index() {
 		<div>
 			<h3>Server message: {data?.message}</h3>
 
-			<Link to="/oppertunities/create">
+			<Link to="/opportunities/create">
 				<SlButton>Test</SlButton>
 			</Link>
 
-			<Link to="/messages">
-				<SlButton>Messages</SlButton>
+			<Link to="/conversations">
+				<SlButton>Conversations</SlButton>
 			</Link>
 			<Link to="/home">
 				<SlButton>Home</SlButton>
+			</Link>
+			<Link to="/profile">
+				<SlButton>Profile</SlButton>
+			</Link>
+			<Link to="/auth">
+				<SlButton>Login</SlButton>
+			</Link>
+			<Link to="/auth/sign-up">
+				<SlButton>Sign Up</SlButton>
 			</Link>
 		</div>
 	);

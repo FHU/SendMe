@@ -17,7 +17,7 @@ const AuthForm: React.FC = () => {
 	const router = useRouter(); // Get the router instance
 
 	const handleAuthSuccess = () => {
-		router.navigate({ to: "/oppertunities/create" }); // Navigate to the opportunities page
+		router.navigate({ to: "/opportunities/create" }); // Navigate to the opportunities page
 	};
 
 	return (

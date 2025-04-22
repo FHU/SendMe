@@ -1,61 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
 :root {
-	--sl-color-primary-50: #E6F2EC;
-	--sl-color-primary-100: #C2DDCE;
-	--sl-color-primary-200: #9EC9B0;
-	--sl-color-primary-300: #7AB593;
-	--sl-color-primary-400: #56A176;
-	--sl-color-primary-500: #2E8B57;
-	--sl-color-primary-600: #26734A;
-	--sl-color-primary-700: #1F5C3D;
-	--sl-color-primary-800: #174530;
-	--sl-color-primary-900: #0F2E23;
-	--sl-color-primary-950: #071715;
+  --sl-color-primary-50: #e6f2ec;
+  --sl-color-primary-100: #c2ddce;
+  --sl-color-primary-200: #9ec9b0;
+  --sl-color-primary-300: #7ab593;
+  --sl-color-primary-400: #56a176;
+  --sl-color-primary-500: #2e8b57;
+  --sl-color-primary-600: #26734a;
+  --sl-color-primary-700: #1f5c3d;
+  --sl-color-primary-800: #174530;
+  --sl-color-primary-900: #0f2e23;
+  --sl-color-primary-950: #071715;
 
-	--sl-color-neutral-50: #f8f9fa; /* Light background color */
-	--sl-color-text: #000000; /* Light text color */
+  --sl-color-neutral-50: #f8f9fa; /* Light background color */
+  --sl-color-text: #000000; /* Light text color */
 
-	--sl-hover-color: #D9D9D9; /* Color for hovering over a conversation */
+  --sl-hover-color: #d9d9d9; /* Color for hovering over a conversation */
 
-	/* --- Section Header Variables --- */
-	--section-header-z-index: -1;
-	--section-header-background-color: var(--sl-color-primary-100);
-	--section-header-border-radius: 1rem;
-	--section-header-padding: 1rem;
-	--section-header-drop-shadow: 0px 10px 4px #3232324b;
-	/* Section Header Typography */
-	--section-header-title-font-size: 36px;
-	--section-header-title-font-weight: 500;
-	--section-header-subtitle-font-size: 14px;
-	--section-header-subtitle-font-weight: 300;
-	--section-header-text-color: var(--sl-color-primary-800);
+  /* --- Section Header Variables --- */
+  --section-header-z-index: -1;
+  --section-header-background-color: var(--sl-color-primary-100);
+  --section-header-border-radius: 1rem;
+  --section-header-padding: 1rem;
+  --section-header-drop-shadow: 0px 10px 4px #3232324b;
+  /* Section Header Typography */
+  --section-header-title-font-size: 36px;
+  --section-header-title-font-weight: 500;
+  --section-header-subtitle-font-size: 14px;
+  --section-header-subtitle-font-weight: 300;
+  --section-header-text-color: var(--sl-color-primary-800);
+
+  --sl-input-background-color: #f8f9fa;
+
+  --sl-input-color-hover: #000;
+  --sl-input-color-focus: #000;
+  --sl-input-color: #000;
 }
 
 /* Dark Mode Variables */
 @media (prefers-color-scheme: dark) {
-	:root {
-		--sl-color-primary-50: #071715;
-		--sl-color-primary-100: #0F2E23;
-		--sl-color-primary-200: #174530;
-		--sl-color-primary-300: #1F5C3D;
-		--sl-color-primary-400: #26734A;
-		--sl-color-primary-500: #2E8B57;
-		--sl-color-primary-600: #56A176;
-		--sl-color-primary-700: #7AB593;
-		--sl-color-primary-800: #9EC9B0;
-		--sl-color-primary-900: #C2DDCE;
-		--sl-color-primary-950: #E6F2EC;
+  :root {
+    --sl-color-primary-50: #071715;
+    --sl-color-primary-100: #0f2e23;
+    --sl-color-primary-200: #174530;
+    --sl-color-primary-300: #1f5c3d;
+    --sl-color-primary-400: #26734a;
+    --sl-color-primary-500: #2e8b57;
+    --sl-color-primary-600: #56a176;
+    --sl-color-primary-700: #7ab593;
+    --sl-color-primary-800: #9ec9b0;
+    --sl-color-primary-900: #c2ddce;
+    --sl-color-primary-950: #e6f2ec;
 
+    --sl-color-neutral-50: #121212; /* Dark background color */
+    --sl-color-text: #e0e0e0; /* Light text color for dark mode */
+    --sl-hover-color: #838282;
 
-		--sl-color-neutral-50: #121212; /* Dark background color */
-		--sl-color-text: #E0E0E0; /* Light text color for dark mode */
-	}
+    --sl-input-background-color: #333;
+
+    --sl-input-color-hover: #e0e0e0;
+    --sl-input-color-focus: #e0e0e0;
+    --sl-input-color: #e0e0e0;
+  }
 }
 
 body {
-	background: var(--sl-color-neutral-50);
-	font-family: 'Roboto', sans-serif;
+  background: var(--sl-color-neutral-50);
+  font-family: "Roboto", sans-serif;
 }
-
-

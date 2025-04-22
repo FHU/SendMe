@@ -89,7 +89,8 @@ const SubmitButton = styled.button`
 `;
 
 export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
-	const { mutateAsync, isPending } = api.opportunities.create.useMutation();
+	const { mutateAsync, isPending } =
+		api.opportunities.createOpprtunity.useMutation();
 
 	const onSubmit = useCallback(
 		(e: React.FormEvent<HTMLFormElement>) => {
