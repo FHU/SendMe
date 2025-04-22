@@ -1,70 +1,74 @@
-import {
-	SlButton,
-	SlButtonGroup,
-	SlIcon,
-	SlTag,
-} from "@shoelace-style/shoelace/dist/react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { SlTag } from "@shoelace-style/shoelace/dist/react";
+import styled from "styled-components";
+import { useState } from "react";
 
-/*const TagsContainer = styled.div`
+const TagsScroller = styled.div`
   display: flex;
-  gap: 10px;
-  flex-shrink: 0;
-`;*/
+  overflow-x: auto;
+  padding: 10px 20px;
+  gap: 16px;
+  scroll-snap-type: x mandatory;
 
-const tags = [
-	"Preacher",
-	"Youth",
-	"Education",
-	"Leadership",
-	"Paid",
-	"Education",
-	"Leadership",
-	"Paid",
-	"Leadership",
-	"Paid",
-	"Education",
-	"Leadership",
-	"Paid",
-];
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const TagWrapper = styled.div`
+  scroll-snap-align: start;
+  flex-shrink: 0;
+`;
+
+const StyledTag = styled(SlTag)`
+  display: flex;
+  align-items: center;
+`;
 
 const OppTags = () => {
-	const settings = {
-		dots: false,
-		infinite: false,
-		speed: 250,
-		slidesToShow: 5,
-		slidesToScroll: 1,
-		responsive: [
-			{
-				breakpoint: 1024,
-				settings: { slidesToShow: 5 },
-			},
-			{
-				breakpoint: 600,
-				settings: { slidesToShow: 5 },
-			},
-		],
-	};
-	return (
-		<>
-			<div
-				style={{ width: "100%", padding: "20px", backgroundColor: "#121212" }}
-			>
-				<Slider {...settings}>
-					{tags.map((tag, id) => (
-						<div key={tag}>
-							<SlTag variant="success" size="medium">
-								{tag}
-							</SlTag>
-						</div>
-					))}
-				</Slider>
-			</div>
-		</>
-	);
+  const [tags, setTags] = useState([
+    "Preacher",
+    "Youth",
+    "Education",
+    "Leadership",
+    "Paid",
+    "Evangelism",
+    "Leadership",
+    "Volunteer",
+    "Hospitality",
+    "Singing",
+    "Construction",
+    "Lawn",
+    "Landscaping",
+  ]);
+  const handleRemove = (tagToRemove: string) => {
+    setTags((tags) => tags.filter((tag) => tag !== tagToRemove));
+  };
+
+  return (
+    <>
+      <div
+        style={{
+          width: "80%",
+          padding: "20px",
+        }}
+      >
+        <TagsScroller>
+          {tags.map((tag, id) => (
+            <TagWrapper key={id}>
+              <StyledTag
+                variant="success"
+                size="medium"
+                removable
+                onSlRemove={() => handleRemove(tag)}
+              >
+                {tag}
+              </StyledTag>
+            </TagWrapper>
+          ))}
+        </TagsScroller>
+      </div>
+    </>
+  );
 };
 
 export default OppTags;
