@@ -6,8 +6,6 @@ from send_me.database.engine import get_db
 
 from . import models, schemas
 
-from datetime import datetime
-
 router = APIRouter(
     tags=["opportunities"],
     responses={404: {"description": "Not found"}},
@@ -17,11 +15,12 @@ router = APIRouter(
 The handler to create an opportunity. PLEASE PUT STATIC DATA IN THE router.get FUNCTION
 """
 
+
 @router.post(
     "/opportunities",
     response_model=schemas.Opportunity,
     status_code=201,
-    operation_id="create",
+    operation_id="create_opprtunity",
 )
 def create_opportunity(
     input: schemas.CreateOpportunityRequest,
@@ -29,7 +28,7 @@ def create_opportunity(
 ):
     # Create the opportunity from the input schema.
     item = models.Opportunity(
-        title =input.title,
+        title=input.title,
         contact_user=input.contact_user,
         location=input.location,
         tags=input.tags,
@@ -50,9 +49,11 @@ def create_opportunity(
     db.refresh(item)
     return item
 
+
 """
 This handler just gets a simple list of the opportunities.
 """
+
 
 @router.get(
     "/opportunities",
@@ -71,24 +72,25 @@ def get_opportunities(
 
     return result
 
-@router.post("/opportunities/seed",status_code=201,operation_id="seed_opportunities")
+
+@router.post("/opportunities/seed", status_code=201, operation_id="seed_opportunities")
 def seed_opportunities(
     db: Session = Depends(get_db),
 ):
     sample_opps = [
         models.Opportunity(
-            title ="Summer Internship",
+            title="Summer Internship",
             contact_user="Jane Doe",
             location="Remote",
-            tags = ["software", "internship"],
+            tags=["software", "internship"],
             summary="Summer backend internship.",
             description="A summer internship for students interested in backend engineering.",
         ),
         models.Opportunity(
-            title = "Fall Internship",
+            title="Fall Internship",
             contact_user="John Smith",
             location="New York",
-            tags = ["data science", "internship"],
+            tags=["data science", "internship"],
             summary="AI research fellowship.",
             description="A fellowship for students interested in AI research.",
         ),

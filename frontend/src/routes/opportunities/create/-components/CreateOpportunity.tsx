@@ -1,6 +1,7 @@
 import api from "@sendme/api";
 import { useCallback } from "react";
 import styled from "styled-components";
+import SectionHeader from "./SectionHeader";
 
 const RoundedContainer = styled.div`
   background-color: var(--sl-color-primary-500);
@@ -88,7 +89,8 @@ const SubmitButton = styled.button`
 `;
 
 export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
-	const { mutateAsync, isPending } = api.opportunities.create.useMutation();
+	const { mutateAsync, isPending } =
+		api.opportunities.createOpprtunity.useMutation();
 
 	const onSubmit = useCallback(
 		(e: React.FormEvent<HTMLFormElement>) => {
@@ -111,75 +113,85 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 	);
 
 	return (
-		<RoundedContainer>
-			<Form onSubmit={onSubmit}>
-				<Heading>Share Opportunity</Heading>
+		<>
+			<SectionHeader />
+			<RoundedContainer>
+				<Form onSubmit={onSubmit}>
+					<Heading>Post Opportunity</Heading>
 
-				{/* 1. Organization (required) */}
-				<Label htmlFor="organization">Organization (required)</Label>
-				<Select id="organization" name="organization" disabled={isPending}>
-					<option value="FHU">FHU</option>
-					<option value="Henderson Church of Christ">
-						Henderson Church of Christ
-					</option>
-				</Select>
+					{/* 1. Title (required) */}
+					<Label htmlFor="location">Title</Label>
+					<Input
+						id="title"
+						name="title"
+						type="text"
+						placeholder="Enter title"
+						disabled={isPending}
+					/>
 
-				{/* 2. Contact User (required) */}
-				<Label htmlFor="contact_user">Contact User (required)</Label>
-				<Input
-					id="contact_user"
-					name="contact_user"
-					type="text"
-					placeholder="Enter contact user info"
-					disabled={isPending}
-				/>
+					{/* 2. Location (City, State, Country) (required) */}
+					<Label htmlFor="location">Location (City, State, Country)</Label>
+					<Input
+						id="location"
+						name="location"
+						type="text"
+						placeholder="Enter location"
+						disabled={isPending}
+					/>
 
-				{/* 3. Location (City, State, Country) (required) */}
-				<Label htmlFor="location">
-					Location (City, State, Country) (required)
-				</Label>
-				<Input
-					id="location"
-					name="location"
-					type="text"
-					placeholder="Enter location"
-					disabled={isPending}
-				/>
+					{/* 3. Tags (required) */}
+					<Label htmlFor="tags">Tags (optional)</Label>
+					<Input
+						id="tags"
+						name="tags"
+						type="text"
+						placeholder="Enter tags (comma separated)"
+						disabled={isPending}
+					/>
 
-				{/* 4. Tags (required) */}
-				<Label htmlFor="tags">Tags (required)</Label>
-				<Input
-					id="tags"
-					name="tags"
-					type="text"
-					placeholder="Enter tags (comma separated)"
-					disabled={isPending}
-				/>
+					{/* 4. Summary (required) */}
+					<Label htmlFor="summary">Summary</Label>
+					<TextArea
+						id="summary"
+						name="summary"
+						placeholder="Enter summary"
+						disabled={isPending}
+					/>
 
-				{/* 5. Summary (required) */}
-				<Label htmlFor="summary">Summary (required)</Label>
-				<TextArea
-					id="summary"
-					name="summary"
-					placeholder="Enter summary"
-					disabled={isPending}
-				/>
+					{/* 5. Description (required) */}
+					<Label htmlFor="description">Description</Label>
+					<TextArea
+						id="description"
+						name="description"
+						placeholder="Enter description"
+						disabled={isPending}
+					/>
 
-				{/* 6. Description (required) */}
-				<Label htmlFor="description">Description (required)</Label>
-				<TextArea
-					id="description"
-					name="description"
-					placeholder="Enter description"
-					disabled={isPending}
-				/>
-
-				<ButtonContainer>
-					<SubmitButton type="submit" disabled={isPending}>
-						{isPending ? "Sharing..." : "Share"}
-					</SubmitButton>
-				</ButtonContainer>
-			</Form>
-		</RoundedContainer>
+					{/* 6. Time of Event */}
+					<Label>Time of Event (Optional)</Label>
+					<TimeOfEventContainer>
+						<Input
+							id="eventDate"
+							name="eventDate"
+							type="date"
+							placeholder="Select event date"
+							disabled={isPending}
+						/>
+						<Input
+							id="eventTime"
+							name="eventTime"
+							type="time"
+							placeholder="Select event time"
+							disabled={isPending}
+						/>
+					</TimeOfEventContainer>
+					<ButtonContainer>
+						<SubmitButton type="submit" disabled={isPending}>
+							{isPending ? "Sharing..." : "Share"}
+						</SubmitButton>
+					</ButtonContainer>
+				</Form>
+			</RoundedContainer>
+		</>
 	);
 }
