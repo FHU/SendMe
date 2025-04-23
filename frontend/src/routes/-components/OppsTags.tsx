@@ -2,6 +2,10 @@ import { SlTag } from "@shoelace-style/shoelace/dist/react";
 import styled from "styled-components";
 import { useState } from "react";
 
+const ScrollerWrapper = styled.div`
+  width: 80%;
+  padding: 20px;
+`;
 const TagsScroller = styled.div`
   display: flex;
   overflow-x: auto;
@@ -22,17 +26,18 @@ const TagWrapper = styled.div`
 const StyledTag = styled(SlTag)`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const OppTags = () => {
-  const [tags, setTags] = useState([
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [unselectedTags, setUnselectedTags] = useState<string[]>([
     "Preacher",
     "Youth",
     "Education",
     "Leadership",
     "Paid",
     "Evangelism",
-    "Leadership",
     "Volunteer",
     "Hospitality",
     "Singing",
@@ -40,33 +45,48 @@ const OppTags = () => {
     "Lawn",
     "Landscaping",
   ]);
-  const handleRemove = (tagToRemove: string) => {
-    setTags((tags) => tags.filter((tag) => tag !== tagToRemove));
+  const handleRemoveTag = (tagToRemove: string) => {
+    setSelectedTags((tags) => tags.filter((tag) => tag !== tagToRemove));
+    setUnselectedTags((tags) => [...tags, tagToRemove]);
   };
 
+  const handleAddTag = (tagToAdd: string) => {
+    setUnselectedTags((tags) => tags.filter((tag) => tag !== tagToAdd));
+    setSelectedTags((tags) => [...tags, tagToAdd]);
+  };
   return (
     <>
-      <div
-        style={{
-          width: "80%",
-          padding: "20px",
-        }}
-      >
+      <ScrollerWrapper>
         <TagsScroller>
-          {tags.map((tag, id) => (
-            <TagWrapper key={id}>
+          {selectedTags.map((tag, id) => (
+            <TagWrapper key={`selected-${id}`}>
               <StyledTag
                 variant="success"
                 size="medium"
                 removable
-                onSlRemove={() => handleRemove(tag)}
+                pill
+                onSlRemove={() => handleRemoveTag(tag)}
               >
                 {tag}
               </StyledTag>
             </TagWrapper>
           ))}
         </TagsScroller>
-      </div>
+        <TagsScroller>
+          {unselectedTags.map((tag, id) => (
+            <TagWrapper key={`unselected-${id}`}>
+              <StyledTag
+                variant="success"
+                size="medium"
+                pill
+                onClick={() => handleAddTag(tag)}
+              >
+                {tag}
+              </StyledTag>
+            </TagWrapper>
+          ))}
+        </TagsScroller>
+      </ScrollerWrapper>
     </>
   );
 };
