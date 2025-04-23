@@ -78,12 +78,12 @@ const SubmitButton = styled.button`
   transition: background 0.2s;
 
   &:hover {
-    background-color: rgba(144, 238, 144, 0.7);
+	background-color: rgba(144, 238, 144, 0.7);
   }
 
   &:disabled {
-    background-color: grey;
-    cursor: not-allowed;
+	background-color: grey;
+	cursor: not-allowed;
   }
 `;
 
