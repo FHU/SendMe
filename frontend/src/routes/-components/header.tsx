@@ -6,7 +6,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 interface HeaderProps {
-  pageName: string;
+	pageName: string;
 }
 
 const HeaderContainer = styled.div`
@@ -87,11 +87,11 @@ const Header = () => {
 	const normalizedPath = pathname.replace(/\/+$/, "");
 
 	const pageTitles: Record<string, string> = {
-    "/": "SendMe",
+		"/": "SendMe",
 		"/home": "Opportunities",
 		"/profile": "Profile",
 		"/conversations": "Conversations",
-    "/auth": "Sign In",
+		"/auth": "Sign In",
 	};
 
 	const pageName = pageTitles[normalizedPath] || "SendMe";
