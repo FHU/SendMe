@@ -12,15 +12,19 @@ import Header from "./-components/header";
 import Navbar from "./-components/navbar";
 
 const ContentArea = styled.main`
-  width: 600px;
-  margin: var(--sl-spacing-4x-large) auto;
+    display: flex;
+	justify-content: center;
+	margin-top: -100px; /* Adjust this based on how much overlap you want */
+	padding-top: 150px; /* Ensure content doesn’t hide behind the header */
+	z-index: 1;
+	position: relative;
 `;
 
 const HeaderDetails = styled.div`
-	display: flex;
-	justify-content: center;
-	border-bottom-left-radius: 5rem;
-	border-top-right-radius: 5rem;
+	position: relative;
+  	z-index: 10;
+  	display: flex;
+  	justify-content: center;
 `;
 
 function Providers({ children }: { children: JSX.Element[] }) {

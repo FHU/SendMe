@@ -1,17 +1,24 @@
 import api from "@sendme/api";
 import { SlIcon, SlIconButton } from "@shoelace-style/shoelace/dist/react";
 import { Link } from "@tanstack/react-router";
+import { useLocation } from "@tanstack/react-router";
 import { useState } from "react";
 import styled from "styled-components";
+
+interface HeaderProps {
+  pageName: string;
+}
 
 const HeaderContainer = styled.div`
   width: 400px;
   height: 250px;
   background-color: var(--sl-color-primary-100);
   border-bottom-left-radius: 1.5rem;
-	border-bottom-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
   padding: 1rem;
   filter: drop-shadow(0px 10px 4px #3232324b);
+  position: relative;
+  z-index: 10;
 `;
 
 const AddButton = styled(SlIconButton)`
@@ -73,10 +80,26 @@ const Header = () => {
 		setActive((prev) => !prev); // Toggle the popup
 	};
 
+	const location = useLocation();
+	const pathname = location.pathname;
+
+	// Optional: normalize to remove trailing slashes, etc.
+	const normalizedPath = pathname.replace(/\/+$/, "");
+
+	const pageTitles: Record<string, string> = {
+    "/": "SendMe",
+		"/home": "Opportunities",
+		"/profile": "Profile",
+		"/conversations": "Conversations",
+    "/auth": "Sign In",
+	};
+
+	const pageName = pageTitles[normalizedPath] || "SendMe";
+
 	return (
 		<HeaderContainer>
 			<TitleRow>
-				<Title>Opportunities</Title>
+				<Title>{pageName}</Title>
 				<Link to="/home">
 					<AddButton name="plus-lg" onClick={handleClick}>
 						<SlIcon name="plus-lg" />
