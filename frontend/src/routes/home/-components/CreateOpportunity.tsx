@@ -1,7 +1,7 @@
 import api from "@sendme/api";
 import { useCallback } from "react";
-import styled from "styled-components";
 import Header from "src/routes/-components/header";
+import styled from "styled-components";
 
 const RoundedContainer = styled.div`
   background-color: var(--sl-color-primary-500);
