@@ -5,10 +5,6 @@ import { useLocation } from "@tanstack/react-router";
 import { useState } from "react";
 import styled from "styled-components";
 
-interface HeaderProps {
-	pageName: string;
-}
-
 const HeaderContainer = styled.div`
   width: 400px;
   height: 250px;
