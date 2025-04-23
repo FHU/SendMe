@@ -21,7 +21,7 @@ The handler to create an opportunity. PLEASE PUT STATIC DATA IN THE router.get F
     "/opportunities",
     response_model=schemas.Opportunity,
     status_code=201,
-    operation_id="create",
+    operation_id="create_opprtunity",
 )
 def create_opportunity(
     input: schemas.CreateOpportunityRequest,

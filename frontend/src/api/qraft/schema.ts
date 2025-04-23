@@ -15,7 +15,7 @@ export interface paths {
         get: operations["list_opportunities"];
         put?: never;
         /** Create Opportunity */
-        post: operations["create"];
+        post: operations["create_opprtunity"];
         delete?: never;
         options?: never;
         head?: never;
@@ -142,6 +142,92 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/conversations/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Conversations */
+        get: operations["getAllConversations"];
+        put?: never;
+        /** Create Conversation */
+        post: operations["createConversation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/conversations/{conversation_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Conversation */
+        get: operations["getConversation"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/conversations/{conversation_id}/messages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Message */
+        post: operations["createMessage"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/conversations/seed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Seed Dummy Data */
+        post: operations["seedConversations"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/users/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Make User */
+        post: operations["createUser"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/hello": {
         parameters: {
             query?: never;
@@ -180,6 +266,41 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** Conversation */
+        Conversation: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Users */
+            users: components["schemas"]["User"][];
+            /** Messages */
+            messages: components["schemas"]["Message"][];
+            /**
+             * Last Updated
+             * Format: date-time
+             */
+            last_updated: string;
+            /**
+             * Has Been Read
+             * @default false
+             */
+            has_been_read: boolean;
+        };
+        /** CreateConversationRequest */
+        CreateConversationRequest: {
+            /**
+             * Reciever Id
+             * Format: uuid
+             */
+            reciever_id: string;
+        };
+        /** CreateMessageRequest */
+        CreateMessageRequest: {
+            /** Content */
+            content: string;
+        };
         /** CreateOpportunityRequest */
         CreateOpportunityRequest: {
             /**
@@ -216,6 +337,34 @@ export interface components {
             /** Type */
             type: string;
         };
+        /** CreateUserRequest */
+        CreateUserRequest: {
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
+            /** First Name */
+            first_name: string;
+            /** Last Name */
+            last_name: string;
+            /** Location */
+            location: string;
+            /** Bio */
+            bio?: string | null;
+            /** Profile Picture */
+            profile_picture?: string | null;
+            /** Facebook */
+            facebook?: string | null;
+            /** X */
+            x?: string | null;
+            /** Instagram */
+            instagram?: string | null;
+            /** Linkedin */
+            linkedin?: string | null;
+            /** Youtube */
+            youtube?: string | null;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -228,8 +377,37 @@ export interface components {
         };
         /** LoginChallengeRequest */
         LoginChallengeRequest: {
-            /** Email */
+            /**
+             * Email
+             * Format: email
+             */
             email: string;
+        };
+        /** Message */
+        Message: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Sender Id
+             * Format: uuid
+             */
+            sender_id: string;
+            /**
+             * Conversation Id
+             * Format: uuid
+             */
+            conversation_id: string;
+            /** Content */
+            content: string;
+            sender: components["schemas"]["User"];
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
         };
         /** Opportunity */
         Opportunity: {
@@ -282,6 +460,47 @@ export interface components {
             /** Otp */
             otp: string;
         };
+        /** User */
+        User: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
+            /** Orginzation Id */
+            orginzation_id?: string | null;
+            /** First Name */
+            first_name: string;
+            /** Last Name */
+            last_name: string;
+            /** Location */
+            location: string;
+            /** Bio */
+            bio?: string | null;
+            /**
+             * Profile Picture
+             * @default
+             */
+            profile_picture: string | null;
+            /** Facebook */
+            facebook?: string | null;
+            /** X */
+            x?: string | null;
+            /** Linkedin */
+            linkedin?: string | null;
+            /** Youtube */
+            youtube?: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+        };
         /** UserInfo */
         UserInfo: {
             /**
@@ -289,10 +508,34 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Email */
+            /**
+             * Email
+             * Format: email
+             */
             email: string;
-            /** Display Name */
-            display_name: string;
+            /** Orginzation Id */
+            orginzation_id?: string | null;
+            /** First Name */
+            first_name: string;
+            /** Last Name */
+            last_name: string;
+            /** Location */
+            location: string;
+            /** Bio */
+            bio?: string | null;
+            /** Profile Picture */
+            profile_picture?: string | null;
+            /** Facebook */
+            facebook?: string | null;
+            /** X */
+            x?: string | null;
+            /** Linkedin */
+            linkedin?: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -339,7 +582,7 @@ export interface operations {
             };
         };
     };
-    create: {
+    create_opprtunity: {
         parameters: {
             query?: never;
             header?: never;
@@ -631,6 +874,220 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    getAllConversations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Conversation"][];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    createConversation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateConversationRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Conversation"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getConversation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                conversation_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Conversation"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    createMessage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                conversation_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateMessageRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Message"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    seedConversations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    createUser: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateUserRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CreateUserRequest"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
             };
         };
     };
