@@ -17,8 +17,9 @@ import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as ConversationsIndexImport } from './routes/conversations/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
 import { Route as MessagesConversationIdImport } from './routes/messages/$conversationId'
-import { Route as OpportunitiesCreateIndexImport } from './routes/opportunities/create/index'
 import { Route as AuthSignUpIndexImport } from './routes/auth/sign-up/index'
+import { Route as HomeCreateOpportunitiesSectionHeaderImport } from './routes/home/create-opportunities/SectionHeader'
+import { Route as HomeCreateOpportunitiesCreateOpportunityImport } from './routes/home/create-opportunities/CreateOpportunity'
 
 // Create/Update Routes
 
@@ -58,17 +59,25 @@ const MessagesConversationIdRoute = MessagesConversationIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const OpportunitiesCreateIndexRoute = OpportunitiesCreateIndexImport.update({
-  id: '/opportunities/create/',
-  path: '/opportunities/create/',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const AuthSignUpIndexRoute = AuthSignUpIndexImport.update({
   id: '/auth/sign-up/',
   path: '/auth/sign-up/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const HomeCreateOpportunitiesSectionHeaderRoute =
+  HomeCreateOpportunitiesSectionHeaderImport.update({
+    id: '/home/create-opportunities/SectionHeader',
+    path: '/home/create-opportunities/SectionHeader',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const HomeCreateOpportunitiesCreateOpportunityRoute =
+  HomeCreateOpportunitiesCreateOpportunityImport.update({
+    id: '/home/create-opportunities/CreateOpportunity',
+    path: '/home/create-opportunities/CreateOpportunity',
+    getParentRoute: () => rootRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -116,18 +125,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexImport
       parentRoute: typeof rootRoute
     }
+    '/home/create-opportunities/CreateOpportunity': {
+      id: '/home/create-opportunities/CreateOpportunity'
+      path: '/home/create-opportunities/CreateOpportunity'
+      fullPath: '/home/create-opportunities/CreateOpportunity'
+      preLoaderRoute: typeof HomeCreateOpportunitiesCreateOpportunityImport
+      parentRoute: typeof rootRoute
+    }
+    '/home/create-opportunities/SectionHeader': {
+      id: '/home/create-opportunities/SectionHeader'
+      path: '/home/create-opportunities/SectionHeader'
+      fullPath: '/home/create-opportunities/SectionHeader'
+      preLoaderRoute: typeof HomeCreateOpportunitiesSectionHeaderImport
+      parentRoute: typeof rootRoute
+    }
     '/auth/sign-up/': {
       id: '/auth/sign-up/'
       path: '/auth/sign-up'
       fullPath: '/auth/sign-up'
       preLoaderRoute: typeof AuthSignUpIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/opportunities/create/': {
-      id: '/opportunities/create/'
-      path: '/opportunities/create'
-      fullPath: '/opportunities/create'
-      preLoaderRoute: typeof OpportunitiesCreateIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -142,8 +158,9 @@ export interface FileRoutesByFullPath {
   '/conversations': typeof ConversationsIndexRoute
   '/home': typeof HomeIndexRoute
   '/profile': typeof ProfileIndexRoute
+  '/home/create-opportunities/CreateOpportunity': typeof HomeCreateOpportunitiesCreateOpportunityRoute
+  '/home/create-opportunities/SectionHeader': typeof HomeCreateOpportunitiesSectionHeaderRoute
   '/auth/sign-up': typeof AuthSignUpIndexRoute
-  '/opportunities/create': typeof OpportunitiesCreateIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -153,8 +170,9 @@ export interface FileRoutesByTo {
   '/conversations': typeof ConversationsIndexRoute
   '/home': typeof HomeIndexRoute
   '/profile': typeof ProfileIndexRoute
+  '/home/create-opportunities/CreateOpportunity': typeof HomeCreateOpportunitiesCreateOpportunityRoute
+  '/home/create-opportunities/SectionHeader': typeof HomeCreateOpportunitiesSectionHeaderRoute
   '/auth/sign-up': typeof AuthSignUpIndexRoute
-  '/opportunities/create': typeof OpportunitiesCreateIndexRoute
 }
 
 export interface FileRoutesById {
@@ -165,8 +183,9 @@ export interface FileRoutesById {
   '/conversations/': typeof ConversationsIndexRoute
   '/home/': typeof HomeIndexRoute
   '/profile/': typeof ProfileIndexRoute
+  '/home/create-opportunities/CreateOpportunity': typeof HomeCreateOpportunitiesCreateOpportunityRoute
+  '/home/create-opportunities/SectionHeader': typeof HomeCreateOpportunitiesSectionHeaderRoute
   '/auth/sign-up/': typeof AuthSignUpIndexRoute
-  '/opportunities/create/': typeof OpportunitiesCreateIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -178,8 +197,9 @@ export interface FileRouteTypes {
     | '/conversations'
     | '/home'
     | '/profile'
+    | '/home/create-opportunities/CreateOpportunity'
+    | '/home/create-opportunities/SectionHeader'
     | '/auth/sign-up'
-    | '/opportunities/create'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -188,8 +208,9 @@ export interface FileRouteTypes {
     | '/conversations'
     | '/home'
     | '/profile'
+    | '/home/create-opportunities/CreateOpportunity'
+    | '/home/create-opportunities/SectionHeader'
     | '/auth/sign-up'
-    | '/opportunities/create'
   id:
     | '__root__'
     | '/'
@@ -198,8 +219,9 @@ export interface FileRouteTypes {
     | '/conversations/'
     | '/home/'
     | '/profile/'
+    | '/home/create-opportunities/CreateOpportunity'
+    | '/home/create-opportunities/SectionHeader'
     | '/auth/sign-up/'
-    | '/opportunities/create/'
   fileRoutesById: FileRoutesById
 }
 
@@ -210,8 +232,9 @@ export interface RootRouteChildren {
   ConversationsIndexRoute: typeof ConversationsIndexRoute
   HomeIndexRoute: typeof HomeIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
+  HomeCreateOpportunitiesCreateOpportunityRoute: typeof HomeCreateOpportunitiesCreateOpportunityRoute
+  HomeCreateOpportunitiesSectionHeaderRoute: typeof HomeCreateOpportunitiesSectionHeaderRoute
   AuthSignUpIndexRoute: typeof AuthSignUpIndexRoute
-  OpportunitiesCreateIndexRoute: typeof OpportunitiesCreateIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -221,8 +244,11 @@ const rootRouteChildren: RootRouteChildren = {
   ConversationsIndexRoute: ConversationsIndexRoute,
   HomeIndexRoute: HomeIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
+  HomeCreateOpportunitiesCreateOpportunityRoute:
+    HomeCreateOpportunitiesCreateOpportunityRoute,
+  HomeCreateOpportunitiesSectionHeaderRoute:
+    HomeCreateOpportunitiesSectionHeaderRoute,
   AuthSignUpIndexRoute: AuthSignUpIndexRoute,
-  OpportunitiesCreateIndexRoute: OpportunitiesCreateIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -241,8 +267,9 @@ export const routeTree = rootRoute
         "/conversations/",
         "/home/",
         "/profile/",
-        "/auth/sign-up/",
-        "/opportunities/create/"
+        "/home/create-opportunities/CreateOpportunity",
+        "/home/create-opportunities/SectionHeader",
+        "/auth/sign-up/"
       ]
     },
     "/": {
@@ -263,11 +290,14 @@ export const routeTree = rootRoute
     "/profile/": {
       "filePath": "profile/index.tsx"
     },
+    "/home/create-opportunities/CreateOpportunity": {
+      "filePath": "home/create-opportunities/CreateOpportunity.tsx"
+    },
+    "/home/create-opportunities/SectionHeader": {
+      "filePath": "home/create-opportunities/SectionHeader.tsx"
+    },
     "/auth/sign-up/": {
       "filePath": "auth/sign-up/index.tsx"
-    },
-    "/opportunities/create/": {
-      "filePath": "opportunities/create/index.tsx"
     }
   }
 }
