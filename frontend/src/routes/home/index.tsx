@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 import ProtectRoute from "../-preloaders/ProtectRoute";
 import Background from "./-components/background";
+import { CreateOpportunity } from "./-components/create-opportunities/CreateOpportunity";
 
 export const Route = createFileRoute("/home/")({
 	component: RouteComponent,
