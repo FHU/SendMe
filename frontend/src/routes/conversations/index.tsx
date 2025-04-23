@@ -16,7 +16,7 @@ import { ConversationList } from "./-components/ConversationList";
 
 export const Route = createFileRoute("/conversations/")({
 	component: RouteComponent,
-	// beforeLoad: ProtectRoute,
+	beforeLoad: ProtectRoute,
 });
 
 const Container = styled.div`
