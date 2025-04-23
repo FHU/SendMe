@@ -19,26 +19,6 @@ export const Route = createFileRoute("/conversations/")({
 	// beforeLoad: ProtectRoute,
 });
 
-const ConversationHeader = styled.h1`
-  color: var(--sl-color-primary-500);
-  margin-top: -150px;
-  margin-left: 20px;
-`;
-
-// const ConversationsContainer = styled.div`
-
-// 	display: flex;
-// 	flex-direction: column;
-// 	margin-left: 20px;
-
-// 	@media screen and (max-width: 700px) {
-// 		justify-content: center;
-// 		align-items: center;
-// 		margin-left: 0px;
-//   	}
-
-// `;
-
 const Container = styled.div`
 	display: flex;
 	height: 100vh;
@@ -165,7 +145,6 @@ function RouteComponent() {
 
 	return (
 		<div>
-			<ConversationHeader>Messages</ConversationHeader>
 			<Container>
 				<LeftPane>
 					{conversations ? (

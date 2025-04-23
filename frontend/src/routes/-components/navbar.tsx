@@ -33,7 +33,6 @@ const NavbarContainer = styled.nav`
   padding: 5px 20px;
   box-shadow: var(--sl-shadow-x-large);
   color: white;
-  margin: 0 auto var(--sl-spacing-4x-large) auto;
  
 `;
 

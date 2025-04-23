@@ -43,7 +43,7 @@ const UserName = styled.h2`
 
   @media screen and (max-width: 700px) {
     grid-row: 1;
-    font-size: 16px;
+    font-size: 22px;
   }
 `;
 const LastReadText = styled.p`
@@ -54,7 +54,7 @@ const LastReadText = styled.p`
   @media screen and (max-width: 700px) {
     grid-row: 1 / span 2;
     grid-column: 2;
-    font-size: 14px;
+    font-size: 18px;
   }
 `;
 const LastReadTime = styled.p`

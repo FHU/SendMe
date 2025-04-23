@@ -12,9 +12,7 @@ const SendMessageContainer = styled.div`
   justify-self: center;
   border: 1px solid var(--sl-color-primary-500);
   border-radius: 20px;
-  margin-top: 20px;
   background-color: var(--sl-input-background-color);
-  position: sticky;
 
   @media (max-width: 768px) {
     width: 90%;
