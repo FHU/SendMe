@@ -41,6 +41,7 @@ dev-backend:
 init:
     #!/usr/bin/env sh
     curl -X POST http://localhost:30500/database/init
+    curl -X POST http://localhost:30500/opportunities/seed
 
 # Reset an already initialized database
 reset:
