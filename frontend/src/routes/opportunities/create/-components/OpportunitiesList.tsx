@@ -32,7 +32,7 @@ export function OpportunitiesList({
 			{data?.map((o) => (
 				<OpportunityBox key={o.id}>
 					<TitleBar>
-						<Title>{o.name}</Title>
+						<Title>{o.title}</Title>
 						<SlRelativeTime>{o.created_at}</SlRelativeTime>
 					</TitleBar>
 					<Description>{o.description}</Description>
