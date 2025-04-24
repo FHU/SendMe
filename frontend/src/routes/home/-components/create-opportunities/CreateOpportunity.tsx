@@ -1,6 +1,5 @@
 import api from "@sendme/api";
 import { useCallback } from "react";
-import Header from "src/routes/-components/header";
 import styled from "styled-components";
 
 const RoundedContainer = styled.div`
@@ -114,7 +113,6 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 
 	return (
 		<>
-			<Header />
 			<RoundedContainer>
 				<Form onSubmit={onSubmit}>
 					<Heading>Post Opportunity</Heading>
