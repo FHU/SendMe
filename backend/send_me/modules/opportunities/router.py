@@ -78,7 +78,7 @@ def create_opportunity_tag(
     
     # Validate the tags against the YAML file
     for item in input:
-        matching = [t for t in tags_yaml if t["id"] == item.tag_id]
+        matching = [t for t in tags_yaml if t["id"] == item.tag]
 
         if not matching:
             raise HTTPException(status_code=404, detail="Tag not found")
@@ -87,16 +87,11 @@ def create_opportunity_tag(
         # Create the OpportunityTag from the input schema.
         assoc = models.OpportunityTags(
             opportunity_id = opportunity_id,
-            tag_id = item.tag_id
+            tag_id = item.tag
         )
         db.add(assoc)
         opportunity_tags_added.append(assoc)
-    for item in input:
-        row = tags_schemas.OpportunityTags(
-            opportunity=input.opportunity_id,
-            tag=input.tag_id,
-        )
-    
+
     # This sends all the database operations to the database,
     # but doesn't yet commit them. Other connecting clients will
     # not see this new item until it's committed, which is done
@@ -105,7 +100,7 @@ def create_opportunity_tag(
 
     for opp_tag in opportunity_tags_added:
         db.refresh(opp_tag)
-        
+
     return opportunity_tags_added
 
 
