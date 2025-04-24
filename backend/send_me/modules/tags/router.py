@@ -46,17 +46,11 @@ def get_opportunity_tags(
     if not opportunity:
         raise HTTPException(status_code=404, detail="Opportunity not found")
 
-    # query = select(models.OpportunityTags.tag_id).where(
-    #     models.OpportunityTags.opportunity_id == opportunity_id
-    # )
-
-    # opportunity_tag_list = db.execute(query)
-
     with open(TAGS_FILE) as file:
         tags = yaml.safe_load(file)
         opp_tags = []
         for tag in tags:
             if opportunity_id in tag[opportunity]:
                 opp_tags.append(tag)
-    # return opportunity_tag_list
+
     return opp_tags

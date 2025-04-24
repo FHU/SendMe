@@ -5,7 +5,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-import send_me.modules.tags.models as tags_models
 import send_me.modules.tags.schemas as tags_schemas
 from send_me.database.engine import get_db
 
@@ -54,56 +53,60 @@ def create_opportunity(
 
 
 @router.post(
-    "/opportunities/{opportunity_id}/tags/{tag_id}",
-    response_model=tags_schemas.OpportunityTags,
+    "/opportunities/{opportunity_id}/tags",
+    response_model=list[tags_schemas.OpportunityTags],
     status_code=201,
     operation_id="create_opportunity_tags",
 )
 def create_opportunity_tag(
-    input: tags_schemas.OpportunityTags,
+    input: list[tags_schemas.CreateOpportunityTagsRequest],
     opportunity_id: uuid.UUID,
-    tag_id: int,
     db: Session = Depends(get_db),
 ):
-    opportunity = db.query(models.Opportunity).where(
+    opportunity = db.scalars(select(models.Opportunity).where(
         models.Opportunity.id == opportunity_id
-    )
+    ))
 
     # Check if the opportunity exists
     if not opportunity:
         raise HTTPException(status_code=404, detail="Opportunity not found")
 
     with open(TAGS_FILE) as file:
-        tags = yaml.safe_load(file)
-        
-    for search_tag in tags:
-        if tag_id in search_tag:
-            tag = search_tag
-        else:
-            tag = None
+        tags_yaml = yaml.safe_load(file)
 
-    # Check if the tag exists
-    if not tag:
-        raise HTTPException(status_code=404, detail="Tag not found")
+    opportunity_tags_added = []
+    
+    # Validate the tags against the YAML file
+    for item in input:
+        matching = [t for t in tags_yaml if t["id"] == item.tag_id]
 
-    # Create the OpportunityTag from the input schema.
-    item = tags_schemas.OpportunityTags(
-        opportunity=input.opportunity_id,
-        tag=input.tag_id,
-    )
-    # Add the item to the database.
-    db.add(item)
+        if not matching:
+            raise HTTPException(status_code=404, detail="Tag not found")
 
+
+        # Create the OpportunityTag from the input schema.
+        assoc = models.OpportunityTags(
+            opportunity_id = opportunity_id,
+            tag_id = item.tag_id
+        )
+        db.add(assoc)
+        opportunity_tags_added.append(assoc)
+    for item in input:
+        row = tags_schemas.OpportunityTags(
+            opportunity=input.opportunity_id,
+            tag=input.tag_id,
+        )
+    
     # This sends all the database operations to the database,
     # but doesn't yet commit them. Other connecting clients will
     # not see this new item until it's committed, which is done
     # in database/engine.py.
     db.flush()
-    # The object (item) will be invalid at this point.
 
-    # Refresh it and return it, now with the id and create time.
-    db.refresh(item)
-    return item
+    for opp_tag in opportunity_tags_added:
+        db.refresh(opp_tag)
+        
+    return opportunity_tags_added
 
 
 """
