@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import Header from "../-components/header";
 import ProtectRoute from "../-preloaders/ProtectRoute";
 import Background from "./-components/background";
 
@@ -12,6 +13,7 @@ function RouteComponent() {
 		<div
 			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
 		>
+			<Header showAddBtn={true} />
 			<Background />
 		</div>
 	);

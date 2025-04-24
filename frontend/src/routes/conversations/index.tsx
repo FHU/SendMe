@@ -11,6 +11,8 @@ import styled from "styled-components";
 import ProtectRoute from "../-preloaders/ProtectRoute";
 import { ConversationList } from "./-components/ConversationList";
 
+import Header from "../-components/header";
+
 export const Route = createFileRoute("/conversations/")({
 	component: RouteComponent,
 	beforeLoad: ProtectRoute,
@@ -34,6 +36,7 @@ function RouteComponent() {
 
 	return (
 		<div>
+			<Header showAddBtn={false} />
 			<MessageHeader>Messages</MessageHeader>
 			<div style={{ display: "flex", flexDirection: "column" }}>
 				<div

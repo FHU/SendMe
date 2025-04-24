@@ -1,6 +1,7 @@
 import api from "@sendme/api";
 import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
+import Header from "../-components/header";
 import ProtectRoute from "../-preloaders/ProtectRoute";
 import Background from "./-components/background";
 import { CreateOpportunity } from "./-components/create-opportunities/CreateOpportunity";
@@ -18,6 +19,7 @@ function RouteComponent() {
 		<div
 			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
 		>
+			<Header showAddBtn={true} />
 			<Background />
 			<CreateOpportunity onCreated={refetch} />
 		</div>

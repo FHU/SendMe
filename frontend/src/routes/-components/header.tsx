@@ -5,6 +5,10 @@ import { useLocation } from "@tanstack/react-router";
 import { useState } from "react";
 import styled from "styled-components";
 
+type headerProps = {
+	showAddBtn: boolean;
+};
+
 const HeaderContainer = styled.div`
   width: 400px;
   height: 250px;
@@ -13,8 +17,6 @@ const HeaderContainer = styled.div`
   border-bottom-right-radius: 1.5rem;
   padding: 1rem;
   filter: drop-shadow(0px 10px 4px #3232324b);
-  position: relative;
-  z-index: 10;
 `;
 
 const AddButton = styled(SlIconButton)`
@@ -63,7 +65,7 @@ const Subtitle = styled.h2`
   margin-top:0.25rem;
 `;
 
-const Header = () => {
+const Header = ({ showAddBtn }: headerProps) => {
 	const { data: orgs, refetch: refetchOrg } =
 		api.organizations.listOrganizations.useQuery();
 	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
@@ -96,11 +98,13 @@ const Header = () => {
 		<HeaderContainer>
 			<TitleRow>
 				<Title>{pageName}</Title>
-				<Link to="/home">
-					<AddButton name="plus-lg" onClick={handleClick}>
-						<SlIcon name="plus-lg" />
-					</AddButton>
-				</Link>
+				{showAddBtn && (
+					<Link to="/home">
+						<AddButton name="plus-lg" onClick={handleClick}>
+							<SlIcon name="plus-lg" />
+						</AddButton>
+					</Link>
+				)}
 			</TitleRow>
 			<Subtitle>Tags Selected</Subtitle>
 		</HeaderContainer>
