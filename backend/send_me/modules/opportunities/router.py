@@ -115,13 +115,13 @@ def get_opportunity_tags(
     db: Session = Depends(get_db),
 ):
     # Check if the requested opportunity exists
-    opportunity = db.scalars(models.Opportunity).where(
+    opportunity = db.scalars(select(models.Opportunity).where(
         models.Opportunity.id == opportunity_id
-    )
+    ))
     if not opportunity:
         raise HTTPException(status_code=404, detail="Opportunity not found")
 
-    tag_ids_for_opp = db.execute(select(
+    tag_ids_for_opp = db.scalars(select(
         tags_models.OpportunityTags.tag_id).where
         (tags_models.OpportunityTags.opportunity_id == opportunity_id))
 
