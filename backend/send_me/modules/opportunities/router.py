@@ -5,10 +5,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-import send_me.modules.tags.schemas as tags_schemas
-from send_me.database.engine import get_db
-
 from . import models, schemas
+from send_me.database.engine import get_db
+import send_me.modules.tags.schemas as tags_schemas
 
 TAGS_FILE = "../tags/tags.yaml"
 
@@ -75,7 +74,7 @@ def create_opportunity_tag(
         tags_yaml = yaml.safe_load(file)
 
     opportunity_tags_added = []
-    
+
     # Validate the tags against the YAML file
     for item in input:
         matching = [t for t in tags_yaml if t["id"] == item.tag]
