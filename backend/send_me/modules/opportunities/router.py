@@ -120,9 +120,9 @@ def get_opportunity_tags(
     )
     if not opportunity:
         raise HTTPException(status_code=404, detail="Opportunity not found")
-    
-    tag_ids_for_opp = db.scalars(select(
-        tags_models.OpportunityTags.id).where
+
+    tag_ids_for_opp = db.execute(select(
+        tags_models.OpportunityTags.tag_id).where
         (tags_models.OpportunityTags.opportunity_id == opportunity_id))
 
     opp_tags = []
@@ -133,7 +133,7 @@ def get_opportunity_tags(
             for tag in all_tags:
                 if tag["id"] == opp_tag.tag_id:
                     opp_tags.append(tag["name"])
-    
+
     return opp_tags
 
 

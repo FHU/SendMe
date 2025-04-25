@@ -1,11 +1,6 @@
-import uuid
 import yaml
 
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
-
-from send_me.database.engine import get_db
-import send_me.modules.opportunities.models as opps_models
+from fastapi import APIRouter
 
 from . import schemas
 
