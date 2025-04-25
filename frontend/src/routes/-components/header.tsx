@@ -90,6 +90,7 @@ const Header = ({ showAddBtn }: headerProps) => {
 		"/profile": "Profile",
 		"/conversations": "Conversations",
 		"/auth": "Sign In",
+		"/create-opportunities": "Create Opportunities",
 	};
 
 	const pageName = pageTitles[normalizedPath] || "SendMe";
@@ -99,7 +100,7 @@ const Header = ({ showAddBtn }: headerProps) => {
 			<TitleRow>
 				<Title>{pageName}</Title>
 				{showAddBtn && (
-					<Link to="/home">
+					<Link to="/create-opportunities">
 						<AddButton name="plus-lg" onClick={handleClick}>
 							<SlIcon name="plus-lg" />
 						</AddButton>

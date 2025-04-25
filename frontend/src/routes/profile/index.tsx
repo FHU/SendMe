@@ -13,7 +13,7 @@ function RouteComponent() {
 		<div
 			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
 		>
-			<Header showAddBtn={true} />
+			<Header showAddBtn={false} />
 			<Background />
 		</div>
 	);
