@@ -12,16 +12,12 @@ export const Route = createFileRoute("/home/")({
 });
 
 function RouteComponent() {
-	const { data: orgs, refetch: refetchOrg } =
-		api.organizations.listOrganizations.useQuery();
-	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
 	return (
 		<div
 			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
 		>
 			<Header showAddBtn={true} />
 			<Background />
-			<CreateOpportunity onCreated={refetch} />
 		</div>
 	);
 }

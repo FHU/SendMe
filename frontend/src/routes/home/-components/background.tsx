@@ -11,6 +11,10 @@ const BackGround = styled.div`
   align-items: center;
   border-radius: 30px;
   max-width: fit-content;
+  z-index: 10;
+  background-color: var(--sl-color-primary-500);
+  margin: -125px;
+  margin-bottom: 125px;
 `;
 
 const AddButton = styled(SlIconButton)`
