@@ -6,6 +6,8 @@ const RoundedContainer = styled.div`
   background-color: var(--sl-color-primary-500);
   border-radius: 16px;
   padding: 16px;
+  z-index: 10;
+  margin-top: -100px;
 `;
 
 const Heading = styled.h3``;

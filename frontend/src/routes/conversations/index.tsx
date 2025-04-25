@@ -20,7 +20,6 @@ export const Route = createFileRoute("/conversations/")({
 
 const MessageHeader = styled.h1`
   color: var(--sl-color-primary-500);
-  margin-top: -150px;
   margin-left: 20px;
 `;
 
@@ -36,7 +35,6 @@ function RouteComponent() {
 
 	return (
 		<div>
-			<Header showAddBtn={false} />
 			<MessageHeader>Messages</MessageHeader>
 			<div style={{ display: "flex", flexDirection: "column" }}>
 				<div
