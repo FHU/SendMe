@@ -1,6 +1,4 @@
 import type { components } from "@sendme/api";
-import { SlAvatar } from "@shoelace-style/shoelace/dist/react";
-import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const MessageCard = styled.div<{ isUser: boolean }>`
@@ -19,7 +17,7 @@ const MessageCard = styled.div<{ isUser: boolean }>`
 
   @media (max-width: 1100px) {
     grid-template-columns: auto 1fr;
-	width: 200px;
+	  width: 200px;
     padding: 8px;
   }
 `;

@@ -1,7 +1,6 @@
 import api from "@sendme/api";
 import { SlIconButton, SlTextarea } from "@shoelace-style/shoelace/dist/react";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const SendMessageContainer = styled.div`

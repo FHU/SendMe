@@ -1,11 +1,6 @@
 import api from "@sendme/api";
-import {
-	SlIcon,
-	SlIconButton,
-	SlInput,
-	SlSpinner,
-} from "@shoelace-style/shoelace/dist/react";
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { SlSpinner } from "@shoelace-style/shoelace/dist/react";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ProtectRoute from "../-preloaders/ProtectRoute";
@@ -36,6 +31,7 @@ const LeftPane = styled.div`
 	overflow-y: auto;
 	margin-top: 20px;
 	overflow-x: hidden;
+	padding-left: 20px;
 
 	
 	@media screen and (max-width: 1500px) {
@@ -55,6 +51,7 @@ const LeftPane = styled.div`
 	@media (max-width: 800px) {
 		width: 100%;
 		border-right: none;
+		padding-left: 0px;
 	}
 `;
 

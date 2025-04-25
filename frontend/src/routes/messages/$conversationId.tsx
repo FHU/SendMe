@@ -1,9 +1,5 @@
 import api from "@sendme/api";
-import {
-	SlIconButton,
-	SlSpinner,
-	SlTextarea,
-} from "@shoelace-style/shoelace/dist/react";
+import { SlSpinner } from "@shoelace-style/shoelace/dist/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -45,7 +41,7 @@ const ChatContainer = styled.div`
   padding: 10px;
   width: 100%;
   max-width: 100%;
-  height: 60vh;
+  height: 70vh;
 
   
   scrollbar-width: none; 
@@ -55,20 +51,6 @@ const ChatContainer = styled.div`
     display: none; 
   }
 
-  @media (max-width: 1024px) {
-    height: 55vh;
-  }
-
-  @media (max-width: 768px) {
-    height: 50vh;
-    padding: 6px;
-    width: 100vw;
-  }
-
-  @media (max-width: 480px) {
-    height: 45vh;
-    padding: 4px;
-  }
 `;
 
 function RouteComponent() {
