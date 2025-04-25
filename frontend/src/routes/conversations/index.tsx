@@ -22,6 +22,8 @@ export const Route = createFileRoute("/conversations/")({
 const Container = styled.div`
 	display: flex;
 	height: 100vh;
+	padding-top: 50px;
+	z-index: -1;
 
 	@media (max-width: 700px) {
 		flex-direction: column;
@@ -36,13 +38,13 @@ const LeftPane = styled.div`
 	overflow-x: hidden;
 
 	
-	@media screen and (max-width: 1400px) {
+	@media screen and (max-width: 1500px) {
 		width: 40%;
   }
 
   	
 	@media screen and (max-width: 1200px) {
-		width: 45%;
+		width: 50%;
   }
 
   @media screen and (max-width: 900px) {
@@ -50,7 +52,7 @@ const LeftPane = styled.div`
   }
 
 
-	@media (max-width: 700px) {
+	@media (max-width: 800px) {
 		width: 100%;
 		border-right: none;
 	}
@@ -60,8 +62,9 @@ const RightPane = styled.div`
 	flex: 1;
 	overflow-y: auto;
 	margin-top: 20px;
+	height: 100vh;
 
-	@media (max-width: 700px) {
+	@media (max-width: 800px) {
 		display: none;
 	}
 	
@@ -95,20 +98,6 @@ const ChatContainer = styled.div`
 	display: none; 
   }
 
-  @media (max-width: 1024px) {
-	height: 55vh;
-  }
-
-  @media (max-width: 768px) {
-	height: 50vh;
-	padding: 6px;
-	width: 100vw;
-  }
-
-  @media (max-width: 480px) {
-	height: 45vh;
-	padding: 4px;
-  }
 `;
 
 function RouteComponent() {
@@ -131,6 +120,12 @@ function RouteComponent() {
 		fetch("/api/conversations/seed", { method: "POST" });
 	}, []);
 
+	useEffect(() => {
+		if (!selectedId && conversations && conversations.length > 0) {
+			setSelectedId(conversations[0].id);
+		}
+	}, [conversations, selectedId]);
+
 	const { data: conversation, refetch: refetchConversation } =
 		api.conversations.getConversation.useQuery({
 			path: { conversation_id: selectedId ?? "" },
@@ -144,7 +139,7 @@ function RouteComponent() {
 	}, [refetchConversation]);
 
 	return (
-		<div>
+		<>
 			<Container>
 				<LeftPane>
 					{conversations ? (
@@ -175,6 +170,6 @@ function RouteComponent() {
 					)}
 				</RightPane>
 			</Container>
-		</div>
+		</>
 	);
 }

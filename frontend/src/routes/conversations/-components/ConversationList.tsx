@@ -27,7 +27,9 @@ const MessageCard = styled.div`
     background-color: var(--sl-hover-color);
   }
 
-  @media screen and (max-width: 700px) {
+
+
+  @media screen and (max-width: 800px) {
     grid-template-columns: 0.5fr 1fr 0.5fr;
     grid-template-rows: 1fr 0.5fr;
     margin-bottom: 0px;
@@ -41,7 +43,7 @@ const UserName = styled.h2`
   grid-row: 1 / span 2;
   grid-column: 2 / span 2;
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
     grid-row: 1;
     font-size: 22px;
   }
@@ -51,7 +53,7 @@ const LastReadText = styled.p`
   grid-column: 2 / span 3;
   padding-top: 40px;
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
     grid-row: 1 / span 2;
     grid-column: 2;
     font-size: 18px;
@@ -62,7 +64,7 @@ const LastReadTime = styled.p`
   grid-column: 4;
   padding-top: 6px;
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
     grid-column: 3;
     align-self: start;
   }
@@ -72,7 +74,7 @@ const ConversationLink = styled.div`
     display: none;
 
 
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 800px) {
         display: block;
   }
 `;
@@ -82,7 +84,7 @@ const ConversationDiv = styled.div`
     column-gap: 50px;
 
 
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 800px) {
         display: none;
   }
 `;
@@ -170,8 +172,6 @@ const ConversationBubble = ({
 	userName,
 	lastReadMessage,
 	formattedDate,
-	visibility = "visible",
-	readButtonColor,
 }: ConversationBubbleProps) => {
 	return (
 		<>

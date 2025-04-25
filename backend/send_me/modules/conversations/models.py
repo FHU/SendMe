@@ -46,8 +46,9 @@ class Conversation(Base):
     __tablename__ = "conversations"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    last_updated: Mapped[datetime] = mapped_column(default=datetime.now)
-
+    last_updated: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=datetime.now
+    )
     users = relationship(
         "User", secondary=UserConversations, back_populates="conversations"
     )

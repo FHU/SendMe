@@ -17,7 +17,7 @@ const MessageCard = styled.div<{ isUser: boolean }>`
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   word-break: break-word;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     grid-template-columns: auto 1fr;
 	width: 200px;
     padding: 8px;
@@ -83,12 +83,6 @@ export function MessageList({
 	data: components["schemas"]["Message"][];
 	currentUserId: string;
 }) {
-	const chatEndRef = useRef<HTMLDivElement | null>(null);
-
-	useEffect(() => {
-		chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-	}, []);
-
 	return (
 		<>
 			{data.map((msg) => (
@@ -99,7 +93,6 @@ export function MessageList({
 					imagePath={msg.sender.profile_picture}
 				/>
 			))}
-			<div ref={chatEndRef} />
 		</>
 	);
 }
