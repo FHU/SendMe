@@ -27,29 +27,3 @@ def get_tags():
     with open(TAGS_FILE) as file:
         tags = yaml.safe_load(file)
     return tags
-
-@router.get(
-    "/tags/{opportunity_id}",
-    response_model = list[schemas.Tag],
-    operation_id = "list_opp_tags",
-)
-# Backend route to get tags associated with a certain opportunity
-def get_opportunity_tags(
-    opportunity_id: uuid.UUID,
-    db: Session = Depends(get_db),
-):
-    # Check if the requested opportunity exists
-    opportunity = db.query(opps_models.Opportunity).where(
-        opps_models.Opportunity.id == opportunity_id
-    )
-    if not opportunity:
-        raise HTTPException(status_code=404, detail="Opportunity not found")
-
-    with open(TAGS_FILE) as file:
-        tags = yaml.safe_load(file)
-        opp_tags = []
-        for tag in tags:
-            if opportunity_id in tag[opportunity]:
-                opp_tags.append(tag)
-
-    return opp_tags

@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 
 from send_me.database.engine import get_db
 import send_me.modules.tags.schemas as tags_schemas
+import send_me.modules.tags.models as tags_models
 
 from . import models, schemas
 
@@ -103,11 +104,42 @@ def create_opportunity_tag(
 
     return opportunity_tags_added
 
+@router.get(
+    "/opportunities/{opportunity_id}/tags",
+    response_model = list[tags_schemas.Tag],
+    operation_id = "list_opp_tags",
+)
+# Backend route to get tags for a certain opportunity
+def get_opportunity_tags(
+    opportunity_id: uuid.UUID,
+    db: Session = Depends(get_db),
+):
+    # Check if the requested opportunity exists
+    opportunity = db.scalars(models.Opportunity).where(
+        models.Opportunity.id == opportunity_id
+    )
+    if not opportunity:
+        raise HTTPException(status_code=404, detail="Opportunity not found")
+    
+    tag_ids_for_opp = db.scalars(select(
+        tags_models.OpportunityTags.id).where
+        (tags_models.OpportunityTags.opportunity_id == opportunity_id))
+
+    opp_tags = []
+
+    with open(TAGS_FILE) as tags_file:
+        all_tags = yaml.safe_load(tags_file)
+        for opp_tag in tag_ids_for_opp:
+            for tag in all_tags:
+                if tag["id"] == opp_tag.tag_id:
+                    opp_tags.append(tag["name"])
+    
+    return opp_tags
+
 
 """
 This handler just gets a simple list of the opportunities.
 """
-
 
 @router.get(
     "/opportunities",
