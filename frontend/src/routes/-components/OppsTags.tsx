@@ -1,5 +1,5 @@
 import { SlTag } from "@shoelace-style/shoelace/dist/react";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 
 const ScrollerWrapper = styled.div`
@@ -57,73 +57,73 @@ const StyledTag = styled(SlTag)`
 `;
 
 const OppTags = () => {
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [unselectedTags, setUnselectedTags] = useState<string[]>([
-    "Preacher",
-    "Youth",
-    "Education",
-    "Leadership",
-    "Paid",
-    "Evangelism",
-    "Volunteer",
-    "Hospitality",
-    "Singing",
-    "Construction",
-    "Lawn",
-    "Landscaping",
-  ]);
+	const [selectedTags, setSelectedTags] = useState<string[]>([]);
+	const [unselectedTags, setUnselectedTags] = useState<string[]>([
+		"Preacher",
+		"Youth",
+		"Education",
+		"Leadership",
+		"Paid",
+		"Evangelism",
+		"Volunteer",
+		"Hospitality",
+		"Singing",
+		"Construction",
+		"Lawn",
+		"Landscaping",
+	]);
 
-  const selectedRef = useRef<HTMLDivElement>(null);
-  const unselectedRef = useRef<HTMLDivElement>(null);
+	const selectedRef = useRef<HTMLDivElement>(null);
+	const unselectedRef = useRef<HTMLDivElement>(null);
 
-  const handleRemoveTag = (tagToRemove: string) => {
-    setSelectedTags((tags) => tags.filter((tag) => tag !== tagToRemove));
-    setUnselectedTags((tags) => [...tags, tagToRemove]);
-  };
+	const handleRemoveTag = (tagToRemove: string) => {
+		setSelectedTags((tags) => tags.filter((tag) => tag !== tagToRemove));
+		setUnselectedTags((tags) => [...tags, tagToRemove]);
+	};
 
-  const handleAddTag = (tagToAdd: string) => {
-    setUnselectedTags((tags) => tags.filter((tag) => tag !== tagToAdd));
-    setSelectedTags((tags) => [...tags, tagToAdd]);
-  };
+	const handleAddTag = (tagToAdd: string) => {
+		setUnselectedTags((tags) => tags.filter((tag) => tag !== tagToAdd));
+		setSelectedTags((tags) => [...tags, tagToAdd]);
+	};
 
-  return (
-    <ScrollerWrapper>
-      <TagsAndButtonsWrapper>
-        <TagsScroller ref={selectedRef}>
-          {selectedTags.map((tag) => (
-            <TagWrapper key={`selected-${tag}`}>
-              <StyledTag
-                variant="success"
-                size="medium"
-                removable
-                pill
-                onSlRemove={() => handleRemoveTag(tag)}
-              >
-                {tag}
-              </StyledTag>
-            </TagWrapper>
-          ))}
-        </TagsScroller>
-      </TagsAndButtonsWrapper>
+	return (
+		<ScrollerWrapper>
+			<TagsAndButtonsWrapper>
+				<TagsScroller ref={selectedRef}>
+					{selectedTags.map((tag) => (
+						<TagWrapper key={`selected-${tag}`}>
+							<StyledTag
+								variant="success"
+								size="medium"
+								removable
+								pill
+								onSlRemove={() => handleRemoveTag(tag)}
+							>
+								{tag}
+							</StyledTag>
+						</TagWrapper>
+					))}
+				</TagsScroller>
+			</TagsAndButtonsWrapper>
 
-      <TagsAndButtonsWrapper>
-        <TagsScroller ref={unselectedRef}>
-          {unselectedTags.map((tag) => (
-            <TagWrapper key={`unselected-${tag}`}>
-              <StyledTag
-                variant="success"
-                size="medium"
-                pill
-                onClick={() => handleAddTag(tag)}
-              >
-                {tag}
-              </StyledTag>
-            </TagWrapper>
-          ))}
-        </TagsScroller>
-      </TagsAndButtonsWrapper>
-    </ScrollerWrapper>
-  );
+			<TagsAndButtonsWrapper>
+				<TagsScroller ref={unselectedRef}>
+					{unselectedTags.map((tag) => (
+						<TagWrapper key={`unselected-${tag}`}>
+							<StyledTag
+								variant="success"
+								size="medium"
+								pill
+								onClick={() => handleAddTag(tag)}
+							>
+								{tag}
+							</StyledTag>
+						</TagWrapper>
+					))}
+				</TagsScroller>
+			</TagsAndButtonsWrapper>
+		</ScrollerWrapper>
+	);
 };
 
 export default OppTags;
