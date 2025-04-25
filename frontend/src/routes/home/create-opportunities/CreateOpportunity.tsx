@@ -56,7 +56,6 @@ const Select = styled.select`
   box-sizing: border-box;
 `;
 
-// Container for date and time under "Time of Event"
 const TimeOfEventContainer = styled.div`
   display: flex;
   gap: 1rem;
@@ -79,12 +78,12 @@ const SubmitButton = styled.button`
   transition: background 0.2s;
 
   &:hover {
-    background-color: rgba(144, 238, 144, 0.7);
+	background-color: rgba(144, 238, 144, 0.7);
   }
 
   &:disabled {
-    background-color: grey;
-    cursor: not-allowed;
+	background-color: grey;
+	cursor: not-allowed;
   }
 `;
 
@@ -97,6 +96,7 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 			e.preventDefault();
 			const formData = new FormData(e.currentTarget);
 			console.log({
+				title: formData.get("title")?.toString() || "",
 				organization: formData.get("organization")?.toString() || "",
 				contact_user: formData.get("contact_user")?.toString() || "",
 				location: formData.get("location")?.toString() || "",
@@ -119,8 +119,7 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 				<Form onSubmit={onSubmit}>
 					<Heading>Post Opportunity</Heading>
 
-					{/* 1. Title (required) */}
-					<Label htmlFor="location">Title</Label>
+					<Label htmlFor="title">Title (required)</Label>
 					<Input
 						id="title"
 						name="title"
@@ -129,7 +128,23 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 						disabled={isPending}
 					/>
 
-					{/* 2. Location (City, State, Country) (required) */}
+					<Label htmlFor="organization">Organization (required)</Label>
+					<Select id="organization" name="organization" disabled={isPending}>
+						<option value="FHU">FHU</option>
+						<option value="Henderson Church of Christ">
+							Henderson Church of Christ
+						</option>
+					</Select>
+
+					<Label htmlFor="contact_user">Contact User (required)</Label>
+					<Input
+						id="contact_user"
+						name="contact_user"
+						type="text"
+						placeholder="Enter contact user info"
+						disabled={isPending}
+					/>
+
 					<Label htmlFor="location">Location (City, State, Country)</Label>
 					<Input
 						id="location"
@@ -139,8 +154,7 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 						disabled={isPending}
 					/>
 
-					{/* 3. Tags (required) */}
-					<Label htmlFor="tags">Tags (optional)</Label>
+					<Label htmlFor="tags">Tags</Label>
 					<Input
 						id="tags"
 						name="tags"
@@ -149,7 +163,6 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 						disabled={isPending}
 					/>
 
-					{/* 4. Summary (required) */}
 					<Label htmlFor="summary">Summary</Label>
 					<TextArea
 						id="summary"
@@ -158,7 +171,6 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 						disabled={isPending}
 					/>
 
-					{/* 5. Description (required) */}
 					<Label htmlFor="description">Description</Label>
 					<TextArea
 						id="description"
@@ -167,24 +179,22 @@ export function CreateOpportunity({ onCreated }: { onCreated: () => void }) {
 						disabled={isPending}
 					/>
 
-					{/* 6. Time of Event */}
 					<Label>Time of Event (Optional)</Label>
 					<TimeOfEventContainer>
 						<Input
 							id="eventDate"
 							name="eventDate"
 							type="date"
-							placeholder="Select event date"
 							disabled={isPending}
 						/>
 						<Input
 							id="eventTime"
 							name="eventTime"
 							type="time"
-							placeholder="Select event time"
 							disabled={isPending}
 						/>
 					</TimeOfEventContainer>
+
 					<ButtonContainer>
 						<SubmitButton type="submit" disabled={isPending}>
 							{isPending ? "Sharing..." : "Share"}

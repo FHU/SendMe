@@ -1,11 +1,10 @@
+import api from "@sendme/api";
 import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 import ProtectRoute from "../-preloaders/ProtectRoute";
 import Background from "./-components/background";
-import Card from "./-components/card";
-import Card1 from "./-components/card1";
-import Card2 from "./-components/card2";
 import Header from "./-components/header";
+import { CreateOpportunity } from "./create-opportunities/CreateOpportunity";
 
 export const Route = createFileRoute("/home/")({
 	component: RouteComponent,
@@ -13,12 +12,16 @@ export const Route = createFileRoute("/home/")({
 });
 
 function RouteComponent() {
+	const { data: orgs, refetch: refetchOrg } =
+		api.organizations.listOrganizations.useQuery();
+	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
 	return (
 		<div
 			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
 		>
 			<Header />
 			<Background />
+			<CreateOpportunity onCreated={refetch} />
 		</div>
 	);
 }

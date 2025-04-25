@@ -22,6 +22,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/opportunities/seed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Seed Opportunities */
+        post: operations["seed_opportunities"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/database/init": {
         parameters: {
             query?: never;
@@ -286,10 +303,28 @@ export interface components {
         };
         /** CreateOpportunityRequest */
         CreateOpportunityRequest: {
-            /** Name */
-            name: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Title */
+            title: string | null;
+            /** Contact User */
+            contact_user: string;
+            /** Location */
+            location: string | null;
+            /** Tags */
+            tags: string[] | null;
+            /** Summary */
+            summary: string | null;
             /** Description */
             description: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
         };
         /** CreateOrganizationRequest */
         CreateOrganizationRequest: {
@@ -381,18 +416,18 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Name */
-            name: string;
-            /** Description */
-            description: string;
-            /** Short Description */
-            short_description: string | null;
+            /** Title */
+            title: string | null;
+            /** Contact User */
+            contact_user: string;
             /** Location */
             location: string | null;
-            /** Organization Id */
-            organization_id: string | null;
-            /** Event Date */
-            event_date: string | null;
+            /** Tags */
+            tags: string[] | null;
+            /** Summary */
+            summary: string | null;
+            /** Description */
+            description: string;
             /**
              * Created At
              * Format: date-time
@@ -584,6 +619,33 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
+            };
+        };
+    };
+    seed_opportunities: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

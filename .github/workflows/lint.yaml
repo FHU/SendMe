@@ -19,7 +19,7 @@ jobs:
           architecture: x64
       - run: pip install poetry==2.0.1
       - run: poetry install --with lint,types
-      - run: poetry run ruff check send_me
+      - run: poetry run ruff check send_me --fix
 
   pyright:
     runs-on: ubuntu-24.04
