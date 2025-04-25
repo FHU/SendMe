@@ -1,26 +1,49 @@
-import {
-  SlTag,
-  SlButtonGroup,
-  SlButton,
-  SlIcon,
-} from "@shoelace-style/shoelace/dist/react";
-import { useState } from "react";
+import { SlTag } from "@shoelace-style/shoelace/dist/react";
+import { useState, useRef } from "react";
 import styled from "styled-components";
 
 const ScrollerWrapper = styled.div`
-  width: 80%;
+  width: 100%;
   gap: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
 `;
+
+const TagsAndButtonsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
 const TagsScroller = styled.div`
   display: flex;
-  overflow-x: auto;
-  padding: 10px 20px;
+  overflow-x: scroll;
   gap: 16px;
-  scroll-snap-type: x mandatory;
+  flex: 1;
+  scroll-behavior: smooth;
+  padding-bottom: 4px;
+  min-height: 60px;
 
   &::-webkit-scrollbar {
-    display: none;
+    width: 0px;
+    height: 0px;
   }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 6px;
+  }
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+
+  overflow-y: hidden;
+
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
 `;
 
 const TagWrapper = styled.div`
@@ -29,7 +52,6 @@ const TagWrapper = styled.div`
 `;
 
 const StyledTag = styled(SlTag)`
-  display: flex;
   align-items: center;
   cursor: pointer;
 `;
@@ -50,6 +72,10 @@ const OppTags = () => {
     "Lawn",
     "Landscaping",
   ]);
+
+  const selectedRef = useRef<HTMLDivElement>(null);
+  const unselectedRef = useRef<HTMLDivElement>(null);
+
   const handleRemoveTag = (tagToRemove: string) => {
     setSelectedTags((tags) => tags.filter((tag) => tag !== tagToRemove));
     setUnselectedTags((tags) => [...tags, tagToRemove]);
@@ -59,15 +85,11 @@ const OppTags = () => {
     setUnselectedTags((tags) => tags.filter((tag) => tag !== tagToAdd));
     setSelectedTags((tags) => [...tags, tagToAdd]);
   };
+
   return (
-    <>
-      <ScrollerWrapper>
-        <SlButtonGroup>
-          <SlButton pill variant="success">
-            <SlIcon name="arrow-left" />
-          </SlButton>
-        </SlButtonGroup>
-        <TagsScroller>
+    <ScrollerWrapper>
+      <TagsAndButtonsWrapper>
+        <TagsScroller ref={selectedRef}>
           {selectedTags.map((tag) => (
             <TagWrapper key={`selected-${tag}`}>
               <StyledTag
@@ -82,7 +104,10 @@ const OppTags = () => {
             </TagWrapper>
           ))}
         </TagsScroller>
-        <TagsScroller>
+      </TagsAndButtonsWrapper>
+
+      <TagsAndButtonsWrapper>
+        <TagsScroller ref={unselectedRef}>
           {unselectedTags.map((tag) => (
             <TagWrapper key={`unselected-${tag}`}>
               <StyledTag
@@ -96,8 +121,8 @@ const OppTags = () => {
             </TagWrapper>
           ))}
         </TagsScroller>
-      </ScrollerWrapper>
-    </>
+      </TagsAndButtonsWrapper>
+    </ScrollerWrapper>
   );
 };
 
