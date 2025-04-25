@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as ProfileIndexImport } from './routes/profile/index'
+import { Route as OrganizationsIndexImport } from './routes/organizations/index'
 import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as ConversationsIndexImport } from './routes/conversations/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
@@ -31,6 +32,12 @@ const IndexRoute = IndexImport.update({
 const ProfileIndexRoute = ProfileIndexImport.update({
   id: '/profile/',
   path: '/profile/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const OrganizationsIndexRoute = OrganizationsIndexImport.update({
+  id: '/organizations/',
+  path: '/organizations/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -109,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeIndexImport
       parentRoute: typeof rootRoute
     }
+    '/organizations/': {
+      id: '/organizations/'
+      path: '/organizations'
+      fullPath: '/organizations'
+      preLoaderRoute: typeof OrganizationsIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/profile/': {
       id: '/profile/'
       path: '/profile'
@@ -141,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthIndexRoute
   '/conversations': typeof ConversationsIndexRoute
   '/home': typeof HomeIndexRoute
+  '/organizations': typeof OrganizationsIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/auth/sign-up': typeof AuthSignUpIndexRoute
   '/opportunities/create': typeof OpportunitiesCreateIndexRoute
@@ -152,6 +167,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthIndexRoute
   '/conversations': typeof ConversationsIndexRoute
   '/home': typeof HomeIndexRoute
+  '/organizations': typeof OrganizationsIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/auth/sign-up': typeof AuthSignUpIndexRoute
   '/opportunities/create': typeof OpportunitiesCreateIndexRoute
@@ -164,6 +180,7 @@ export interface FileRoutesById {
   '/auth/': typeof AuthIndexRoute
   '/conversations/': typeof ConversationsIndexRoute
   '/home/': typeof HomeIndexRoute
+  '/organizations/': typeof OrganizationsIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/auth/sign-up/': typeof AuthSignUpIndexRoute
   '/opportunities/create/': typeof OpportunitiesCreateIndexRoute
@@ -177,6 +194,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/conversations'
     | '/home'
+    | '/organizations'
     | '/profile'
     | '/auth/sign-up'
     | '/opportunities/create'
@@ -187,6 +205,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/conversations'
     | '/home'
+    | '/organizations'
     | '/profile'
     | '/auth/sign-up'
     | '/opportunities/create'
@@ -197,6 +216,7 @@ export interface FileRouteTypes {
     | '/auth/'
     | '/conversations/'
     | '/home/'
+    | '/organizations/'
     | '/profile/'
     | '/auth/sign-up/'
     | '/opportunities/create/'
@@ -209,6 +229,7 @@ export interface RootRouteChildren {
   AuthIndexRoute: typeof AuthIndexRoute
   ConversationsIndexRoute: typeof ConversationsIndexRoute
   HomeIndexRoute: typeof HomeIndexRoute
+  OrganizationsIndexRoute: typeof OrganizationsIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
   AuthSignUpIndexRoute: typeof AuthSignUpIndexRoute
   OpportunitiesCreateIndexRoute: typeof OpportunitiesCreateIndexRoute
@@ -220,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthIndexRoute: AuthIndexRoute,
   ConversationsIndexRoute: ConversationsIndexRoute,
   HomeIndexRoute: HomeIndexRoute,
+  OrganizationsIndexRoute: OrganizationsIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
   AuthSignUpIndexRoute: AuthSignUpIndexRoute,
   OpportunitiesCreateIndexRoute: OpportunitiesCreateIndexRoute,
@@ -240,6 +262,7 @@ export const routeTree = rootRoute
         "/auth/",
         "/conversations/",
         "/home/",
+        "/organizations/",
         "/profile/",
         "/auth/sign-up/",
         "/opportunities/create/"
@@ -259,6 +282,9 @@ export const routeTree = rootRoute
     },
     "/home/": {
       "filePath": "home/index.tsx"
+    },
+    "/organizations/": {
+      "filePath": "organizations/index.tsx"
     },
     "/profile/": {
       "filePath": "profile/index.tsx"

@@ -32,6 +32,9 @@ function Index() {
 			<Link to="/auth/sign-up">
 				<SlButton>Sign Up</SlButton>
 			</Link>
+			<Link to="/organizations">
+                <SlButton>Create Organization</SlButton>
+            </Link>
 		</div>
 	);
 }
