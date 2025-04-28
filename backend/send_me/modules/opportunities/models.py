@@ -6,6 +6,8 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 from send_me.database.models import Base
 
+from sqlalchemy import ARRAY, String
+
 """
 This class represents an Opportunity in the database.
 SQLAlchemy uses this to write the appropiate SQL
@@ -17,14 +19,15 @@ class Opportunity(Base):
     __tablename__ = "opportunities"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    name: Mapped[str]
+    title: Mapped[str | None]
+    contact_user: Mapped[str]
     description: Mapped[str]
+    summary: Mapped[str | None]
     location: Mapped[str | None]
-    short_description: Mapped[str | None]
     organization_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("organizations.id")
     )
-    event_date: Mapped[datetime | None]
+    tags: Mapped[list[str] | None] = mapped_column(ARRAY(String))
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=datetime.now
     )

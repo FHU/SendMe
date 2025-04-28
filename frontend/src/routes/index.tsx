@@ -13,10 +13,6 @@ function Index() {
 		<div style={{ paddingTop: "100px", zIndex: -1 }}>
 			<h3>Server message: {data?.message}</h3>
 
-			<Link to="/opportunities/create">
-				<SlButton>Test</SlButton>
-			</Link>
-
 			<Link to="/conversations">
 				<SlButton>Conversations</SlButton>
 			</Link>
