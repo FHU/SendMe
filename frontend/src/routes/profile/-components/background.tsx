@@ -12,6 +12,7 @@ const BackGround = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: fit-content;
+  
 `;
 
 const Background = () => {

@@ -1,5 +1,6 @@
 import api from "@sendme/api";
 import { SlButton, SlCard, SlInput } from "@shoelace-style/shoelace/dist/react";
+import { useRouter } from "@tanstack/react-router";
 import type React from "react";
 import { useState } from "react";
 import styled from "styled-components";
@@ -119,6 +120,7 @@ const RequestOTPForm: React.FC<RequestOTPFormProps> = ({ onSuccess }) => {
 	const [responseMessage, setResponseMessage] = useState<string>("");
 	const [isError, setIsError] = useState<boolean>(false);
 	const { mutateAsync: requestOtp } = api.auth.requestOtp.useMutation();
+	const router = useRouter();
 
 	const requestOTP = async (): Promise<void> => {
 		setResponseMessage("");
@@ -132,9 +134,17 @@ const RequestOTPForm: React.FC<RequestOTPFormProps> = ({ onSuccess }) => {
 			});
 
 			onSuccess(); // Switch to EnterOTPForm
-		} catch {
-			setIsError(true);
-			setResponseMessage("Something went wrong.");
+			// biome-ignore lint/suspicious/noExplicitAny: try catch blocks require any or unknown for error type
+		} catch (error: any) {
+			console.error(error);
+			if (error.detail?.includes("User not found")) {
+				setIsError(true);
+				setResponseMessage("User not found");
+				router.navigate({ to: "/auth/sign-up" });
+			} else {
+				setIsError(true);
+				setResponseMessage("Something went wrong.");
+			}
 		}
 	};
 
