@@ -75,6 +75,8 @@ const StyledInput = styled(SlInput)`
   --sl-input-font-size-medium: 1rem;
   --sl-input-height-medium: 2.75rem;
   --sl-input-background-color: var(--sl-color-text);
+  --sl-input-color: var(--sl-color-primary-50);
+
   color: var(--sl-color-text);
   border-radius: 24px;
 `;
