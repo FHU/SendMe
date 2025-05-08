@@ -7,7 +7,7 @@ engine = create_engine(
     os.environ["SENDME_DB_URL"],
     echo=False,
     pool_size=20,
-    max_overflow=30,
+    max_overflow=30, 
     pool_timeout=30,
     pool_recycle=180,
 )

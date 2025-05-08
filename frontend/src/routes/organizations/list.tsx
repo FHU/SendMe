@@ -1,73 +1,98 @@
-import { useQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
-import styled from "styled-components";
+import { createFileRoute } from '@tanstack/react-router';
+import styled from 'styled-components';
+import SectionHeaderOrgs from './-components/SectionHeaderOrgs';
+import api from '@sendme/api';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 
-export const Route = createFileRoute("/organizations/list")({
-	component: OrganizationListPage,
+export const Route = createFileRoute('/organizations/list')({
+  component: RouteComponent,
 });
 
 const PageWrapper = styled.div`
-  max-width: 800px;
-  margin: 2rem auto;
+  margin: 6rem auto 2rem auto;
+  max-width: 700px;
   padding: 1rem;
 `;
 
-const OrgCard = styled.div`
-  background: var(--sl-color-neutral-0);
-  border-radius: 12px;
-  box-shadow: var(--sl-shadow-small);
-  padding: 1.5rem;
+const Title = styled.h2`
+  font-size: 1.5rem;
   margin-bottom: 1.5rem;
+  text-align: center;
 `;
 
-const OrgName = styled.h2`
-  margin: 0 0 0.5rem;
-  color: var(--sl-color-primary-800);
+const OrgCard = styled.div`
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: var(--sl-color-neutral-0);
+  box-shadow: var(--sl-shadow-small);
+  margin-bottom: 1rem;
 `;
 
-const OrgType = styled.span`
-  font-weight: bold;
-  text-transform: capitalize;
+const OrgName = styled.h3`
+  margin: 0 0 0.5rem 0;
+  color: var(--sl-color-primary-600);
 `;
 
-const OrgDesc = styled.p`
-  margin-top: 0.5rem;
+const OrgDetail = styled.p`
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
 `;
 
-const OrgLocation = styled.p`
-  font-size: 0.9rem;
-  color: var(--sl-color-gray-600);
-  margin-top: 0.25rem;
-`;
+type Organization = {
+  id: string;
+  name: string;
+  description: string;
+  location: string;
+  type: string;
+  created_at: string;
+};
 
-function OrganizationListPage() {
-	const {
-		data: organizations,
-		isLoading,
-		isError,
-	} = useQuery({
-		queryKey: ["organizations"],
-		queryFn: async () => {
-			const res = await fetch("/api/organizations");
-			if (!res.ok) throw new Error("Failed to fetch organizations");
-			return res.json();
-		},
-	});
+function RouteComponent() {
+  const { data, isLoading, isError } = api.organizations.listOrganizations.useQuery();
+  const [orgs, setOrgs] = useState<Organization[]>([]);
 
-	if (isLoading) return <PageWrapper>Loading organizations...</PageWrapper>;
-	if (isError) return <PageWrapper>Failed to load organizations.</PageWrapper>;
+  useEffect(() => {
+    if (data) {
+      try {
+        const stored = localStorage.getItem("new-orgs");
+        const parsed = stored ? JSON.parse(stored) : [];
+        setOrgs([...data, ...parsed]);
+      } catch {
+        setOrgs(data);
+      }
+    }
+  }, [data]);
 
-	return (
-		<PageWrapper>
-			<h1>All Organizations</h1>
-			{organizations.map((org: any) => (
-				<OrgCard key={org.id}>
-					<OrgName>{org.name}</OrgName>
-					<OrgType>{org.type}</OrgType>
-					<OrgDesc>{org.description}</OrgDesc>
-					<OrgLocation>{org.location}</OrgLocation>
-				</OrgCard>
-			))}
-		</PageWrapper>
-	);
+  return (
+    <>
+      <SectionHeaderOrgs />
+      <PageWrapper>
+        <Title>All Organizations</Title>
+
+        {isLoading && <OrgCard>Loading...</OrgCard>}
+        {isError && <OrgCard>Error loading organizations.</OrgCard>}
+
+        {orgs && orgs.length > 0 ? (
+          orgs.map((org) => (
+            <OrgCard key={org.id}>
+              <OrgName>{org.name}</OrgName>
+              <OrgDetail><strong>Type:</strong> {org.type}</OrgDetail>
+              <OrgDetail><strong>Location:</strong> {org.location}</OrgDetail>
+              <OrgDetail><strong>Description:</strong> {org.description}</OrgDetail>
+              <OrgDetail>
+                <small>
+                  Created at: {new Date(org.created_at).toLocaleString()}
+                </small>
+              </OrgDetail>
+            </OrgCard>
+          ))
+        ) : (
+          !isLoading && !isError && (
+            <OrgCard>No organizations found.</OrgCard>
+          )
+        )}
+      </PageWrapper>
+    </>
+  );
 }
