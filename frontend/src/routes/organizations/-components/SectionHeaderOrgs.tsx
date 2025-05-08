@@ -27,9 +27,9 @@ const Subtitle = styled.h2`
 `;
 
 const SectionHeader = () => (
-    <HeaderContainer>
-        <Title>Organizations</Title>
-    </HeaderContainer>
+	<HeaderContainer>
+		<Title>Organizations</Title>
+	</HeaderContainer>
 );
 
 export default SectionHeader;

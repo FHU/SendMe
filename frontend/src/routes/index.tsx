@@ -33,8 +33,8 @@ function Index() {
 				<SlButton>Sign Up</SlButton>
 			</Link>
 			<Link to="/organizations">
-                <SlButton>Create Organization</SlButton>
-            </Link>
+				<SlButton>Create Organization</SlButton>
+			</Link>
 		</div>
 	);
 }

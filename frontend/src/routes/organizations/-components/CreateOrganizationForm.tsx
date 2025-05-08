@@ -1,12 +1,14 @@
+import api from "@sendme/api";
+import { p } from "node_modules/react-router/dist/development/fog-of-war-CvttGpNz";
 import { useState } from "react";
 import styled from "styled-components";
-import SectionHeaderOrgs from "./SectionHeaderOrgs";  // Adjust path if needed
+import SectionHeaderOrgs from "./SectionHeaderOrgs"; // Adjust path if needed
 
 const RoundedContainer = styled.div`
   background-color: var(--sl-color-primary-500);
   border-radius: 16px;
   padding: 16px;
-  margin-top: 5rem;   // Added spacing below header
+  margin-top: 5rem; // Added spacing below header
 `;
 
 const Heading = styled.h3``;
@@ -70,74 +72,86 @@ const SubmitButton = styled.button`
 `;
 
 export function CreateOrganizationForm() {
-    const [name, setName] = useState("");
-    const [category, setCategory] = useState("");
-    const [description, setDescription] = useState("");
-    const [isSubmitting, setIsSubmitting] = useState(false);
+	const [name, setName] = useState("");
+	const [category, setCategory] = useState("");
+	const [description, setDescription] = useState("");
+	const {
+		mutateAsync: createOrganization,
+		isPending: isSubmitting,
+		isError,
+		isSuccess,
+	} = api.organizations.createOrganization.useMutation();
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsSubmitting(true);
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
 
-        console.log({ name, category, description });
+		console.log({ name, category, description });
 
-        setIsSubmitting(false);
-    };
+		try {
+			await createOrganization({
+				body: { name, type: category, description, location: "Placeholder" },
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	};
 
-    return (
-        <>
-            <SectionHeaderOrgs />
-            <RoundedContainer>
-                <Form onSubmit={handleSubmit}>
-                    <Heading>Create Organization</Heading>
+	return (
+		<>
+			<SectionHeaderOrgs />
+			<RoundedContainer>
+				<Form onSubmit={handleSubmit}>
+					<Heading>Create Organization</Heading>
 
-                    <Label htmlFor="name">Organization Name</Label>
-                    <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder="Enter organization name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        disabled={isSubmitting}
-                        required
-                    />
+					<Label htmlFor="name">Organization Name</Label>
+					<Input
+						id="name"
+						name="name"
+						type="text"
+						placeholder="Enter organization name"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+						disabled={isSubmitting}
+						required
+					/>
 
-                    <Label htmlFor="category">Category</Label>
-                    <Select
-                        id="category"
-                        name="category"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        disabled={isSubmitting}
-                        required
-                    >
-                        <option value="">Select a category</option>
-                        <option value="Business">Business</option>
-                        <option value="Education">Education</option>
-                        <option value="Non-Profit">Non-Profit</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Health">Health</option>
-                    </Select>
+					<Label htmlFor="category">Category</Label>
+					<Select
+						id="category"
+						name="category"
+						value={category}
+						onChange={(e) => setCategory(e.target.value)}
+						disabled={isSubmitting}
+						required
+					>
+						<option value="">Select a category</option>
+						<option value="Business">Business</option>
+						<option value="Education">Education</option>
+						<option value="Non-Profit">Non-Profit</option>
+						<option value="Technology">Technology</option>
+						<option value="Health">Health</option>
+					</Select>
 
-                    <Label htmlFor="description">Description</Label>
-                    <Input
-                        id="description"
-                        name="description"
-                        type="text"
-                        placeholder="Enter description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        disabled={isSubmitting}
-                    />
+					<Label htmlFor="description">Description</Label>
+					<Input
+						id="description"
+						name="description"
+						type="text"
+						placeholder="Enter description"
+						value={description}
+						onChange={(e) => setDescription(e.target.value)}
+						disabled={isSubmitting}
+					/>
 
-                    <ButtonContainer>
-                        <SubmitButton type="submit" disabled={isSubmitting}>
-                            {isSubmitting ? "Creating..." : "Create Organization"}
-                        </SubmitButton>
-                    </ButtonContainer>
-                </Form>
-            </RoundedContainer>
-        </>
-    );
+					<ButtonContainer>
+						<SubmitButton type="submit" disabled={isSubmitting}>
+							{isSubmitting ? "Creating..." : "Create Organization"}
+						</SubmitButton>
+					</ButtonContainer>
+				</Form>
+				{isError && <p>{"An error occurred"}</p>}
+				{isSuccess && <p>{"Organization created successfully"}</p>}
+			</RoundedContainer>
+		</>
+	);
 }

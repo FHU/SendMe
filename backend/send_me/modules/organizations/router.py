@@ -32,6 +32,8 @@ def create_organization(
     item = models.Organization(
         name=input.name,
         description=input.description,
+        type=input.type,
+        location=input.location,
     )
     # Add the item to the database.
     db.add(item)
