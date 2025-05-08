@@ -17,6 +17,7 @@ import { Route as OrganizationsIndexImport } from './routes/organizations/index'
 import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as ConversationsIndexImport } from './routes/conversations/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
+import { Route as OrganizationsListImport } from './routes/organizations/list'
 import { Route as MessagesConversationIdImport } from './routes/messages/$conversationId'
 import { Route as OpportunitiesCreateIndexImport } from './routes/opportunities/create/index'
 import { Route as AuthSignUpIndexImport } from './routes/auth/sign-up/index'
@@ -59,6 +60,12 @@ const AuthIndexRoute = AuthIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const OrganizationsListRoute = OrganizationsListImport.update({
+  id: '/organizations/list',
+  path: '/organizations/list',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const MessagesConversationIdRoute = MessagesConversationIdImport.update({
   id: '/messages/$conversationId',
   path: '/messages/$conversationId',
@@ -93,6 +100,13 @@ declare module '@tanstack/react-router' {
       path: '/messages/$conversationId'
       fullPath: '/messages/$conversationId'
       preLoaderRoute: typeof MessagesConversationIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/organizations/list': {
+      id: '/organizations/list'
+      path: '/organizations/list'
+      fullPath: '/organizations/list'
+      preLoaderRoute: typeof OrganizationsListImport
       parentRoute: typeof rootRoute
     }
     '/auth/': {
@@ -152,6 +166,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/messages/$conversationId': typeof MessagesConversationIdRoute
+  '/organizations/list': typeof OrganizationsListRoute
   '/auth': typeof AuthIndexRoute
   '/conversations': typeof ConversationsIndexRoute
   '/home': typeof HomeIndexRoute
@@ -164,6 +179,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/messages/$conversationId': typeof MessagesConversationIdRoute
+  '/organizations/list': typeof OrganizationsListRoute
   '/auth': typeof AuthIndexRoute
   '/conversations': typeof ConversationsIndexRoute
   '/home': typeof HomeIndexRoute
@@ -177,6 +193,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/messages/$conversationId': typeof MessagesConversationIdRoute
+  '/organizations/list': typeof OrganizationsListRoute
   '/auth/': typeof AuthIndexRoute
   '/conversations/': typeof ConversationsIndexRoute
   '/home/': typeof HomeIndexRoute
@@ -191,6 +208,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/messages/$conversationId'
+    | '/organizations/list'
     | '/auth'
     | '/conversations'
     | '/home'
@@ -202,6 +220,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/messages/$conversationId'
+    | '/organizations/list'
     | '/auth'
     | '/conversations'
     | '/home'
@@ -213,6 +232,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/messages/$conversationId'
+    | '/organizations/list'
     | '/auth/'
     | '/conversations/'
     | '/home/'
@@ -226,6 +246,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MessagesConversationIdRoute: typeof MessagesConversationIdRoute
+  OrganizationsListRoute: typeof OrganizationsListRoute
   AuthIndexRoute: typeof AuthIndexRoute
   ConversationsIndexRoute: typeof ConversationsIndexRoute
   HomeIndexRoute: typeof HomeIndexRoute
@@ -238,6 +259,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MessagesConversationIdRoute: MessagesConversationIdRoute,
+  OrganizationsListRoute: OrganizationsListRoute,
   AuthIndexRoute: AuthIndexRoute,
   ConversationsIndexRoute: ConversationsIndexRoute,
   HomeIndexRoute: HomeIndexRoute,
@@ -259,6 +281,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/messages/$conversationId",
+        "/organizations/list",
         "/auth/",
         "/conversations/",
         "/home/",
@@ -273,6 +296,9 @@ export const routeTree = rootRoute
     },
     "/messages/$conversationId": {
       "filePath": "messages/$conversationId.tsx"
+    },
+    "/organizations/list": {
+      "filePath": "organizations/list.tsx"
     },
     "/auth/": {
       "filePath": "auth/index.tsx"

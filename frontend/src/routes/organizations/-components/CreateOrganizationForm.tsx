@@ -1,14 +1,14 @@
-import api from "@sendme/api";
-import { p } from "node_modules/react-router/dist/development/fog-of-war-CvttGpNz";
 import { useState } from "react";
+import { useRouter } from "@tanstack/react-router";
 import styled from "styled-components";
-import SectionHeaderOrgs from "./SectionHeaderOrgs"; // Adjust path if needed
+import SectionHeaderOrgs from "./SectionHeaderOrgs";
+import api from "@sendme/api";
 
 const RoundedContainer = styled.div`
   background-color: var(--sl-color-primary-500);
   border-radius: 16px;
   padding: 16px;
-  margin-top: 5rem; // Added spacing below header
+  margin-top: 5rem;
 `;
 
 const Heading = styled.h3``;
@@ -75,24 +75,30 @@ export function CreateOrganizationForm() {
 	const [name, setName] = useState("");
 	const [category, setCategory] = useState("");
 	const [description, setDescription] = useState("");
+	const router = useRouter();
+
 	const {
 		mutateAsync: createOrganization,
 		isPending: isSubmitting,
 		isError,
-		isSuccess,
 	} = api.organizations.createOrganization.useMutation();
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		console.log({ name, category, description });
-
 		try {
 			await createOrganization({
-				body: { name, type: category, description, location: "Placeholder" },
+				body: {
+					name,
+					type: category,
+					description,
+					location: "Placeholder",
+				},
 			});
+			// 🔁 Redirect on success
+			router.navigate({ to: "/organizations/list" });
 		} catch (e) {
-			console.log(e);
+			console.error(e);
 		}
 	};
 
@@ -149,8 +155,7 @@ export function CreateOrganizationForm() {
 						</SubmitButton>
 					</ButtonContainer>
 				</Form>
-				{isError && <p>{"An error occurred"}</p>}
-				{isSuccess && <p>{"Organization created successfully"}</p>}
+				{isError && <p>An error occurred</p>}
 			</RoundedContainer>
 		</>
 	);
