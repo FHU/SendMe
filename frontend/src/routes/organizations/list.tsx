@@ -1,12 +1,12 @@
-import { createFileRoute } from '@tanstack/react-router';
-import styled from 'styled-components';
-import SectionHeaderOrgs from './-components/SectionHeaderOrgs';
-import api from '@sendme/api';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import api from "@sendme/api";
+import { useQuery } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import SectionHeaderOrgs from "./-components/SectionHeaderOrgs";
 
-export const Route = createFileRoute('/organizations/list')({
-  component: RouteComponent,
+export const Route = createFileRoute("/organizations/list")({
+	component: RouteComponent,
 });
 
 const PageWrapper = styled.div`
@@ -40,59 +40,63 @@ const OrgDetail = styled.p`
 `;
 
 type Organization = {
-  id: string;
-  name: string;
-  description: string;
-  location: string;
-  type: string;
-  created_at: string;
+	id: string;
+	name: string;
+	description: string;
+	location: string;
+	type: string;
+	created_at: string;
 };
 
 function RouteComponent() {
-  const { data, isLoading, isError } = api.organizations.listOrganizations.useQuery();
-  const [orgs, setOrgs] = useState<Organization[]>([]);
+	const { data, isLoading, isError } =
+		api.organizations.listOrganizations.useQuery();
+	const [orgs, setOrgs] = useState<Organization[]>([]);
 
-  useEffect(() => {
-    if (data) {
-      try {
-        const stored = localStorage.getItem("new-orgs");
-        const parsed = stored ? JSON.parse(stored) : [];
-        setOrgs([...data, ...parsed]);
-      } catch {
-        setOrgs(data);
-      }
-    }
-  }, [data]);
+	useEffect(() => {
+		if (data) {
+			try {
+				const stored = localStorage.getItem("new-orgs");
+				const parsed = stored ? JSON.parse(stored) : [];
+				setOrgs([...data, ...parsed]);
+			} catch {
+				setOrgs(data);
+			}
+		}
+	}, [data]);
 
-  return (
-    <>
-      <SectionHeaderOrgs />
-      <PageWrapper>
-        <Title>All Organizations</Title>
+	return (
+		<>
+			<SectionHeaderOrgs />
+			<PageWrapper>
+				<Title>All Organizations</Title>
 
-        {isLoading && <OrgCard>Loading...</OrgCard>}
-        {isError && <OrgCard>Error loading organizations.</OrgCard>}
+				{isLoading && <OrgCard>Loading...</OrgCard>}
+				{isError && <OrgCard>Error loading organizations.</OrgCard>}
 
-        {orgs && orgs.length > 0 ? (
-          orgs.map((org) => (
-            <OrgCard key={org.id}>
-              <OrgName>{org.name}</OrgName>
-              <OrgDetail><strong>Type:</strong> {org.type}</OrgDetail>
-              <OrgDetail><strong>Location:</strong> {org.location}</OrgDetail>
-              <OrgDetail><strong>Description:</strong> {org.description}</OrgDetail>
-              <OrgDetail>
-                <small>
-                  Created at: {new Date(org.created_at).toLocaleString()}
-                </small>
-              </OrgDetail>
-            </OrgCard>
-          ))
-        ) : (
-          !isLoading && !isError && (
-            <OrgCard>No organizations found.</OrgCard>
-          )
-        )}
-      </PageWrapper>
-    </>
-  );
+				{orgs && orgs.length > 0
+					? orgs.map((org) => (
+							<OrgCard key={org.id}>
+								<OrgName>{org.name}</OrgName>
+								<OrgDetail>
+									<strong>Type:</strong> {org.type}
+								</OrgDetail>
+								<OrgDetail>
+									<strong>Location:</strong> {org.location}
+								</OrgDetail>
+								<OrgDetail>
+									<strong>Description:</strong> {org.description}
+								</OrgDetail>
+								<OrgDetail>
+									<small>
+										Created at: {new Date(org.created_at).toLocaleString()}
+									</small>
+								</OrgDetail>
+							</OrgCard>
+						))
+					: !isLoading &&
+						!isError && <OrgCard>No organizations found.</OrgCard>}
+			</PageWrapper>
+		</>
+	);
 }

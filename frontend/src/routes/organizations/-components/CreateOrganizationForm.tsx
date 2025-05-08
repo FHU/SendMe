@@ -1,8 +1,8 @@
 import api from "@sendme/api";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import styled from "styled-components";
-import { Link } from "@tanstack/react-router";
-import SectionHeaderOrgs from "./SectionHeaderOrgs"; 
+import SectionHeaderOrgs from "./SectionHeaderOrgs";
 
 const RoundedContainer = styled.div`
   background-color: var(--sl-color-primary-500);
@@ -72,126 +72,127 @@ const SubmitButton = styled.button`
 `;
 
 export function CreateOrganizationForm() {
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
+	const [name, setName] = useState("");
+	const [category, setCategory] = useState("");
+	const [description, setDescription] = useState("");
+	const [location, setLocation] = useState("");
 
-  const {
-    mutateAsync: createOrganization,
-    isPending: isSubmitting,
-    isError,
-    isSuccess,
-  } = api.organizations.createOrganization.useMutation();
+	const {
+		mutateAsync: createOrganization,
+		isPending: isSubmitting,
+		isError,
+		isSuccess,
+	} = api.organizations.createOrganization.useMutation();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
 
-    const newOrg = {
-      id: crypto.randomUUID(),
-      name,
-      type: category,
-      description,
-      location,
-      created_at: new Date().toISOString(),
-    };
+		const newOrg = {
+			id: crypto.randomUUID(),
+			name,
+			type: category,
+			description,
+			location,
+			created_at: new Date().toISOString(),
+		};
 
-    try {
-      await createOrganization({ body: newOrg });
+		try {
+			await createOrganization({ body: newOrg });
 
-      const existing = localStorage.getItem("new-orgs");
-      const updated = existing ? JSON.parse(existing) : [];
-      updated.push(newOrg);
-      localStorage.setItem("new-orgs", JSON.stringify(updated));
-    } catch (e) {
-      console.log(e);
-    }
-  };
+			const existing = localStorage.getItem("new-orgs");
+			const updated = existing ? JSON.parse(existing) : [];
+			updated.push(newOrg);
+			localStorage.setItem("new-orgs", JSON.stringify(updated));
+		} catch (e) {
+			console.log(e);
+		}
+	};
 
-  return (
-    <>
-      <SectionHeaderOrgs />
-      <RoundedContainer>
-        <Form onSubmit={handleSubmit}>
-          <div style={{ textAlign: "right", marginBottom: "1rem" }}>
-            <Link to="/organizations/list">
-              <button
-                style={{
-                  backgroundColor: "#ddd",
-                  border: "none",
-                  borderRadius: "4px",
-                  padding: "0.5rem 1rem",
-                  cursor: "pointer",
-                }}
-              >
-                View All Organizations
-              </button>
-            </Link>
-          </div>
+	return (
+		<>
+			<SectionHeaderOrgs />
+			<RoundedContainer>
+				<Form onSubmit={handleSubmit}>
+					<div style={{ textAlign: "right", marginBottom: "1rem" }}>
+						<Link to="/organizations/list">
+							<button
+								type="button" // ✅ Fixes the Biome lint error
+								style={{
+									backgroundColor: "#ddd",
+									border: "none",
+									borderRadius: "4px",
+									padding: "0.5rem 1rem",
+									cursor: "pointer",
+								}}
+							>
+								View All Organizations
+							</button>
+						</Link>
+					</div>
 
-          <Heading>Create Organization</Heading>
+					<Heading>Create Organization</Heading>
 
-          <Label htmlFor="name">Organization Name</Label>
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Enter organization name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            disabled={isSubmitting}
-            required
-          />
+					<Label htmlFor="name">Organization Name</Label>
+					<Input
+						id="name"
+						name="name"
+						type="text"
+						placeholder="Enter organization name"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+						disabled={isSubmitting}
+						required
+					/>
 
-          <Label htmlFor="category">Category</Label>
-          <Select
-            id="category"
-            name="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            disabled={isSubmitting}
-            required
-          >
-            <option value="">Select a category</option>
-            <option value="Business">Business</option>
-            <option value="Education">Education</option>
-            <option value="Non-Profit">Non-Profit</option>
-            <option value="Technology">Technology</option>
-            <option value="Health">Health</option>
-          </Select>
+					<Label htmlFor="category">Category</Label>
+					<Select
+						id="category"
+						name="category"
+						value={category}
+						onChange={(e) => setCategory(e.target.value)}
+						disabled={isSubmitting}
+						required
+					>
+						<option value="">Select a category</option>
+						<option value="Business">Business</option>
+						<option value="Education">Education</option>
+						<option value="Non-Profit">Non-Profit</option>
+						<option value="Technology">Technology</option>
+						<option value="Health">Health</option>
+					</Select>
 
-          <Label htmlFor="location">Location</Label>
-          <Input
-            id="location"
-            name="location"
-            type="text"
-            placeholder="Enter location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            disabled={isSubmitting}
-            required
-          />
+					<Label htmlFor="location">Location</Label>
+					<Input
+						id="location"
+						name="location"
+						type="text"
+						placeholder="Enter location"
+						value={location}
+						onChange={(e) => setLocation(e.target.value)}
+						disabled={isSubmitting}
+						required
+					/>
 
-          <Label htmlFor="description">Description</Label>
-          <Input
-            id="description"
-            name="description"
-            type="text"
-            placeholder="Enter description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            disabled={isSubmitting}
-          />
+					<Label htmlFor="description">Description</Label>
+					<Input
+						id="description"
+						name="description"
+						type="text"
+						placeholder="Enter description"
+						value={description}
+						onChange={(e) => setDescription(e.target.value)}
+						disabled={isSubmitting}
+					/>
 
-          <ButtonContainer>
-            <SubmitButton type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Creating..." : "Create Organization"}
-            </SubmitButton>
-          </ButtonContainer>
-        </Form>
-        {isError && <p>{"An error occurred"}</p>}
-        {isSuccess && <p>{"Organization created successfully"}</p>}
-      </RoundedContainer>
-    </>
-  );
+					<ButtonContainer>
+						<SubmitButton type="submit" disabled={isSubmitting}>
+							{isSubmitting ? "Creating..." : "Create Organization"}
+						</SubmitButton>
+					</ButtonContainer>
+				</Form>
+				{isError && <p>{"An error occurred"}</p>}
+				{isSuccess && <p>{"Organization created successfully"}</p>}
+			</RoundedContainer>
+		</>
+	);
 }
