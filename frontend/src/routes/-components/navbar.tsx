@@ -36,6 +36,7 @@ const NavbarContainer = styled.nav`
   position: fixed;
   width: 100%;
   z-index: 1;
+  border: 1px solid orange;
  
 `;
 

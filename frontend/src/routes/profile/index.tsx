@@ -10,7 +10,12 @@ export const Route = createFileRoute("/profile/")({
 function RouteComponent() {
 	return (
 		<div
-			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				paddingTop: "60px",
+			}}
 		>
 			<Background />
 		</div>
