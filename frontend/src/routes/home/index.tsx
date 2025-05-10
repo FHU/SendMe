@@ -4,7 +4,7 @@ import styled from "styled-components";
 import ProtectRoute from "../-preloaders/ProtectRoute";
 import Background from "./-components/background";
 import Header from "./-components/header";
-import { CreateOpportunity } from "./create-opportunities/CreateOpportunity";
+import { CreateOpportunity } from "./-create-opportunities/CreateOpportunity";
 
 export const Route = createFileRoute("/home/")({
 	component: RouteComponent,
@@ -17,7 +17,12 @@ function RouteComponent() {
 	const { data, refetch } = api.opportunities.listOpportunities.useQuery();
 	return (
 		<div
-			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				paddingTop: "100px",
+			}}
 		>
 			<Header />
 			<Background />
