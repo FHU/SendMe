@@ -11,6 +11,8 @@ import styled from "styled-components";
 import ProtectRoute from "../-preloaders/ProtectRoute";
 import { ConversationList } from "./-components/ConversationList";
 
+import Header from "../-components/header";
+
 export const Route = createFileRoute("/conversations/")({
 	component: RouteComponent,
 	beforeLoad: ProtectRoute,
@@ -18,7 +20,6 @@ export const Route = createFileRoute("/conversations/")({
 
 const MessageHeader = styled.h1`
   color: var(--sl-color-primary-500);
-  margin-top: -150px;
   margin-left: 20px;
 `;
 

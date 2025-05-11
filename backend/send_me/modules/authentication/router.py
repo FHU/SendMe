@@ -2,7 +2,6 @@ import secrets
 from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from fastapi.responses import RedirectResponse
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -34,7 +33,7 @@ def request_otp(
     user = db.execute(user_query).scalar()
 
     if not user:
-        return RedirectResponse(url="/profiles/sign-up")
+        raise HTTPException(status_code=404, detail="User not found")
 
     # Create a login
     login_challenge = models.LoginChallenge(
