@@ -8,17 +8,17 @@ import Card2 from "./-components/card2";
 import Header from "./-components/header";
 
 export const Route = createFileRoute("/home/")({
-	component: RouteComponent,
+  component: RouteComponent,
 });
 
 function RouteComponent() {
-	return (
-		<div
-			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-		>
-			<Header />
-			<Background />
-			<OppsTags />
-		</div>
-	);
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <Header />
+      <Background />
+      {/*<OppsTags />*/}
+    </div>
+  );
 }
