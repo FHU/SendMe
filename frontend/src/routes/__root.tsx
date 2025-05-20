@@ -11,6 +11,10 @@ import Footer from "./-components/footer";
 import Navbar from "./-components/navbar";
 
 const ContentArea = styled.main`
+    display: flex;
+	justify-content: center;
+	z-index: 1;
+	position: relative;
 `;
 
 function Providers({ children }: { children: JSX.Element[] }) {

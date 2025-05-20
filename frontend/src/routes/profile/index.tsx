@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import Header from "../-components/header";
 import ProtectRoute from "../-preloaders/ProtectRoute";
 import Background from "./-components/background";
 
@@ -17,6 +18,7 @@ function RouteComponent() {
 				paddingTop: "60px",
 			}}
 		>
+			<Header showAddBtn={false} />
 			<Background />
 		</div>
 	);

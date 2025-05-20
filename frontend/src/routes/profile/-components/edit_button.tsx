@@ -6,7 +6,8 @@ const EditContainer = styled.div`
   font-family: Arial, sans-serif;
   width: 400px;
   display: flex;
-  margin-top: 16rem;
+  margin-top: 15rem;
+  z-index: 10;
   justify-content: center;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;

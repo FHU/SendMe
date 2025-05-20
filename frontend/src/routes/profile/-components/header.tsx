@@ -7,8 +7,8 @@ const HeaderContainer = styled.div`
     justify-content: center;
     position: absolute;
     top: 0;
-    margin-top: 4.5rem;
-    z-index: -1;
+    margin-top: 7rem;
+    z-index: 1;
     background-color: var(--sl-color-primary-100);
     width: 400px;
     border-bottom-left-radius: 1rem;

@@ -9,6 +9,8 @@ import MessageHeader from "../messages/-components/MessageHeader";
 import { MessageList } from "../messages/-components/MessageList";
 import { ConversationList } from "./-components/ConversationList";
 
+import Header from "../-components/header";
+
 export const Route = createFileRoute("/conversations/")({
 	component: RouteComponent,
 	beforeLoad: ProtectRoute,
@@ -94,7 +96,6 @@ const ChatContainer = styled.div`
   &::-webkit-scrollbar {
 	display: none; 
   }
-
 `;
 
 function RouteComponent() {
