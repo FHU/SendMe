@@ -1,6 +1,4 @@
 import type { components } from "@sendme/api";
-import { SlAvatar } from "@shoelace-style/shoelace/dist/react";
-import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const MessageCard = styled.div<{ isUser: boolean }>`
@@ -11,16 +9,15 @@ const MessageCard = styled.div<{ isUser: boolean }>`
   border-radius: 12px;
   margin: 10px 0;
   padding: 10px;
-  max-width: 90%;
-  margin-left: ${({ isUser }) => (isUser ? "auto" : "0")};
-  margin-right: ${({ isUser }) => (isUser ? "0" : "auto")};
+  width: 450px;
+  margin-left: ${({ isUser }) => (isUser ? "auto" : "10px")};
+  margin-right: ${({ isUser }) => (isUser ? "10px" : "auto")};
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   word-break: break-word;
-  border: 2px solid red;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     grid-template-columns: auto 1fr;
-    max-width: 100%;
+	  width: 200px;
     padding: 8px;
   }
 `;
@@ -84,12 +81,6 @@ export function MessageList({
 	data: components["schemas"]["Message"][];
 	currentUserId: string;
 }) {
-	const chatEndRef = useRef<HTMLDivElement | null>(null);
-
-	useEffect(() => {
-		chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-	}, []);
-
 	return (
 		<>
 			{data.map((msg) => (
@@ -100,7 +91,6 @@ export function MessageList({
 					imagePath={msg.sender.profile_picture}
 				/>
 			))}
-			<div ref={chatEndRef} />
 		</>
 	);
 }

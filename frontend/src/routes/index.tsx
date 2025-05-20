@@ -10,7 +10,7 @@ export const Route = createFileRoute("/")({
 function Index() {
 	const { data } = api.hello.helloWorldHelloGet.useQuery();
 	return (
-		<div>
+		<div style={{ paddingTop: "100px", zIndex: -1 }}>
 			<h3>Server message: {data?.message}</h3>
 
 			<Link to="/conversations">

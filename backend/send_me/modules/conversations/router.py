@@ -148,17 +148,28 @@ def seed_dummy_data(response: Response, db: DatabaseSession = Depends(get_db)):
         bio="Can we fix it? Yes, we can!",
         profile_picture=None,
     )
+    user3 = User(
+        email="tony@example.com",
+        first_name="Tony",
+        last_name="Stark",
+        location="NewYork",
+        bio="And we have a hulk",
+        profile_picture=None,
+    )
 
-    db.add_all([user1, user2])
+    db.add_all([user1, user2, user3])
     db.flush()
     db.refresh(user1)
     db.refresh(user2)
+    db.refresh(user3)
 
     conversation = models.Conversation(users=[user1, user2])
+    conversation_2 = models.Conversation(users=[user1, user3])
 
-    db.add(conversation)
+    db.add_all([conversation, conversation_2])
     db.flush()
     db.refresh(conversation)
+    db.refresh(conversation_2)
 
     # Create Messages
     message1 = models.Message(
@@ -183,11 +194,43 @@ def seed_dummy_data(response: Response, db: DatabaseSession = Depends(get_db)):
     db.flush()
     db.refresh(message2)  # Use the second message as newest
 
+    message3 = models.Message(
+        sender_id=user3.id,
+        conversation_id=conversation_2.id,
+        content="Hey Alice, what's your current status?",
+        sender=user3,
+        conversation=conversation_2,
+        created_at=datetime.now(),
+    )
+
+    message4 = models.Message(
+        sender_id=user1.id,
+        conversation_id=conversation_2.id,
+        content="Tony, I am trapped in the basement",
+        sender=user1,
+        conversation=conversation_2,
+        created_at=datetime.now(),
+    )
+    message5 = models.Message(
+        sender_id=user3.id,
+        conversation_id=conversation_2.id,
+        content="That does not bode well",
+        sender=user3,
+        conversation=conversation_2,
+        created_at=datetime.now(),
+    )
+
+    db.add_all([message3, message4, message5])
+    db.flush()
+    db.refresh(message5)  # Use the second message as newest
+
     # Update conversation with actual newest message ID
     # conversation.newest_message_id = message2.id
     conversation.last_updated = message2.created_at
+    conversation_2.last_updated = message5.created_at
 
     db.add(conversation)
+    db.add(conversation_2)
     db.flush()
 
     # Create session for testing endpoints

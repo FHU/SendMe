@@ -31,9 +31,11 @@ const NavbarContainer = styled.nav`
   align-items: center;
   background-color: var(--sl-color-primary-500);
   padding: 5px 20px;
-  z-index: -1;
   box-shadow: var(--sl-shadow-x-large);
   color: white;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 `;
 
 const AppName = styled.h1`

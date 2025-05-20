@@ -14,7 +14,12 @@ export const Route = createFileRoute("/home/")({
 function RouteComponent() {
 	return (
 		<div
-			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				paddingTop: "100px",
+			}}
 		>
 			<Header showAddBtn={true} />
 			<Background />
