@@ -8,8 +8,8 @@ packages = [{ include = "send_me" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-fastapi = { extras = ["standard"], version = "^0.115.6" }
-uvicorn = "^0.30.6"
+fastapi = { extras = ["standard"], version = "^0.119.0" }
+uvicorn = "^0.37.0"
 pydantic = "^2.8.2"
 minio = "^7.2.8"
 sqlalchemy = "^2.0.36"
